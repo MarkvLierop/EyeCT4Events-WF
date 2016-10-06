@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EyeCT4Events_WF.Classes.Gebruikers
 {
-    class Beheerder
+    class Beheerder : Gebruiker
     {
     }
 }
