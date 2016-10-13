@@ -1,1 +1,9 @@
 E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.exe.config
+E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.exe
+E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.pdb
+E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csprojResolveAssemblyReference.cache
+E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Form1.resources
+E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Properties.Resources.resources
+E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csproj.GenerateResource.Cache
+E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.exe
+E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.pdb

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EyeCT4Events_WF.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,7 @@ namespace EyeCT4Events_WF
         public Form1()
         {
             InitializeComponent();
+            DBcon db = new DBcon();
         }
     }
 }

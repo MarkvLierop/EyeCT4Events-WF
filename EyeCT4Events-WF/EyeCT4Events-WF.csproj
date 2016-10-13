@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Categorie.cs" />
+    <Compile Include="Classes\DBcon.cs" />
     <Compile Include="Classes\Event.cs" />
     <Compile Include="Classes\Gebruikers\Beheerder.cs" />
     <Compile Include="Classes\Gebruikers\Bezoeker.cs" />
@@ -66,6 +67,9 @@
     <Compile Include="Classes\Reactie.cs" />
     <Compile Include="Classes\Reservering.cs" />
     <Compile Include="Classes\Uitgeleend_materiaal.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
