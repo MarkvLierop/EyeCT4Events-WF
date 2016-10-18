@@ -52,7 +52,6 @@
     <Compile Include="Classes\Gebruikers\Beheerder.cs" />
     <Compile Include="Classes\Gebruikers\Bezoeker.cs" />
     <Compile Include="Classes\Gebruikers\Medewerker.cs" />
-    <Compile Include="Classes\sdfsdf.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
