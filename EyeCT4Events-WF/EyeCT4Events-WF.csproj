@@ -67,6 +67,18 @@
     <Compile Include="Classes\Reactie.cs" />
     <Compile Include="Classes\Reservering.cs" />
     <Compile Include="Classes\Uitgeleend_materiaal.cs" />
+    <Compile Include="ReserveerMateriaal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReserveerMateriaal.designer.cs">
+      <DependentUpon>ReserveerMateriaal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReserveerPlaats.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReserveerPlaats.designer.cs">
+      <DependentUpon>ReserveerPlaats.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -79,6 +91,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReserveerMateriaal.resx">
+      <DependentUpon>ReserveerMateriaal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReserveerPlaats.resx">
+      <DependentUpon>ReserveerPlaats.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
