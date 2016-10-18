@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Categorie.cs" />
+    <Compile Include="Classes\Class1.cs" />
     <Compile Include="Classes\DBcon.cs" />
     <Compile Include="Classes\Event.cs" />
     <Compile Include="Classes\Gebruikers\Beheerder.cs" />
