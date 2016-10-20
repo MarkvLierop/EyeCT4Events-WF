@@ -10,6 +10,9 @@ E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\obj\Debug\EyeCT4Even
 C:\Users\Xinoclash J. Arc\Desktop\Nieuwe map\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.exe.config
 C:\Users\Xinoclash J. Arc\Desktop\Nieuwe map\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.exe
 C:\Users\Xinoclash J. Arc\Desktop\Nieuwe map\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.pdb
-D:\Documents\School\Proftaak\EYECTevents\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.exe.config
-D:\Documents\School\Proftaak\EYECTevents\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.exe
-D:\Documents\School\Proftaak\EYECTevents\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.pdb
+E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Gebruikergegevens.resources
+E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Gebruikersbeheer.resources
+E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.ReserveerMateriaal.resources
+E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.ReserveerPlaats.resources
+E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Inloggen.resources
+E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.RegistreerNieuweGebruiker.resources

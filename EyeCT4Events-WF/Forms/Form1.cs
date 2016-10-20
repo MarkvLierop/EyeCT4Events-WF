@@ -16,7 +16,6 @@ namespace EyeCT4Events_WF
         public Form1()
         {
             InitializeComponent();
-            DBcon db = new DBcon();
         }
     }
 }

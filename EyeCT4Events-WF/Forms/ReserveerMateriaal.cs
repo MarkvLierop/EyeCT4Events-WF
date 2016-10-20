@@ -22,11 +22,5 @@ namespace EyeCT4Events_WF
             VoorraadLijst.Items.Add("Muis");
             VoorraadLijst.Items.Add("Camera");
         }
-
-
-
-
-
-
     }
 }

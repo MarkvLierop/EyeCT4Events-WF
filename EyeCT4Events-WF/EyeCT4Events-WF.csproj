@@ -53,7 +53,6 @@
       <DependentUpon>AanwezigBezoekers.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Categorie.cs" />
-    <Compile Include="Classes\DBcon.cs" />
     <Compile Include="Classes\Event.cs" />
     <Compile Include="Classes\Gebruikers\Beheerder.cs" />
     <Compile Include="Classes\Gebruikers\Bezoeker.cs" />
@@ -80,12 +79,20 @@
     <Compile Include="Forms\Gebruikersbeheer.designer.cs">
       <DependentUpon>Gebruikersbeheer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\GebruikerAanmaken.cs">
+    <Compile Include="Forms\Inloggen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\GebruikerAanmaken.Designer.cs">
-      <DependentUpon>GebruikerAanmaken.cs</DependentUpon>
+    <Compile Include="Forms\Inloggen.designer.cs">
+      <DependentUpon>Inloggen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RegistreerNieuweGebruiker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RegistreerNieuweGebruiker.designer.cs">
+      <DependentUpon>RegistreerNieuweGebruiker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\IGebruikerAdministratie.cs" />
+    <Compile Include="Persistencies\MSSQL-Server.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Reactie.cs" />
@@ -112,8 +119,11 @@
     <EmbeddedResource Include="Forms\Gebruikersbeheer.resx">
       <DependentUpon>Gebruikersbeheer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GebruikerAanmaken.resx">
-      <DependentUpon>GebruikerAanmaken.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inloggen.resx">
+      <DependentUpon>Inloggen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RegistreerNieuweGebruiker.resx">
+      <DependentUpon>RegistreerNieuweGebruiker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -143,7 +153,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
