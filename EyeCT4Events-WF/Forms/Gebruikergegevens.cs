@@ -24,7 +24,7 @@ namespace EyeCT4Events_WF
         {
             tbnaam.Text = g.Voornaam + " " + g.Tussenvoegsel + " " + g.Achternaam;
             tbWachtwoord.Text = g.Wachtwoord;
-            //tbEmail.Text = g.Email;
+            
             
         }
 
@@ -64,7 +64,8 @@ namespace EyeCT4Events_WF
             g.Tussenvoegsel = tbTussenvoegsel.Text;
             g.Achternaam = tbAchternaam.Text;
             g.Wachtwoord = tbWachtwoord.Text;
-            //g.Email = tbEmail.Text;
+            // Voeg veranderingen toe in de database
+         
             
         }
 
@@ -86,7 +87,8 @@ namespace EyeCT4Events_WF
 
         private void btDeleteAccount_Click(object sender, EventArgs e)
         {
-            g = null;
+            //Verwijder account uit de database
+           // g = null;
         }
     }
 }

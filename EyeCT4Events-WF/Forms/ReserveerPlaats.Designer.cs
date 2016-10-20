@@ -158,6 +158,7 @@
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Resultaat";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // button1
             // 
@@ -189,6 +190,7 @@
             this.Controls.Add(this.button1);
             this.Name = "ReserveerPlaats";
             this.Text = "Reserveren";
+            this.Load += new System.EventHandler(this.ReserveerPlaats_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PBCampeerplek)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
