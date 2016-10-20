@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EyeCT4Events_WF.Classes
 {
-    abstract class Gebruiker
+   public abstract class Gebruiker
     {
         public string Achternaam { get; set; }
         public int GebruikersID { get; set; }

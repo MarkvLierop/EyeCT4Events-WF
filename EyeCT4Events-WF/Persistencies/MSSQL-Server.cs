@@ -64,5 +64,10 @@ namespace EyeCT4Events_WF.Persistencies
                    
             }
         }
+
+        public int create(Medewerker medewerker)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
