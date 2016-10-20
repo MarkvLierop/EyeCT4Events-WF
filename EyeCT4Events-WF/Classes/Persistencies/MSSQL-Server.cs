@@ -18,10 +18,12 @@ namespace EyeCT4Events_WF.Persistencies
         SqlConnection SQLcon;
         SqlDataReader reader;
 
+        Gebruiker gebruiker;
+
         private void Connect()
         {
-            SQLcon = new SqlConnection();
-            connString = "Server=192.168.10.12;Database=EyeCT4Events;User Id=sa;Password=PTS16;";
+            this.connString = "Data Source=192.168.10.12,20;Initial Catalog=EyeCT4Events;Persist Security Info=True;User ID=sa;Password=PTS16";
+            SQLcon = new SqlConnection(connString);
             SQLcon.Open();
         }
         private void Close()
@@ -63,46 +65,46 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
             return bezoekerLijst;
         }
+        //public List<Gebruiker> AanwezigeGebruikers()
+        //{
+        //    List<Gebruiker> aanwezigeGebruikers = new List<Gebruiker>();
+
+        //    return aanwezigeGebruikers;
+        //}
         public Gebruiker Login(string wachtwoord, string gebruikersnaam)
         {
-            Gebruiker gebruiker;
-
             Connect();
             string query = "SELECT Gebruikersnaam, Wachtwoord FROM Gebruiker Where Gebruikersnaam = @Gebruikersnaam AND Wachtwoord = @Wachtwoord";
             using (command = new SqlCommand(query, SQLcon))
             {
                 command.Parameters.Add(new SqlParameter("@Gebruikersnaam", gebruikersnaam));
-                command.Parameters.Add(new SqlParameter("@Wachtwoord", EncryptString(wachtwoord)));
+                command.Parameters.Add(new SqlParameter("@Wachtwoord", wachtwoord));
 
                 while (reader.Read())
                 {
-                    switch (reader["GebruikerType"].ToString().ToLower())
+                    if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
                     {
-                        case "bezoeker":
-                            gebruiker = new Bezoeker();
-                            break;
-                        case "medewerker":
-                            gebruiker = new Medewerker();
-                            break;
-                        case "beheerder":
-                            gebruiker = new Beheerder();
-                            break;
+                        gebruiker = new Bezoeker();
                     }
+                    else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
+                    {
+                        gebruiker = new Beheerder();
+                    }
+                    else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
+                    {
+                        gebruiker = new Medewerker();
+                    }
+                    gebruiker.Achternaam = reader["Achternaam"].ToString();
+                    gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
+                    gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                    gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                    gebruiker.Voornaam = reader["Voornaam"].ToString();
+                    gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
                 }
-                return gebruiker = new Medewerker();  /// NOG AANPASSEN
-            }
-        }
-        private Gebruiker GebruikerDataToewijzen(Gebruiker gebruiker)
-        {
-            gebruiker.Achternaam = reader["Achternaam"].ToString();
-            gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
-            gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
-            gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
-            gebruiker.Voornaam = reader["Voornaam"].ToString();
-            gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
 
-            Close();
-            return gebruiker;
+                Close();
+                return gebruiker;
+            }
         }
     }
 }

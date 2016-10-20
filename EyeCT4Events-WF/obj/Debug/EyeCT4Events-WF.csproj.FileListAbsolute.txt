@@ -19,3 +19,6 @@ E:\School\SE Jaar1\Proftaak\EyeCT4Events-WF\EyeCT4Events-WF\obj\Debug\EyeCT4Even
 D:\Documents\School\Proftaak\EYECTevents\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.exe.config
 D:\Documents\School\Proftaak\EYECTevents\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.exe
 D:\Documents\School\Proftaak\EYECTevents\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.pdb
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.exe.config
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.exe
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.pdb
