@@ -30,7 +30,7 @@ namespace EyeCT4Events_WF
 
         private void tbGebruikersnaam_TextChanged(object sender, EventArgs e)
         {
-       
+      
         }
 
         private void tbnaam_TextChanged(object sender, EventArgs e)

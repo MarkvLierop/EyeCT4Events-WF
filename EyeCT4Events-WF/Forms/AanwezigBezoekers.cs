@@ -19,7 +19,7 @@ namespace EyeCT4Events_WF
 
         private void AanwezigBezoekers_Load(object sender, EventArgs e)
         {
-
+            //Laad alle bezoekers uit de database met status aanweziug
         }
 
         private void lbSluiten_Click(object sender, EventArgs e)
