@@ -22,3 +22,14 @@ D:\Documents\School\Proftaak\EYECTevents\EyeCT4Events-WF\obj\Debug\EyeCT4Events-
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.exe.config
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.exe
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.pdb
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csprojResolveAssemblyReference.cache
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.AanwezigBezoekers.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Form1.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Gebruikergegevens.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Gebruikersbeheer.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Inloggen.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.RegistreerNieuweGebruiker.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Properties.Resources.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.ReserveerMateriaal.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.ReserveerPlaats.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csproj.GenerateResource.Cache

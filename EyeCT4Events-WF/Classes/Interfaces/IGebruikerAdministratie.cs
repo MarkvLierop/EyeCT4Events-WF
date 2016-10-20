@@ -1,4 +1,5 @@
-﻿using EyeCT4Events_WF.Classes.Gebruikers;
+﻿using EyeCT4Events_WF.Classes;
+using EyeCT4Events_WF.Classes.Gebruikers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace EyeCT4Events_WF.Interfaces
 {
     public interface IGebruikerAdministratie
     {
-        List<Bezoeker> LijstBezoekers();
+        List<Gebruiker> LijstAanwezigePersonen();
     }
 }
