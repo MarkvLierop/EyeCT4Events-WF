@@ -53,7 +53,6 @@
       <DependentUpon>AanwezigBezoekers.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Categorie.cs" />
-    <Compile Include="Classes\DBcon.cs" />
     <Compile Include="Classes\Event.cs" />
     <Compile Include="Classes\Gebruikers\Beheerder.cs" />
     <Compile Include="Classes\Gebruikers\Bezoeker.cs" />

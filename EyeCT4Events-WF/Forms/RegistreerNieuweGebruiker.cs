@@ -25,13 +25,13 @@ namespace EyeCT4Events_WF
             {
                 if(tbRegBevestigWachtwoord.Text == tbRegWachtwoord.Text)
                 {
-                    Administration admin = new Administration();
-                    bool gelukt = admin.MaakBezoeker(tbRegAchternaam.Text, tbRegVoornaam.Text, tbRegGebruiker.Text, tbRegWachtwoord.Text);
+                    //Administration admin = new Administration();
+                    //bool gelukt = admin.MaakBezoeker(tbRegAchternaam.Text, tbRegVoornaam.Text, tbRegGebruiker.Text, tbRegWachtwoord.Text);
 
-                    if (gelukt)
-                    {
-                        MessageBox.Show("Registratie succesvol");
-                    }
+                    //if (gelukt)
+                    //{
+                    //    MessageBox.Show("Registratie succesvol");
+                    //}
                 }
 
                 else

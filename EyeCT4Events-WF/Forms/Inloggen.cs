@@ -33,22 +33,22 @@ namespace EyeCT4Events_WF
             inlog = tbUser.Text;
             //string SoortAccount = DatabaseClass.LogIn(tbUser.Text, tbPass.Text);
 
-            if (Gebruikertype == "Beheerder")
-            {
-                //BeheerderForm beheerder = new BeheerderForm ();
-                //beheerder.Show(); naar het beheerdersform
-            }
-            else if (Gebruikertype == "Medewerker")
-            {
+            //if (Gebruikertype == "Beheerder")
+            //{
+            //    //BeheerderForm beheerder = new BeheerderForm ();
+            //    //beheerder.Show(); naar het beheerdersform
+            //}
+            //else if (Gebruikertype == "Medewerker")
+            //{
                 
-                MedewerkerForm medewerker = new MedewerkerForm();
-                medewerker.Show();
-            }
-            else if (Gebruikertype == "Bezoeker")
-            {
-                BezoekerForm bezoeker = new BezoekerForm();
-                bezoeker.Show();
-            }
+            //    MedewerkerForm medewerker = new MedewerkerForm();
+            //    medewerker.Show();
+            //}
+            //else if (Gebruikertype == "Bezoeker")
+            //{
+            //    BezoekerForm bezoeker = new BezoekerForm();
+            //    bezoeker.Show();
+            //}
         }
 
         //In de database class zit dan een read method die de gegevens ophaalt voor de login
