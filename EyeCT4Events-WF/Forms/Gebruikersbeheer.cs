@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EyeCT4Events_WF.Classes;
+using EyeCT4Events_WF.Classes.Gebruikers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,6 +28,7 @@ namespace EyeCT4Events_WF
         {
             cbSorteer.Items.Add("Gebruikersnaam");
             cbSorteer.Items.Add("Naam");
+            
             //Laad alle gebruikers uit de database en stop ze in het form
 
         }
@@ -46,9 +49,27 @@ namespace EyeCT4Events_WF
 
         private void btEdit_Click(object sender, EventArgs e)
         {
-           // Gebruikergegevens g = new Gebruikergegevens();
+            Gebruiker g = null;
+            foreach (int index in lbGebruikersnaam.SelectedIndices)
+            {
+                g = (Gebruiker)lbGebruikersnaam.Items[index];
+                     
+            }
+            Gebruikergegevens gg = new Gebruikergegevens(g);
 
-            //g.Show();
+                gg.Show();
         }
+
+        private void tbZoeken_Click(object sender, EventArgs e)
+        {
+            string s = tbZoeken.Text;
+            int index = lbGebruikersnaam.FindString(s, -1);
+            if (index != -1)
+            {
+                lbGebruikersnaam.SetSelected(index, true);
+            }
+            
+        }
+       
     }
 }

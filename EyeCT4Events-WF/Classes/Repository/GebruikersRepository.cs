@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EyeCT4Events_WF.Classes.Gebruikers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,17 +7,21 @@ using System.Threading.Tasks;
 
 namespace EyeCT4Events_WF.Classes
 {
-    class GebruikersRepository
+    public class GebruikersRepository
     {
-        public List<Gebruiker> Gebruikers { get; set; }
+        private readonly Igebruiker gebruiker;
+        
 
-        public GebruikersRepository()
+        public GebruikersRepository(Igebruiker _gebruiker)
         {
-
+            gebruiker = _gebruiker;
         }
-        public void getGebruiker()
+        public bool add(string name)
         {
-        //Stop alle gebruikers in de lijst gebruikers
+            bool result;
+            Bezoeker Bez = new Bezoeker();
+            result = gebruiker.create(Bez);
+            return result;
         }
     }
 }

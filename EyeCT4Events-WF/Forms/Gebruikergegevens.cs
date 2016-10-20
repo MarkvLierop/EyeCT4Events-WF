@@ -22,7 +22,9 @@ namespace EyeCT4Events_WF
 
         private void Gebruikergegevens_Load(object sender, EventArgs e)
         {
-            tbnaam.Text = g.Voornaam + " " + g.Tussenvoegsel + " " + g.Achternaam;
+            tbnaam.Text = g.Voornaam;
+            tbTussenvoegsel.Text = g.Tussenvoegsel;
+            tbAchternaam.Text = g.Achternaam;
             tbWachtwoord.Text = g.Wachtwoord;
             
             
@@ -30,7 +32,7 @@ namespace EyeCT4Events_WF
 
         private void tbGebruikersnaam_TextChanged(object sender, EventArgs e)
         {
-       
+      
         }
 
         private void tbnaam_TextChanged(object sender, EventArgs e)

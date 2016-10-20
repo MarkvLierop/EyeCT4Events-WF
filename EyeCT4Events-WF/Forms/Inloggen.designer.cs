@@ -31,6 +31,8 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.tbUser = new System.Windows.Forms.TextBox();
             this.tbPass = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnLogin
@@ -57,16 +59,37 @@
             this.tbPass.Size = new System.Drawing.Size(100, 20);
             this.tbPass.TabIndex = 2;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(37, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Gebruikersnaam";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(53, 59);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Wachtwoord";
+            // 
             // Inloggen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.tbPass);
             this.Controls.Add(this.tbUser);
             this.Controls.Add(this.btnLogin);
             this.Name = "Inloggen";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Inloggen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -77,6 +100,8 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.TextBox tbUser;
         private System.Windows.Forms.TextBox tbPass;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 
