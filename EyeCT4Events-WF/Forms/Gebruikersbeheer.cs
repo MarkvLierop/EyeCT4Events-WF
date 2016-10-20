@@ -26,6 +26,8 @@ namespace EyeCT4Events_WF
         {
             cbSorteer.Items.Add("Gebruikersnaam");
             cbSorteer.Items.Add("Naam");
+            //Laad alle gebruikers uit de database en stop ze in het form
+
         }
 
         private void btSluiten_Click(object sender, EventArgs e)
@@ -45,6 +47,7 @@ namespace EyeCT4Events_WF
         private void btEdit_Click(object sender, EventArgs e)
         {
            // Gebruikergegevens g = new Gebruikergegevens();
+
             //g.Show();
         }
     }

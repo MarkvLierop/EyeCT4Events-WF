@@ -43,7 +43,7 @@
             // 
             // tbEdit
             // 
-            this.tbEdit.Location = new System.Drawing.Point(294, 183);
+            this.tbEdit.Location = new System.Drawing.Point(1, 127);
             this.tbEdit.Name = "tbEdit";
             this.tbEdit.Size = new System.Drawing.Size(75, 23);
             this.tbEdit.TabIndex = 1;
@@ -104,7 +104,7 @@
             // 
             // btDeleteAccount
             // 
-            this.btDeleteAccount.Location = new System.Drawing.Point(437, 47);
+            this.btDeleteAccount.Location = new System.Drawing.Point(82, 127);
             this.btDeleteAccount.Name = "btDeleteAccount";
             this.btDeleteAccount.Size = new System.Drawing.Size(95, 23);
             this.btDeleteAccount.TabIndex = 13;
@@ -115,7 +115,7 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(412, 137);
+            this.listBox1.Location = new System.Drawing.Point(508, 12);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(120, 95);
             this.listBox1.TabIndex = 14;

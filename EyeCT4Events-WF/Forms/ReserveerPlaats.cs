@@ -16,5 +16,15 @@ namespace EyeCT4Events_WF
         {
             InitializeComponent();
         }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ReserveerPlaats_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

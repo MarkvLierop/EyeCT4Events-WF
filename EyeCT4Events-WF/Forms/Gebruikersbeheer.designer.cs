@@ -40,7 +40,7 @@
             // lbGebruikersnaam
             // 
             this.lbGebruikersnaam.FormattingEnabled = true;
-            this.lbGebruikersnaam.Location = new System.Drawing.Point(263, 88);
+            this.lbGebruikersnaam.Location = new System.Drawing.Point(12, 25);
             this.lbGebruikersnaam.Name = "lbGebruikersnaam";
             this.lbGebruikersnaam.Size = new System.Drawing.Size(120, 199);
             this.lbGebruikersnaam.TabIndex = 0;
@@ -50,7 +50,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(260, 72);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 13);
             this.label1.TabIndex = 1;
@@ -58,7 +58,7 @@
             // 
             // sdsd
             // 
-            this.sdsd.Location = new System.Drawing.Point(38, 62);
+            this.sdsd.Location = new System.Drawing.Point(138, 54);
             this.sdsd.Name = "sdsd";
             this.sdsd.Size = new System.Drawing.Size(100, 20);
             this.sdsd.TabIndex = 2;
@@ -66,7 +66,7 @@
             // tbZoeken
             // 
             this.tbZoeken.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.tbZoeken.Location = new System.Drawing.Point(133, 60);
+            this.tbZoeken.Location = new System.Drawing.Point(244, 54);
             this.tbZoeken.Name = "tbZoeken";
             this.tbZoeken.Size = new System.Drawing.Size(75, 23);
             this.tbZoeken.TabIndex = 3;
@@ -76,7 +76,7 @@
             // cbSorteer
             // 
             this.cbSorteer.FormattingEnabled = true;
-            this.cbSorteer.Location = new System.Drawing.Point(22, 129);
+            this.cbSorteer.Location = new System.Drawing.Point(138, 27);
             this.cbSorteer.Name = "cbSorteer";
             this.cbSorteer.Size = new System.Drawing.Size(121, 21);
             this.cbSorteer.TabIndex = 4;
@@ -85,7 +85,7 @@
             // 
             // btSluiten
             // 
-            this.btSluiten.Location = new System.Drawing.Point(475, 25);
+            this.btSluiten.Location = new System.Drawing.Point(496, 12);
             this.btSluiten.Name = "btSluiten";
             this.btSluiten.Size = new System.Drawing.Size(75, 23);
             this.btSluiten.TabIndex = 5;
