@@ -112,7 +112,6 @@
     <Compile Include="Forms\ReserveerPlaats.designer.cs">
       <DependentUpon>ReserveerPlaats.cs</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\GebruikerRep.cs" />
     <EmbeddedResource Include="Forms\AanwezigBezoekers.resx">
       <DependentUpon>AanwezigBezoekers.cs</DependentUpon>
     </EmbeddedResource>

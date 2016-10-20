@@ -21,5 +21,6 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             return context.LijstBezoekers();
         }
+       
     }
 }
