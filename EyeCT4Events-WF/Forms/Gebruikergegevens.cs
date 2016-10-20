@@ -24,7 +24,7 @@ namespace EyeCT4Events_WF
         {
             tbnaam.Text = g.Voornaam + " " + g.Tussenvoegsel + " " + g.Achternaam;
             tbWachtwoord.Text = g.Wachtwoord;
-            tbEmail.Text = g.Email;
+            //tbEmail.Text = g.Email;
             
         }
 
@@ -64,7 +64,7 @@ namespace EyeCT4Events_WF
             g.Tussenvoegsel = tbTussenvoegsel.Text;
             g.Achternaam = tbAchternaam.Text;
             g.Wachtwoord = tbWachtwoord.Text;
-            g.Email = tbEmail.Text;
+            //g.Email = tbEmail.Text;
             
         }
 
