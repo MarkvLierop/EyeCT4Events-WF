@@ -51,6 +51,11 @@ namespace EyeCT4Events_WF
             //}
         }
 
+        private void Inloggen_Load(object sender, EventArgs e)
+        {
+
+        }
+
         //In de database class zit dan een read method die de gegevens ophaalt voor de login
 
         //public static string LogIn(string user, string wachtwoord)

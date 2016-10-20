@@ -55,5 +55,14 @@ namespace EyeCT4Events_WF.Persistencies
                 }
             }
         }
+        public void RegistreerBezoeker()
+        {
+            Connect();
+            using (SqlConnection SQLcon = new SqlConnection(connString))
+            {
+                //string query = "Insert into db (Gebruikersnaam,wachtwoord,voornaam,tussenvoegsel,achternaam,type)values('" +
+                   
+            }
+        }
     }
 }

@@ -59,5 +59,17 @@ namespace EyeCT4Events_WF
 
                 gg.Show();
         }
+
+        private void tbZoeken_Click(object sender, EventArgs e)
+        {
+            string s = tbZoeken.Text;
+            int index = lbGebruikersnaam.FindString(s, -1);
+            if (index != -1)
+            {
+                lbGebruikersnaam.SetSelected(index, true);
+            }
+            
+        }
+       
     }
 }

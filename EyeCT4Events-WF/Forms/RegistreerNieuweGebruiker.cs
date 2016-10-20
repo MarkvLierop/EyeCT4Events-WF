@@ -48,5 +48,10 @@ namespace EyeCT4Events_WF
               
             }    
         }
+
+        private void RegistreerNieuweGebruiker_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

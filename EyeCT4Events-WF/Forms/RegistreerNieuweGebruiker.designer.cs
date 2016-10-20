@@ -162,6 +162,7 @@
             this.Controls.Add(this.btnBevestigRegistratie);
             this.Name = "RegistreerNieuweGebruiker";
             this.Text = "Registreer nieuwe gebruiker";
+            this.Load += new System.EventHandler(this.RegistreerNieuweGebruiker_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

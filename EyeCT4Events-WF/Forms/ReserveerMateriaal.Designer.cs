@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btAnnuleer = new System.Windows.Forms.Button();
+            this.btBevestig = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,23 +45,24 @@
             this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button2
+            // btAnnuleer
             // 
-            this.button2.Location = new System.Drawing.Point(20, 400);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(80, 30);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Annuleer";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btAnnuleer.Location = new System.Drawing.Point(20, 400);
+            this.btAnnuleer.Name = "btAnnuleer";
+            this.btAnnuleer.Size = new System.Drawing.Size(80, 30);
+            this.btAnnuleer.TabIndex = 6;
+            this.btAnnuleer.Text = "Annuleer";
+            this.btAnnuleer.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btBevestig
             // 
-            this.button1.Location = new System.Drawing.Point(570, 400);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 30);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Bevestig";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btBevestig.Location = new System.Drawing.Point(570, 400);
+            this.btBevestig.Name = "btBevestig";
+            this.btBevestig.Size = new System.Drawing.Size(80, 30);
+            this.btBevestig.TabIndex = 7;
+            this.btBevestig.Text = "Bevestig";
+            this.btBevestig.UseVisualStyleBackColor = true;
+            this.btBevestig.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
@@ -191,8 +192,8 @@
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btAnnuleer);
+            this.Controls.Add(this.btBevestig);
             this.Name = "ReserveerMateriaal";
             this.Text = "ReserveerMateriaal";
             this.Load += new System.EventHandler(this.ReserveerMateriaal_Load);
@@ -203,8 +204,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btAnnuleer;
+        private System.Windows.Forms.Button btBevestig;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;

@@ -12,15 +12,19 @@ namespace EyeCT4Events_WF
 {
     public partial class ReserveerMateriaal : Form
     {
-        public ReserveerMateriaal(){
+        public ReserveerMateriaal()
+        {
             InitializeComponent();
         }
 
-        private void ReserveerMateriaal_Load(object sender, EventArgs e){
-            VoorraadLijst.Items.Add("Usb stick");
-            VoorraadLijst.Items.Add("Beeldscherm");
-            VoorraadLijst.Items.Add("Muis");
-            VoorraadLijst.Items.Add("Camera");
+        private void ReserveerMateriaal_Load(object sender, EventArgs e)
+        {
+          //Laad alle voorraat uit de database 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Zet de geselecteerde items in de database als verhuurd
         }
     }
 }

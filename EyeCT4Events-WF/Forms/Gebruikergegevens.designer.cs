@@ -39,11 +39,12 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.tbTussenvoegsel = new System.Windows.Forms.TextBox();
             this.tbAchternaam = new System.Windows.Forms.TextBox();
+            this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
             this.SuspendLayout();
             // 
             // tbEdit
             // 
-            this.tbEdit.Location = new System.Drawing.Point(1, 127);
+            this.tbEdit.Location = new System.Drawing.Point(1, 149);
             this.tbEdit.Name = "tbEdit";
             this.tbEdit.Size = new System.Drawing.Size(75, 23);
             this.tbEdit.TabIndex = 1;
@@ -104,7 +105,7 @@
             // 
             // btDeleteAccount
             // 
-            this.btDeleteAccount.Location = new System.Drawing.Point(82, 127);
+            this.btDeleteAccount.Location = new System.Drawing.Point(82, 149);
             this.btDeleteAccount.Name = "btDeleteAccount";
             this.btDeleteAccount.Size = new System.Drawing.Size(95, 23);
             this.btDeleteAccount.TabIndex = 13;
@@ -135,6 +136,12 @@
             this.tbAchternaam.Size = new System.Drawing.Size(100, 20);
             this.tbAchternaam.TabIndex = 16;
             this.tbAchternaam.TextChanged += new System.EventHandler(this.tbAchternaam_TextChanged);
+            // 
+            // directorySearcher1
+            // 
+            this.directorySearcher1.ClientTimeout = System.TimeSpan.Parse("-00:00:01");
+            this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
+            this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
             // 
             // Gebruikergegevens
             // 
@@ -172,5 +179,6 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TextBox tbTussenvoegsel;
         private System.Windows.Forms.TextBox tbAchternaam;
+        private System.DirectoryServices.DirectorySearcher directorySearcher1;
     }
 }

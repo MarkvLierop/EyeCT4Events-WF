@@ -72,6 +72,7 @@
             this.tbZoeken.TabIndex = 3;
             this.tbZoeken.Text = "Zoeken";
             this.tbZoeken.UseVisualStyleBackColor = true;
+            this.tbZoeken.Click += new System.EventHandler(this.tbZoeken_Click);
             // 
             // cbSorteer
             // 
