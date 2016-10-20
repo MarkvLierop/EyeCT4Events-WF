@@ -20,8 +20,8 @@ namespace EyeCT4Events_WF.Persistencies
 
         private void Connect()
         {
-            SQLcon = new SqlConnection();
-            connString = "Server=192.168.10.12;Database=EyeCT4Events;User Id=sa;Password=PTS16;";
+            this.connString = "Data Source=192.168.10.12,20;Initial Catalog=EyeCT4Events;Persist Security Info=True;User ID=sa;Password=PTS16";
+            SQLcon = new SqlConnection(connString);
             SQLcon.Open();
         }
         private void Close()
