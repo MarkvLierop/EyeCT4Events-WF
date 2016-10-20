@@ -20,7 +20,8 @@ namespace EyeCT4Events_WF
             InitializeComponent();
 
             GebruikerRepository gr = new GebruikerRepository(new MSSQL_Server());
-            
+
+            MessageBox.Show(gr.LijstBezoekers()[0].Voornaam);
         }
     }
 }
