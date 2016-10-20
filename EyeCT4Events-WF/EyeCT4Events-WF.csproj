@@ -59,11 +59,11 @@
     <Compile Include="Classes\Domain Classes\Gebruikers\Beheerder.cs" />
     <Compile Include="Classes\Domain Classes\Gebruikers\Bezoeker.cs" />
     <Compile Include="Classes\Domain Classes\Gebruikers\Medewerker.cs" />
-    <Compile Include="Forms\Form1.cs">
+    <Compile Include="Forms\MediaOverzicht.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\MediaOverzicht.Designer.cs">
+      <DependentUpon>MediaOverzicht.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Domain Classes\Gebruikers\Gebruiker.cs" />
     <Compile Include="Classes\Domain Classes\Kampeerplaats.cs" />
@@ -115,8 +115,8 @@
     <EmbeddedResource Include="Forms\AanwezigBezoekers.resx">
       <DependentUpon>AanwezigBezoekers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MediaOverzicht.resx">
+      <DependentUpon>MediaOverzicht.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Gebruikergegevens.resx">
       <DependentUpon>Gebruikergegevens.cs</DependentUpon>

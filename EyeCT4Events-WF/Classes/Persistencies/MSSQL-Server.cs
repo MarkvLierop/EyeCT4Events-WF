@@ -41,12 +41,6 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
             return bezoekerLijst;
         }
-        //public List<Gebruiker> AanwezigeGebruikers()
-        //{
-        //    List<Gebruiker> aanwezigeGebruikers = new List<Gebruiker>();
-
-        //    return aanwezigeGebruikers;
-        //}
         public Gebruiker GebruikerLogin(string wachtwoord, string gebruikersnaam)
         {
             Connect();
@@ -77,7 +71,6 @@ namespace EyeCT4Events_WF.Persistencies
                 return gebruiker;
             }
         }
-
         public void GebruikerRegistreren(Gebruiker gebruiker)
         {
             Connect();
@@ -97,7 +90,6 @@ namespace EyeCT4Events_WF.Persistencies
             }
             Close();
         }
-
         private void GebruikerDataToewijzen(Gebruiker gebruiker)
         {
             gebruiker.Achternaam = reader["Achternaam"].ToString();

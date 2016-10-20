@@ -13,9 +13,9 @@ using System.Windows.Forms;
 
 namespace EyeCT4Events_WF
 {
-    public partial class Form1 : Form
+    public partial class MediaOverzicht : Form
     {
-        public Form1()
+        public MediaOverzicht()
         {
             InitializeComponent();
 
