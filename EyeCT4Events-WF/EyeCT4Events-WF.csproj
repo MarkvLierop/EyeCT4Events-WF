@@ -47,7 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Interfaces\ISocialMediaSharing.cs" />
     <Compile Include="Classes\Repositories\GebruikerRepository.cs" />
+    <Compile Include="Classes\Repositories\SocialMediaSharingRepository.cs" />
+    <Compile Include="CustomControls\RoundButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\AanwezigBezoekers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +64,12 @@
     <Compile Include="Classes\Domain Classes\Gebruikers\Beheerder.cs" />
     <Compile Include="Classes\Domain Classes\Gebruikers\Bezoeker.cs" />
     <Compile Include="Classes\Domain Classes\Gebruikers\Medewerker.cs" />
+    <Compile Include="Forms\CategorieToevoegen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CategorieToevoegen.Designer.cs">
+      <DependentUpon>CategorieToevoegen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MediaOverzicht.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +97,12 @@
     </Compile>
     <Compile Include="Forms\Inloggen.designer.cs">
       <DependentUpon>Inloggen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MediaUploaden.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MediaUploaden.Designer.cs">
+      <DependentUpon>MediaUploaden.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\RegistreerNieuweGebruiker.cs">
       <SubType>Form</SubType>
@@ -115,6 +132,9 @@
     <EmbeddedResource Include="Forms\AanwezigBezoekers.resx">
       <DependentUpon>AanwezigBezoekers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CategorieToevoegen.resx">
+      <DependentUpon>CategorieToevoegen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MediaOverzicht.resx">
       <DependentUpon>MediaOverzicht.cs</DependentUpon>
     </EmbeddedResource>
@@ -126,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inloggen.resx">
       <DependentUpon>Inloggen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MediaUploaden.resx">
+      <DependentUpon>MediaUploaden.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RegistreerNieuweGebruiker.resx">
       <DependentUpon>RegistreerNieuweGebruiker.cs</DependentUpon>

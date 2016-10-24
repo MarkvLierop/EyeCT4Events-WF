@@ -12,9 +12,10 @@ namespace EyeCT4Events_WF.Classes
         public int Flagged { get; set; }
         public string GeplaatstDoor { get; set; }
         public int Likes { get; set; }
-        public int MediaID { get; set; }
-        public string MediaType { get; set; }
+        public int ID { get; set; }
+        public string Type { get; set; }
         public string Pad { get; set; }
+        public string Beschrijving { get; set; }
         
         public Media()
         {

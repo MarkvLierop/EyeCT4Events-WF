@@ -8,8 +8,7 @@ namespace EyeCT4Events_WF.Classes
 {
     class Reservering
     {
-        private List<Gebruiker> GebruikerList;
-
+        public List<Gebruiker> GebruikerList { get; private set; }
         public DateTime DatumTot { get; set; }
         public DateTime DatumVan { get; set; }
         public int ReserveringID { get; set; }

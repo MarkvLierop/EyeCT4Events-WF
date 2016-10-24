@@ -33,17 +33,20 @@
             this.tbZoeken = new System.Windows.Forms.TextBox();
             this.btnMediaUploaden = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnPlus = new System.Windows.Forms.Button();
+            this.btnCategorieToevoegen = new System.Windows.Forms.Button();
             this.pnlCategorieën.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlCategorieën
             // 
-            this.pnlCategorieën.Controls.Add(this.btnPlus);
-            this.pnlCategorieën.Location = new System.Drawing.Point(12, 49);
+            this.pnlCategorieën.AutoScroll = true;
+            this.pnlCategorieën.BackColor = System.Drawing.SystemColors.Window;
+            this.pnlCategorieën.Controls.Add(this.btnCategorieToevoegen);
+            this.pnlCategorieën.Location = new System.Drawing.Point(12, 73);
             this.pnlCategorieën.Name = "pnlCategorieën";
-            this.pnlCategorieën.Size = new System.Drawing.Size(183, 467);
+            this.pnlCategorieën.Size = new System.Drawing.Size(183, 443);
             this.pnlCategorieën.TabIndex = 0;
+            this.pnlCategorieën.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCategorieën_Paint);
             // 
             // pnlContent
             // 
@@ -67,6 +70,7 @@
             this.btnMediaUploaden.TabIndex = 3;
             this.btnMediaUploaden.Text = "Media Uploaden";
             this.btnMediaUploaden.UseVisualStyleBackColor = true;
+            this.btnMediaUploaden.Click += new System.EventHandler(this.btnMediaUploaden_Click);
             // 
             // label1
             // 
@@ -78,14 +82,16 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Media Overzicht";
             // 
-            // btnPlus
+            // btnCategorieToevoegen
             // 
-            this.btnPlus.Location = new System.Drawing.Point(141, 3);
-            this.btnPlus.Name = "btnPlus";
-            this.btnPlus.Size = new System.Drawing.Size(39, 28);
-            this.btnPlus.TabIndex = 5;
-            this.btnPlus.Text = "+";
-            this.btnPlus.UseVisualStyleBackColor = true;
+            this.btnCategorieToevoegen.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.btnCategorieToevoegen.Location = new System.Drawing.Point(136, 0);
+            this.btnCategorieToevoegen.Name = "btnCategorieToevoegen";
+            this.btnCategorieToevoegen.Size = new System.Drawing.Size(47, 41);
+            this.btnCategorieToevoegen.TabIndex = 0;
+            this.btnCategorieToevoegen.Text = "+";
+            this.btnCategorieToevoegen.UseVisualStyleBackColor = true;
+            this.btnCategorieToevoegen.Click += new System.EventHandler(this.btnCategorieToevoegen_Click);
             // 
             // MediaOverzicht
             // 
@@ -108,11 +114,11 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlCategorieën;
-        private System.Windows.Forms.Button btnPlus;
         private System.Windows.Forms.Panel pnlContent;
         private System.Windows.Forms.TextBox tbZoeken;
         private System.Windows.Forms.Button btnMediaUploaden;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnCategorieToevoegen;
     }
 }
 

@@ -8,8 +8,7 @@ namespace EyeCT4Events_WF.Classes
 {
     class Kampeerplaats
     {
-        private List<Gebruiker> gebruikersOpLocatie;
-
+        public List<Gebruiker> gebruikersOpLocatie { get; private set; }
         public List<string> Eigenschappen { get; set; }
         public int MaxPersonen { get; set; }
         public int PlaatsID { get; set; }
