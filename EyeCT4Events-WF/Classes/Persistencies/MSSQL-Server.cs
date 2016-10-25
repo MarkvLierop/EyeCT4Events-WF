@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using EyeCT4Events_WF.Classes.Gebruikers;
 using EyeCT4Events_WF.Classes;
 using EyeCT4Events_WF.Classes.Interfaces;
+using System.IO;
 
 namespace EyeCT4Events_WF.Persistencies
 {
@@ -21,6 +22,9 @@ namespace EyeCT4Events_WF.Persistencies
 
         Gebruiker gebruiker;
 
+        /// <summary>
+        ///  Private Methods
+        /// </summary>
         private void Connect()
         {
             this.connString = "Data Source=192.168.10.12,20;Initial Catalog=EyeCT4Events;Persist Security Info=True;User ID=sa;Password=PTS16";
@@ -32,6 +36,100 @@ namespace EyeCT4Events_WF.Persistencies
             SQLcon.Close();
             SQLcon.Dispose();
         }
+        private string EncryptString(string toEncrypt)
+        {
+            SHA256Managed crypt = new SHA256Managed();
+            System.Text.StringBuilder hash = new StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(toEncrypt), 0, Encoding.UTF8.GetByteCount(toEncrypt));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
+        }
+        private void GebruikerDataToewijzen(Gebruiker gebruiker)
+        {
+            gebruiker.Achternaam = reader["Achternaam"].ToString();
+            gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
+            gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+            gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+            gebruiker.Voornaam = reader["Voornaam"].ToString();
+            gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+            if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+            {
+                gebruiker.Aanwezig = true;
+            }
+            else
+            {
+                gebruiker.Aanwezig = false;
+            }
+        }
+        private string BestandsTypeDefinieren (string type)
+        {
+            switch (type.ToLower())
+            {
+                case ".png":
+                    type = "Afbeelding";
+                    break;
+                case ".jpg":
+                    type = "Afbeelding";
+                    break;
+                case ".tiff":
+                    type = "Afbeelding";
+                    break;
+                case ".jpeg":
+                    type = "Afbeelding";
+                    break;
+                case ".gif":
+                    type = "Afbeelding";
+                    break;
+                case ".bmp":
+                    type = "Afbeelding";
+                    break;
+                case ".mp4":
+                    type = "Video";
+                    break;
+                case ".avi":
+                    type = "Video";
+                    break;
+                case ".wmv":
+                    type = "Video";
+                    break;
+                case ".flv":
+                    type = "Video";
+                    break;
+                case ".vob":
+                    type = "Video";
+                    break;
+                case ".mpeg":
+                    type = "Video";
+                    break;
+                case ".mpg":
+                    type = "Video";
+                    break;
+                case ".mp3":
+                    type = "Geluid";
+                    break;
+                case ".wav":
+                    type = "Geluid";
+                    break;
+                case ".m4a":
+                    type = "Geluid";
+                    break;
+                case ".wma":
+                    type = "Geluid";
+                    break;
+                default:
+                    type = "Bericht";
+                    break;
+            }
+            return type;
+        }
+
+        /// <summary>
+        /// Public Methods.
+        /// </summary>
+        /// <returns></returns>
         public List<Gebruiker> LijstAanwezigePersonen()
         {
             List<Gebruiker> bezoekerLijst = new List<Gebruiker>();
@@ -102,35 +200,6 @@ namespace EyeCT4Events_WF.Persistencies
             }
             Close();
         }
-        private void GebruikerDataToewijzen(Gebruiker gebruiker)
-        {
-            gebruiker.Achternaam = reader["Achternaam"].ToString();
-            gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
-            gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
-            gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
-            gebruiker.Voornaam = reader["Voornaam"].ToString();
-            gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
-            if (Convert.ToInt32(reader["Aanwezig"]) == 1)
-            {
-                gebruiker.Aanwezig = true;
-            }
-            else
-            {
-                gebruiker.Aanwezig = false;
-            }
-        }
-        private string EncryptString(string toEncrypt)
-        {
-            SHA256Managed crypt = new SHA256Managed();
-            System.Text.StringBuilder hash = new StringBuilder();
-            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(toEncrypt), 0, Encoding.UTF8.GetByteCount(toEncrypt));
-            foreach (byte theByte in crypto)
-            {
-                hash.Append(theByte.ToString("x2"));
-            }
-            return hash.ToString();
-        }
-
         public List<Categorie> GetAlleCategorien()
         {
             List<Categorie> categorieLijst = new List<Categorie>();
@@ -198,8 +267,6 @@ namespace EyeCT4Events_WF.Persistencies
 
             return cat;
         }
-
-
         public List<Media> GetAlleMedia()
         {
             List<Media> mediaList = new List<Media>();
@@ -268,6 +335,23 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
 
             return catlist;
+        }
+
+        public void MediaToevoegen(Media media)
+        {            
+            Connect();
+            string query = "INSERT INTO Media VALUES (@GeplaatstDoor, @Categorie, @Pad, @Type, 0, 0, @Beschrijving)";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@GeplaatstDoor", 1)); // media.GeplaatstDoor   AAANPASSEN ALS INLOGGEN WERKT.
+                command.Parameters.Add(new SqlParameter("@Categorie", media.Categorie));
+                command.Parameters.Add(new SqlParameter("@Pad", media.Pad));
+                command.Parameters.Add(new SqlParameter("@Type", BestandsTypeDefinieren(media.Type)));
+                command.Parameters.Add(new SqlParameter("@Beschrijving", media.Beschrijving));
+
+                command.ExecuteNonQuery();
+            }
+            Close();
         }
     }
 }

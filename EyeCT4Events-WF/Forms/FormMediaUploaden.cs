@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,9 @@ namespace EyeCT4Events_WF.Forms
         SocialMediaSharingRepository smsr;
         Gebruiker gebruiker;
         OpenFileDialog ofd;
+        FormCategorieToevoegen fct;
+        FormCategorieZoeken fcz;
+
         public FormMediaUploaden(Gebruiker gebruiker)
         {
             InitializeComponent();
@@ -30,9 +34,20 @@ namespace EyeCT4Events_WF.Forms
         {
             Media media = new Media();
             media.Beschrijving = tbBeschrijving.Text;
-            media.Categorie = smsr.GetCategorieMetNaam(tbCategorie.Text).ID;
+            if(fct != null)
+            {
+                media.Categorie = smsr.GetCategorieMetNaam(fct.cat.Naam).ID;
+            }
+            else if (fcz != null)
+            {
+                media.Categorie = smsr.GetCategorieMetNaam(fcz.Categorie).ID;
+            }
             media.GeplaatstDoor = gebruiker.ToString();
-            media.Pad = ofd.InitialDirectory;
+            media.Pad = ofd.FileName;
+            media.Type = Path.GetExtension(ofd.FileName);
+            smsr.MediaToevoegen(media);
+            MessageBox.Show("Media geplaatst.");
+            Close();
         }
 
         private void tbBestandZoeken_Click(object sender, EventArgs e)
@@ -47,14 +62,24 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnCategorieToevoegen_Click(object sender, EventArgs e)
         {
-            using (FormCategorieToevoegen fct = new FormCategorieToevoegen())
-            {
-                fct.ShowDialog();
+            fct = new FormCategorieToevoegen();            
+            fct.ShowDialog();
 
-                if (fct.DialogResult == DialogResult.OK)
-                {
-                    tbCategorie.Text = fct.cat.Naam;
-                }
+            if (fct.DialogResult == DialogResult.OK)
+            {
+                lblCategorie.Text = fct.cat.Naam;
+            }
+            
+        }
+
+        private void btnCategorieZoeken_Click(object sender, EventArgs e)
+        {
+            fcz = new FormCategorieZoeken();
+            fcz.ShowDialog();
+
+            if (fcz.DialogResult == DialogResult.OK)
+            {
+                lblCategorie.Text = fcz.Categorie;
             }
         }
     }

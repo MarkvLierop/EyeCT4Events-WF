@@ -30,13 +30,14 @@
         {
             this.tbTitel = new System.Windows.Forms.TextBox();
             this.lblTitel = new System.Windows.Forms.Label();
-            this.lblCategorie = new System.Windows.Forms.Label();
-            this.tbCategorie = new System.Windows.Forms.TextBox();
+            this.lblCat = new System.Windows.Forms.Label();
             this.tbBestandZoeken = new System.Windows.Forms.Button();
             this.lblBestandsNaam = new System.Windows.Forms.Label();
-            this.btnCategorieToevoegen = new System.Windows.Forms.Button();
             this.tbBeschrijving = new System.Windows.Forms.RichTextBox();
             this.btnOpslaan = new System.Windows.Forms.Button();
+            this.btnCategorieZoeken = new System.Windows.Forms.Button();
+            this.lblCategorie = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbTitel
@@ -56,23 +57,14 @@
             this.lblTitel.TabIndex = 1;
             this.lblTitel.Text = "Titel";
             // 
-            // lblCategorie
+            // lblCat
             // 
-            this.lblCategorie.AutoSize = true;
-            this.lblCategorie.Location = new System.Drawing.Point(13, 133);
-            this.lblCategorie.Name = "lblCategorie";
-            this.lblCategorie.Size = new System.Drawing.Size(52, 13);
-            this.lblCategorie.TabIndex = 2;
-            this.lblCategorie.Text = "Categorie";
-            // 
-            // tbCategorie
-            // 
-            this.tbCategorie.Enabled = false;
-            this.tbCategorie.Location = new System.Drawing.Point(108, 133);
-            this.tbCategorie.Multiline = true;
-            this.tbCategorie.Name = "tbCategorie";
-            this.tbCategorie.Size = new System.Drawing.Size(318, 25);
-            this.tbCategorie.TabIndex = 3;
+            this.lblCat.AutoSize = true;
+            this.lblCat.Location = new System.Drawing.Point(13, 133);
+            this.lblCat.Name = "lblCat";
+            this.lblCat.Size = new System.Drawing.Size(52, 13);
+            this.lblCat.TabIndex = 2;
+            this.lblCat.Text = "Categorie";
             // 
             // tbBestandZoeken
             // 
@@ -93,27 +85,17 @@
             this.lblBestandsNaam.TabIndex = 5;
             this.lblBestandsNaam.Text = "BestandsNaam";
             // 
-            // btnCategorieToevoegen
-            // 
-            this.btnCategorieToevoegen.Location = new System.Drawing.Point(450, 135);
-            this.btnCategorieToevoegen.Name = "btnCategorieToevoegen";
-            this.btnCategorieToevoegen.Size = new System.Drawing.Size(128, 23);
-            this.btnCategorieToevoegen.TabIndex = 6;
-            this.btnCategorieToevoegen.Text = "Categorie Toevoegen";
-            this.btnCategorieToevoegen.UseVisualStyleBackColor = true;
-            this.btnCategorieToevoegen.Click += new System.EventHandler(this.btnCategorieToevoegen_Click);
-            // 
             // tbBeschrijving
             // 
             this.tbBeschrijving.Location = new System.Drawing.Point(108, 176);
             this.tbBeschrijving.Name = "tbBeschrijving";
-            this.tbBeschrijving.Size = new System.Drawing.Size(470, 123);
+            this.tbBeschrijving.Size = new System.Drawing.Size(443, 123);
             this.tbBeschrijving.TabIndex = 7;
             this.tbBeschrijving.Text = "";
             // 
             // btnOpslaan
             // 
-            this.btnOpslaan.Location = new System.Drawing.Point(498, 319);
+            this.btnOpslaan.Location = new System.Drawing.Point(471, 319);
             this.btnOpslaan.Name = "btnOpslaan";
             this.btnOpslaan.Size = new System.Drawing.Size(80, 23);
             this.btnOpslaan.TabIndex = 8;
@@ -121,21 +103,49 @@
             this.btnOpslaan.UseVisualStyleBackColor = true;
             this.btnOpslaan.Click += new System.EventHandler(this.btnOpslaan_Click);
             // 
-            // MediaUploaden
+            // btnCategorieZoeken
+            // 
+            this.btnCategorieZoeken.Location = new System.Drawing.Point(423, 128);
+            this.btnCategorieZoeken.Name = "btnCategorieZoeken";
+            this.btnCategorieZoeken.Size = new System.Drawing.Size(128, 23);
+            this.btnCategorieZoeken.TabIndex = 9;
+            this.btnCategorieZoeken.Text = "Categorie Zoeken";
+            this.btnCategorieZoeken.UseVisualStyleBackColor = true;
+            this.btnCategorieZoeken.Click += new System.EventHandler(this.btnCategorieZoeken_Click);
+            // 
+            // lblCategorie
+            // 
+            this.lblCategorie.AutoSize = true;
+            this.lblCategorie.Location = new System.Drawing.Point(105, 135);
+            this.lblCategorie.Name = "lblCategorie";
+            this.lblCategorie.Size = new System.Drawing.Size(0, 13);
+            this.lblCategorie.TabIndex = 10;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 179);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Beschrijving";
+            // 
+            // FormMediaUploaden
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(590, 354);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblCategorie);
+            this.Controls.Add(this.btnCategorieZoeken);
             this.Controls.Add(this.btnOpslaan);
             this.Controls.Add(this.tbBeschrijving);
-            this.Controls.Add(this.btnCategorieToevoegen);
             this.Controls.Add(this.lblBestandsNaam);
             this.Controls.Add(this.tbBestandZoeken);
-            this.Controls.Add(this.tbCategorie);
-            this.Controls.Add(this.lblCategorie);
+            this.Controls.Add(this.lblCat);
             this.Controls.Add(this.lblTitel);
             this.Controls.Add(this.tbTitel);
-            this.Name = "MediaUploaden";
+            this.Name = "FormMediaUploaden";
             this.Text = "MediaUploaden";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -146,12 +156,13 @@
 
         private System.Windows.Forms.TextBox tbTitel;
         private System.Windows.Forms.Label lblTitel;
-        private System.Windows.Forms.Label lblCategorie;
-        private System.Windows.Forms.TextBox tbCategorie;
+        private System.Windows.Forms.Label lblCat;
         private System.Windows.Forms.Button tbBestandZoeken;
         private System.Windows.Forms.Label lblBestandsNaam;
-        private System.Windows.Forms.Button btnCategorieToevoegen;
         private System.Windows.Forms.RichTextBox tbBeschrijving;
         private System.Windows.Forms.Button btnOpslaan;
+        private System.Windows.Forms.Button btnCategorieZoeken;
+        private System.Windows.Forms.Label lblCategorie;
+        private System.Windows.Forms.Label label1;
     }
 }

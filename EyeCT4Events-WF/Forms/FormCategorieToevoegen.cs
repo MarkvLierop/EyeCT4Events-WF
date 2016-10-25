@@ -40,9 +40,16 @@ namespace EyeCT4Events_WF.Forms
             cat.Parent = smsr.GetCategorieMetNaam(lbCategorien.SelectedItem.ToString()).ID;
             smsr.CategorieToevoegen(cat);
 
-            MessageBox.Show(cat.Naam + " Toegevoegd");
+            if (lbCategorien.SelectedItem == null)
+            {
+                MessageBox.Show("Selecteer een hoofdcategorie.");
+            }
+            else
+            {
+                MessageBox.Show(cat.Naam + " Toegevoegd");
 
-            Close();
+                Close();
+            }
         }
 
         private void tbCategorieZoeken_TextChanged(object sender, EventArgs e)

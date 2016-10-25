@@ -33,5 +33,10 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             return ISM.CategorieZoeken(naam);
         }
+
+        public void MediaToevoegen(Media media)
+        {
+            ISM.MediaToevoegen(media);
+        }
     }
 }
