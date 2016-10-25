@@ -1,6 +1,6 @@
 ﻿namespace EyeCT4Events_WF.Forms
 {
-    partial class MediaUploaden
+    partial class FormMediaUploaden
     {
         /// <summary>
         /// Required designer variable.
@@ -67,6 +67,7 @@
             // 
             // tbCategorie
             // 
+            this.tbCategorie.Enabled = false;
             this.tbCategorie.Location = new System.Drawing.Point(108, 133);
             this.tbCategorie.Multiline = true;
             this.tbCategorie.Name = "tbCategorie";
@@ -81,6 +82,7 @@
             this.tbBestandZoeken.TabIndex = 4;
             this.tbBestandZoeken.Text = "Bestand";
             this.tbBestandZoeken.UseVisualStyleBackColor = true;
+            this.tbBestandZoeken.Click += new System.EventHandler(this.tbBestandZoeken_Click);
             // 
             // lblBestandsNaam
             // 
@@ -99,6 +101,7 @@
             this.btnCategorieToevoegen.TabIndex = 6;
             this.btnCategorieToevoegen.Text = "Categorie Toevoegen";
             this.btnCategorieToevoegen.UseVisualStyleBackColor = true;
+            this.btnCategorieToevoegen.Click += new System.EventHandler(this.btnCategorieToevoegen_Click);
             // 
             // tbBeschrijving
             // 
@@ -116,6 +119,7 @@
             this.btnOpslaan.TabIndex = 8;
             this.btnOpslaan.Text = "Opslaan";
             this.btnOpslaan.UseVisualStyleBackColor = true;
+            this.btnOpslaan.Click += new System.EventHandler(this.btnOpslaan_Click);
             // 
             // MediaUploaden
             // 

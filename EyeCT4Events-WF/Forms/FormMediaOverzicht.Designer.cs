@@ -1,6 +1,6 @@
 ﻿namespace EyeCT4Events_WF
 {
-    partial class MediaOverzicht
+    partial class FormMediaOverzicht
     {
         /// <summary>
         /// Required designer variable.
@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.pnlCategorieën = new System.Windows.Forms.Panel();
+            this.btnCategorieToevoegen = new System.Windows.Forms.Button();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.tbZoeken = new System.Windows.Forms.TextBox();
             this.btnMediaUploaden = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnCategorieToevoegen = new System.Windows.Forms.Button();
             this.pnlCategorieën.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,15 +44,26 @@
             this.pnlCategorieën.Controls.Add(this.btnCategorieToevoegen);
             this.pnlCategorieën.Location = new System.Drawing.Point(12, 73);
             this.pnlCategorieën.Name = "pnlCategorieën";
-            this.pnlCategorieën.Size = new System.Drawing.Size(183, 443);
+            this.pnlCategorieën.Size = new System.Drawing.Size(197, 443);
             this.pnlCategorieën.TabIndex = 0;
             this.pnlCategorieën.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCategorieën_Paint);
             // 
+            // btnCategorieToevoegen
+            // 
+            this.btnCategorieToevoegen.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.btnCategorieToevoegen.Location = new System.Drawing.Point(150, 0);
+            this.btnCategorieToevoegen.Name = "btnCategorieToevoegen";
+            this.btnCategorieToevoegen.Size = new System.Drawing.Size(47, 41);
+            this.btnCategorieToevoegen.TabIndex = 0;
+            this.btnCategorieToevoegen.Text = "+";
+            this.btnCategorieToevoegen.UseVisualStyleBackColor = true;
+            this.btnCategorieToevoegen.Click += new System.EventHandler(this.btnCategorieToevoegen_Click);
+            // 
             // pnlContent
             // 
-            this.pnlContent.Location = new System.Drawing.Point(234, 49);
+            this.pnlContent.Location = new System.Drawing.Point(232, 49);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(730, 467);
+            this.pnlContent.Size = new System.Drawing.Size(732, 467);
             this.pnlContent.TabIndex = 1;
             // 
             // tbZoeken
@@ -81,17 +92,6 @@
             this.label1.Size = new System.Drawing.Size(196, 29);
             this.label1.TabIndex = 4;
             this.label1.Text = "Media Overzicht";
-            // 
-            // btnCategorieToevoegen
-            // 
-            this.btnCategorieToevoegen.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
-            this.btnCategorieToevoegen.Location = new System.Drawing.Point(136, 0);
-            this.btnCategorieToevoegen.Name = "btnCategorieToevoegen";
-            this.btnCategorieToevoegen.Size = new System.Drawing.Size(47, 41);
-            this.btnCategorieToevoegen.TabIndex = 0;
-            this.btnCategorieToevoegen.Text = "+";
-            this.btnCategorieToevoegen.UseVisualStyleBackColor = true;
-            this.btnCategorieToevoegen.Click += new System.EventHandler(this.btnCategorieToevoegen_Click);
             // 
             // MediaOverzicht
             // 

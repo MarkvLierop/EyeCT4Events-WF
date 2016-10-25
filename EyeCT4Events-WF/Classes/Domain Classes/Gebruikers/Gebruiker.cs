@@ -21,5 +21,15 @@ namespace EyeCT4Events_WF.Classes
         private List<Media> MediaList;
         private List<Reactie> ReactieList;
         private List<Uitgeleend_materiaal> UitgeleendMateriaal;
+
+        public Gebruiker()
+        {
+
+        }
+
+        public override string ToString()
+        {
+            return Voornaam + " " + Tussenvoegsel + " " + Achternaam;
+        }
     }
 }

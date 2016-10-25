@@ -28,5 +28,10 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             return ISM.GetCategorieMetNaam(naam);
         }
+
+        public List<Categorie> CategorieZoeken(string naam)
+        {
+            return ISM.CategorieZoeken(naam);
+        }
     }
 }

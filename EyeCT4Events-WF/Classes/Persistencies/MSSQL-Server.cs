@@ -160,16 +160,6 @@ namespace EyeCT4Events_WF.Persistencies
                 }
             }
             Close();
-
-            // Dubbele verwijderen
-            //List<Categorie> tempList = new List<Categorie>();
-            //foreach (Categorie c in categorieLijst)
-            //{
-            //    if (!tempList.Contains(c).)
-            //    {
-            //        tempList.Add(c);
-            //    }
-            //}
             return categorieLijst;
         }
         public void CategorieToevoegen(Categorie cat)
@@ -207,6 +197,77 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
 
             return cat;
+        }
+
+
+        public List<Media> GetAlleMedia()
+        {
+            List<Media> mediaList = new List<Media>();
+
+            Connect();
+            string query = "SELECT * FROM Media";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Media media = new Media();
+                    media.Beschrijving = reader["Beschrijving"].ToString();
+                    media.Pad = reader["BestandPad"].ToString();
+                    media.Type = reader["MediaType"].ToString();
+                    media.Categorie = Convert.ToInt32(reader["Categorie"]);
+                    media.Flagged = Convert.ToInt32(reader["Flagged"]);
+                    media.Likes = Convert.ToInt32(reader["Likes"]);
+                    mediaList.Add(media);
+                }
+            }
+            Close();
+
+            return mediaList;
+        }
+
+        public Gebruiker GetGebruikerByID(int ID)
+        {
+            Connect();
+            string query = "SELECT * FROM Gebruiker WHERE ID = @ID";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@ID", ID));
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    gebruiker = new Bezoeker();
+                    GebruikerDataToewijzen(gebruiker);
+                }
+            }
+            Close();
+            return gebruiker;
+        }
+
+        public List<Categorie> CategorieZoeken(string naam)
+        {
+            List<Categorie> catlist = new List<Categorie>();
+            Connect();
+            string query = "SELECT * FROM Categorie WHERE Naam LIKE @naam";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@naam", "%"+naam+"%"));
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Categorie cat = new Categorie();
+                    cat.ID = Convert.ToInt32(reader["ID"]);
+                    cat.Naam = reader["Naam"].ToString();
+                    cat.Parent = Convert.ToInt32(reader["ParentCategorie"]);
+                    catlist.Add(cat);
+                }
+            }
+            Close();
+
+            return catlist;
         }
     }
 }

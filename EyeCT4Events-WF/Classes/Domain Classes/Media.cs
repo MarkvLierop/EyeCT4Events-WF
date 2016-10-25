@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EyeCT4Events_WF.Classes
 {
-    class Media
+    public class Media
     {
         public int Categorie { get; set; }
         public int Flagged { get; set; }

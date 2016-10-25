@@ -21,10 +21,10 @@ namespace EyeCT4Events_WF.Classes
 
         }
 
-        public void DrawNaam(Graphics g, Point location, int count)
+        public void DrawNaam(Graphics g, int count)
         {
             int fontSize = 14;
-            g.DrawString(Naam, new Font("Arial", fontSize), Brushes.Black, new Point(location.X,location.Y + (count * fontSize) +20));
+            g.DrawString(Naam, new Font("Arial", fontSize), Brushes.Black, new Point(0, 0 + (count * fontSize)));
         }
     }
 }

@@ -34,6 +34,6 @@ C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.ReserveerP
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csproj.GenerateResource.Cache
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.exe
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.pdb
-C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.MediaOverzicht.resources
-C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.CategorieToevoegen.resources
-C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.MediaUploaden.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormCategorieToevoegen.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormMediaOverzicht.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMediaUploaden.resources

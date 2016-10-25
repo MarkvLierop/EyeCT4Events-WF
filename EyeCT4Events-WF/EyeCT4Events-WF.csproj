@@ -53,62 +53,62 @@
     <Compile Include="CustomControls\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\AanwezigBezoekers.cs">
+    <Compile Include="Forms\FormAanwezigBezoekers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AanwezigBezoekers.designer.cs">
-      <DependentUpon>AanwezigBezoekers.cs</DependentUpon>
+    <Compile Include="Forms\FormAanwezigBezoekers.designer.cs">
+      <DependentUpon>FormAanwezigBezoekers.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Domain Classes\Categorie.cs" />
     <Compile Include="Classes\Domain Classes\Event.cs" />
     <Compile Include="Classes\Domain Classes\Gebruikers\Beheerder.cs" />
     <Compile Include="Classes\Domain Classes\Gebruikers\Bezoeker.cs" />
     <Compile Include="Classes\Domain Classes\Gebruikers\Medewerker.cs" />
-    <Compile Include="Forms\CategorieToevoegen.cs">
+    <Compile Include="Forms\FormCategorieToevoegen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CategorieToevoegen.Designer.cs">
-      <DependentUpon>CategorieToevoegen.cs</DependentUpon>
+    <Compile Include="Forms\FormCategorieToevoegen.Designer.cs">
+      <DependentUpon>FormCategorieToevoegen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MediaOverzicht.cs">
+    <Compile Include="Forms\FormMediaOverzicht.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MediaOverzicht.Designer.cs">
-      <DependentUpon>MediaOverzicht.cs</DependentUpon>
+    <Compile Include="Forms\FormMediaOverzicht.Designer.cs">
+      <DependentUpon>FormMediaOverzicht.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Domain Classes\Gebruikers\Gebruiker.cs" />
     <Compile Include="Classes\Domain Classes\Kampeerplaats.cs" />
     <Compile Include="Classes\Domain Classes\Materiaal.cs" />
     <Compile Include="Classes\Domain Classes\Media.cs" />
-    <Compile Include="Forms\Gebruikergegevens.cs">
+    <Compile Include="Forms\FormGebruikergegevens.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Gebruikergegevens.designer.cs">
-      <DependentUpon>Gebruikergegevens.cs</DependentUpon>
+    <Compile Include="Forms\FormGebruikergegevens.designer.cs">
+      <DependentUpon>FormGebruikergegevens.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Gebruikersbeheer.cs">
+    <Compile Include="Forms\FormGebruikersbeheer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Gebruikersbeheer.designer.cs">
-      <DependentUpon>Gebruikersbeheer.cs</DependentUpon>
+    <Compile Include="Forms\FormGebruikersbeheer.designer.cs">
+      <DependentUpon>FormGebruikersbeheer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inloggen.cs">
+    <Compile Include="Forms\FormInloggen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inloggen.designer.cs">
-      <DependentUpon>Inloggen.cs</DependentUpon>
+    <Compile Include="Forms\FormInloggen.designer.cs">
+      <DependentUpon>FormInloggen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MediaUploaden.cs">
+    <Compile Include="Forms\FormMediaUploaden.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MediaUploaden.Designer.cs">
-      <DependentUpon>MediaUploaden.cs</DependentUpon>
+    <Compile Include="Forms\FormMediaUploaden.Designer.cs">
+      <DependentUpon>FormMediaUploaden.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RegistreerNieuweGebruiker.cs">
+    <Compile Include="Forms\FormRegistreerNieuweGebruiker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RegistreerNieuweGebruiker.designer.cs">
-      <DependentUpon>RegistreerNieuweGebruiker.cs</DependentUpon>
+    <Compile Include="Forms\FormRegistreerNieuweGebruiker.designer.cs">
+      <DependentUpon>FormRegistreerNieuweGebruiker.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Interfaces\IGebruikerAdministratie.cs" />
     <Compile Include="Classes\Persistencies\MSSQL-Server.cs" />
@@ -117,41 +117,41 @@
     <Compile Include="Classes\Domain Classes\Reactie.cs" />
     <Compile Include="Classes\Domain Classes\Reservering.cs" />
     <Compile Include="Classes\Domain Classes\Uitgeleend_materiaal.cs" />
-    <Compile Include="Forms\ReserveerMateriaal.cs">
+    <Compile Include="Forms\FormReserveerMateriaal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ReserveerMateriaal.designer.cs">
-      <DependentUpon>ReserveerMateriaal.cs</DependentUpon>
+    <Compile Include="Forms\FormReserveerMateriaal.designer.cs">
+      <DependentUpon>FormReserveerMateriaal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ReserveerPlaats.cs">
+    <Compile Include="Forms\FormReserveerPlaats.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ReserveerPlaats.designer.cs">
-      <DependentUpon>ReserveerPlaats.cs</DependentUpon>
+    <Compile Include="Forms\FormReserveerPlaats.designer.cs">
+      <DependentUpon>FormReserveerPlaats.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\AanwezigBezoekers.resx">
-      <DependentUpon>AanwezigBezoekers.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormAanwezigBezoekers.resx">
+      <DependentUpon>FormAanwezigBezoekers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CategorieToevoegen.resx">
-      <DependentUpon>CategorieToevoegen.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormCategorieToevoegen.resx">
+      <DependentUpon>FormCategorieToevoegen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MediaOverzicht.resx">
-      <DependentUpon>MediaOverzicht.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormMediaOverzicht.resx">
+      <DependentUpon>FormMediaOverzicht.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Gebruikergegevens.resx">
-      <DependentUpon>Gebruikergegevens.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormGebruikergegevens.resx">
+      <DependentUpon>FormGebruikergegevens.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Gebruikersbeheer.resx">
-      <DependentUpon>Gebruikersbeheer.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormGebruikersbeheer.resx">
+      <DependentUpon>FormGebruikersbeheer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inloggen.resx">
-      <DependentUpon>Inloggen.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormInloggen.resx">
+      <DependentUpon>FormInloggen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MediaUploaden.resx">
-      <DependentUpon>MediaUploaden.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormMediaUploaden.resx">
+      <DependentUpon>FormMediaUploaden.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RegistreerNieuweGebruiker.resx">
-      <DependentUpon>RegistreerNieuweGebruiker.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormRegistreerNieuweGebruiker.resx">
+      <DependentUpon>FormRegistreerNieuweGebruiker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -162,11 +162,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\ReserveerMateriaal.resx">
-      <DependentUpon>ReserveerMateriaal.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormReserveerMateriaal.resx">
+      <DependentUpon>FormReserveerMateriaal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ReserveerPlaats.resx">
-      <DependentUpon>ReserveerPlaats.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormReserveerPlaats.resx">
+      <DependentUpon>FormReserveerPlaats.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

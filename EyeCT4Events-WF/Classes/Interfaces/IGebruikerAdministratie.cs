@@ -6,5 +6,7 @@ namespace EyeCT4Events_WF.Interfaces
     public interface IGebruikerAdministratie
     {
         List<Gebruiker> LijstAanwezigePersonen();
+
+        Gebruiker GetGebruikerByID(int ID);
     }
 }

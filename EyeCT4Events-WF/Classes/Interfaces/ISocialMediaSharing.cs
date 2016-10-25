@@ -11,5 +11,7 @@ namespace EyeCT4Events_WF.Classes.Interfaces
         List<Categorie> GetAlleCategorien();
         void CategorieToevoegen(Categorie cat);
         Categorie GetCategorieMetNaam(string naam);
+        List<Media> GetAlleMedia();
+        List<Categorie> CategorieZoeken(string naam);
     }
 }

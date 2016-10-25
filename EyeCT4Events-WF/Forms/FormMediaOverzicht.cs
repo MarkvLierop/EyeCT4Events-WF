@@ -14,12 +14,15 @@ using System.Windows.Forms;
 
 namespace EyeCT4Events_WF
 {
-    public partial class MediaOverzicht : Form
+    public partial class FormMediaOverzicht : Form
     {
         private List<Categorie> categorieLijst;
-        public MediaOverzicht()
+        private Gebruiker gebruiker;
+
+        public FormMediaOverzicht(Gebruiker gebruiker)
         {
             InitializeComponent();
+            this.gebruiker = gebruiker;
 
             SocialMediaSharingRepository smsr = new SocialMediaSharingRepository(new MSSQL_Server());
             categorieLijst = smsr.GetAlleCategorien();
@@ -27,7 +30,7 @@ namespace EyeCT4Events_WF
 
         private void btnCategorieToevoegen_Click(object sender, EventArgs e)
         {
-            CategorieToevoegen catToevoegen = new CategorieToevoegen();
+            FormCategorieToevoegen catToevoegen = new FormCategorieToevoegen();
             catToevoegen.Show();
         }
 
@@ -37,13 +40,22 @@ namespace EyeCT4Events_WF
 
             for (int i = 0; i < categorieLijst.Count; i++)
             {
-                categorieLijst[i].DrawNaam(g, Location, i);
+                categorieLijst[i].DrawNaam(g, i);
             }
         }
 
         private void btnMediaUploaden_Click(object sender, EventArgs e)
         {
+            using (FormMediaUploaden fmu = new FormMediaUploaden(gebruiker))
+            {
+                fmu.ShowDialog();
 
+                if (fmu.DialogResult == DialogResult.OK)
+                {
+                    pnlCategorieën.Refresh();
+                    pnlContent.Refresh();
+                }
+            }
         }
     }
 }
