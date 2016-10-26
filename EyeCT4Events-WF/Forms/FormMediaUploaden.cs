@@ -45,7 +45,7 @@ namespace EyeCT4Events_WF.Forms
             media.GeplaatstDoor = gebruiker.ToString();
             media.Pad = ofd.FileName;
             media.Type = Path.GetExtension(ofd.FileName);
-            smsr.MediaToevoegen(media);
+            smsr.ToevoegenMedia(media);
             MessageBox.Show("Media geplaatst.");
             Close();
         }

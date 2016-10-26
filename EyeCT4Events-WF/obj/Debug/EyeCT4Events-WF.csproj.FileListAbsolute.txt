@@ -38,3 +38,8 @@ C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.Form
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormMediaOverzicht.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMediaUploaden.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormCategorieZoeken.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\bin\Debug\Interop.WMPLib.dll
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\Interop.WMPLib.dll
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csproj.ResolveComReference.cache

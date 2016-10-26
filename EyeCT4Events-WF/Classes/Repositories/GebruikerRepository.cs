@@ -21,10 +21,5 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             return context.LijstAanwezigePersonen();
         }
-       
-        public Gebruiker GetGebruikerByID(int id)
-        {
-            return context.GetGebruikerByID(id);
-        }
     }
 }

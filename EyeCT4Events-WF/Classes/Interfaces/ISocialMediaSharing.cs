@@ -8,11 +8,14 @@ namespace EyeCT4Events_WF.Classes.Interfaces
 {
     public interface ISocialMediaSharing
     {
-        List<Categorie> GetAlleCategorien();
-        void CategorieToevoegen(Categorie cat);
+        List<Categorie> AlleCategorienOpvragen();
+        List<Media> AlleMediaOpvragen();
+        void ToevoegenCategorie(Categorie cat);
+        void ToevoegenMedia(Media media);
+        void ToevoegenLike(Gebruiker gebruiker, int mediaID, int reactieID, int aantalLikes);
         Categorie GetCategorieMetNaam(string naam);
-        List<Media> GetAlleMedia();
-        List<Categorie> CategorieZoeken(string naam);
-        void MediaToevoegen(Media media);
+        Media GetMediaByID(int ID);
+        int AantalLikesOpvragen(int mediaID, int reactieID);
+        List<Categorie> ZoekenCategorie(string naam);
     }
 }

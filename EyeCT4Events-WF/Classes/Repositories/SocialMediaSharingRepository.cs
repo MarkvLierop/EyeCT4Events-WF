@@ -16,27 +16,42 @@ namespace EyeCT4Events_WF.Classes.Repositories
             this.ISM = ISM;
         }
 
-        public List<Categorie> GetAlleCategorien()
+        public List<Categorie> AlleCategorienOpvragen()
         {
-            return ISM.GetAlleCategorien();
+            return ISM.AlleCategorienOpvragen();
         }
-        public void CategorieToevoegen(Categorie cat)
+        public void ToevoegenCategorie(Categorie cat)
         {
-            ISM.CategorieToevoegen(cat);
+            ISM.ToevoegenCategorie(cat);
+        }
+        public void ToevoegenMedia(Media media)
+        {
+            ISM.ToevoegenMedia(media);
+        }
+        public void ToevoegenLike(Gebruiker gebruiker, int mediaID, int reactieID, int aantalLikes)
+        {
+            ISM.ToevoegenLike(gebruiker, mediaID, reactieID, aantalLikes);
+        }
+        public Media GetMediaByID(int id)
+        {
+            return ISM.GetMediaByID(id);
+        }
+        public int AantalLikesOpvragen(int mediaID, int reactieID)
+        {
+            return ISM.AantalLikesOpvragen(mediaID, reactieID);
         }
         public Categorie GetCategorieMetNaam(string naam)
         {
             return ISM.GetCategorieMetNaam(naam);
         }
 
-        public List<Categorie> CategorieZoeken(string naam)
+        public List<Categorie> ZoekenCategorie(string naam)
         {
-            return ISM.CategorieZoeken(naam);
+            return ISM.ZoekenCategorie(naam);
         }
-
-        public void MediaToevoegen(Media media)
+        public List<Media> AlleMediaOpvragen()
         {
-            ISM.MediaToevoegen(media);
+            return ISM.AlleMediaOpvragen();
         }
     }
 }

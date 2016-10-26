@@ -27,9 +27,16 @@ namespace EyeCT4Events_WF.Persistencies
         /// </summary>
         private void Connect()
         {
-            this.connString = "Data Source=192.168.10.12,20;Initial Catalog=EyeCT4Events;Persist Security Info=True;User ID=sa;Password=PTS16";
-            SQLcon = new SqlConnection(connString);
-            SQLcon.Open();
+            try
+            {
+                this.connString = "Data Source=192.168.10.12,20;Initial Catalog=EyeCT4Events;Persist Security Info=True;User ID=sa;Password=PTS16";
+                SQLcon = new SqlConnection(connString);
+                SQLcon.Open();
+            }
+            catch (SqlException)
+            {
+                //throw new NoDatabaseConnectionExists;
+            }
         }
         private void Close()
         {
@@ -46,23 +53,6 @@ namespace EyeCT4Events_WF.Persistencies
                 hash.Append(theByte.ToString("x2"));
             }
             return hash.ToString();
-        }
-        private void GebruikerDataToewijzen(Gebruiker gebruiker)
-        {
-            gebruiker.Achternaam = reader["Achternaam"].ToString();
-            gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
-            gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
-            gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
-            gebruiker.Voornaam = reader["Voornaam"].ToString();
-            gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
-            if (Convert.ToInt32(reader["Aanwezig"]) == 1)
-            {
-                gebruiker.Aanwezig = true;
-            }
-            else
-            {
-                gebruiker.Aanwezig = false;
-            }
         }
         private string BestandsTypeDefinieren (string type)
         {
@@ -108,16 +98,16 @@ namespace EyeCT4Events_WF.Persistencies
                     type = "Video";
                     break;
                 case ".mp3":
-                    type = "Geluid";
+                    type = "Audio";
                     break;
                 case ".wav":
-                    type = "Geluid";
+                    type = "Audio";
                     break;
                 case ".m4a":
-                    type = "Geluid";
+                    type = "Audio";
                     break;
                 case ".wma":
-                    type = "Geluid";
+                    type = "Audio";
                     break;
                 default:
                     type = "Bericht";
@@ -125,40 +115,14 @@ namespace EyeCT4Events_WF.Persistencies
             }
             return type;
         }
-
-        /// <summary>
-        /// Public Methods.
-        /// </summary>
-        /// <returns></returns>
-        public List<Gebruiker> LijstAanwezigePersonen()
+        private Gebruiker GetGebruikerByID(int ID)
         {
-            List<Gebruiker> bezoekerLijst = new List<Gebruiker>();
-
             Connect();
-            string query = "SELECT * FROM Gebruiker WHERE GebruikerType = 'bezoeker'";
+            string query = "SELECT * FROM Gebruiker WHERE ID = @ID";
             using (command = new SqlCommand(query, SQLcon))
             {
+                command.Parameters.Add(new SqlParameter("@ID", ID));
                 reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    gebruiker = new Bezoeker();
-                    GebruikerDataToewijzen(gebruiker);
-
-                    bezoekerLijst.Add(gebruiker);
-                }
-            }
-            Close();
-            return bezoekerLijst;
-        }
-        public Gebruiker GebruikerLogin(string wachtwoord, string gebruikersnaam)
-        {
-            Connect();
-            string query = "SELECT Gebruikersnaam, Wachtwoord FROM Gebruiker Where Gebruikersnaam = @Gebruikersnaam AND Wachtwoord = @Wachtwoord";
-            using (command = new SqlCommand(query, SQLcon))
-            {
-                command.Parameters.Add(new SqlParameter("@Gebruikersnaam", gebruikersnaam));
-                command.Parameters.Add(new SqlParameter("@Wachtwoord", wachtwoord));
 
                 while (reader.Read())
                 {
@@ -174,7 +138,45 @@ namespace EyeCT4Events_WF.Persistencies
                     {
                         gebruiker = new Medewerker();
                     }
-                    GebruikerDataToewijzen(gebruiker);
+                    gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
+                    gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                    gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                    gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                    gebruiker.Voornaam = reader["Voornaam"].ToString();
+                    gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                    gebruiker.Achternaam = reader["Achternaam"].ToString();
+                    if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                    {
+                        gebruiker.Aanwezig = true;
+                    }
+                    else
+                    {
+                        gebruiker.Aanwezig = false;
+                    }
+                }
+            }
+            Close();
+            return gebruiker;
+        }
+        /// <summary>
+        /// Public Methods.
+        /// </summary>
+        /// <returns></returns>
+        /// 
+
+        #region Gebruikers
+        public Gebruiker GebruikerLogin(string wachtwoord, string gebruikersnaam)
+        {
+            Connect();
+            string query = "SELECT Gebruikersnaam, Wachtwoord FROM Gebruiker WHERE Gebruikersnaam = @Gebruikersnaam AND Wachtwoord = @Wachtwoord";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@Gebruikersnaam", gebruikersnaam));
+                command.Parameters.Add(new SqlParameter("@Wachtwoord", wachtwoord));
+
+                while (reader.Read())
+                {
+                    //GebruikerDataToewijzen(gebruiker);
                 }
 
                 Close();
@@ -200,7 +202,150 @@ namespace EyeCT4Events_WF.Persistencies
             }
             Close();
         }
-        public List<Categorie> GetAlleCategorien()
+        public List<Gebruiker> LijstAanwezigePersonen()
+        {
+            List<Gebruiker> bezoekerLijst = new List<Gebruiker>();
+
+            Connect();
+            string query = "SELECT * FROM Gebruiker WHERE GebruikerType = 'bezoeker'";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    gebruiker = new Bezoeker();
+                    //GebruikerDataToewijzen(gebruiker);
+
+                    bezoekerLijst.Add(gebruiker);
+                }
+            }
+            Close();
+            return bezoekerLijst;
+        }
+        #endregion
+        #region Media
+        public List<Media> AlleMediaOpvragen()
+        {
+            List<Media> mediaList = new List<Media>();
+
+            Connect();
+            string query = "SELECT * FROM Media";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Media media = new Media();
+                    media.Beschrijving = reader["Beschrijving"].ToString();
+                    media.Pad = reader["BestandPad"].ToString();
+                    media.Type = reader["MediaType"].ToString();
+                    media.Categorie = Convert.ToInt32(reader["Categorie"]);
+                    media.Flagged = Convert.ToInt32(reader["Flagged"]);
+                    media.Likes = Convert.ToInt32(reader["Likes"]);
+                    media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]).ToString();
+                    mediaList.Add(media);
+                }
+            }
+            Close();
+
+            foreach (Media m in mediaList)
+            {
+                m.GeplaatstDoor = GetGebruikerByID(Convert.ToInt32(m.GeplaatstDoor)).ToString();
+            }
+
+            return mediaList;
+        }
+        public Media GetMediaByID(int ID)
+        {
+            Media media = null;
+            Connect();
+            string query = "SELECT * FROM Media WHERE ID = @ID";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@ID", ID));
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    media.ID = Convert.ToInt32(reader["ID"]);
+                }
+            }
+            Close();
+
+            return media;
+        }
+        public void ToevoegenMedia(Media media)
+        {
+            Connect();
+            string query = "INSERT INTO Media VALUES (@GeplaatstDoor, @Categorie, @Pad, @Type, 0, 0, @Beschrijving)";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@GeplaatstDoor", 1)); // media.GeplaatstDoor   AAANPASSEN ALS INLOGGEN WERKT.
+                command.Parameters.Add(new SqlParameter("@Categorie", media.Categorie));
+                command.Parameters.Add(new SqlParameter("@Pad", media.Pad));
+                command.Parameters.Add(new SqlParameter("@Type", BestandsTypeDefinieren(media.Type)));
+                command.Parameters.Add(new SqlParameter("@Beschrijving", media.Beschrijving));
+
+                command.ExecuteNonQuery();
+            }
+            Close();
+        }
+        public int AantalLikesOpvragen(int mediaID, int reactieID)
+        {
+            int aantalLikes = int.MinValue;
+
+            if (reactieID == int.MinValue)
+            {
+                Connect();
+                string query = "SELECT Likes FROM Media WHERE ID = @ID";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@ID", mediaID));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        aantalLikes = Convert.ToInt32(reader["ID"]);
+                    }
+                }
+                Close();
+            }
+            return aantalLikes;
+        }
+
+        public void ToevoegenLike(Gebruiker gebruiker, int mediaID, int reactieID, int aantalLikes)
+        {
+            if (reactieID == int.MinValue)
+            {
+                Connect();
+                string query = "UPDATE Media SET Likes= @aantalLikes WHERE ID = @mediaID";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@mediaID", mediaID));
+                    command.Parameters.Add(new SqlParameter("@aantalLikes", aantalLikes));
+
+                    command.ExecuteNonQuery();
+                }
+                Close();
+            }
+            else if (mediaID == int.MinValue)
+            {
+                Connect();
+                string query = "UPDATE Media SET Likes= ";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@GeplaatstDoor", mediaID));
+
+                    command.ExecuteNonQuery();
+                }
+                Close();
+            }
+        }
+        #endregion
+        #region Categorie
+        public List<Categorie> AlleCategorienOpvragen()
         {
             List<Categorie> categorieLijst = new List<Categorie>();
 
@@ -231,7 +376,7 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
             return categorieLijst;
         }
-        public void CategorieToevoegen(Categorie cat)
+        public void ToevoegenCategorie(Categorie cat)
         {
             Connect();
             string query = "INSERT INTO Categorie VALUES (@Naam, @ParentCat)";
@@ -267,60 +412,15 @@ namespace EyeCT4Events_WF.Persistencies
 
             return cat;
         }
-        public List<Media> GetAlleMedia()
-        {
-            List<Media> mediaList = new List<Media>();
 
-            Connect();
-            string query = "SELECT * FROM Media";
-            using (command = new SqlCommand(query, SQLcon))
-            {
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Media media = new Media();
-                    media.Beschrijving = reader["Beschrijving"].ToString();
-                    media.Pad = reader["BestandPad"].ToString();
-                    media.Type = reader["MediaType"].ToString();
-                    media.Categorie = Convert.ToInt32(reader["Categorie"]);
-                    media.Flagged = Convert.ToInt32(reader["Flagged"]);
-                    media.Likes = Convert.ToInt32(reader["Likes"]);
-                    mediaList.Add(media);
-                }
-            }
-            Close();
-
-            return mediaList;
-        }
-
-        public Gebruiker GetGebruikerByID(int ID)
-        {
-            Connect();
-            string query = "SELECT * FROM Gebruiker WHERE ID = @ID";
-            using (command = new SqlCommand(query, SQLcon))
-            {
-                command.Parameters.Add(new SqlParameter("@ID", ID));
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    gebruiker = new Bezoeker();
-                    GebruikerDataToewijzen(gebruiker);
-                }
-            }
-            Close();
-            return gebruiker;
-        }
-
-        public List<Categorie> CategorieZoeken(string naam)
+        public List<Categorie> ZoekenCategorie(string naam)
         {
             List<Categorie> catlist = new List<Categorie>();
             Connect();
             string query = "SELECT * FROM Categorie WHERE Naam LIKE @naam";
             using (command = new SqlCommand(query, SQLcon))
             {
-                command.Parameters.Add(new SqlParameter("@naam", "%"+naam+"%"));
+                command.Parameters.Add(new SqlParameter("@naam", "%" + naam + "%"));
                 reader = command.ExecuteReader();
 
                 while (reader.Read())
@@ -337,21 +437,8 @@ namespace EyeCT4Events_WF.Persistencies
             return catlist;
         }
 
-        public void MediaToevoegen(Media media)
-        {            
-            Connect();
-            string query = "INSERT INTO Media VALUES (@GeplaatstDoor, @Categorie, @Pad, @Type, 0, 0, @Beschrijving)";
-            using (command = new SqlCommand(query, SQLcon))
-            {
-                command.Parameters.Add(new SqlParameter("@GeplaatstDoor", 1)); // media.GeplaatstDoor   AAANPASSEN ALS INLOGGEN WERKT.
-                command.Parameters.Add(new SqlParameter("@Categorie", media.Categorie));
-                command.Parameters.Add(new SqlParameter("@Pad", media.Pad));
-                command.Parameters.Add(new SqlParameter("@Type", BestandsTypeDefinieren(media.Type)));
-                command.Parameters.Add(new SqlParameter("@Beschrijving", media.Beschrijving));
 
-                command.ExecuteNonQuery();
-            }
-            Close();
-        }
+        #endregion
+
     }
 }

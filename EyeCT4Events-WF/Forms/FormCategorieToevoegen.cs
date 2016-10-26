@@ -25,7 +25,7 @@ namespace EyeCT4Events_WF.Forms
             InitializeComponent();
             smsr = new SocialMediaSharingRepository(new MSSQL_Server());
 
-            catList = smsr.GetAlleCategorien();
+            catList = smsr.AlleCategorienOpvragen();
             
             foreach (Categorie cat in catList)
             {
@@ -38,7 +38,7 @@ namespace EyeCT4Events_WF.Forms
             Categorie cat = new Categorie();
             cat.Naam = tbNaam.Text;
             cat.Parent = smsr.GetCategorieMetNaam(lbCategorien.SelectedItem.ToString()).ID;
-            smsr.CategorieToevoegen(cat);
+            smsr.ToevoegenCategorie(cat);
 
             if (lbCategorien.SelectedItem == null)
             {
@@ -55,7 +55,7 @@ namespace EyeCT4Events_WF.Forms
         private void tbCategorieZoeken_TextChanged(object sender, EventArgs e)
         {
             lbCategorien.Items.Clear();
-            catList = smsr.CategorieZoeken(tbCategorieZoeken.Text);
+            catList = smsr.ZoekenCategorie(tbCategorieZoeken.Text);
 
             foreach (Categorie cat in catList)
             {

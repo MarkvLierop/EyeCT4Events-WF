@@ -33,7 +33,7 @@
             this.pnlContent = new System.Windows.Forms.Panel();
             this.tbZoeken = new System.Windows.Forms.TextBox();
             this.btnMediaUploaden = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblMediaOverzicht = new System.Windows.Forms.Label();
             this.pnlCategorieën.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,27 +83,27 @@
             this.btnMediaUploaden.UseVisualStyleBackColor = true;
             this.btnMediaUploaden.Click += new System.EventHandler(this.btnMediaUploaden_Click);
             // 
-            // label1
+            // lblMediaOverzicht
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
-            this.label1.Location = new System.Drawing.Point(13, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(196, 29);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Media Overzicht";
+            this.lblMediaOverzicht.AutoSize = true;
+            this.lblMediaOverzicht.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.lblMediaOverzicht.Location = new System.Drawing.Point(13, 12);
+            this.lblMediaOverzicht.Name = "lblMediaOverzicht";
+            this.lblMediaOverzicht.Size = new System.Drawing.Size(196, 29);
+            this.lblMediaOverzicht.TabIndex = 4;
+            this.lblMediaOverzicht.Text = "Media Overzicht";
             // 
-            // MediaOverzicht
+            // FormMediaOverzicht
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(976, 528);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblMediaOverzicht);
             this.Controls.Add(this.btnMediaUploaden);
             this.Controls.Add(this.tbZoeken);
             this.Controls.Add(this.pnlContent);
             this.Controls.Add(this.pnlCategorieën);
-            this.Name = "MediaOverzicht";
+            this.Name = "FormMediaOverzicht";
             this.Text = "Media Overzicht";
             this.pnlCategorieën.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -117,7 +117,7 @@
         private System.Windows.Forms.Panel pnlContent;
         private System.Windows.Forms.TextBox tbZoeken;
         private System.Windows.Forms.Button btnMediaUploaden;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblMediaOverzicht;
         private System.Windows.Forms.Button btnCategorieToevoegen;
     }
 }
