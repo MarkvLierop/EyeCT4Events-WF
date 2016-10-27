@@ -34,6 +34,7 @@
             this.tbZoeken = new System.Windows.Forms.TextBox();
             this.btnMediaUploaden = new System.Windows.Forms.Button();
             this.lblMediaOverzicht = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlCategorieën.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,10 +69,11 @@
             // 
             // tbZoeken
             // 
-            this.tbZoeken.Location = new System.Drawing.Point(372, 15);
+            this.tbZoeken.Location = new System.Drawing.Point(449, 15);
             this.tbZoeken.Name = "tbZoeken";
             this.tbZoeken.Size = new System.Drawing.Size(384, 20);
             this.tbZoeken.TabIndex = 2;
+            this.tbZoeken.TextChanged += new System.EventHandler(this.tbZoeken_TextChanged);
             // 
             // btnMediaUploaden
             // 
@@ -93,11 +95,21 @@
             this.lblMediaOverzicht.TabIndex = 4;
             this.lblMediaOverzicht.Text = "Media Overzicht";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(250, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(172, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Zoeken op type media of gebruiker";
+            // 
             // FormMediaOverzicht
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(976, 528);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblMediaOverzicht);
             this.Controls.Add(this.btnMediaUploaden);
             this.Controls.Add(this.tbZoeken);
@@ -119,6 +131,7 @@
         private System.Windows.Forms.Button btnMediaUploaden;
         private System.Windows.Forms.Label lblMediaOverzicht;
         private System.Windows.Forms.Button btnCategorieToevoegen;
+        private System.Windows.Forms.Label label1;
     }
 }
 

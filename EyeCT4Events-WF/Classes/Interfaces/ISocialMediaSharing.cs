@@ -12,9 +12,11 @@ namespace EyeCT4Events_WF.Classes.Interfaces
         List<Media> AlleMediaOpvragen();
         void ToevoegenCategorie(Categorie cat);
         void ToevoegenMedia(Media media);
-        void ToevoegenLike(Gebruiker gebruiker, int mediaID, int reactieID, int aantalLikes);
+        void ToevoegenLikeInMediaOfReactie(Gebruiker gebruiker, int mediaID, int reactieID);
+        void ToevoegenRapporterenMediaReactie(int mediaID, int reactieID);
         Categorie GetCategorieMetNaam(string naam);
         Media GetMediaByID(int ID);
         List<Categorie> ZoekenCategorie(string naam);
+        List<Media> ZoekenMedia(string zoekterm);
     }
 }

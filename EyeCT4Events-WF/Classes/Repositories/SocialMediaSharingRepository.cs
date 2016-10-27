@@ -15,7 +15,6 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             this.ISM = ISM;
         }
-
         public List<Categorie> AlleCategorienOpvragen()
         {
             return ISM.AlleCategorienOpvragen();
@@ -28,9 +27,13 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             ISM.ToevoegenMedia(media);
         }
-        public void ToevoegenLike(Gebruiker gebruiker, int mediaID, int reactieID, int aantalLikes)
+        public void ToevoegenLikeMediaReactie(Gebruiker gebruiker, int mediaID, int reactieID)
         {
-            ISM.ToevoegenLike(gebruiker, mediaID, reactieID, aantalLikes);
+            ISM.ToevoegenLikeInMediaOfReactie(gebruiker, mediaID, reactieID);
+        }
+        public void ToevoegenRapporterenMediaReactie(int mediaID, int reactieID)
+        {
+            ISM.ToevoegenRapporterenMediaReactie(mediaID, reactieID);
         }
         public Media GetMediaByID(int id)
         {
@@ -44,6 +47,10 @@ namespace EyeCT4Events_WF.Classes.Repositories
         public List<Categorie> ZoekenCategorie(string naam)
         {
             return ISM.ZoekenCategorie(naam);
+        }
+        public List<Media> ZoekenMedia (string zoekterm)
+        {
+            return ISM.ZoekenMedia(zoekterm);
         }
         public List<Media> AlleMediaOpvragen()
         {

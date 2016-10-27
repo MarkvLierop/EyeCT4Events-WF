@@ -159,12 +159,12 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
             return gebruiker;
         }
+
         /// <summary>
         /// Public Methods.
         /// </summary>
         /// <returns></returns>
         /// 
-
         #region Gebruikers
         public Gebruiker GebruikerLogin(string wachtwoord, string gebruikersnaam)
         {
@@ -294,38 +294,60 @@ namespace EyeCT4Events_WF.Persistencies
             }
             Close();
         }
-        //public int AantalLikesOpvragen(int mediaID, int reactieID)
-        //{
-        //    int aantalLikes = 0;
+        
+        public void ToevoegenLikeInMediaOfReactie(Gebruiker gebruiker, int mediaID, int reactieID)
+        {
+            // INSERT +1 Like INTO Media
+            if (reactieID == int.MinValue)
+            {
+                Connect();
+                string query = "UPDATE Media SET Likes= (SELECT Likes FROM Media WHERE ID = @mediaID)+1 WHERE ID = @mediaID";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@mediaID", mediaID));
 
-        //    if (reactieID == int.MinValue)
-        //    {
-        //        Connect();
-        //        string query = "SELECT Likes FROM Media WHERE ID = @ID";
-        //        using (command = new SqlCommand(query, SQLcon))
-        //        {
-        //            command.Parameters.Add(new SqlParameter("@ID", mediaID));
-        //            reader = command.ExecuteReader();
+                    command.ExecuteNonQuery();
+                }
+                string insert = @"INSERT INTO [Like](GebruikerID,MediaID) VALUES(@gebruikerID, @mediaID)";
+                using (command = new SqlCommand(insert, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@gebruikerID", 1)); // AANPASSEN ALS LOGIN WERKT gebruiker.GebruikersID
+                    command.Parameters.Add(new SqlParameter("@mediaID", mediaID));
 
-        //            while (reader.Read())
-        //            {
-        //                aantalLikes = Convert.ToInt32(reader["ID"]);
-        //            }
-        //        }
-        //        Close();
-        //    }
-        //    return aantalLikes;
-        //}
+                    command.ExecuteNonQuery();
+                }
+                Close();
+            }
+            // INSERT +1 Like INTO Reactie
+            else if (mediaID == int.MinValue)
+            {
+                Connect();
+                string query = "UPDATE Reactie SET Likes= (SELECT Likes FROM Reactie WHERE ID = @reactieID)+1 WHERE ID = @reactieID";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@reactieID", reactieID));
 
-        public void ToevoegenLike(Gebruiker gebruiker, int mediaID, int reactieID, int aantalLikes)
+                    command.ExecuteNonQuery();
+                }
+                string insert = "INSERT INTO [Like](GebruikerID, ReactieID) VALUES(@gebruikerID, @reactieID)";
+                using (command = new SqlCommand(insert, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@gebruikerID", 1)); // AANPASSEN ALS LOGIN WERKT gebruiker.GebruikersID
+                    command.Parameters.Add(new SqlParameter("@reactieID", reactieID));
+
+                    command.ExecuteNonQuery();
+                }
+                Close();
+            }
+        }
+        public void ToevoegenRapporterenMediaReactie(int mediaID, int reactieID)
         {
             if (reactieID == int.MinValue)
             {
                 Connect();
-                string query = "UPDATE Media SET Likes= @aantalLikes WHERE ID = @mediaID";
+                string query = "UPDATE Media SET Flagged= (SELECT Flagged FROM Media WHERE ID = @mediaID)+1 WHERE ID = @mediaID";
                 using (command = new SqlCommand(query, SQLcon))
                 {
-                    command.Parameters.Add(new SqlParameter("@aantalLikes", aantalLikes));
                     command.Parameters.Add(new SqlParameter("@mediaID", mediaID));
 
                     command.ExecuteNonQuery();
@@ -335,16 +357,48 @@ namespace EyeCT4Events_WF.Persistencies
             else if (mediaID == int.MinValue)
             {
                 Connect();
-                string query = "UPDATE Media SET Likes= @aantalLikes WHERE ID = @reactieID";
+                string query = "UPDATE Reactie SET Flagged= (SELECT Flagged FROM Reactie WHERE ID = @reactieID)+1 WHERE ID = @reactieID";
                 using (command = new SqlCommand(query, SQLcon))
                 {
-                    command.Parameters.Add(new SqlParameter("@aantalLikes", aantalLikes));
                     command.Parameters.Add(new SqlParameter("@reactieID", reactieID));
 
                     command.ExecuteNonQuery();
                 }
                 Close();
             }
+        }
+
+        public List<Media> ZoekenMedia(string zoekterm)
+        {
+            List<Media> medialist = new List<Media>();
+            Connect();
+            string query = "SELECT * FROM Media WHERE GeplaatstDoor LIKE(SELECT ID FROM Gebruiker WHERE Voornaam Like @zoekterm OR Tussenvoegsel Like @zoekterm OR Achternaam LIKE @zoekterm) OR MediaType LIKE @zoekterm";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@zoekterm", "%" + zoekterm + "%"));
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Media media = new Media();
+                    media.ID = Convert.ToInt32(reader["ID"]);
+                    media.Beschrijving = reader["Beschrijving"].ToString();
+                    media.Pad = reader["BestandPad"].ToString();
+                    media.Type = reader["MediaType"].ToString();
+                    media.Categorie = Convert.ToInt32(reader["Categorie"]);
+                    media.Flagged = Convert.ToInt32(reader["Flagged"]);
+                    media.Likes = Convert.ToInt32(reader["Likes"]);
+                    media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]).ToString();
+                    medialist.Add(media);
+                }
+            }
+            Close();
+
+            foreach (Media m in medialist)
+            {
+                m.GeplaatstDoor = GetGebruikerByID(Convert.ToInt32(m.GeplaatstDoor)).ToString();
+            }
+            return medialist;
         }
         #endregion
         #region Categorie
@@ -439,6 +493,7 @@ namespace EyeCT4Events_WF.Persistencies
 
             return catlist;
         }
+
 
 
         #endregion

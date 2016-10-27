@@ -17,28 +17,23 @@ namespace EyeCT4Events_WF
 {
     public partial class FormMediaOverzicht : Form
     {
+        // Fields
         SocialMediaSharingRepository smsr;
         private List<Categorie> categorieLijst;
         private List<Media> mediaLijst;
         private Gebruiker gebruiker;
-        
-        public FormMediaOverzicht(Gebruiker gebruiker)
+
+        // Methods
+        private void ContentCreeren(List<Media> mediaList)
         {
-            InitializeComponent();
-            this.gebruiker = gebruiker;
-
-            smsr = new SocialMediaSharingRepository(new MSSQL_Server());
-            categorieLijst = smsr.AlleCategorienOpvragen();
-
-            mediaLijst = smsr.AlleMediaOpvragen();
             List<Control> pnlContentControlList = new List<Control>();
-            for(int i = 0; i< mediaLijst.Count;i++)
+            for (int i = 0; i < mediaLijst.Count; i++)
             {
                 Label Titel = new Label();
                 Titel.Text = mediaLijst[i].GeplaatstDoor + " heeft een " + mediaLijst[i].Type + " Geplaatst";
                 Titel.Width = pnlContent.Width;
                 pnlContentControlList.Add(Titel);
-                
+
                 switch (mediaLijst[i].Type)
                 {
                     case "Afbeelding":
@@ -57,18 +52,22 @@ namespace EyeCT4Events_WF
                 Beschrijving.Text = mediaLijst[i].Beschrijving;
                 pnlContentControlList.Add(Beschrijving);
 
-                Button btnLikes = new Button();
-                btnLikes.Text = "Likes "+ mediaLijst[i].Likes;
-                btnLikes.Tag = mediaLijst[i].Likes;
-                btnLikes.Name = mediaLijst[i].ID.ToString();
-                btnLikes.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnLikes_MouseUp);
-                pnlContentControlList.Add(btnLikes);
+                Button btnMediaLike = new Button();
+                btnMediaLike.Text = "Likes " + mediaLijst[i].Likes;
+                btnMediaLike.Tag = mediaLijst[i].Likes;
+                btnMediaLike.Name = mediaLijst[i].ID.ToString();
+                btnMediaLike.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnMediaLike_MouseUp);
+                pnlContentControlList.Add(btnMediaLike);
 
-                Button Rapporteren = new Button();
-                Rapporteren.Text = "Rapporteren";
-                pnlContentControlList.Add(Rapporteren);
+                Button btnMediaRapporteren = new Button();
+                btnMediaRapporteren.Text = "Rapporteren";
+                btnMediaRapporteren.Tag = mediaLijst[i].Likes; // NOG AANPASSEN
+                btnMediaRapporteren.Name = mediaLijst[i].ID.ToString();
+                btnMediaRapporteren.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnMediaRapporteren_MouseUp);
+                pnlContentControlList.Add(btnMediaRapporteren);
 
-                for (int c = 0; c < pnlContentControlList.Count;c++)
+                // Alle Custom controls positioneren op het Content panel.
+                for (int c = 0; c < pnlContentControlList.Count; c++)
                 {
                     pnlContentControlList[c].Location = new Point(0, c * pnlContentControlList[c].Height);
                     pnlContent.Controls.Add(pnlContentControlList[c]);
@@ -76,12 +75,35 @@ namespace EyeCT4Events_WF
             }
         }
 
-        private void btnLikes_MouseUp(object sender, MouseEventArgs e)
+        // Constructor
+        public FormMediaOverzicht(Gebruiker gebruiker)
         {
-            // Button sender.Name = MediaID. 
-            // sender.Tag = AantalLikes.
-            smsr.ToevoegenLike(gebruiker, Convert.ToInt32(((Button)sender).Name), int.MinValue, Convert.ToInt32(((Button)sender).Tag) + 1);
+            InitializeComponent();
+            this.gebruiker = gebruiker;
+
+            smsr = new SocialMediaSharingRepository(new MSSQL_Server());
+            categorieLijst = smsr.AlleCategorienOpvragen();
+
+            mediaLijst = smsr.AlleMediaOpvragen();
+            ContentCreeren(mediaLijst);
+        }
+
+        // Events
+        private void btnMediaRapporteren_MouseUp(object sender, MouseEventArgs e)
+        {
+            smsr.ToevoegenRapporterenMediaReactie(Convert.ToInt32(((Button)sender).Name), int.MinValue);
+            ((Button)sender).Enabled = false;
+            ((Button)sender).Text = "Gerapporteerd";
+            MessageBox.Show("Gerapporteerd.");
+        }
+
+        private void btnMediaLike_MouseUp(object sender, MouseEventArgs e)
+        {
+            // Button sender.Name = ID van Media. 
+            // sender.Tag = Aantal likes dat de media heeft.
+            smsr.ToevoegenLikeMediaReactie(gebruiker, Convert.ToInt32(((Button)sender).Name), int.MinValue);
             ((Button)sender).Text = "Likes " + (Convert.ToInt32(((Button)sender).Tag) + 1).ToString();
+            ((Button)sender).Enabled = false;
         }
 
         private void btnCategorieToevoegen_Click(object sender, EventArgs e)
@@ -112,6 +134,13 @@ namespace EyeCT4Events_WF
                     pnlContent.Refresh();
                 }
             }
+        }
+
+        private void tbZoeken_TextChanged(object sender, EventArgs e)
+        {
+            pnlContent.Controls.Clear();
+            mediaLijst = smsr.ZoekenMedia(tbZoeken.Text);
+            ContentCreeren(mediaLijst);
         }
     }
 }
