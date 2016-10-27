@@ -15,7 +15,6 @@ namespace EyeCT4Events_WF.Classes.Interfaces
         void ToevoegenLike(Gebruiker gebruiker, int mediaID, int reactieID, int aantalLikes);
         Categorie GetCategorieMetNaam(string naam);
         Media GetMediaByID(int ID);
-        int AantalLikesOpvragen(int mediaID, int reactieID);
         List<Categorie> ZoekenCategorie(string naam);
     }
 }

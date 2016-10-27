@@ -36,10 +36,6 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             return ISM.GetMediaByID(id);
         }
-        public int AantalLikesOpvragen(int mediaID, int reactieID)
-        {
-            return ISM.AantalLikesOpvragen(mediaID, reactieID);
-        }
         public Categorie GetCategorieMetNaam(string naam)
         {
             return ISM.GetCategorieMetNaam(naam);

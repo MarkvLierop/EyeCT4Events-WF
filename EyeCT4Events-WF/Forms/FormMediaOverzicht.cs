@@ -21,8 +21,7 @@ namespace EyeCT4Events_WF
         private List<Categorie> categorieLijst;
         private List<Media> mediaLijst;
         private Gebruiker gebruiker;
-
-
+        
         public FormMediaOverzicht(Gebruiker gebruiker)
         {
             InitializeComponent();
@@ -60,7 +59,8 @@ namespace EyeCT4Events_WF
 
                 Button btnLikes = new Button();
                 btnLikes.Text = "Likes "+ mediaLijst[i].Likes;
-                btnLikes.Tag = mediaLijst[i].ID;
+                btnLikes.Tag = mediaLijst[i].Likes;
+                btnLikes.Name = mediaLijst[i].ID.ToString();
                 btnLikes.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnLikes_MouseUp);
                 pnlContentControlList.Add(btnLikes);
 
@@ -78,13 +78,10 @@ namespace EyeCT4Events_WF
 
         private void btnLikes_MouseUp(object sender, MouseEventArgs e)
         {
-            foreach (Media m in mediaLijst)
-            {
-                if (Convert.ToInt32(Tag) == m.ID)
-                {
-                    smsr.ToevoegenLike(gebruiker, m.ID, int.MinValue, smsr.AantalLikesOpvragen(m.ID, int.MinValue));
-                }
-            }
+            // Button sender.Name = MediaID. 
+            // sender.Tag = AantalLikes.
+            smsr.ToevoegenLike(gebruiker, Convert.ToInt32(((Button)sender).Name), int.MinValue, Convert.ToInt32(((Button)sender).Tag) + 1);
+            ((Button)sender).Text = "Likes " + (Convert.ToInt32(((Button)sender).Tag) + 1).ToString();
         }
 
         private void btnCategorieToevoegen_Click(object sender, EventArgs e)

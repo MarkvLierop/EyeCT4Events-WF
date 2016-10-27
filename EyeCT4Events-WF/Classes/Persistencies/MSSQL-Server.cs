@@ -10,6 +10,7 @@ using EyeCT4Events_WF.Classes.Gebruikers;
 using EyeCT4Events_WF.Classes;
 using EyeCT4Events_WF.Classes.Interfaces;
 using System.IO;
+using EyeCT4Events_WF.Exceptions;
 
 namespace EyeCT4Events_WF.Persistencies
 {
@@ -29,13 +30,13 @@ namespace EyeCT4Events_WF.Persistencies
         {
             try
             {
-                this.connString = "Data Source=192.168.10.12,20;Initial Catalog=EyeCT4Events;Persist Security Info=True;User ID=sa;Password=PTS16";
+                this.connString = "Data Source=192.168.10.10,20;Initial Catalog=EyeCT4Events;Persist Security Info=True;User ID=sa;Password=PTS16";
                 SQLcon = new SqlConnection(connString);
                 SQLcon.Open();
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
-                //throw new NoDatabaseConnectionExists;
+                throw new NoDatabaseConnectionException(e.Message);
             }
         }
         private void Close()
@@ -238,6 +239,7 @@ namespace EyeCT4Events_WF.Persistencies
                 while (reader.Read())
                 {
                     Media media = new Media();
+                    media.ID = Convert.ToInt32(reader["ID"]);
                     media.Beschrijving = reader["Beschrijving"].ToString();
                     media.Pad = reader["BestandPad"].ToString();
                     media.Type = reader["MediaType"].ToString();
@@ -292,28 +294,28 @@ namespace EyeCT4Events_WF.Persistencies
             }
             Close();
         }
-        public int AantalLikesOpvragen(int mediaID, int reactieID)
-        {
-            int aantalLikes = int.MinValue;
+        //public int AantalLikesOpvragen(int mediaID, int reactieID)
+        //{
+        //    int aantalLikes = 0;
 
-            if (reactieID == int.MinValue)
-            {
-                Connect();
-                string query = "SELECT Likes FROM Media WHERE ID = @ID";
-                using (command = new SqlCommand(query, SQLcon))
-                {
-                    command.Parameters.Add(new SqlParameter("@ID", mediaID));
-                    reader = command.ExecuteReader();
+        //    if (reactieID == int.MinValue)
+        //    {
+        //        Connect();
+        //        string query = "SELECT Likes FROM Media WHERE ID = @ID";
+        //        using (command = new SqlCommand(query, SQLcon))
+        //        {
+        //            command.Parameters.Add(new SqlParameter("@ID", mediaID));
+        //            reader = command.ExecuteReader();
 
-                    while (reader.Read())
-                    {
-                        aantalLikes = Convert.ToInt32(reader["ID"]);
-                    }
-                }
-                Close();
-            }
-            return aantalLikes;
-        }
+        //            while (reader.Read())
+        //            {
+        //                aantalLikes = Convert.ToInt32(reader["ID"]);
+        //            }
+        //        }
+        //        Close();
+        //    }
+        //    return aantalLikes;
+        //}
 
         public void ToevoegenLike(Gebruiker gebruiker, int mediaID, int reactieID, int aantalLikes)
         {
@@ -323,8 +325,8 @@ namespace EyeCT4Events_WF.Persistencies
                 string query = "UPDATE Media SET Likes= @aantalLikes WHERE ID = @mediaID";
                 using (command = new SqlCommand(query, SQLcon))
                 {
-                    command.Parameters.Add(new SqlParameter("@mediaID", mediaID));
                     command.Parameters.Add(new SqlParameter("@aantalLikes", aantalLikes));
+                    command.Parameters.Add(new SqlParameter("@mediaID", mediaID));
 
                     command.ExecuteNonQuery();
                 }
@@ -333,10 +335,11 @@ namespace EyeCT4Events_WF.Persistencies
             else if (mediaID == int.MinValue)
             {
                 Connect();
-                string query = "UPDATE Media SET Likes= ";
+                string query = "UPDATE Media SET Likes= @aantalLikes WHERE ID = @reactieID";
                 using (command = new SqlCommand(query, SQLcon))
                 {
-                    command.Parameters.Add(new SqlParameter("@GeplaatstDoor", mediaID));
+                    command.Parameters.Add(new SqlParameter("@aantalLikes", aantalLikes));
+                    command.Parameters.Add(new SqlParameter("@reactieID", reactieID));
 
                     command.ExecuteNonQuery();
                 }
