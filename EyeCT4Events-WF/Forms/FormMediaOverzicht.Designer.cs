@@ -40,9 +40,12 @@
             // 
             // pnlCategorieën
             // 
+            this.pnlCategorieën.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlCategorieën.AutoScroll = true;
             this.pnlCategorieën.BackColor = System.Drawing.SystemColors.Window;
             this.pnlCategorieën.Controls.Add(this.btnCategorieToevoegen);
+            this.pnlCategorieën.ForeColor = System.Drawing.SystemColors.ControlText;
             this.pnlCategorieën.Location = new System.Drawing.Point(12, 73);
             this.pnlCategorieën.Name = "pnlCategorieën";
             this.pnlCategorieën.Size = new System.Drawing.Size(197, 443);
@@ -52,6 +55,7 @@
             // btnCategorieToevoegen
             // 
             this.btnCategorieToevoegen.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.btnCategorieToevoegen.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnCategorieToevoegen.Location = new System.Drawing.Point(150, 0);
             this.btnCategorieToevoegen.Name = "btnCategorieToevoegen";
             this.btnCategorieToevoegen.Size = new System.Drawing.Size(47, 41);
@@ -62,6 +66,9 @@
             // 
             // pnlContent
             // 
+            this.pnlContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlContent.Location = new System.Drawing.Point(232, 49);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Size = new System.Drawing.Size(732, 467);
@@ -69,6 +76,7 @@
             // 
             // tbZoeken
             // 
+            this.tbZoeken.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tbZoeken.Location = new System.Drawing.Point(449, 15);
             this.tbZoeken.Name = "tbZoeken";
             this.tbZoeken.Size = new System.Drawing.Size(384, 20);
@@ -77,6 +85,7 @@
             // 
             // btnMediaUploaden
             // 
+            this.btnMediaUploaden.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMediaUploaden.Location = new System.Drawing.Point(852, 12);
             this.btnMediaUploaden.Name = "btnMediaUploaden";
             this.btnMediaUploaden.Size = new System.Drawing.Size(112, 23);
@@ -89,6 +98,7 @@
             // 
             this.lblMediaOverzicht.AutoSize = true;
             this.lblMediaOverzicht.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.lblMediaOverzicht.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblMediaOverzicht.Location = new System.Drawing.Point(13, 12);
             this.lblMediaOverzicht.Name = "lblMediaOverzicht";
             this.lblMediaOverzicht.Size = new System.Drawing.Size(196, 29);
@@ -97,6 +107,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(250, 18);
             this.label1.Name = "label1";
@@ -117,6 +128,7 @@
             this.Controls.Add(this.pnlCategorieën);
             this.Name = "FormMediaOverzicht";
             this.Text = "Media Overzicht";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlCategorieën.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

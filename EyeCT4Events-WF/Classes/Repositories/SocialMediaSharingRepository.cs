@@ -9,52 +9,55 @@ namespace EyeCT4Events_WF.Classes.Repositories
 {
     public class SocialMediaSharingRepository
     {
-        ISocialMediaSharing ISM;
+        ISocialMediaSharing ISMS;
 
         public SocialMediaSharingRepository(ISocialMediaSharing ISM)
         {
-            this.ISM = ISM;
+            this.ISMS = ISM;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<Categorie> AlleCategorienOpvragen()
         {
-            return ISM.AlleCategorienOpvragen();
+            return ISMS.AlleCategorienOpvragen();
         }
         public void ToevoegenCategorie(Categorie cat)
         {
-            ISM.ToevoegenCategorie(cat);
+            ISMS.ToevoegenCategorie(cat);
         }
         public void ToevoegenMedia(Media media)
         {
-            ISM.ToevoegenMedia(media);
+            ISMS.ToevoegenMedia(media);
         }
-        public void ToevoegenLikeMediaReactie(Gebruiker gebruiker, int mediaID, int reactieID)
+        public void ToevoegenLikeInMediaOfReactie(Gebruiker gebruiker, int mediaID, int reactieID)
         {
-            ISM.ToevoegenLikeInMediaOfReactie(gebruiker, mediaID, reactieID);
+            ISMS.ToevoegenLikeInMediaOfReactie(gebruiker, mediaID, reactieID);
         }
         public void ToevoegenRapporterenMediaReactie(int mediaID, int reactieID)
         {
-            ISM.ToevoegenRapporterenMediaReactie(mediaID, reactieID);
+            ISMS.ToevoegenRapporterenMediaReactie(mediaID, reactieID);
         }
         public Media GetMediaByID(int id)
         {
-            return ISM.GetMediaByID(id);
+            return ISMS.GetMediaByID(id);
         }
         public Categorie GetCategorieMetNaam(string naam)
         {
-            return ISM.GetCategorieMetNaam(naam);
+            return ISMS.GetCategorieMetNaam(naam);
         }
-
         public List<Categorie> ZoekenCategorie(string naam)
         {
-            return ISM.ZoekenCategorie(naam);
+            return ISMS.ZoekenCategorie(naam);
         }
         public List<Media> ZoekenMedia (string zoekterm)
         {
-            return ISM.ZoekenMedia(zoekterm);
+            return ISMS.ZoekenMedia(zoekterm);
         }
         public List<Media> AlleMediaOpvragen()
         {
-            return ISM.AlleMediaOpvragen();
+            return ISMS.AlleMediaOpvragen();
         }
     }
 }

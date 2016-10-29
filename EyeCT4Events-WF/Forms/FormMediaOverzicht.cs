@@ -38,7 +38,9 @@ namespace EyeCT4Events_WF
                 {
                     case "Afbeelding":
                         PictureBox pb = new PictureBox();
-                        pb.ImageLocation = mediaLijst[i].Pad;
+                        pb.Image = Image.FromFile(mediaLijst[i].Pad);
+                        pb.Width = Image.FromFile(mediaLijst[i].Pad).Width;
+                        //pb.Height = Image.FromFile(mediaLijst[i].Pad).Height;
                         pnlContentControlList.Add(pb);
                         break;
                     case "Video":
@@ -101,7 +103,7 @@ namespace EyeCT4Events_WF
         {
             // Button sender.Name = ID van Media. 
             // sender.Tag = Aantal likes dat de media heeft.
-            smsr.ToevoegenLikeMediaReactie(gebruiker, Convert.ToInt32(((Button)sender).Name), int.MinValue);
+            smsr.ToevoegenLikeInMediaOfReactie(gebruiker, Convert.ToInt32(((Button)sender).Name), int.MinValue);
             ((Button)sender).Text = "Likes " + (Convert.ToInt32(((Button)sender).Tag) + 1).ToString();
             ((Button)sender).Enabled = false;
         }
