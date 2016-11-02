@@ -18,12 +18,12 @@ namespace EyeCT4Events_WF.Forms
         RepositorySocialMediaSharing rsms;
 
         Gebruiker gebruiker;
-        Media media;
-        public FormMediaReageren(Gebruiker gebruiker, Media media)
+        string mediaID;
+        public FormMediaReageren(Gebruiker gebruiker, string mediaID)
         {
             InitializeComponent();
             this.gebruiker = gebruiker;
-            this.media = media;
+            this.mediaID = mediaID;
         }
 
         private void btnReactiePlaatsen_Click(object sender, EventArgs e)
@@ -32,11 +32,14 @@ namespace EyeCT4Events_WF.Forms
 
             Reactie reactie = new Reactie();
             reactie.DatumTijd = DateTime.Now;
-            reactie.GeplaatstDoor = gebruiker.Gebruikersnaam;
+            reactie.GeplaatstDoor = gebruiker.GebruikersID;
             reactie.Inhoud = txtReactieInhoud.Text;
-            reactie.Media = media.ID;
+            reactie.Media = Convert.ToInt32(mediaID);
 
             rsms.ToevoegenReactie(reactie);
+
+            MessageBox.Show("Reactie Toegevoegd");
+            Close();
         }
     }
 }

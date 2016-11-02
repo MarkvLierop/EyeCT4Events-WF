@@ -25,7 +25,7 @@ namespace EyeCT4Events_WF.Forms
             InitializeComponent();
             smsr = new RepositorySocialMediaSharing(new MSSQL_Server());
 
-            catList = smsr.AlleCategorienOpvragen();
+            catList = smsr.AlleCategorienOpvragen().ToList();
             
             foreach (Categorie cat in catList)
             {

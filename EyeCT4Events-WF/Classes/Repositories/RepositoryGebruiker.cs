@@ -36,5 +36,13 @@ namespace EyeCT4Events_WF.Classes.Repositories
 
             return ingelogde;
         }
+        public Gebruiker GetGebruikerByGebruikersnaam (string gebruikersnaam)
+        {
+            return context.GetGebruikerByGebruikersnaam(gebruikersnaam);
+        }
+        public Gebruiker GetGebruikerByID (int ID)
+        {
+            return context.GetGebruikerByID(ID);
+        }
     }
 }

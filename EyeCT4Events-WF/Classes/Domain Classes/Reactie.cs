@@ -10,7 +10,7 @@ namespace EyeCT4Events_WF.Classes
     {
         public DateTime DatumTijd { get; set; }
         public int Flagged { get; set; }
-        public string GeplaatstDoor { get; set; }
+        public int GeplaatstDoor { get; set; }
         public string Inhoud { get; set; }
         public int Likes { get; set; }
         public int Media { get; set; }

@@ -15,7 +15,7 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             this.ISMS = ISM;
         }
-        public List<Categorie> AlleCategorienOpvragen()
+        public Categorie[] AlleCategorienOpvragen()
         {
             return ISMS.AlleCategorienOpvragen();
         }

@@ -118,7 +118,35 @@ namespace EyeCT4Events_WF.Persistencies
             }
             return type;
         }
-        private Gebruiker GetGebruikerByID(int ID)
+        private void CheckVoorSubCategorien(List<Categorie> catLijst, Categorie[] catArray, Categorie cat)
+        {
+            foreach (Categorie c in catLijst)
+            {
+                if (c.Parent == cat.ID)
+                {
+                    int x = 0;
+                    Start:
+                    if (catArray[x] == null)
+                    {
+                        catArray[x] = c;
+                        CheckVoorSubCategorien(catLijst, catArray, c);
+                    }
+                    else
+                    {
+                        x++;
+                        goto Start;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Public Methods.
+        /// </summary>
+        /// <returns></returns>
+        /// 
+        #region Gebruikers
+        public Gebruiker GetGebruikerByID(int ID)
         {
             Connect();
             string query = "SELECT * FROM Gebruiker WHERE ID = @ID";
@@ -161,13 +189,6 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
             return gebruiker;
         }
-
-        /// <summary>
-        /// Public Methods.
-        /// </summary>
-        /// <returns></returns>
-        /// 
-        #region Gebruikers
         public Gebruiker GebruikerLogin(string wachtwoord, string gebruikersnaam)
         {
             Connect();
@@ -240,7 +261,7 @@ namespace EyeCT4Events_WF.Persistencies
             string query = "SELECT * FROM Gebruiker WHERE Gebruikersnaam = @GEBRUIKERSNAAM";
             using (command = new SqlCommand(query, SQLcon))
             {
-                command.Parameters.Add(new SqlParameter("@GEBRUIKERSNAAM", gebruikersnaam));
+                command.Parameters.Add(new SqlParameter("@GEBRUIKERSNAAM", "lieropm")); // Lieropm later aanpassen
                 reader = command.ExecuteReader();
 
                 while (reader.Read())
@@ -474,7 +495,7 @@ namespace EyeCT4Events_WF.Persistencies
         }
         #endregion
         #region Categorie
-        public List<Categorie> AlleCategorienOpvragen()
+        public Categorie[] AlleCategorienOpvragen()
         {
             List<Categorie> categorieLijst = new List<Categorie>();
 
@@ -508,9 +529,25 @@ namespace EyeCT4Events_WF.Persistencies
             }
             Close();
             
-
-            Categorie[] ar = categorieArray;
-            return categorieLijst;
+            for (int i = 0; i< categorieLijst.Count;i++)
+            {
+                if (!categorieArray.Contains(categorieLijst[i]))
+                {
+                    int a = i;
+                    Start:
+                    if (categorieArray[a] == null)
+                    {
+                        categorieArray[a] = categorieLijst[i];
+                        CheckVoorSubCategorien(categorieLijst, categorieArray, categorieArray[a]);
+                    }
+                    else
+                    {
+                        a++;
+                        goto Start;
+                    }
+                }
+            }
+            return categorieArray;
         }
         public void ToevoegenCategorie(Categorie cat)
         {
@@ -589,7 +626,7 @@ namespace EyeCT4Events_WF.Persistencies
                     Reactie reactie = new Reactie();
                     reactie.DatumTijd = Convert.ToDateTime(reader["DatumTijd"]);
                     reactie.Flagged = Convert.ToInt32(reader["Flagged"]);
-                    reactie.GeplaatstDoor = reader["GeplaatstDoor"].ToString();
+                    reactie.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]);
                     reactie.Inhoud = reader["Inhoud"].ToString();
                     reactie.Media = Convert.ToInt32(reader["MediaID"]);
                     reactie.ReactieID = Convert.ToInt32(reader["ID"]);
@@ -605,11 +642,10 @@ namespace EyeCT4Events_WF.Persistencies
             string query = "INSERT INTO Reactie VALUES (@geplaatstDoor, @mediaID, 0, @inhoud, @datetime, 0)";
             using (command = new SqlCommand(query, SQLcon))
             {
-                command.Parameters.Add(new SqlParameter("@geplaatstDoor", GetGebruikerByGebruikersnaam(reactie.GeplaatstDoor).GebruikersID));
+                command.Parameters.Add(new SqlParameter("@geplaatstDoor", 1)); // Later aanpassen
                 command.Parameters.Add(new SqlParameter("@mediaID", reactie.Media));
                 command.Parameters.Add(new SqlParameter("@inhoud", reactie.Inhoud));
                 command.Parameters.Add(new SqlParameter("@datetime", DateTime.Now.ToString()));
-
                 command.ExecuteNonQuery();
             }
             Close();
@@ -618,14 +654,25 @@ namespace EyeCT4Events_WF.Persistencies
         #endregion
         #region Kampeer queries
 
-        public List<Kampeerplaats> AlleKampeerplaatsenOpvragen()
+        public List<Kampeerplaats> AlleKampeerplaatsenOpvragen(bool comfort, bool invalide, bool lawaai, string eigentent,
+                                     string bungalow, string bungalino, string blokhut, string stacaravan, string huurtent)
         {
             List<Kampeerplaats> KampeerList = new List<Kampeerplaats>();
 
             Connect();
-            string query = "SELECT * FROM Kampeerplaats";
+            string query = "SELECT * FROM KampeerPlaats k WHERE (k.Comfort = @comfort AND k.Invalide = @invalide AND k.Lawaai = @lawaai) "+
+                "AND (k.KampeerPlaatsType = @blokhut OR k.KampeerPlaatsType = @bungelino OR k.KampeerPlaatsType = @bungalow	OR k.KampeerPlaatsType = @invalideaccomedatie)";
             using (command = new SqlCommand(query, SQLcon))
             {
+                command.Parameters.Add(new SqlParameter("@comfort", comfort));
+                command.Parameters.Add(new SqlParameter("@invalide", invalide));
+                command.Parameters.Add(new SqlParameter("@lawaai", lawaai));
+                command.Parameters.Add(new SqlParameter("@eigentent", eigentent));
+                command.Parameters.Add(new SqlParameter("@bungalow", bungalow));
+                command.Parameters.Add(new SqlParameter("@bungalino", bungalino));
+                command.Parameters.Add(new SqlParameter("@blokhut", blokhut));
+                command.Parameters.Add(new SqlParameter("@stacaravan", stacaravan));
+                command.Parameters.Add(new SqlParameter("@huurtent", huurtent));
                 reader = command.ExecuteReader();
 
                 while (reader.Read())

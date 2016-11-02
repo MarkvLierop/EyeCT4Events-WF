@@ -10,5 +10,6 @@ namespace EyeCT4Events_WF.Interfaces
         bool Inloggen(string gebruikersnaam, string wachtwoord);
 
         Gebruiker GetGebruikerByGebruikersnaam(string gebruikersnaam);
+        Gebruiker GetGebruikerByID(int ID);
     }
 }
