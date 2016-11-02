@@ -19,7 +19,7 @@ namespace EyeCT4Events_WF
     public partial class FormMediaOverzicht : Form
     {
         // Fields
-        SocialMediaSharingRepository smsr;
+        RepositorySocialMediaSharing smsr;
         private List<Categorie> categorieLijst;
         private List<Media> mediaLijst;
         private Gebruiker gebruiker;
@@ -72,10 +72,16 @@ namespace EyeCT4Events_WF
 
                 Button btnMediaRapporteren = new Button();
                 btnMediaRapporteren.Text = "Rapporteren";
-                btnMediaRapporteren.Tag = mediaLijst[i].Likes; // NOG AANPASSEN
+                btnMediaRapporteren.Tag = mediaLijst[i].Flagged; // NOG AANPASSEN
                 btnMediaRapporteren.Name = mediaLijst[i].ID.ToString();
                 btnMediaRapporteren.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnMediaRapporteren_MouseUp);
                 pnlContentControlList.Add(btnMediaRapporteren);
+
+                Button btnReageren = new Button();
+                btnReageren.Text = "Reageren";
+                btnReageren.Name = mediaLijst[i].ID.ToString();
+                btnReageren.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnReageren_MouseUp);
+                pnlContentControlList.Add(btnReageren);
 
                 // Alle Custom controls positioneren op het Content panel.
                 for (int c = 0; c < pnlContentControlList.Count; c++)
@@ -86,13 +92,24 @@ namespace EyeCT4Events_WF
             }
         }
 
+        private void btnReageren_MouseUp(object sender, MouseEventArgs e)
+        {
+            FormMediaReageren fmr = new FormMediaReageren(gebruiker, new Media());
+            fmr.ShowDialog();
+
+            if (fmr.DialogResult == DialogResult.OK)
+            {
+                pnlContent.Refresh();
+            }
+        }
+
         // Constructor
         public FormMediaOverzicht(Gebruiker gebruiker)
         {
             InitializeComponent();
             this.gebruiker = gebruiker;
 
-            smsr = new SocialMediaSharingRepository(new MSSQL_Server());
+            smsr = new RepositorySocialMediaSharing(new MSSQL_Server());
             categorieLijst = smsr.AlleCategorienOpvragen();
 
             mediaLijst = smsr.AlleMediaOpvragen();

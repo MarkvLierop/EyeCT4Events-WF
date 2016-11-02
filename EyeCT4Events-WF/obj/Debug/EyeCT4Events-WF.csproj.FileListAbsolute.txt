@@ -43,3 +43,4 @@ C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\Interop.WMPLib.dll
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\AxInterop.WMPLib.dll
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csproj.ResolveComReference.cache
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormInloggen.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMediaReageren.resources

@@ -7,18 +7,14 @@ using System.Threading.Tasks;
 
 namespace EyeCT4Events_WF.Classes.Repositories
 {
-    public class SocialMediaSharingRepository
+    public class RepositorySocialMediaSharing
     {
         ISocialMediaSharing ISMS;
 
-        public SocialMediaSharingRepository(ISocialMediaSharing ISM)
+        public RepositorySocialMediaSharing(ISocialMediaSharing ISM)
         {
             this.ISMS = ISM;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         public List<Categorie> AlleCategorienOpvragen()
         {
             return ISMS.AlleCategorienOpvragen();
@@ -58,6 +54,14 @@ namespace EyeCT4Events_WF.Classes.Repositories
         public List<Media> AlleMediaOpvragen()
         {
             return ISMS.AlleMediaOpvragen();
+        }
+        public List<Reactie> AlleReactiesOpvragen()
+        {
+            return ISMS.AlleReactiesOpvragen();
+        }
+        public void ToevoegenReactie(Reactie reactie)
+        {
+            ISMS.ToevoegenReactie(reactie);
         }
     }
 }

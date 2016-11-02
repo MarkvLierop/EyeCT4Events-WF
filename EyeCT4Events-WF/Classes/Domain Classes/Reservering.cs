@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EyeCT4Events_WF.Classes
 {
-    class Reservering
+    public class Reservering
     {
         public List<Gebruiker> GebruikerList { get; private set; }
         public DateTime DatumTot { get; set; }

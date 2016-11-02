@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace EyeCT4Events_WF.Classes.Repositories
 {
-    public class GebruikerRepository
+    public class RepositoryGebruiker
     {
         IGebruikerAdministratie context;
 
-        public GebruikerRepository(IGebruikerAdministratie context)
+        public RepositoryGebruiker(IGebruikerAdministratie context)
         {
             this.context = context;
         }

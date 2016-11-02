@@ -21,5 +21,14 @@ namespace EyeCT4Events_WF.Classes
         {
 
         }
+
+        public bool CheckOfBezoekersAanwezigZijn()
+        {
+            if (gebruikersOpLocatie.Count < 1)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

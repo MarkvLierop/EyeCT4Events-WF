@@ -49,8 +49,9 @@
   <ItemGroup>
     <Compile Include="Classes\Interfaces\iKampeerplaats.cs" />
     <Compile Include="Classes\Interfaces\ISocialMediaSharing.cs" />
-    <Compile Include="Classes\Repositories\GebruikerRepository.cs" />
-    <Compile Include="Classes\Repositories\SocialMediaSharingRepository.cs" />
+    <Compile Include="Classes\Repositories\KampeerplaatsenRepository.cs" />
+    <Compile Include="Classes\Repositories\RepositoryGebruiker.cs" />
+    <Compile Include="Classes\Repositories\RepositorySocialMediaSharing.cs" />
     <Compile Include="CustomControls\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -106,6 +107,12 @@
     <Compile Include="Forms\FormInloggen.designer.cs">
       <DependentUpon>FormInloggen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormMediaReageren.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMediaReageren.Designer.cs">
+      <DependentUpon>FormMediaReageren.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormMediaUploaden.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormInloggen.resx">
       <DependentUpon>FormInloggen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMediaReageren.resx">
+      <DependentUpon>FormMediaReageren.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMediaUploaden.resx">
       <DependentUpon>FormMediaUploaden.cs</DependentUpon>
