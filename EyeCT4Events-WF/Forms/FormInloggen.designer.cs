@@ -88,7 +88,7 @@
             this.Controls.Add(this.tbUser);
             this.Controls.Add(this.btnLogin);
             this.Name = "Inloggen";
-            this.Text = "Form1";
+            this.Text = "Login";
             this.Load += new System.EventHandler(this.Inloggen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

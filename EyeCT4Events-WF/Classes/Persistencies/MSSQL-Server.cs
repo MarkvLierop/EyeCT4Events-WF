@@ -14,7 +14,7 @@ using EyeCT4Events_WF.Exceptions;
 
 namespace EyeCT4Events_WF.Persistencies
 {
-    public class MSSQL_Server : ISocialMediaSharing, IGebruikerAdministratie 
+    public class MSSQL_Server : ISocialMediaSharing, IGebruikerAdministratie, IKampeerplaats
     {
         string connString;
         SqlCommand command;
@@ -30,7 +30,7 @@ namespace EyeCT4Events_WF.Persistencies
         {
             try
             {
-                this.connString = "Data Source=192.168.10.10,20;Initial Catalog=EyeCT4Events;Persist Security Info=True;User ID=sa;Password=PTS16";
+                this.connString = "Data Source=192.168.10.11,20;Initial Catalog=EyeCT4Events;Persist Security Info=True;User ID=sa;Password=PTS16";
                 SQLcon = new SqlConnection(connString);
                 SQLcon.Open();
             }
@@ -184,6 +184,37 @@ namespace EyeCT4Events_WF.Persistencies
                 return gebruiker;
             }
         }
+        public bool Inloggen(string Gebruikersnaam, string wachtwoord)
+        {
+            Connect();
+            string query = "SELECT * FROM Gebruiker WHERE gebruikersnaam = @GEBRUIKERSNAAM";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@GEBRUIKERSNAAM", Gebruikersnaam));
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (!reader.HasRows)
+                    {
+                        //MessageBox.Show("Gebruiker niet bekend");  MAG NIET
+
+                        return false;
+                    }
+
+                    else if (!wachtwoord.Equals(reader["Wachtwoord"].ToString()))
+                    {
+                        //MessageBox.Show("Wachtwoord onjuist, probeer het nogmaals");  MAG NIET
+
+                        return false;
+                    }
+
+
+                }
+            }
+            Close();
+            return true;
+        }
         public void GebruikerRegistreren(Gebruiker gebruiker)
         {
             Connect();
@@ -202,6 +233,49 @@ namespace EyeCT4Events_WF.Persistencies
                 command.ExecuteNonQuery();
             }
             Close();
+        }
+        public Gebruiker GetGebruikerByGebruikersnaam(string gebruikersnaam)
+        {
+            Connect();
+            string query = "SELECT * FROM Gebruiker WHERE Gebruikersnaam = @GEBRUIKERSNAAM";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@GEBRUIKERSNAAM", gebruikersnaam));
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                    {
+                        gebruiker = new Bezoeker();
+                    }
+                    else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
+                    {
+                        gebruiker = new Beheerder();
+                    }
+                    else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
+                    {
+                        gebruiker = new Medewerker();
+                    }
+                    gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
+                    gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                    gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                    gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                    gebruiker.Voornaam = reader["Voornaam"].ToString();
+                    gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                    gebruiker.Achternaam = reader["Achternaam"].ToString();
+                    if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                    {
+                        gebruiker.Aanwezig = true;
+                    }
+                    else
+                    {
+                        gebruiker.Aanwezig = false;
+                    }
+                }
+            }
+            Close();
+            return gebruiker;
         }
         public List<Gebruiker> LijstAanwezigePersonen()
         {
@@ -293,8 +367,7 @@ namespace EyeCT4Events_WF.Persistencies
                 command.ExecuteNonQuery();
             }
             Close();
-        }
-        
+        }      
         public void ToevoegenLikeInMediaOfReactie(Gebruiker gebruiker, int mediaID, int reactieID)
         {
             // INSERT +1 Like INTO Media
@@ -367,7 +440,6 @@ namespace EyeCT4Events_WF.Persistencies
                 Close();
             }
         }
-
         public List<Media> ZoekenMedia(string zoekterm)
         {
             List<Media> medialist = new List<Media>();
@@ -493,9 +565,37 @@ namespace EyeCT4Events_WF.Persistencies
 
             return catlist;
         }
+        #endregion
 
+        #region Kampeer queries
 
+        public List<Kampeerplaats> AlleKampeerplaatsenOpvragen()
+        {
+            List<Kampeerplaats> KampeerList = new List<Kampeerplaats>();
 
+            Connect();
+            string query = "SELECT * FROM Kampeerplaats";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Kampeerplaats kampeerplaats = new Kampeerplaats();
+
+                    kampeerplaats.Type = reader["KampeerPlaatsType"].ToString();
+                    kampeerplaats.PlaatsID = Convert.ToInt32(reader["ID"]);
+                    kampeerplaats.MaxPersonen = Convert.ToInt32(reader["MaxPersonen"]);
+                    kampeerplaats.Lawaai = Convert.ToInt32(reader["Lawaai"]);
+                    kampeerplaats.Invalide = Convert.ToInt32(reader["Invalide"]);
+                    kampeerplaats.Comfort = Convert.ToInt32(reader["Comfort"]);
+                    KampeerList.Add(kampeerplaats);
+
+                }
+            }
+            Close();
+            return KampeerList;
+        }
         #endregion
 
     }

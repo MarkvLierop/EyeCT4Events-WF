@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Interfaces\iKampeerplaats.cs" />
     <Compile Include="Classes\Interfaces\ISocialMediaSharing.cs" />
     <Compile Include="Classes\Repositories\GebruikerRepository.cs" />
     <Compile Include="Classes\Repositories\SocialMediaSharingRepository.cs" />

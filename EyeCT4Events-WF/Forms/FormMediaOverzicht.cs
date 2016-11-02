@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,10 +23,18 @@ namespace EyeCT4Events_WF
         private List<Categorie> categorieLijst;
         private List<Media> mediaLijst;
         private Gebruiker gebruiker;
+        private string[] directories;
 
         // Methods
         private void ContentCreeren(List<Media> mediaList)
         {
+            //directories = Directory.GetDirectories(Directory.GetCurrentDirectory(), "*", SearchOption.AllDirectories);
+
+            //for (int i = 0; i < directories.GetLength(0); i++)
+            //{
+            //    MessageBox.Show(Path.GetFileName(directories[i]));
+            //}
+
             List<Control> pnlContentControlList = new List<Control>();
             for (int i = 0; i < mediaLijst.Count; i++)
             {
@@ -122,6 +131,11 @@ namespace EyeCT4Events_WF
             {
                 categorieLijst[i].DrawNaam(g, i);
             }
+            //for (int i = 0; i< directories.GetLength(0); i++)
+            //{
+            //    MessageBox.Show(Path.GetFileName(Path.GetDirectoryName(directories[i]));
+            //    g.DrawString(Path.GetFileName(Path.GetDirectoryName(directories[i])), new Font("Arial", 14), Brushes.Black, new Point(0, i * 15));
+            //}
         }
 
         private void btnMediaUploaden_Click(object sender, EventArgs e)
@@ -143,6 +157,11 @@ namespace EyeCT4Events_WF
             pnlContent.Controls.Clear();
             mediaLijst = smsr.ZoekenMedia(tbZoeken.Text);
             ContentCreeren(mediaLijst);
+        }
+
+        private void roundButton1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

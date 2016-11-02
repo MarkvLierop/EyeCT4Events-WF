@@ -6,5 +6,9 @@ namespace EyeCT4Events_WF.Interfaces
     public interface IGebruikerAdministratie
     {
         List<Gebruiker> LijstAanwezigePersonen();
+
+        bool Inloggen(string gebruikersnaam, string wachtwoord);
+
+        Gebruiker GetGebruikerByGebruikersnaam(string gebruikersnaam);
     }
 }
