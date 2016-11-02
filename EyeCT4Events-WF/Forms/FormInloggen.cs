@@ -14,49 +14,39 @@ using EyeCT4Events_WF.Forms;
 
 namespace EyeCT4Events_WF
 {
-    public partial class Inloggen : Form
+    public partial class FormInloggen : Form
     {
-
-        string inlog;
-        GebruikerRepository gar;
-        
+        GebruikerRepository gar;     
 
 
-        public Inloggen()
+        public FormInloggen()
         {
             InitializeComponent();
 
             gar = new GebruikerRepository(new MSSQL_Server());
-
-        }
-
-        
+        }       
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            EyeCT4Events_WF.Classes.Gebruiker ingelogde;
-
-            bool check;
-
-            check = gar.CheckLogIn(tbUser.Text, tbPass.Text);
-
-            if (check)
+            EyeCT4Events_WF.Classes.Gebruiker gebruiker;
+            
+            if (gar.CheckLogIn(tbUser.Text, tbPass.Text))
             {
-                ingelogde = gar.LogIn(tbUser.Text);
+                gebruiker = gar.LogIn(tbUser.Text);
 
-                if(ingelogde.GebruikerType == "Bezoeker")
+                if (gebruiker.GetType() == typeof(Bezoeker))
                 {
-                    this.Close();
-                    FormMediaOverzicht fmo = new FormMediaOverzicht(ingelogde);
+                    this.Hide();
+                    FormMediaOverzicht fmo = new FormMediaOverzicht(gebruiker);
                     fmo.Show();
                 }
 
-                else if(ingelogde.GebruikerType == "Medewerker")
+                else if(gebruiker.GetType() == typeof(Medewerker))
                 {
                     this.Close();
                 }
 
-                else if(ingelogde.GebruikerType == "Beheerder")
+                else if(gebruiker.GetType() == typeof(Beheerder))
                 {
                     this.Close();
                 }

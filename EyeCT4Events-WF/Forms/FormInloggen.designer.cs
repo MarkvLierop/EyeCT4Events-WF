@@ -1,6 +1,6 @@
 ﻿namespace EyeCT4Events_WF
 {
-    partial class Inloggen
+    partial class FormInloggen
     {
         /// <summary>
         /// Required designer variable.

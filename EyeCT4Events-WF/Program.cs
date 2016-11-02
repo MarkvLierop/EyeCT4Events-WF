@@ -19,7 +19,7 @@ namespace EyeCT4Events_WF
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Inloggen());
+            Application.Run(new FormInloggen());
             
         }
     }

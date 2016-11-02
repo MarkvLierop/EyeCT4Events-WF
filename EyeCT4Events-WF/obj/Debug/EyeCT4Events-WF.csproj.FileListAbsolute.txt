@@ -26,7 +26,6 @@ C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csprojReso
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.AanwezigBezoekers.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Gebruikergegevens.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Gebruikersbeheer.resources
-C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Inloggen.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.RegistreerNieuweGebruiker.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Properties.Resources.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.ReserveerMateriaal.resources
@@ -43,3 +42,4 @@ C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\bin\Debug\AxInterop.WMPLib.dll
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\Interop.WMPLib.dll
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\AxInterop.WMPLib.dll
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csproj.ResolveComReference.cache
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormInloggen.resources

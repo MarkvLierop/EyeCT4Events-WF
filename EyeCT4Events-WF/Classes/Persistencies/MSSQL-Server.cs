@@ -22,6 +22,7 @@ namespace EyeCT4Events_WF.Persistencies
         SqlDataReader reader;
 
         Gebruiker gebruiker;
+        Categorie[] categorieArray;
 
         /// <summary>
         ///  Private Methods
@@ -197,15 +198,13 @@ namespace EyeCT4Events_WF.Persistencies
                 {
                     if (!reader.HasRows)
                     {
-                        //MessageBox.Show("Gebruiker niet bekend");  MAG NIET
-
+                        Close();
                         return false;
                     }
 
                     else if (!wachtwoord.Equals(reader["Wachtwoord"].ToString()))
                     {
-                        //MessageBox.Show("Wachtwoord onjuist, probeer het nogmaals");  MAG NIET
-
+                        Close();
                         return false;
                     }
 
@@ -227,7 +226,7 @@ namespace EyeCT4Events_WF.Persistencies
                 command.Parameters.Add(new SqlParameter("@Voornaam", gebruiker.Voornaam));
                 command.Parameters.Add(new SqlParameter("@Tussenvoegsel", gebruiker.Tussenvoegsel));
                 command.Parameters.Add(new SqlParameter("@Achternaam", gebruiker.Achternaam));
-                command.Parameters.Add(new SqlParameter("@GebruikerType", gebruiker.GebruikerType));
+                command.Parameters.Add(new SqlParameter("@GebruikerType", gebruiker.GetType().ToString()));
                 command.Parameters.Add(new SqlParameter("@Aanwezig", gebruiker.Aanwezig ? 1 : 0));
 
                 command.ExecuteNonQuery();
@@ -479,7 +478,20 @@ namespace EyeCT4Events_WF.Persistencies
             List<Categorie> categorieLijst = new List<Categorie>();
 
             Connect();
-            string query = "SELECT DISTINCT(c.Naam), c.ID, c.ParentCategorie, Categorie.ID 'ID2', Categorie.Naam 'N2', Categorie.ParentCategorie 'P2' FROM Categorie c LEFT JOIN Categorie ON c.ID = Categorie.ParentCategorie WHERE c.ParentCategorie = 0";
+            string query = "SELECT COUNT(*) 'aantalCategorien' FROM Categorie";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                reader = command.ExecuteReader();
+                
+                while (reader.Read())
+                {
+                    categorieArray = new Categorie[Convert.ToInt32(reader["aantalCategorien"])];
+                }
+            }
+            Close();
+
+            Connect();
+            query = "SELECT * FROM Categorie";
             using (command = new SqlCommand(query, SQLcon))
             {
                 reader = command.ExecuteReader();
@@ -491,18 +503,58 @@ namespace EyeCT4Events_WF.Persistencies
                     cat.ID = Convert.ToInt32(reader["ID"]);
                     cat.Parent = Convert.ToInt32(reader["ParentCategorie"]);
                     categorieLijst.Add(cat);
-
-                    if (!string.IsNullOrEmpty(reader["ID2"].ToString()))
-                    {
-                        cat = new Categorie();
-                        cat.ID = Convert.ToInt32(reader["ID2"]);
-                        cat.Naam = reader["N2"].ToString();
-                        cat.Parent = Convert.ToInt32(reader["P2"]);
-                        categorieLijst.Add(cat);
-                    }
                 }
             }
             Close();
+
+            for (int i = 0; i < categorieLijst.Count; i++)
+            {
+                if (!categorieArray.Contains(categorieLijst[i]))
+                {
+                    int w = i;
+                    Start3:
+                    if (categorieArray[w] == null)
+                    {
+                        categorieArray[w] = categorieLijst[i];
+                    }
+                    else
+                    {
+                        w++;
+                        goto Start3;
+                    }
+                }
+                foreach (Categorie c in categorieLijst)
+                {
+                    if (categorieLijst[i].ID == c.Parent)
+                    {
+                        int b = i;
+                        Start:
+                        if (categorieArray[b] == null)
+                        {
+                            if (!categorieArray.Contains(c))
+                            {
+                                int a = b;
+                                Start2:
+                                if (categorieArray[a] == null)
+                                {
+                                    categorieArray[a] = c;
+                                }
+                                else
+                                {
+                                    a++;
+                                    goto Start2;
+                                }
+                            }
+                        }
+                        else 
+                        {
+                            b++;
+                            goto Start;                            
+                        }
+                    }
+                }
+            }
+            Categorie[] ar = categorieArray;
             return categorieLijst;
         }
         public void ToevoegenCategorie(Categorie cat)
