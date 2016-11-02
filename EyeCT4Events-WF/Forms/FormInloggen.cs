@@ -43,13 +43,19 @@ namespace EyeCT4Events_WF
 
                 else if(gebruiker.GetType() == typeof(Medewerker))
                 {
-                    this.Close();
+                    this.Hide();
+                    FormReserveerPlaats frp = new FormReserveerPlaats(gebruiker);
+                    frp.Show();
                 }
 
                 else if(gebruiker.GetType() == typeof(Beheerder))
                 {
-                    this.Close();
+
+                    this.Hide();
                 }
+
+                else
+                    MessageBox.Show("Gebruikersnaam en/of wachtwoord incorrect, probeer het nogmaals");
             }
 
         }
