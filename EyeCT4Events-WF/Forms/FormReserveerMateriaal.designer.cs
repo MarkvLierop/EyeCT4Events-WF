@@ -1,6 +1,6 @@
 ﻿namespace EyeCT4Events_WF
 {
-    partial class ReserveerMateriaal
+    partial class FormReserveerMateriaal
     {
         /// <summary>
         /// Required designer variable.

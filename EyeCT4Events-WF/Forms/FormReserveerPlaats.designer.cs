@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.PBCampeerplek = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnVerder = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.lbKampeerplaatsen = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -57,15 +57,15 @@
             this.PBCampeerplek.TabIndex = 8;
             this.PBCampeerplek.TabStop = false;
             // 
-            // button1
+            // btnVerder
             // 
-            this.button1.Location = new System.Drawing.Point(570, 400);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 30);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Verder";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnVerder.Location = new System.Drawing.Point(570, 400);
+            this.btnVerder.Name = "btnVerder";
+            this.btnVerder.Size = new System.Drawing.Size(80, 30);
+            this.btnVerder.TabIndex = 5;
+            this.btnVerder.Text = "Verder";
+            this.btnVerder.UseVisualStyleBackColor = true;
+            this.btnVerder.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -157,6 +157,7 @@
             this.cbEigenTent.TabIndex = 5;
             this.cbEigenTent.Text = "Eigen Tent";
             this.cbEigenTent.UseVisualStyleBackColor = true;
+            this.cbEigenTent.CheckedChanged += new System.EventHandler(this.cbEigenTent_CheckedChanged);
             // 
             // cbBungalino
             // 
@@ -167,6 +168,7 @@
             this.cbBungalino.TabIndex = 4;
             this.cbBungalino.Text = "Bungalino";
             this.cbBungalino.UseVisualStyleBackColor = true;
+            this.cbBungalino.CheckedChanged += new System.EventHandler(this.cbBungalino_CheckedChanged);
             // 
             // cbBlokhut
             // 
@@ -177,6 +179,7 @@
             this.cbBlokhut.TabIndex = 3;
             this.cbBlokhut.Text = "Blokhut";
             this.cbBlokhut.UseVisualStyleBackColor = true;
+            this.cbBlokhut.CheckedChanged += new System.EventHandler(this.cbBlokhut_CheckedChanged);
             // 
             // cbStaCaravan
             // 
@@ -187,6 +190,7 @@
             this.cbStaCaravan.TabIndex = 2;
             this.cbStaCaravan.Text = "StaCaravan";
             this.cbStaCaravan.UseVisualStyleBackColor = true;
+            this.cbStaCaravan.CheckedChanged += new System.EventHandler(this.cbStaCaravan_CheckedChanged);
             // 
             // cbHuurTent
             // 
@@ -197,6 +201,7 @@
             this.cbHuurTent.TabIndex = 1;
             this.cbHuurTent.Text = "HuurTent";
             this.cbHuurTent.UseVisualStyleBackColor = true;
+            this.cbHuurTent.CheckedChanged += new System.EventHandler(this.cbHuurTent_CheckedChanged);
             // 
             // cbBungalow
             // 
@@ -207,6 +212,7 @@
             this.cbBungalow.TabIndex = 0;
             this.cbBungalow.Text = "Bungalow";
             this.cbBungalow.UseVisualStyleBackColor = true;
+            this.cbBungalow.CheckedChanged += new System.EventHandler(this.cbBungalow_CheckedChanged);
             // 
             // lblMedewerker
             // 
@@ -228,7 +234,7 @@
             this.Controls.Add(this.lbKampeerplaatsen);
             this.Controls.Add(this.PBCampeerplek);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnVerder);
             this.Name = "FormReserveerPlaats";
             this.Text = "Reserveren";
             this.Load += new System.EventHandler(this.ReserveerPlaats_Load);
@@ -244,7 +250,7 @@
 
         #endregion
         private System.Windows.Forms.PictureBox PBCampeerplek;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnVerder;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ListBox lbKampeerplaatsen;
         private System.Windows.Forms.GroupBox groupBox1;

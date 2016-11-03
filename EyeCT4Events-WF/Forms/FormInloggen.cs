@@ -44,8 +44,8 @@ namespace EyeCT4Events_WF
                 else if(gebruiker.GetType() == typeof(Medewerker))
                 {
                     this.Hide();
-                    FormReserveerPlaats frp = new FormReserveerPlaats(gebruiker);
-                    frp.Show();
+                    FormMedewerkerHub fmh = new FormMedewerkerHub(gebruiker);
+                    fmh.Show();
                 }
 
                 else if(gebruiker.GetType() == typeof(Beheerder))

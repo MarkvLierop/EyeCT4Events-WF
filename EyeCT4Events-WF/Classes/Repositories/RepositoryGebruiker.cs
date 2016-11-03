@@ -44,5 +44,10 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             return context.GetGebruikerByID(ID);
         }
+
+        public List<Gebruiker> GezochteBezoekersOphalen(string zoekopdracht)
+        {
+            return context.GezochteBezoekersOphalen(zoekopdracht);
+        }
     }
 }

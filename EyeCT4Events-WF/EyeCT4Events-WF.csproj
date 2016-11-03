@@ -47,10 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Interfaces\iKampeerplaats.cs" />
+    <Compile Include="Classes\Interfaces\IKampeerplaats.cs" />
+    <Compile Include="Classes\Interfaces\IMateriaal.cs" />
     <Compile Include="Classes\Interfaces\ISocialMediaSharing.cs" />
-    <Compile Include="Classes\Repositories\KampeerplaatsenRepository.cs" />
+    <Compile Include="Classes\Repositories\RepositoryKampeerPlaatsen.cs" />
     <Compile Include="Classes\Repositories\RepositoryGebruiker.cs" />
+    <Compile Include="Classes\Repositories\RepositoryMateriaal.cs" />
     <Compile Include="Classes\Repositories\RepositorySocialMediaSharing.cs" />
     <Compile Include="CustomControls\RoundButton.cs">
       <SubType>Component</SubType>
@@ -67,6 +69,12 @@
     <Compile Include="Classes\Domain Classes\Gebruikers\Beheerder.cs" />
     <Compile Include="Classes\Domain Classes\Gebruikers\Bezoeker.cs" />
     <Compile Include="Classes\Domain Classes\Gebruikers\Medewerker.cs" />
+    <Compile Include="Forms\FormBestaandeAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormBestaandeAccount.Designer.cs">
+      <DependentUpon>FormBestaandeAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormCategorieToevoegen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +86,18 @@
     </Compile>
     <Compile Include="Forms\FormCategorieZoeken.Designer.cs">
       <DependentUpon>FormCategorieZoeken.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEventAanmaken.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEventAanmaken.Designer.cs">
+      <DependentUpon>FormEventAanmaken.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormMedewerkerHub.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMedewerkerHub.Designer.cs">
+      <DependentUpon>FormMedewerkerHub.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormMediaOverzicht.cs">
       <SubType>Form</SubType>
@@ -147,11 +167,20 @@
     <EmbeddedResource Include="Forms\FormAanwezigBezoekers.resx">
       <DependentUpon>FormAanwezigBezoekers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormBestaandeAccount.resx">
+      <DependentUpon>FormBestaandeAccount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCategorieToevoegen.resx">
       <DependentUpon>FormCategorieToevoegen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCategorieZoeken.resx">
       <DependentUpon>FormCategorieZoeken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEventAanmaken.resx">
+      <DependentUpon>FormEventAanmaken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMedewerkerHub.resx">
+      <DependentUpon>FormMedewerkerHub.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMediaOverzicht.resx">
       <DependentUpon>FormMediaOverzicht.cs</DependentUpon>

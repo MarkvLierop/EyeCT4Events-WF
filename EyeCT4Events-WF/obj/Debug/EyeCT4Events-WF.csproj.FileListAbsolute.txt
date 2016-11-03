@@ -44,3 +44,31 @@ C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\AxInterop.WMPLib.dll
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csproj.ResolveComReference.cache
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormInloggen.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMediaReageren.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.exe.config
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.exe
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.pdb
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\bin\Debug\Interop.WMPLib.dll
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csprojResolveAssemblyReference.cache
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\Interop.WMPLib.dll
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csproj.ResolveComReference.cache
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.AanwezigBezoekers.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormCategorieToevoegen.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormCategorieZoeken.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormMediaOverzicht.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Gebruikergegevens.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Gebruikersbeheer.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormInloggen.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMediaReageren.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMediaUploaden.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Properties.Resources.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormReserveerPlaats.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csproj.GenerateResource.Cache
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.exe
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.pdb
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormRegistreerNieuweGebruiker.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMedewerkerHub.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormReserveerMateriaal.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormBestaandeAccount.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormEventAanmaken.resources

@@ -11,11 +11,19 @@ using EyeCT4Events_WF.Classes;
 
 namespace EyeCT4Events_WF
 {
-    public partial class RegistreerNieuweGebruiker : Form
+    public partial class FormRegistreerNieuweGebruiker : Form
     {
-        public RegistreerNieuweGebruiker()
+        Gebruiker medewerker;
+
+
+        public FormRegistreerNieuweGebruiker()
         {
             InitializeComponent();
+        }
+
+        public FormRegistreerNieuweGebruiker(Gebruiker gebruiker)
+        {
+            medewerker = gebruiker;
         }
 
         private void btnBevestigRegistratie_Click(object sender, EventArgs e)

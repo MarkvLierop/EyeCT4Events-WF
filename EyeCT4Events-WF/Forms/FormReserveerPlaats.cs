@@ -15,24 +15,76 @@ namespace EyeCT4Events_WF
 {
     public partial class FormReserveerPlaats : Form
     {
-        KampeerplaatsenRepository kpr = new KampeerplaatsenRepository(new MSSQL_Server());
-             
+        RepositoryKampeerPlaatsen kpr = new RepositoryKampeerPlaatsen(new MSSQL_Server());
+        List<Kampeerplaats> kampeerplaatsen = new List<Kampeerplaats>();
+
+        bool comfort;
+        bool lawaai;
+        bool invalide;
+        string bungalow ;
+        string bungalino ;
+        string blokhut ;
+        string stacaravan ;
+        string huurtent ;
+        string eigentent ;
+
+
+
         public FormReserveerPlaats()
         {
             InitializeComponent();
-            
+            //HaalKampeerplaatsenOp();
         }
 
         public FormReserveerPlaats(Gebruiker gebruiker)
         {
+           
             lblMedewerker.Text = gebruiker.Voornaam + " " + gebruiker.Achternaam;
             groupBox2.Enabled = false;
 
         }
 
-        public void HaalLijstOp()
+        public void HaalKampeerplaatsenOp()
         {
+            ResetGegevens();
 
+            if (cbBlokhut.Checked) { blokhut = "blokhut"; }
+            if (cbBungalino.Checked) { blokhut = "bungalino"; }
+            if (cbBungalow.Checked) { blokhut = "bungalow"; }
+            if (cbEigenTent.Checked) { blokhut = "eigentent"; }
+            if (cbHuurTent.Checked) { blokhut = "huurtent"; }
+            if (cbStaCaravan.Checked) { blokhut = "stacaravan"; }
+            if (rbComfort.Checked) { comfort = true; }
+            if (rbInvalide.Checked) { invalide = true; }
+            if (rbLawaai.Checked) { lawaai = true; }
+            kampeerplaatsen = kpr.KampeerplaatsenOpvragen(comfort, invalide, lawaai, eigentent, bungalow, bungalino, blokhut, stacaravan, huurtent);
+
+            Ververs();
+        }
+
+        public void ResetGegevens()
+        {
+            kampeerplaatsen.Clear();
+            comfort = false;
+            lawaai = false;
+            invalide = false;
+            bungalow = "";
+            bungalino = "";
+            blokhut = "";
+            stacaravan = "";
+            huurtent = "";
+            eigentent = "";
+        }
+
+        public void Ververs()
+        {
+            lbKampeerplaatsen.Items.Clear();
+
+            foreach (Kampeerplaats k in kampeerplaatsen)
+            {
+                lbKampeerplaatsen.Items.Add(k);
+            }
+                        
         }
 
 
@@ -43,22 +95,75 @@ namespace EyeCT4Events_WF
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            FormRegistreerNieuweGebruiker frg = new FormRegistreerNieuweGebruiker();
+            this.Hide();
+            frg.Show();
         }
 
         private void rbInvalide_CheckedChanged(object sender, EventArgs e)
         {
-            HaalLijstOp();
+
+            
+            if (rbInvalide.Checked)
+            {
+                cbBungalow.Checked = true;
+                groupBox2.Enabled = false;
+                cbBlokhut.Checked = false;
+                cbBungalino.Checked = false;
+                cbEigenTent.Checked = false;
+                cbHuurTent.Checked = false;
+                cbStaCaravan.Checked = false;
+                HaalKampeerplaatsenOp();
+            }
+
+            else
+
+                groupBox2.Enabled = true;
+            HaalKampeerplaatsenOp();
+
+
         }
 
         private void rbComfort_CheckedChanged(object sender, EventArgs e)
         {
-            HaalLijstOp();
+            groupBox2.Enabled = true;
+            HaalKampeerplaatsenOp();
         }
 
         private void rbLawaai_CheckedChanged(object sender, EventArgs e)
         {
-            HaalLijstOp();
+            groupBox2.Enabled = true;
+            HaalKampeerplaatsenOp();
+        }
+
+        private void cbBungalow_CheckedChanged(object sender, EventArgs e)
+        {
+            HaalKampeerplaatsenOp();
+        }
+
+        private void cbStaCaravan_CheckedChanged(object sender, EventArgs e)
+        {
+            HaalKampeerplaatsenOp();
+        }
+
+        private void cbBlokhut_CheckedChanged(object sender, EventArgs e)
+        {
+            HaalKampeerplaatsenOp();
+        }
+
+        private void cbHuurTent_CheckedChanged(object sender, EventArgs e)
+        {
+            HaalKampeerplaatsenOp();
+        }
+
+        private void cbBungalino_CheckedChanged(object sender, EventArgs e)
+        {
+            HaalKampeerplaatsenOp();
+        }
+
+        private void cbEigenTent_CheckedChanged(object sender, EventArgs e)
+        {
+            HaalKampeerplaatsenOp();
         }
     }
 }

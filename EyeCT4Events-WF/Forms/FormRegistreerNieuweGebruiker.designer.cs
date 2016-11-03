@@ -1,6 +1,6 @@
 ﻿namespace EyeCT4Events_WF
 {
-    partial class RegistreerNieuweGebruiker
+    partial class FormRegistreerNieuweGebruiker
     {
         /// <summary>
         /// Required designer variable.

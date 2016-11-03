@@ -140,6 +140,34 @@ namespace EyeCT4Events_WF.Persistencies
             }
         }
 
+        public List<Kampeerplaats> AlleKampeerplaatsenOpvragen()
+        {
+            List<Kampeerplaats> KampeerList = new List<Kampeerplaats>();
+
+            Connect();
+            string query = "SELECT * FROM Kampeerplaats";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Kampeerplaats kampeerplaats = new Kampeerplaats();
+
+                    kampeerplaats.Type = reader["KampeerPlaatsType"].ToString();
+                    kampeerplaats.PlaatsID = Convert.ToInt32(reader["ID"]);
+                    kampeerplaats.MaxPersonen = Convert.ToInt32(reader["MaxPersonen"]);
+                    kampeerplaats.Lawaai = Convert.ToInt32(reader["Lawaai"]);
+                    kampeerplaats.Invalide = Convert.ToInt32(reader["Invalide"]);
+                    kampeerplaats.Comfort = Convert.ToInt32(reader["Comfort"]);
+                    KampeerList.Add(kampeerplaats);
+
+                }
+            }
+            Close();
+            return KampeerList;
+        }
+
         /// <summary>
         /// Public Methods.
         /// </summary>
@@ -318,6 +346,41 @@ namespace EyeCT4Events_WF.Persistencies
             }
             Close();
             return bezoekerLijst;
+        }
+
+        public List<Gebruiker> GezochteBezoekersOphalen(string zoekopdracht)
+        {
+            string gezochtebezoeker = zoekopdracht;
+            List<Gebruiker> Bezoekers = new List<Gebruiker>();
+            
+            Connect();
+            string query = "SELECT * FROM Gebruiker WHERE GebruikerType = 'bezoeker' AND Gebruikersnaam LIKE *@gezochtebezoeker*";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Gebruiker bezoeker = new Bezoeker();
+
+                   
+                    bezoeker.GebruikersID = Convert.ToInt32(reader["ID"]);
+                    bezoeker.Voornaam = reader["Voornaam"].ToString();
+                    bezoeker.Achternaam = reader["Achternaam"].ToString();
+                    bezoeker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                    bezoeker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                    bezoeker.RFID = Convert.ToInt32(reader["RFID"]);
+                    if ((Convert.ToInt32(reader["Aanwezig"]) == 1))
+                    {
+                        bezoeker.Aanwezig = true;
+                    }
+                    bezoeker.Aanwezig = false;
+                    Bezoekers.Add(bezoeker);
+
+                }
+            }
+            Close();
+            return Bezoekers;
         }
         #endregion
         #region Media
@@ -654,7 +717,7 @@ namespace EyeCT4Events_WF.Persistencies
         #endregion
         #region Kampeer queries
 
-        public List<Kampeerplaats> AlleKampeerplaatsenOpvragen(bool comfort, bool invalide, bool lawaai, string eigentent,
+        public List<Kampeerplaats> KampeerplaatsenOpvragen(bool comfort, bool invalide, bool lawaai, string eigentent,
                                      string bungalow, string bungalino, string blokhut, string stacaravan, string huurtent)
         {
             List<Kampeerplaats> KampeerList = new List<Kampeerplaats>();
@@ -692,6 +755,7 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
             return KampeerList;
         }
+
 
         #endregion
 

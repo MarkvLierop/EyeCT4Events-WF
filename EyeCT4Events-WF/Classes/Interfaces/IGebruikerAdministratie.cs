@@ -7,9 +7,11 @@ namespace EyeCT4Events_WF.Interfaces
     {
         List<Gebruiker> LijstAanwezigePersonen();
 
+        List<Gebruiker> GezochteBezoekersOphalen(string zoekopdracht);
         bool Inloggen(string gebruikersnaam, string wachtwoord);
 
         Gebruiker GetGebruikerByGebruikersnaam(string gebruikersnaam);
         Gebruiker GetGebruikerByID(int ID);
+
     }
 }
