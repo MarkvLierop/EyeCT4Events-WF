@@ -15,7 +15,7 @@ namespace EyeCT4Events_WF.Forms
 {
     public partial class FormCategorieToevoegen : Form
     {
-        SocialMediaSharingRepository smsr;
+        RepositorySocialMediaSharing smsr;
         List<Categorie> catList;
 
         public Categorie cat { get; private set; }
@@ -23,7 +23,7 @@ namespace EyeCT4Events_WF.Forms
         public FormCategorieToevoegen()
         {
             InitializeComponent();
-            smsr = new SocialMediaSharingRepository(new MSSQL_Server());
+            smsr = new RepositorySocialMediaSharing(new MSSQL_Server());
 
             catList = smsr.AlleCategorienOpvragen();
             

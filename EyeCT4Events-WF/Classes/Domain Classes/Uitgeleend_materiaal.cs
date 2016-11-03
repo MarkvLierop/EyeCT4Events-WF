@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EyeCT4Events_WF.Classes
 {
-    class Uitgeleend_materiaal
+    public class Uitgeleend_materiaal
     {
         public string Gebruiker { get; set; }
         public string MateriaalNaam { get; set; }

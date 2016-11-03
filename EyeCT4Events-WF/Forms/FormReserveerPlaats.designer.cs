@@ -37,12 +37,12 @@
             this.rbComfort = new System.Windows.Forms.RadioButton();
             this.rbInvalide = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cbBungalow = new System.Windows.Forms.CheckBox();
-            this.cbHuurTent = new System.Windows.Forms.CheckBox();
-            this.cbStaCaravan = new System.Windows.Forms.CheckBox();
-            this.cbBlokhut = new System.Windows.Forms.CheckBox();
-            this.cbBungalino = new System.Windows.Forms.CheckBox();
             this.cbEigenTent = new System.Windows.Forms.CheckBox();
+            this.cbBungalino = new System.Windows.Forms.CheckBox();
+            this.cbBlokhut = new System.Windows.Forms.CheckBox();
+            this.cbStaCaravan = new System.Windows.Forms.CheckBox();
+            this.cbHuurTent = new System.Windows.Forms.CheckBox();
+            this.cbBungalow = new System.Windows.Forms.CheckBox();
             this.lblMedewerker = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PBCampeerplek)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -106,6 +106,7 @@
             this.rbLawaai.TabStop = true;
             this.rbLawaai.Text = "Lawaai";
             this.rbLawaai.UseVisualStyleBackColor = true;
+            this.rbLawaai.CheckedChanged += new System.EventHandler(this.rbLawaai_CheckedChanged);
             // 
             // rbComfort
             // 
@@ -117,6 +118,7 @@
             this.rbComfort.TabStop = true;
             this.rbComfort.Text = "Comfort";
             this.rbComfort.UseVisualStyleBackColor = true;
+            this.rbComfort.CheckedChanged += new System.EventHandler(this.rbComfort_CheckedChanged);
             // 
             // rbInvalide
             // 
@@ -129,6 +131,7 @@
             this.rbInvalide.Text = "Invalide";
             this.rbInvalide.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.rbInvalide.UseVisualStyleBackColor = true;
+            this.rbInvalide.CheckedChanged += new System.EventHandler(this.rbInvalide_CheckedChanged);
             // 
             // groupBox2
             // 
@@ -145,45 +148,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Verblijf";
             // 
-            // cbBungalow
+            // cbEigenTent
             // 
-            this.cbBungalow.AutoSize = true;
-            this.cbBungalow.Location = new System.Drawing.Point(6, 19);
-            this.cbBungalow.Name = "cbBungalow";
-            this.cbBungalow.Size = new System.Drawing.Size(73, 17);
-            this.cbBungalow.TabIndex = 0;
-            this.cbBungalow.Text = "Bungalow";
-            this.cbBungalow.UseVisualStyleBackColor = true;
-            // 
-            // cbHuurTent
-            // 
-            this.cbHuurTent.AutoSize = true;
-            this.cbHuurTent.Location = new System.Drawing.Point(92, 19);
-            this.cbHuurTent.Name = "cbHuurTent";
-            this.cbHuurTent.Size = new System.Drawing.Size(71, 17);
-            this.cbHuurTent.TabIndex = 1;
-            this.cbHuurTent.Text = "HuurTent";
-            this.cbHuurTent.UseVisualStyleBackColor = true;
-            // 
-            // cbStaCaravan
-            // 
-            this.cbStaCaravan.AutoSize = true;
-            this.cbStaCaravan.Location = new System.Drawing.Point(6, 35);
-            this.cbStaCaravan.Name = "cbStaCaravan";
-            this.cbStaCaravan.Size = new System.Drawing.Size(82, 17);
-            this.cbStaCaravan.TabIndex = 2;
-            this.cbStaCaravan.Text = "StaCaravan";
-            this.cbStaCaravan.UseVisualStyleBackColor = true;
-            // 
-            // cbBlokhut
-            // 
-            this.cbBlokhut.AutoSize = true;
-            this.cbBlokhut.Location = new System.Drawing.Point(6, 52);
-            this.cbBlokhut.Name = "cbBlokhut";
-            this.cbBlokhut.Size = new System.Drawing.Size(62, 17);
-            this.cbBlokhut.TabIndex = 3;
-            this.cbBlokhut.Text = "Blokhut";
-            this.cbBlokhut.UseVisualStyleBackColor = true;
+            this.cbEigenTent.AutoSize = true;
+            this.cbEigenTent.Location = new System.Drawing.Point(92, 52);
+            this.cbEigenTent.Name = "cbEigenTent";
+            this.cbEigenTent.Size = new System.Drawing.Size(78, 17);
+            this.cbEigenTent.TabIndex = 5;
+            this.cbEigenTent.Text = "Eigen Tent";
+            this.cbEigenTent.UseVisualStyleBackColor = true;
             // 
             // cbBungalino
             // 
@@ -195,15 +168,45 @@
             this.cbBungalino.Text = "Bungalino";
             this.cbBungalino.UseVisualStyleBackColor = true;
             // 
-            // cbEigenTent
+            // cbBlokhut
             // 
-            this.cbEigenTent.AutoSize = true;
-            this.cbEigenTent.Location = new System.Drawing.Point(92, 52);
-            this.cbEigenTent.Name = "cbEigenTent";
-            this.cbEigenTent.Size = new System.Drawing.Size(78, 17);
-            this.cbEigenTent.TabIndex = 5;
-            this.cbEigenTent.Text = "Eigen Tent";
-            this.cbEigenTent.UseVisualStyleBackColor = true;
+            this.cbBlokhut.AutoSize = true;
+            this.cbBlokhut.Location = new System.Drawing.Point(6, 52);
+            this.cbBlokhut.Name = "cbBlokhut";
+            this.cbBlokhut.Size = new System.Drawing.Size(62, 17);
+            this.cbBlokhut.TabIndex = 3;
+            this.cbBlokhut.Text = "Blokhut";
+            this.cbBlokhut.UseVisualStyleBackColor = true;
+            // 
+            // cbStaCaravan
+            // 
+            this.cbStaCaravan.AutoSize = true;
+            this.cbStaCaravan.Location = new System.Drawing.Point(6, 35);
+            this.cbStaCaravan.Name = "cbStaCaravan";
+            this.cbStaCaravan.Size = new System.Drawing.Size(82, 17);
+            this.cbStaCaravan.TabIndex = 2;
+            this.cbStaCaravan.Text = "StaCaravan";
+            this.cbStaCaravan.UseVisualStyleBackColor = true;
+            // 
+            // cbHuurTent
+            // 
+            this.cbHuurTent.AutoSize = true;
+            this.cbHuurTent.Location = new System.Drawing.Point(92, 19);
+            this.cbHuurTent.Name = "cbHuurTent";
+            this.cbHuurTent.Size = new System.Drawing.Size(71, 17);
+            this.cbHuurTent.TabIndex = 1;
+            this.cbHuurTent.Text = "HuurTent";
+            this.cbHuurTent.UseVisualStyleBackColor = true;
+            // 
+            // cbBungalow
+            // 
+            this.cbBungalow.AutoSize = true;
+            this.cbBungalow.Location = new System.Drawing.Point(6, 19);
+            this.cbBungalow.Name = "cbBungalow";
+            this.cbBungalow.Size = new System.Drawing.Size(73, 17);
+            this.cbBungalow.TabIndex = 0;
+            this.cbBungalow.Text = "Bungalow";
+            this.cbBungalow.UseVisualStyleBackColor = true;
             // 
             // lblMedewerker
             // 

@@ -16,7 +16,7 @@ namespace EyeCT4Events_WF.Forms
 {
     public partial class FormMediaUploaden : Form
     {
-        SocialMediaSharingRepository smsr;
+        RepositorySocialMediaSharing smsr;
         Gebruiker gebruiker;
         OpenFileDialog ofd;
         FormCategorieToevoegen fct;
@@ -27,7 +27,7 @@ namespace EyeCT4Events_WF.Forms
             InitializeComponent();
             this.gebruiker = gebruiker;
 
-            smsr = new SocialMediaSharingRepository(new MSSQL_Server());
+            smsr = new RepositorySocialMediaSharing(new MSSQL_Server());
         }
 
         private void btnOpslaan_Click(object sender, EventArgs e)

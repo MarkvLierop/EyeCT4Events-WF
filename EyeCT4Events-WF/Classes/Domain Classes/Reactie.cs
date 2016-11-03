@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EyeCT4Events_WF.Classes
 {
-    class Reactie
+    public class Reactie
     {
         public DateTime DatumTijd { get; set; }
         public int Flagged { get; set; }

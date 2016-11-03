@@ -11,6 +11,7 @@ using EyeCT4Events_WF.Classes;
 using EyeCT4Events_WF.Classes.Interfaces;
 using System.IO;
 using EyeCT4Events_WF.Exceptions;
+using System.Windows.Forms;
 
 namespace EyeCT4Events_WF.Persistencies
 {
@@ -506,54 +507,8 @@ namespace EyeCT4Events_WF.Persistencies
                 }
             }
             Close();
+            
 
-            for (int i = 0; i < categorieLijst.Count; i++)
-            {
-                if (!categorieArray.Contains(categorieLijst[i]))
-                {
-                    int w = i;
-                    Start3:
-                    if (categorieArray[w] == null)
-                    {
-                        categorieArray[w] = categorieLijst[i];
-                    }
-                    else
-                    {
-                        w++;
-                        goto Start3;
-                    }
-                }
-                foreach (Categorie c in categorieLijst)
-                {
-                    if (categorieLijst[i].ID == c.Parent)
-                    {
-                        int b = i;
-                        Start:
-                        if (categorieArray[b] == null)
-                        {
-                            if (!categorieArray.Contains(c))
-                            {
-                                int a = b;
-                                Start2:
-                                if (categorieArray[a] == null)
-                                {
-                                    categorieArray[a] = c;
-                                }
-                                else
-                                {
-                                    a++;
-                                    goto Start2;
-                                }
-                            }
-                        }
-                        else 
-                        {
-                            b++;
-                            goto Start;                            
-                        }
-                    }
-                }
-            }
             Categorie[] ar = categorieArray;
             return categorieLijst;
         }
@@ -618,7 +573,49 @@ namespace EyeCT4Events_WF.Persistencies
             return catlist;
         }
         #endregion
+        #region Reactie
 
+        public List<Reactie> AlleReactiesOpvragen()
+        {
+            List<Reactie> reactieLijst = new List<Reactie>();
+            Connect();
+            string query = "SELECT * FROM Reactie";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Reactie reactie = new Reactie();
+                    reactie.DatumTijd = Convert.ToDateTime(reader["DatumTijd"]);
+                    reactie.Flagged = Convert.ToInt32(reader["Flagged"]);
+                    reactie.GeplaatstDoor = reader["GeplaatstDoor"].ToString();
+                    reactie.Inhoud = reader["Inhoud"].ToString();
+                    reactie.Media = Convert.ToInt32(reader["MediaID"]);
+                    reactie.ReactieID = Convert.ToInt32(reader["ID"]);
+                    reactieLijst.Add(reactie);
+                }
+            }
+            Close();
+            return reactieLijst;
+        }
+        public void ToevoegenReactie(Reactie reactie)
+        {
+            Connect();
+            string query = "INSERT INTO Reactie VALUES (@geplaatstDoor, @mediaID, 0, @inhoud, @datetime, 0)";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@geplaatstDoor", GetGebruikerByGebruikersnaam(reactie.GeplaatstDoor).GebruikersID));
+                command.Parameters.Add(new SqlParameter("@mediaID", reactie.Media));
+                command.Parameters.Add(new SqlParameter("@inhoud", reactie.Inhoud));
+                command.Parameters.Add(new SqlParameter("@datetime", DateTime.Now.ToString()));
+
+                command.ExecuteNonQuery();
+            }
+            Close();
+        }
+
+        #endregion
         #region Kampeer queries
 
         public List<Kampeerplaats> AlleKampeerplaatsenOpvragen()
@@ -648,6 +645,7 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
             return KampeerList;
         }
+
         #endregion
 
     }

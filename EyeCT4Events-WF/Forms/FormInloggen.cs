@@ -16,14 +16,14 @@ namespace EyeCT4Events_WF
 {
     public partial class FormInloggen : Form
     {
-        GebruikerRepository gar;     
+        RepositoryGebruiker gar;     
 
 
         public FormInloggen()
         {
             InitializeComponent();
 
-            gar = new GebruikerRepository(new MSSQL_Server());
+            gar = new RepositoryGebruiker(new MSSQL_Server());
         }       
 
         private void btnLogin_Click(object sender, EventArgs e)
