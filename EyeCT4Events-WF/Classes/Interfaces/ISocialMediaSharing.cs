@@ -8,7 +8,7 @@ namespace EyeCT4Events_WF.Classes.Interfaces
 {
     public interface ISocialMediaSharing
     {
-        List<Categorie> AlleCategorienOpvragen();
+        Categorie[] AlleCategorienOpvragen();
         List<Media> AlleMediaOpvragen();
         List<Reactie> AlleReactiesOpvragen();
         void ToevoegenCategorie(Categorie cat);

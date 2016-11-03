@@ -17,9 +17,11 @@ namespace EyeCT4Events_WF.Classes.Repositories
             this.context = context;
         }
 
-        public List<Kampeerplaats> LijstKampeerplaatsen()
+        public List<Kampeerplaats> AlleKampeerplaatsenOpvragen(bool comfort, bool invalide, bool lawaai, string eigentent,
+                                     string bungalow, string bungalino, string blokhut, string stacaravan, string huurtent)
         {
-            return context.AlleKampeerplaatsenOpvragen();
+            return context.AlleKampeerplaatsenOpvragen(comfort, invalide, lawaai, eigentent, bungalow, bungalino, blokhut,
+                                            stacaravan, huurtent);
         }
     }
 }

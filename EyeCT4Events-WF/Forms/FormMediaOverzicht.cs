@@ -19,7 +19,8 @@ namespace EyeCT4Events_WF
     public partial class FormMediaOverzicht : Form
     {
         // Fields
-        RepositorySocialMediaSharing smsr;
+        RepositorySocialMediaSharing rsms;
+        RepositoryGebruiker rg;
         private List<Categorie> categorieLijst;
         private List<Media> mediaLijst;
         private Gebruiker gebruiker;
@@ -28,6 +29,7 @@ namespace EyeCT4Events_WF
         // Methods
         private void ContentCreeren(List<Media> mediaList)
         {
+            rg = new RepositoryGebruiker(new MSSQL_Server());
             //directories = Directory.GetDirectories(Directory.GetCurrentDirectory(), "*", SearchOption.AllDirectories);
 
             //for (int i = 0; i < directories.GetLength(0); i++)
@@ -83,6 +85,18 @@ namespace EyeCT4Events_WF
                 btnReageren.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnReageren_MouseUp);
                 pnlContentControlList.Add(btnReageren);
 
+                List<Reactie> reactieLijst = rsms.AlleReactiesOpvragen();
+
+                foreach (Reactie r in reactieLijst)
+                {
+                    if (r.Media == mediaLijst[i].ID)
+                    {
+                        Label l = new Label();
+                        l.Text =  rg.GetGebruikerByID(r.GeplaatstDoor).Gebruikersnaam + ": "+ r.Inhoud;
+                        pnlContentControlList.Add(l);
+                    }
+                }
+
                 // Alle Custom controls positioneren op het Content panel.
                 for (int c = 0; c < pnlContentControlList.Count; c++)
                 {
@@ -94,7 +108,7 @@ namespace EyeCT4Events_WF
 
         private void btnReageren_MouseUp(object sender, MouseEventArgs e)
         {
-            FormMediaReageren fmr = new FormMediaReageren(gebruiker, new Media());
+            FormMediaReageren fmr = new FormMediaReageren(gebruiker, ((Button)sender).Name);
             fmr.ShowDialog();
 
             if (fmr.DialogResult == DialogResult.OK)
@@ -109,17 +123,17 @@ namespace EyeCT4Events_WF
             InitializeComponent();
             this.gebruiker = gebruiker;
 
-            smsr = new RepositorySocialMediaSharing(new MSSQL_Server());
-            categorieLijst = smsr.AlleCategorienOpvragen();
+            rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
+            categorieLijst = rsms.AlleCategorienOpvragen().ToList();
 
-            mediaLijst = smsr.AlleMediaOpvragen();
+            mediaLijst = rsms.AlleMediaOpvragen();
             ContentCreeren(mediaLijst);
         }
 
         // Events
         private void btnMediaRapporteren_MouseUp(object sender, MouseEventArgs e)
         {
-            smsr.ToevoegenRapporterenMediaReactie(Convert.ToInt32(((Button)sender).Name), int.MinValue);
+            rsms.ToevoegenRapporterenMediaReactie(Convert.ToInt32(((Button)sender).Name), int.MinValue);
             ((Button)sender).Enabled = false;
             ((Button)sender).Text = "Gerapporteerd";
             MessageBox.Show("Gerapporteerd.");
@@ -129,7 +143,7 @@ namespace EyeCT4Events_WF
         {
             // Button sender.Name = ID van Media. 
             // sender.Tag = Aantal likes dat de media heeft.
-            smsr.ToevoegenLikeInMediaOfReactie(gebruiker, Convert.ToInt32(((Button)sender).Name), int.MinValue);
+            rsms.ToevoegenLikeInMediaOfReactie(gebruiker, Convert.ToInt32(((Button)sender).Name), int.MinValue);
             ((Button)sender).Text = "Likes " + (Convert.ToInt32(((Button)sender).Tag) + 1).ToString();
             ((Button)sender).Enabled = false;
         }
@@ -172,7 +186,7 @@ namespace EyeCT4Events_WF
         private void tbZoeken_TextChanged(object sender, EventArgs e)
         {
             pnlContent.Controls.Clear();
-            mediaLijst = smsr.ZoekenMedia(tbZoeken.Text);
+            mediaLijst = rsms.ZoekenMedia(tbZoeken.Text);
             ContentCreeren(mediaLijst);
         }
 
