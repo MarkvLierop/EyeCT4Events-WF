@@ -524,14 +524,15 @@ namespace EyeCT4Events_WF.Persistencies
                 Close();
             }
         }
-        public List<Media> ZoekenMedia(string zoekterm)
+        public List<Media> ZoekenMedia(string zoekterm, int ID)
         {
             List<Media> medialist = new List<Media>();
             Connect();
-            string query = "SELECT * FROM Media WHERE GeplaatstDoor LIKE(SELECT ID FROM Gebruiker WHERE Voornaam Like @zoekterm OR Tussenvoegsel Like @zoekterm OR Achternaam LIKE @zoekterm) OR MediaType LIKE @zoekterm";
+            string query = "SELECT * FROM Media WHERE GeplaatstDoor LIKE(SELECT ID FROM Gebruiker WHERE Voornaam Like @zoekterm OR Tussenvoegsel Like @zoekterm OR Achternaam LIKE @zoekterm) OR MediaType LIKE @zoekterm OR Categorie = @ID";
             using (command = new SqlCommand(query, SQLcon))
             {
                 command.Parameters.Add(new SqlParameter("@zoekterm", "%" + zoekterm + "%"));
+                command.Parameters.Add(new SqlParameter("@ID",ID));
                 reader = command.ExecuteReader();
 
                 while (reader.Read())

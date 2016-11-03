@@ -7,8 +7,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Media;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,43 +27,49 @@ namespace EyeCT4Events_WF
         private List<Categorie> categorieLijst;
         private List<Media> mediaLijst;
         private Gebruiker gebruiker;
-        private string[] directories;
 
-        // Methods
+        // Private Methods
         private void ContentCreeren(List<Media> mediaList)
         {
             rg = new RepositoryGebruiker(new MSSQL_Server());
-            //directories = Directory.GetDirectories(Directory.GetCurrentDirectory(), "*", SearchOption.AllDirectories);
-
-            //for (int i = 0; i < directories.GetLength(0); i++)
-            //{
-            //    MessageBox.Show(Path.GetFileName(directories[i]));
-            //}
 
             List<Control> pnlContentControlList = new List<Control>();
             for (int i = 0; i < mediaLijst.Count; i++)
             {
                 Label Titel = new Label();
                 Titel.Text = mediaLijst[i].GeplaatstDoor + " heeft een " + mediaLijst[i].Type + " Geplaatst";
+                //Titel.Font = new Font("Arial", 15, FontStyle.Bold);
                 Titel.Width = pnlContent.Width;
                 pnlContentControlList.Add(Titel);
 
-                switch (mediaLijst[i].Type)
+                //switch (mediaLijst[i].Type)
+                //{
+                //    case "Afbeelding":
+                //        PictureBox pb = new PictureBox();
+                //        pb.Image = Image.FromFile(mediaLijst[i].Pad);
+                //        pb.Width = Image.FromFile(mediaLijst[i].Pad).Width;
+                //        pb.Height = Image.FromFile(mediaLijst[i].Pad).Height;
+                //        pnlContentControlList.Add(pb);
+                //        break;
+                //    case "Video":
+                //        WindowsMediaPlayer wmp1 = new WindowsMediaPlayer();
+                //        //pnlContentControlList.Add(wmp1 as Control);
+                //        break;
+                //    case "Audio":
+                //        WindowsMediaPlayer wmp2 = new WindowsMediaPlayer();
+                //        //pnlContentControlList.Add(wmp2 as Control);
+                //        break;
+                //}
+                if (mediaLijst[i].Pad != "")
                 {
-                    case "Afbeelding":
-                        PictureBox pb = new PictureBox();
-                        pb.Image = Image.FromFile(mediaLijst[i].Pad);
-                        pb.Width = Image.FromFile(mediaLijst[i].Pad).Width;
-                        //pb.Height = Image.FromFile(mediaLijst[i].Pad).Height;
-                        pnlContentControlList.Add(pb);
-                        break;
-                    case "Video":
-                        WindowsMediaPlayer wmp1 = new WindowsMediaPlayer();
-                        break;
-                    case "Audio":
-                        WindowsMediaPlayer wmp2 = new WindowsMediaPlayer();
-                        break;
+                    Label lblDownloadFile = new Label();
+                    lblDownloadFile.Text = mediaLijst[i].Pad;
+                    lblDownloadFile.Name = mediaLijst[i].ID.ToString();
+                    lblDownloadFile.Width = pnlContent.Width;
+                    lblDownloadFile.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lblDownloadFile_MouseUp);
+                    pnlContentControlList.Add(lblDownloadFile);
                 }
+
                 Label Beschrijving = new Label();
                 Beschrijving.Text = mediaLijst[i].Beschrijving;
                 pnlContentControlList.Add(Beschrijving);
@@ -87,22 +96,97 @@ namespace EyeCT4Events_WF
 
                 List<Reactie> reactieLijst = rsms.AlleReactiesOpvragen();
 
+                // Alle reacties weergeven onder elk media onderdeel
                 foreach (Reactie r in reactieLijst)
                 {
                     if (r.Media == mediaLijst[i].ID)
                     {
-                        Label l = new Label();
-                        l.Text =  rg.GetGebruikerByID(r.GeplaatstDoor).Gebruikersnaam + ": "+ r.Inhoud;
-                        pnlContentControlList.Add(l);
+                        Label lblGebruiker = new Label();
+                        lblGebruiker.Text =  rg.GetGebruikerByID(r.GeplaatstDoor).Gebruikersnaam + ": "+ r.Inhoud;
+                        pnlContentControlList.Add(lblGebruiker);
                     }
                 }
 
-                // Alle Custom controls positioneren op het Content panel.
-                for (int c = 0; c < pnlContentControlList.Count; c++)
+                // Alle Custom controls positioneren  en toevoegen aan het Content panel.
+                for (int c = 1; c < pnlContentControlList.Count; c++)
                 {
-                    pnlContentControlList[c].Location = new Point(0, c * pnlContentControlList[c].Height);
+                    pnlContentControlList[c].Location = new Point(0, (c * pnlContentControlList[c].Height) + pnlContent.Location.Y);
                     pnlContent.Controls.Add(pnlContentControlList[c]);
                 }
+            }
+        }
+        private string FilterVaststellen(Media media)
+        {
+            if (media.Type == "Afbeelding")
+            {
+                return "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|Image Files(*.TIF)|*.TIF|PNG Image(*.png)|*.png";
+            }
+            else if (media.Type == "Audio")
+            {
+                return "Audio Bestand|*.wav|Audio Bestand|*.mp3|Audio Bestand|*.m4a|Audio Bestand|*.wma";
+            }
+            else if (media.Type == "Video")
+            {
+                return "Video Bestand|*.mp4|Video Bestand|*.avi|Video Bestand|*.wmv|Video Bestand|*.flv|Video Bestand|*.mpg|Video Bestand|*.mpeg";
+            }
+            return "Alle Bestanden|*.*";
+        }
+        private void BestandOpslaan(Media media, SaveFileDialog sfd)
+        {
+            switch (media.Type)
+            {
+                case "Afbeelding":
+                    Bitmap bestand = new Bitmap(sfd.FileName);
+                    using (System.IO.FileStream fs = (System.IO.FileStream)sfd.OpenFile())
+                    {
+                        switch (sfd.FilterIndex)
+                        {
+                            case 1:
+                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Jpeg);
+                                break;
+                            case 2:
+                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Bmp);
+                                break;
+                            case 3:
+                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Gif);
+                                break;
+                            case 4:
+                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Tiff);
+                                break;
+                            case 5:
+                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Png);
+                                break;
+                        }
+                    }
+                    break;
+                case "Audio":
+                    File.Copy(media.Pad, sfd.FileName);
+                    break;
+                case "Video":
+                    File.Copy(media.Pad, sfd.FileName);
+                    break;
+            }
+        }
+
+        // Events
+        private void lblDownloadFile_MouseUp(object sender, MouseEventArgs e)
+        {
+            Media media = null;
+            foreach (Media m in mediaLijst)
+            {
+                if (m.ID == Convert.ToInt32(((Label)sender).Name))
+                {
+                    media = m;
+                }
+            }
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Title = "Bestand Opslaan";
+            sfd.Filter = FilterVaststellen(media);
+            sfd.ShowDialog();
+
+            if (sfd.FileName != "")
+            {
+                BestandOpslaan(media, sfd);
             }
         }
 
@@ -162,11 +246,6 @@ namespace EyeCT4Events_WF
             {
                 categorieLijst[i].DrawNaam(g, i);
             }
-            //for (int i = 0; i< directories.GetLength(0); i++)
-            //{
-            //    MessageBox.Show(Path.GetFileName(Path.GetDirectoryName(directories[i]));
-            //    g.DrawString(Path.GetFileName(Path.GetDirectoryName(directories[i])), new Font("Arial", 14), Brushes.Black, new Point(0, i * 15));
-            //}
         }
 
         private void btnMediaUploaden_Click(object sender, EventArgs e)
@@ -186,13 +265,24 @@ namespace EyeCT4Events_WF
         private void tbZoeken_TextChanged(object sender, EventArgs e)
         {
             pnlContent.Controls.Clear();
-            mediaLijst = rsms.ZoekenMedia(tbZoeken.Text);
+            mediaLijst = rsms.ZoekenMedia(tbZoeken.Text, int.MinValue);
             ContentCreeren(mediaLijst);
         }
 
-        private void roundButton1_Click(object sender, EventArgs e)
+        private void pnlCategorieën_MouseDown(object sender, MouseEventArgs e)
         {
-
+            // Checken welke categorie aangeklikt is. Op basis daarvan media filteren.
+            foreach (Categorie c in categorieLijst)
+            {
+                if (c.Locatie.X < e.X && c.Locatie.Y < e.Y &&
+                        c.Locatie.Right > e.X && c.Locatie.Bottom > e.Y)
+                {
+                    //MessageBox.Show(c.ID.ToString() + " "+ c.Naam +" Aangeklikt");
+                    pnlContent.Controls.Clear();
+                    mediaLijst = rsms.ZoekenMedia(" ", c.ID);
+                    ContentCreeren(mediaLijst);
+                }
+            }
         }
     }
 }

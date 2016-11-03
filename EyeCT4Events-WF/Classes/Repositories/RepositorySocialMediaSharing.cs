@@ -47,9 +47,9 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             return ISMS.ZoekenCategorie(naam);
         }
-        public List<Media> ZoekenMedia (string zoekterm)
+        public List<Media> ZoekenMedia (string zoekterm, int ID)
         {
-            return ISMS.ZoekenMedia(zoekterm);
+            return ISMS.ZoekenMedia(zoekterm, ID);
         }
         public List<Media> AlleMediaOpvragen()
         {

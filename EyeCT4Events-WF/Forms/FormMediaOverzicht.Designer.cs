@@ -51,6 +51,7 @@
             this.pnlCategorieën.Size = new System.Drawing.Size(197, 443);
             this.pnlCategorieën.TabIndex = 0;
             this.pnlCategorieën.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCategorieën_Paint);
+            this.pnlCategorieën.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlCategorieën_MouseDown);
             // 
             // btnCategorieToevoegen
             // 
@@ -69,6 +70,7 @@
             this.pnlContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlContent.AutoScroll = true;
             this.pnlContent.Location = new System.Drawing.Point(232, 49);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Size = new System.Drawing.Size(732, 467);
