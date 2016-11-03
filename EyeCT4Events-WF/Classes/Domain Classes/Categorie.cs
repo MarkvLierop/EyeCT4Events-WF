@@ -16,6 +16,7 @@ namespace EyeCT4Events_WF.Classes
         public string Naam { get; set; }
         public int Parent { get; set; }
 
+        public Rectangle Locatie {get; set;}
         public Categorie()
         {
 
@@ -24,7 +25,8 @@ namespace EyeCT4Events_WF.Classes
         public void DrawNaam(Graphics g, int count)
         {
             int fontSize = 14;
-            g.DrawString(Naam, new Font("Arial", fontSize), Brushes.Black, new Point(0, 0 + (count * fontSize)));
+            Locatie = new Rectangle(new Point(0, 0 + (count * fontSize)),new Size(Naam.Length * 20,fontSize));
+            g.DrawString(Naam, new Font("Arial", fontSize), Brushes.Black, Locatie.Location);
         }
     }
 }
