@@ -20,21 +20,9 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             return context.LijstAanwezigePersonen();
         }
-        public bool CheckLogIn(string gebruikersnaam, string wachtwoord)
+        public Gebruiker GebruikerInloggen(string gebruikersnaam, string wachtwoord)
         {
-            bool logincorrect;
-
-            logincorrect = context.Inloggen(gebruikersnaam, wachtwoord);
-
-            return logincorrect;
-        }
-        public Gebruiker LogIn(string gebruikersnaam)
-        {
-            Gebruiker ingelogde;
-
-            ingelogde = context.GetGebruikerByGebruikersnaam(gebruikersnaam);
-
-            return ingelogde;
+            return context.Inloggen(gebruikersnaam, wachtwoord);
         }
         public Gebruiker GetGebruikerByGebruikersnaam (string gebruikersnaam)
         {

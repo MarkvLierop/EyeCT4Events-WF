@@ -15,20 +15,18 @@ namespace EyeCT4Events_WF.Forms
     {
         Gebruiker medewerker;
 
-        public FormMedewerkerHub()
-        {
-            InitializeComponent();
-        }
-
         public FormMedewerkerHub(Gebruiker gebruiker)
         {
+            InitializeComponent();
+
             medewerker = gebruiker;
-            lblMedewerker.Text = medewerker.Voornaam + " " + medewerker.Achternaam;
+            lblMedewerkerNaam.Text = medewerker.ToString();
         }
 
         private void btnMedia_Click(object sender, EventArgs e)
         {
-
+            FormMediaOverzicht fmo = new FormMediaOverzicht(medewerker);
+            fmo.Show();
         }
 
         private void btnReserveer_Click(object sender, EventArgs e)

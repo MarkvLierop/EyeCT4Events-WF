@@ -56,8 +56,10 @@
             // 
             this.tbPass.Location = new System.Drawing.Point(127, 59);
             this.tbPass.Name = "tbPass";
+            this.tbPass.PasswordChar = '*';
             this.tbPass.Size = new System.Drawing.Size(100, 20);
             this.tbPass.TabIndex = 2;
+            this.tbPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbPass_KeyDown);
             // 
             // label1
             // 
@@ -77,7 +79,7 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Wachtwoord";
             // 
-            // Inloggen
+            // FormInloggen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -87,7 +89,7 @@
             this.Controls.Add(this.tbPass);
             this.Controls.Add(this.tbUser);
             this.Controls.Add(this.btnLogin);
-            this.Name = "Inloggen";
+            this.Name = "FormInloggen";
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Inloggen_Load);
             this.ResumeLayout(false);

@@ -26,10 +26,7 @@ C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csprojReso
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.AanwezigBezoekers.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Gebruikergegevens.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Gebruikersbeheer.resources
-C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.RegistreerNieuweGebruiker.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Properties.Resources.resources
-C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.ReserveerMateriaal.resources
-C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.ReserveerPlaats.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events-WF.csproj.GenerateResource.Cache
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.exe
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\bin\Debug\EyeCT4Events-WF.pdb
@@ -72,3 +69,9 @@ C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4E
 C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormReserveerMateriaal.resources
 C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormBestaandeAccount.resources
 C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormEventAanmaken.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormBestaandeAccount.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormEventAanmaken.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMedewerkerHub.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormRegistreerNieuweGebruiker.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormReserveerMateriaal.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormReserveerPlaats.resources

@@ -217,52 +217,50 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
             return gebruiker;
         }
-        public Gebruiker GebruikerLogin(string wachtwoord, string gebruikersnaam)
+        public Gebruiker Inloggen(string Gebruikersnaam, string wachtwoord)
         {
+            Gebruiker gebruiker = null;
             Connect();
-            string query = "SELECT Gebruikersnaam, Wachtwoord FROM Gebruiker WHERE Gebruikersnaam = @Gebruikersnaam AND Wachtwoord = @Wachtwoord";
+            string query = "SELECT * FROM Gebruiker WHERE gebruikersnaam = @Gebruiker AND Wachtwoord = @Wachtwoord";
             using (command = new SqlCommand(query, SQLcon))
             {
-                command.Parameters.Add(new SqlParameter("@Gebruikersnaam", gebruikersnaam));
+                command.Parameters.Add(new SqlParameter("@Gebruiker", Gebruikersnaam));
                 command.Parameters.Add(new SqlParameter("@Wachtwoord", wachtwoord));
-
-                while (reader.Read())
-                {
-                    //GebruikerDataToewijzen(gebruiker);
-                }
-
-                Close();
-                return gebruiker;
-            }
-        }
-        public bool Inloggen(string Gebruikersnaam, string wachtwoord)
-        {
-            Connect();
-            string query = "SELECT * FROM Gebruiker WHERE gebruikersnaam = @GEBRUIKERSNAAM";
-            using (command = new SqlCommand(query, SQLcon))
-            {
-                command.Parameters.Add(new SqlParameter("@GEBRUIKERSNAAM", Gebruikersnaam));
                 reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    if (!reader.HasRows)
+                    if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
                     {
-                        Close();
-                        return false;
+                        gebruiker = new Bezoeker();
                     }
-
-                    else if (!wachtwoord.Equals(reader["Wachtwoord"].ToString()))
+                    else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
                     {
-                        Close();
-                        return false;
+                        gebruiker = new Beheerder();
                     }
-
-
+                    else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
+                    {
+                        gebruiker = new Medewerker();
+                    }
+                    gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
+                    gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                    gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                    gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                    gebruiker.Voornaam = reader["Voornaam"].ToString();
+                    gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                    gebruiker.Achternaam = reader["Achternaam"].ToString();
+                    if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                    {
+                        gebruiker.Aanwezig = true;
+                    }
+                    else
+                    {
+                        gebruiker.Aanwezig = false;
+                    }
                 }
             }
             Close();
-            return true;
+            return gebruiker;
         }
         public void GebruikerRegistreren(Gebruiker gebruiker)
         {

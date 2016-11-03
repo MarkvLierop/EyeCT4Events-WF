@@ -28,11 +28,10 @@ namespace EyeCT4Events_WF
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            EyeCT4Events_WF.Classes.Gebruiker gebruiker;
-            
-            if (gar.CheckLogIn(tbUser.Text, tbPass.Text))
+            EyeCT4Events_WF.Classes.Gebruiker gebruiker = gar.GebruikerInloggen(tbUser.Text, tbPass.Text);
+
+            if (gebruiker != null)
             {
-                gebruiker = gar.LogIn(tbUser.Text);
 
                 if (gebruiker.GetType() == typeof(Bezoeker))
                 {
@@ -53,16 +52,23 @@ namespace EyeCT4Events_WF
 
                     this.Hide();
                 }
-
-                else
-                    MessageBox.Show("Gebruikersnaam en/of wachtwoord incorrect, probeer het nogmaals");
             }
+            else
+                MessageBox.Show("Gebruikersnaam of wachtwoord incorrect, probeer het nogmaals");
 
         }
 
         private void Inloggen_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void tbPass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin_Click(sender, e);
+            }
         }
     }
 }
