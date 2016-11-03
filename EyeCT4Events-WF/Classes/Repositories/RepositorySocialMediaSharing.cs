@@ -51,6 +51,10 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             return ISMS.ZoekenMedia(zoekterm, ID);
         }
+        public Media SelectHoogsteMediaID()
+        {
+            return ISMS.SelectLaatstIngevoerdeMedia();
+        }
         public List<Media> AlleMediaOpvragen()
         {
             return ISMS.AlleMediaOpvragen();

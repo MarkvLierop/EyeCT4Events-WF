@@ -20,5 +20,6 @@ namespace EyeCT4Events_WF.Classes.Interfaces
         Media GetMediaByID(int ID);
         List<Categorie> ZoekenCategorie(string naam);
         List<Media> ZoekenMedia(string zoekterm, int ID);
+        Media SelectLaatstIngevoerdeMedia();
     }
 }

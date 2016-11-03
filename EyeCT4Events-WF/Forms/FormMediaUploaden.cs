@@ -29,9 +29,9 @@ namespace EyeCT4Events_WF.Forms
 
             smsr = new RepositorySocialMediaSharing(new MSSQL_Server());
         }
-
         private void btnOpslaan_Click(object sender, EventArgs e)
         {
+            // Media
             Media media = new Media();
             media.Beschrijving = tbBeschrijving.Text;
             if(fct != null)
@@ -42,10 +42,15 @@ namespace EyeCT4Events_WF.Forms
             {
                 media.Categorie = smsr.GetCategorieMetNaam(fcz.Categorie).ID;
             }
-            media.GeplaatstDoor = gebruiker.ToString();
-            media.Pad = ofd.FileName;
+            media.GeplaatstDoor = gebruiker.GebruikersID;
             media.Type = Path.GetExtension(ofd.FileName);
+
+            // Directory bestand opslaan
+            media.BestandOpslaan(ofd.SafeFileName, ofd.FileName);
+
+            // Database
             smsr.ToevoegenMedia(media);
+
             MessageBox.Show("Media geplaatst.");
             Close();
         }

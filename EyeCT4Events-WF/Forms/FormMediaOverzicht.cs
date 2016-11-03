@@ -37,7 +37,7 @@ namespace EyeCT4Events_WF
             for (int i = 0; i < mediaLijst.Count; i++)
             {
                 Label Titel = new Label();
-                Titel.Text = mediaLijst[i].GeplaatstDoor + " heeft een " + mediaLijst[i].Type + " Geplaatst";
+                Titel.Text = mediaLijst[i].GeplaatstDoorGebruiker() + " heeft een " + mediaLijst[i].Type + " Geplaatst";
                 //Titel.Font = new Font("Arial", 15, FontStyle.Bold);
                 Titel.Width = pnlContent.Width;
                 pnlContentControlList.Add(Titel);
@@ -72,6 +72,7 @@ namespace EyeCT4Events_WF
 
                 Label Beschrijving = new Label();
                 Beschrijving.Text = mediaLijst[i].Beschrijving;
+                Beschrijving.Width = pnlContent.Width;
                 pnlContentControlList.Add(Beschrijving);
 
                 Button btnMediaLike = new Button();
@@ -102,7 +103,8 @@ namespace EyeCT4Events_WF
                     if (r.Media == mediaLijst[i].ID)
                     {
                         Label lblGebruiker = new Label();
-                        lblGebruiker.Text =  rg.GetGebruikerByID(r.GeplaatstDoor).Gebruikersnaam + ": "+ r.Inhoud;
+                        lblGebruiker.Text =  rg.GetGebruikerByID(r.GeplaatstDoor).ToString() + ": "+ r.Inhoud;
+                        lblGebruiker.Width = pnlContent.Width;
                         pnlContentControlList.Add(lblGebruiker);
                     }
                 }
@@ -115,59 +117,7 @@ namespace EyeCT4Events_WF
                 }
             }
         }
-        private string FilterVaststellen(Media media)
-        {
-            if (media.Type == "Afbeelding")
-            {
-                return "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|Image Files(*.TIF)|*.TIF|PNG Image(*.png)|*.png";
-            }
-            else if (media.Type == "Audio")
-            {
-                return "Audio Bestand|*.wav|Audio Bestand|*.mp3|Audio Bestand|*.m4a|Audio Bestand|*.wma";
-            }
-            else if (media.Type == "Video")
-            {
-                return "Video Bestand|*.mp4|Video Bestand|*.avi|Video Bestand|*.wmv|Video Bestand|*.flv|Video Bestand|*.mpg|Video Bestand|*.mpeg";
-            }
-            return "Alle Bestanden|*.*";
-        }
-        private void BestandOpslaan(Media media, SaveFileDialog sfd)
-        {
-            switch (media.Type)
-            {
-                case "Afbeelding":
-                    Bitmap bestand = new Bitmap(sfd.FileName);
-                    using (System.IO.FileStream fs = (System.IO.FileStream)sfd.OpenFile())
-                    {
-                        switch (sfd.FilterIndex)
-                        {
-                            case 1:
-                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Jpeg);
-                                break;
-                            case 2:
-                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Bmp);
-                                break;
-                            case 3:
-                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Gif);
-                                break;
-                            case 4:
-                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Tiff);
-                                break;
-                            case 5:
-                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Png);
-                                break;
-                        }
-                    }
-                    break;
-                case "Audio":
-                    File.Copy(media.Pad, sfd.FileName);
-                    break;
-                case "Video":
-                    File.Copy(media.Pad, sfd.FileName);
-                    break;
-            }
-        }
-
+        
         // Events
         private void lblDownloadFile_MouseUp(object sender, MouseEventArgs e)
         {
@@ -181,12 +131,12 @@ namespace EyeCT4Events_WF
             }
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Title = "Bestand Opslaan";
-            sfd.Filter = FilterVaststellen(media);
+            sfd.Filter = media.FilterVastStellen(); // MOET MISSCHIEN AANGEPAST WORDEN ALS FOUT IS
             sfd.ShowDialog();
 
             if (sfd.FileName != "")
             {
-                BestandOpslaan(media, sfd);
+                File.Copy(media.Pad, sfd.FileName);
             }
         }
 
@@ -283,6 +233,14 @@ namespace EyeCT4Events_WF
                     ContentCreeren(mediaLijst);
                 }
             }
+        }
+
+        private void txtCategorieZoeken_TextChanged(object sender, EventArgs e)
+        {
+            RepositorySocialMediaSharing rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
+
+            categorieLijst = rsms.ZoekenCategorie(txtCategorieZoeken.Text);
+            pnlCategorieën.Refresh();
         }
     }
 }

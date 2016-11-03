@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace EyeCT4Events_WF.Exceptions
 {
-    class NoDatabaseConnectionException : Exception
+    class FoutBijOpslaanBestandException : Exception
     {
-        public NoDatabaseConnectionException(string message) 
-            : base("Er is geen verbinding met de database.")
+        public FoutBijOpslaanBestandException(string message) 
+            : base("Bestand kan niet opgeslagen worden. \n"+ message)
         {
         }
     }

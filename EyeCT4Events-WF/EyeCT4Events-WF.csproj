@@ -63,6 +63,8 @@
     <Compile Include="CustomControls\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Exceptions\FoutBijOpslaanBestandException.cs" />
+    <Compile Include="Exceptions\FoutBijUitvoerenQueryException.cs" />
     <Compile Include="Exceptions\NoDatabaseConnectionException.cs" />
     <Compile Include="Forms\FormAanwezigBezoekers.cs">
       <SubType>Form</SubType>

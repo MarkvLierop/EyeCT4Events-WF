@@ -140,34 +140,6 @@ namespace EyeCT4Events_WF.Persistencies
             }
         }
 
-        public List<Kampeerplaats> AlleKampeerplaatsenOpvragen()
-        {
-            List<Kampeerplaats> KampeerList = new List<Kampeerplaats>();
-
-            Connect();
-            string query = "SELECT * FROM Kampeerplaats";
-            using (command = new SqlCommand(query, SQLcon))
-            {
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Kampeerplaats kampeerplaats = new Kampeerplaats();
-
-                    kampeerplaats.Type = reader["KampeerPlaatsType"].ToString();
-                    kampeerplaats.PlaatsID = Convert.ToInt32(reader["ID"]);
-                    kampeerplaats.MaxPersonen = Convert.ToInt32(reader["MaxPersonen"]);
-                    kampeerplaats.Lawaai = Convert.ToInt32(reader["Lawaai"]);
-                    kampeerplaats.Invalide = Convert.ToInt32(reader["Invalide"]);
-                    kampeerplaats.Comfort = Convert.ToInt32(reader["Comfort"]);
-                    KampeerList.Add(kampeerplaats);
-
-                }
-            }
-            Close();
-            return KampeerList;
-        }
-
         /// <summary>
         /// Public Methods.
         /// </summary>
@@ -177,42 +149,49 @@ namespace EyeCT4Events_WF.Persistencies
         public Gebruiker GetGebruikerByID(int ID)
         {
             Connect();
-            string query = "SELECT * FROM Gebruiker WHERE ID = @ID";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@ID", ID));
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Gebruiker WHERE ID = @ID";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                    command.Parameters.Add(new SqlParameter("@ID", ID));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
                     {
-                        gebruiker = new Bezoeker();
-                    }
-                    else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
-                    {
-                        gebruiker = new Beheerder();
-                    }
-                    else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
-                    {
-                        gebruiker = new Medewerker();
-                    }
-                    gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
-                    gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
-                    gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
-                    gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
-                    gebruiker.Voornaam = reader["Voornaam"].ToString();
-                    gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
-                    gebruiker.Achternaam = reader["Achternaam"].ToString();
-                    if (Convert.ToInt32(reader["Aanwezig"]) == 1)
-                    {
-                        gebruiker.Aanwezig = true;
-                    }
-                    else
-                    {
-                        gebruiker.Aanwezig = false;
+                        if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                        {
+                            gebruiker = new Bezoeker();
+                        }
+                        else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
+                        {
+                            gebruiker = new Beheerder();
+                        }
+                        else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
+                        {
+                            gebruiker = new Medewerker();
+                        }
+                        gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
+                        gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                        gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                        gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                        gebruiker.Voornaam = reader["Voornaam"].ToString();
+                        gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                        gebruiker.Achternaam = reader["Achternaam"].ToString();
+                        if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                        {
+                            gebruiker.Aanwezig = true;
+                        }
+                        else
+                        {
+                            gebruiker.Aanwezig = false;
+                        }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
             return gebruiker;
@@ -221,43 +200,50 @@ namespace EyeCT4Events_WF.Persistencies
         {
             Gebruiker gebruiker = null;
             Connect();
-            string query = "SELECT * FROM Gebruiker WHERE gebruikersnaam = @Gebruiker AND Wachtwoord = @Wachtwoord";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@Gebruiker", Gebruikersnaam));
-                command.Parameters.Add(new SqlParameter("@Wachtwoord", wachtwoord));
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Gebruiker WHERE gebruikersnaam = @Gebruiker AND Wachtwoord = @Wachtwoord";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                    command.Parameters.Add(new SqlParameter("@Gebruiker", Gebruikersnaam));
+                    command.Parameters.Add(new SqlParameter("@Wachtwoord", wachtwoord));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
                     {
-                        gebruiker = new Bezoeker();
-                    }
-                    else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
-                    {
-                        gebruiker = new Beheerder();
-                    }
-                    else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
-                    {
-                        gebruiker = new Medewerker();
-                    }
-                    gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
-                    gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
-                    gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
-                    gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
-                    gebruiker.Voornaam = reader["Voornaam"].ToString();
-                    gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
-                    gebruiker.Achternaam = reader["Achternaam"].ToString();
-                    if (Convert.ToInt32(reader["Aanwezig"]) == 1)
-                    {
-                        gebruiker.Aanwezig = true;
-                    }
-                    else
-                    {
-                        gebruiker.Aanwezig = false;
+                        if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                        {
+                            gebruiker = new Bezoeker();
+                        }
+                        else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
+                        {
+                            gebruiker = new Beheerder();
+                        }
+                        else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
+                        {
+                            gebruiker = new Medewerker();
+                        }
+                        gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
+                        gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                        gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                        gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                        gebruiker.Voornaam = reader["Voornaam"].ToString();
+                        gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                        gebruiker.Achternaam = reader["Achternaam"].ToString();
+                        if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                        {
+                            gebruiker.Aanwezig = true;
+                        }
+                        else
+                        {
+                            gebruiker.Aanwezig = false;
+                        }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
             return gebruiker;
@@ -284,43 +270,51 @@ namespace EyeCT4Events_WF.Persistencies
         public Gebruiker GetGebruikerByGebruikersnaam(string gebruikersnaam)
         {
             Connect();
-            string query = "SELECT * FROM Gebruiker WHERE Gebruikersnaam = @GEBRUIKERSNAAM";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@GEBRUIKERSNAAM", "lieropm")); // Lieropm later aanpassen
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Gebruiker WHERE Gebruikersnaam = @GEBRUIKERSNAAM";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                    command.Parameters.Add(new SqlParameter("@GEBRUIKERSNAAM", "lieropm")); // Lieropm later aanpassen
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
                     {
-                        gebruiker = new Bezoeker();
-                    }
-                    else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
-                    {
-                        gebruiker = new Beheerder();
-                    }
-                    else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
-                    {
-                        gebruiker = new Medewerker();
-                    }
-                    gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
-                    gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
-                    gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
-                    gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
-                    gebruiker.Voornaam = reader["Voornaam"].ToString();
-                    gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
-                    gebruiker.Achternaam = reader["Achternaam"].ToString();
-                    if (Convert.ToInt32(reader["Aanwezig"]) == 1)
-                    {
-                        gebruiker.Aanwezig = true;
-                    }
-                    else
-                    {
-                        gebruiker.Aanwezig = false;
+                        if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                        {
+                            gebruiker = new Bezoeker();
+                        }
+                        else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
+                        {
+                            gebruiker = new Beheerder();
+                        }
+                        else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
+                        {
+                            gebruiker = new Medewerker();
+                        }
+                        gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
+                        gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                        gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                        gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                        gebruiker.Voornaam = reader["Voornaam"].ToString();
+                        gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                        gebruiker.Achternaam = reader["Achternaam"].ToString();
+                        if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                        {
+                            gebruiker.Aanwezig = true;
+                        }
+                        else
+                        {
+                            gebruiker.Aanwezig = false;
+                        }
                     }
                 }
             }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            
             Close();
             return gebruiker;
         }
@@ -402,33 +396,34 @@ namespace EyeCT4Events_WF.Persistencies
                     media.Categorie = Convert.ToInt32(reader["Categorie"]);
                     media.Flagged = Convert.ToInt32(reader["Flagged"]);
                     media.Likes = Convert.ToInt32(reader["Likes"]);
-                    media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]).ToString();
+                    media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]);
                     mediaList.Add(media);
                 }
             }
             Close();
-
-            foreach (Media m in mediaList)
-            {
-                m.GeplaatstDoor = GetGebruikerByID(Convert.ToInt32(m.GeplaatstDoor)).ToString();
-            }
-
             return mediaList;
         }
         public Media GetMediaByID(int ID)
         {
             Media media = null;
             Connect();
-            string query = "SELECT * FROM Media WHERE ID = @ID";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@ID", ID));
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Media WHERE ID = @ID";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    media.ID = Convert.ToInt32(reader["ID"]);
+                    command.Parameters.Add(new SqlParameter("@ID", ID));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        media.ID = Convert.ToInt32(reader["ID"]);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
 
@@ -437,16 +432,23 @@ namespace EyeCT4Events_WF.Persistencies
         public void ToevoegenMedia(Media media)
         {
             Connect();
-            string query = "INSERT INTO Media VALUES (@GeplaatstDoor, @Categorie, @Pad, @Type, 0, 0, @Beschrijving)";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@GeplaatstDoor", 1)); // media.GeplaatstDoor   AAANPASSEN ALS INLOGGEN WERKT.
-                command.Parameters.Add(new SqlParameter("@Categorie", media.Categorie));
-                command.Parameters.Add(new SqlParameter("@Pad", media.Pad));
-                command.Parameters.Add(new SqlParameter("@Type", BestandsTypeDefinieren(media.Type)));
-                command.Parameters.Add(new SqlParameter("@Beschrijving", media.Beschrijving));
+                string query = "INSERT INTO Media VALUES (@GeplaatstDoor, @Categorie, @Pad, @Type, 0, 0, @Beschrijving)";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@GeplaatstDoor", media.GeplaatstDoor));
+                    command.Parameters.Add(new SqlParameter("@Categorie", media.Categorie));
+                    command.Parameters.Add(new SqlParameter("@Pad", media.Pad));
+                    command.Parameters.Add(new SqlParameter("@Type", BestandsTypeDefinieren(media.Type)));
+                    command.Parameters.Add(new SqlParameter("@Beschrijving", media.Beschrijving));
 
-                command.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
         }      
@@ -522,11 +524,12 @@ namespace EyeCT4Events_WF.Persistencies
                 Close();
             }
         }
+        // Zoeken op CategorieID & MediaType
         public List<Media> ZoekenMedia(string zoekterm, int ID)
         {
             List<Media> medialist = new List<Media>();
             Connect();
-            string query = "SELECT * FROM Media WHERE GeplaatstDoor LIKE(SELECT ID FROM Gebruiker WHERE Voornaam Like @zoekterm OR Tussenvoegsel Like @zoekterm OR Achternaam LIKE @zoekterm) OR MediaType LIKE @zoekterm OR Categorie = @ID";
+            string query = "SELECT * FROM Media WHERE Categorie = @ID OR MediaType LIKE @zoekterm OR BestandPad LIKE @zoekterm";
             using (command = new SqlCommand(query, SQLcon))
             {
                 command.Parameters.Add(new SqlParameter("@zoekterm", "%" + zoekterm + "%"));
@@ -543,17 +546,34 @@ namespace EyeCT4Events_WF.Persistencies
                     media.Categorie = Convert.ToInt32(reader["Categorie"]);
                     media.Flagged = Convert.ToInt32(reader["Flagged"]);
                     media.Likes = Convert.ToInt32(reader["Likes"]);
-                    media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]).ToString();
+                    media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]);
                     medialist.Add(media);
                 }
             }
             Close();
-
-            foreach (Media m in medialist)
-            {
-                m.GeplaatstDoor = GetGebruikerByID(Convert.ToInt32(m.GeplaatstDoor)).ToString();
-            }
+            
             return medialist;
+        }
+        public Media SelectLaatstIngevoerdeMedia()
+        {
+            Media media = null;
+            Connect();
+            string query = "SELECT MAX(ID) maxID FROM Media";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    media = new Media();
+
+                    if (reader["maxID"].ToString() != "NULL")
+                        media.ID = Convert.ToInt32(reader["maxID"]);
+                }
+            }
+            Close();
+
+            return media;
         }
         #endregion
         #region Categorie
@@ -715,7 +735,33 @@ namespace EyeCT4Events_WF.Persistencies
 
         #endregion
         #region Kampeer queries
+        public List<Kampeerplaats> AlleKampeerplaatsenOpvragen()
+        {
+            List<Kampeerplaats> KampeerList = new List<Kampeerplaats>();
 
+            Connect();
+            string query = "SELECT * FROM Kampeerplaats";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Kampeerplaats kampeerplaats = new Kampeerplaats();
+
+                    kampeerplaats.Type = reader["KampeerPlaatsType"].ToString();
+                    kampeerplaats.PlaatsID = Convert.ToInt32(reader["ID"]);
+                    kampeerplaats.MaxPersonen = Convert.ToInt32(reader["MaxPersonen"]);
+                    kampeerplaats.Lawaai = Convert.ToInt32(reader["Lawaai"]);
+                    kampeerplaats.Invalide = Convert.ToInt32(reader["Invalide"]);
+                    kampeerplaats.Comfort = Convert.ToInt32(reader["Comfort"]);
+                    KampeerList.Add(kampeerplaats);
+
+                }
+            }
+            Close();
+            return KampeerList;
+        }
         public List<Kampeerplaats> KampeerplaatsenOpvragen(bool comfort, bool invalide, bool lawaai, string eigentent,
                                      string bungalow, string bungalino, string blokhut, string stacaravan, string huurtent)
         {

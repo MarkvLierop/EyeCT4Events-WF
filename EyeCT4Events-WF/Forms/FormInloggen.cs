@@ -16,8 +16,7 @@ namespace EyeCT4Events_WF
 {
     public partial class FormInloggen : Form
     {
-        RepositoryGebruiker gar;     
-
+        RepositoryGebruiker gar;    
 
         public FormInloggen()
         {
@@ -55,14 +54,7 @@ namespace EyeCT4Events_WF
             }
             else
                 MessageBox.Show("Gebruikersnaam of wachtwoord incorrect, probeer het nogmaals");
-
         }
-
-        private void Inloggen_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void tbPass_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
