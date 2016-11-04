@@ -15,6 +15,14 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             this.ISMS = ISM;
         }
+        public void VerwijderMedia(Media media)
+        {
+            ISMS.VerwijderMedia(media);
+        }
+        public void VerwijderReactie(Reactie reactie)
+        {
+            ISMS.VerwijderReactie(reactie);
+        }
         public Categorie[] AlleCategorienOpvragen()
         {
             return ISMS.AlleCategorienOpvragen();
@@ -26,6 +34,10 @@ namespace EyeCT4Events_WF.Classes.Repositories
         public void ToevoegenMedia(Media media)
         {
             ISMS.ToevoegenMedia(media);
+        }
+        public void ZetAantalKerenGerapporteerdOp0(Media media)
+        {
+            ISMS.ZetAantalKerenGerapporteerdOp0(media);
         }
         public void ToevoegenLikeInMediaOfReactie(Gebruiker gebruiker, int mediaID, int reactieID)
         {
@@ -58,6 +70,10 @@ namespace EyeCT4Events_WF.Classes.Repositories
         public List<Media> AlleMediaOpvragen()
         {
             return ISMS.AlleMediaOpvragen();
+        }
+        public List<Media> AlleGerapporteerdeMediaOpvragen()
+        {
+            return ISMS.AlleGerapporteerdeMediaOpvragen();
         }
         public List<Reactie> AlleReactiesOpvragen()
         {

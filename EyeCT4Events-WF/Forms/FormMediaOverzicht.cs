@@ -4,18 +4,10 @@ using EyeCT4Events_WF.Forms;
 using EyeCT4Events_WF.Persistencies;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Media;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WMPLib;
 
 namespace EyeCT4Events_WF
 {
@@ -38,7 +30,7 @@ namespace EyeCT4Events_WF
             {
                 Label Titel = new Label();
                 Titel.Text = mediaLijst[i].GeplaatstDoorGebruiker() + " heeft een " + mediaLijst[i].Type + " Geplaatst";
-                //Titel.Font = new Font("Arial", 15, FontStyle.Bold);
+                Titel.Font = new Font("Arial", 10, FontStyle.Bold);
                 Titel.Width = pnlContent.Width;
                 pnlContentControlList.Add(Titel);
 
@@ -63,8 +55,9 @@ namespace EyeCT4Events_WF
                 if (mediaLijst[i].Pad != "")
                 {
                     Label lblDownloadFile = new Label();
-                    lblDownloadFile.Text = mediaLijst[i].Pad;
+                    lblDownloadFile.Text = "Bestand Downloaden: "+mediaLijst[i].GetBestandsNaam();
                     lblDownloadFile.Name = mediaLijst[i].ID.ToString();
+                    lblCategorieZoeken.Font = new Font("Arial", 10, FontStyle.Underline);
                     lblDownloadFile.Width = pnlContent.Width;
                     lblDownloadFile.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lblDownloadFile_MouseUp);
                     pnlContentControlList.Add(lblDownloadFile);
@@ -131,7 +124,7 @@ namespace EyeCT4Events_WF
             }
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Title = "Bestand Opslaan";
-            sfd.Filter = media.FilterVastStellen(); // MOET MISSCHIEN AANGEPAST WORDEN ALS FOUT IS
+            sfd.Filter = media.FilterVastStellen();
             sfd.ShowDialog();
 
             if (sfd.FileName != "")

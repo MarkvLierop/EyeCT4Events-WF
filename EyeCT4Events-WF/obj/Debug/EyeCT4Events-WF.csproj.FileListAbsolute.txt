@@ -71,7 +71,10 @@ C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4E
 C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormEventAanmaken.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormBestaandeAccount.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormEventAanmaken.resources
-C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMedewerkerHub.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormRegistreerNieuweGebruiker.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormReserveerMateriaal.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormReserveerPlaats.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormBeheerderMainMenu.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormGerapporteerdeMediaOverzicht.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMedewerkerMainMenu.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMediaBekijken.resources

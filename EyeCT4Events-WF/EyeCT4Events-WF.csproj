@@ -77,6 +77,12 @@
     <Compile Include="Classes\Domain Classes\Gebruikers\Beheerder.cs" />
     <Compile Include="Classes\Domain Classes\Gebruikers\Bezoeker.cs" />
     <Compile Include="Classes\Domain Classes\Gebruikers\Medewerker.cs" />
+    <Compile Include="Forms\FormBeheerderMainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormBeheerderMainMenu.Designer.cs">
+      <DependentUpon>FormBeheerderMainMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormBestaandeAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,11 +107,23 @@
     <Compile Include="Forms\FormEventAanmaken.Designer.cs">
       <DependentUpon>FormEventAanmaken.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormMedewerkerHub.cs">
+    <Compile Include="Forms\FormGerapporteerdeMediaOverzicht.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormMedewerkerHub.Designer.cs">
-      <DependentUpon>FormMedewerkerHub.cs</DependentUpon>
+    <Compile Include="Forms\FormGerapporteerdeMediaOverzicht.Designer.cs">
+      <DependentUpon>FormGerapporteerdeMediaOverzicht.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormMedewerkerMainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMedewerkerMainMenu.Designer.cs">
+      <DependentUpon>FormMedewerkerMainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormMediaBekijken.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMediaBekijken.Designer.cs">
+      <DependentUpon>FormMediaBekijken.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormMediaOverzicht.cs">
       <SubType>Form</SubType>
@@ -175,6 +193,9 @@
     <EmbeddedResource Include="Forms\FormAanwezigBezoekers.resx">
       <DependentUpon>FormAanwezigBezoekers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormBeheerderMainMenu.resx">
+      <DependentUpon>FormBeheerderMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormBestaandeAccount.resx">
       <DependentUpon>FormBestaandeAccount.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,8 +208,14 @@
     <EmbeddedResource Include="Forms\FormEventAanmaken.resx">
       <DependentUpon>FormEventAanmaken.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormMedewerkerHub.resx">
-      <DependentUpon>FormMedewerkerHub.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormGerapporteerdeMediaOverzicht.resx">
+      <DependentUpon>FormGerapporteerdeMediaOverzicht.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMedewerkerMainMenu.resx">
+      <DependentUpon>FormMedewerkerMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMediaBekijken.resx">
+      <DependentUpon>FormMediaBekijken.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMediaOverzicht.resx">
       <DependentUpon>FormMediaOverzicht.cs</DependentUpon>

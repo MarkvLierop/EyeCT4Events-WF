@@ -1,6 +1,6 @@
 ﻿namespace EyeCT4Events_WF.Forms
 {
-    partial class FormMedewerkerHub
+    partial class FormMedewerkerMainMenu
     {
         /// <summary>
         /// Required designer variable.
@@ -63,7 +63,7 @@
             this.btnMedia.Name = "btnMedia";
             this.btnMedia.Size = new System.Drawing.Size(107, 51);
             this.btnMedia.TabIndex = 3;
-            this.btnMedia.Text = "Media";
+            this.btnMedia.Text = "Social Media Sharing";
             this.btnMedia.UseVisualStyleBackColor = true;
             this.btnMedia.Click += new System.EventHandler(this.btnMedia_Click);
             // 
@@ -97,7 +97,7 @@
             this.lblMedewerkerNaam.TabIndex = 6;
             this.lblMedewerkerNaam.Text = "medewerker naam";
             // 
-            // FormMedewerkerHub
+            // FormMedewerkerMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -108,7 +108,7 @@
             this.Controls.Add(this.btnMedia);
             this.Controls.Add(this.btnEventAanmaken);
             this.Controls.Add(this.btnReserveer);
-            this.Name = "FormMedewerkerHub";
+            this.Name = "FormMedewerkerMainMenu";
             this.Text = "Hub Medewerker";
             this.ResumeLayout(false);
             this.PerformLayout();

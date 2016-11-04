@@ -139,7 +139,16 @@ namespace EyeCT4Events_WF.Persistencies
                 }
             }
         }
+        private decimal GetMediaVerbergThreshhold()
+        {
 
+            using (StreamReader srVerbergThreshHold = new StreamReader("Settings.txt", false))
+            {
+                string line = srVerbergThreshHold.ReadLine();
+                string[] data = line.Split(':');
+                return Convert.ToDecimal(data[data.Count() - 1]);
+            }
+        }
         /// <summary>
         /// Public Methods.
         /// </summary>
@@ -323,23 +332,28 @@ namespace EyeCT4Events_WF.Persistencies
             List<Gebruiker> bezoekerLijst = new List<Gebruiker>();
 
             Connect();
-            string query = "SELECT * FROM Gebruiker WHERE GebruikerType = 'bezoeker'";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Gebruiker WHERE GebruikerType = 'bezoeker' AND Aanwezig = 1";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    gebruiker = new Bezoeker();
-                    //GebruikerDataToewijzen(gebruiker);
+                    reader = command.ExecuteReader();
 
-                    bezoekerLijst.Add(gebruiker);
+                    while (reader.Read())
+                    {
+                        gebruiker = new Bezoeker();
+
+                        bezoekerLijst.Add(gebruiker);
+                    }
                 }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
             return bezoekerLijst;
         }
-
         public List<Gebruiker> GezochteBezoekersOphalen(string zoekopdracht)
         {
             string gezochtebezoeker = zoekopdracht;
@@ -353,9 +367,7 @@ namespace EyeCT4Events_WF.Persistencies
 
                 while (reader.Read())
                 {
-                    Gebruiker bezoeker = new Bezoeker();
-
-                   
+                    Gebruiker bezoeker = new Bezoeker();                   
                     bezoeker.GebruikersID = Convert.ToInt32(reader["ID"]);
                     bezoeker.Voornaam = reader["Voornaam"].ToString();
                     bezoeker.Achternaam = reader["Achternaam"].ToString();
@@ -381,24 +393,67 @@ namespace EyeCT4Events_WF.Persistencies
             List<Media> mediaList = new List<Media>();
 
             Connect();
-            string query = "SELECT * FROM Media";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Media WHERE Flagged < @VerbergThreshhold";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    Media media = new Media();
-                    media.ID = Convert.ToInt32(reader["ID"]);
-                    media.Beschrijving = reader["Beschrijving"].ToString();
-                    media.Pad = reader["BestandPad"].ToString();
-                    media.Type = reader["MediaType"].ToString();
-                    media.Categorie = Convert.ToInt32(reader["Categorie"]);
-                    media.Flagged = Convert.ToInt32(reader["Flagged"]);
-                    media.Likes = Convert.ToInt32(reader["Likes"]);
-                    media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]);
-                    mediaList.Add(media);
+                    command.Parameters.Add(new SqlParameter("@VerbergThreshhold", GetMediaVerbergThreshhold()));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Media media = new Media();
+                        media.ID = Convert.ToInt32(reader["ID"]);
+                        media.Beschrijving = reader["Beschrijving"].ToString();
+                        media.Pad = reader["BestandPad"].ToString();
+                        media.Type = reader["MediaType"].ToString();
+                        media.Categorie = Convert.ToInt32(reader["Categorie"]);
+                        media.Flagged = Convert.ToInt32(reader["Flagged"]);
+                        media.Likes = Convert.ToInt32(reader["Likes"]);
+                        media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]);
+                        mediaList.Add(media);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+            return mediaList;
+        }
+        public List<Media> AlleGerapporteerdeMediaOpvragen()
+        {
+            List<Media> mediaList = new List<Media>();
+
+            Connect();
+            try
+            {
+                string query = "SELECT * FROM Media WHERE Flagged > @VerbergThreshhold";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@VerbergThreshhold", GetMediaVerbergThreshhold()));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Media media = new Media();
+                        media.ID = Convert.ToInt32(reader["ID"]);
+                        media.Beschrijving = reader["Beschrijving"].ToString();
+                        media.Pad = reader["BestandPad"].ToString();
+                        media.Type = reader["MediaType"].ToString();
+                        media.Categorie = Convert.ToInt32(reader["Categorie"]);
+                        media.Flagged = Convert.ToInt32(reader["Flagged"]);
+                        media.Likes = Convert.ToInt32(reader["Likes"]);
+                        media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]);
+                        mediaList.Add(media);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
             return mediaList;
@@ -524,35 +579,81 @@ namespace EyeCT4Events_WF.Persistencies
                 Close();
             }
         }
-        // Zoeken op CategorieID & MediaType
+        // Zoeken op CategorieID & MediaType & bestandpad
         public List<Media> ZoekenMedia(string zoekterm, int ID)
         {
             List<Media> medialist = new List<Media>();
             Connect();
-            string query = "SELECT * FROM Media WHERE Categorie = @ID OR MediaType LIKE @zoekterm OR BestandPad LIKE @zoekterm";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@zoekterm", "%" + zoekterm + "%"));
-                command.Parameters.Add(new SqlParameter("@ID",ID));
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Media WHERE Flagged < @Threshhold AND (Categorie = @ID OR MediaType LIKE @zoekterm OR BestandPad LIKE @zoekterm)";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    Media media = new Media();
-                    media.ID = Convert.ToInt32(reader["ID"]);
-                    media.Beschrijving = reader["Beschrijving"].ToString();
-                    media.Pad = reader["BestandPad"].ToString();
-                    media.Type = reader["MediaType"].ToString();
-                    media.Categorie = Convert.ToInt32(reader["Categorie"]);
-                    media.Flagged = Convert.ToInt32(reader["Flagged"]);
-                    media.Likes = Convert.ToInt32(reader["Likes"]);
-                    media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]);
-                    medialist.Add(media);
+                    command.Parameters.Add(new SqlParameter("@zoekterm", "%" + zoekterm + "%"));
+                    command.Parameters.Add(new SqlParameter("@ID", ID));
+                    command.Parameters.Add(new SqlParameter("@Threshhold", GetMediaVerbergThreshhold()));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Media media = new Media();
+                        media.ID = Convert.ToInt32(reader["ID"]);
+                        media.Beschrijving = reader["Beschrijving"].ToString();
+                        media.Pad = reader["BestandPad"].ToString();
+                        media.Type = reader["MediaType"].ToString();
+                        media.Categorie = Convert.ToInt32(reader["Categorie"]);
+                        media.Flagged = Convert.ToInt32(reader["Flagged"]);
+                        media.Likes = Convert.ToInt32(reader["Likes"]);
+                        media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]);
+                        medialist.Add(media);
+                    }
                 }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
             
             return medialist;
+        }
+
+        public void ZetAantalKerenGerapporteerdOp0(Media media)
+        {
+            Connect();
+            try
+            {
+                string query = "UPDATE Media SET Flagged = 0 WHERE ID = @mediaID";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@mediaID", media.ID));
+
+                    command.ExecuteNonQuery();
+                }
+                Close();
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+        }
+        public void VerwijderMedia(Media media)
+        {
+            Connect();
+            try
+            {
+                string query = "DELETE FROM Media WHERE ID = @ID";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@ID", media.ID));
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
         }
         public Media SelectLaatstIngevoerdeMedia()
         {
@@ -693,7 +794,25 @@ namespace EyeCT4Events_WF.Persistencies
         }
         #endregion
         #region Reactie
-
+        
+        public void VerwijderReactie(Reactie reactie)
+        {
+            Connect();
+            try
+            {
+                string query = "DELETE FROM Reactie WHERE ID = @ID";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@ID", reactie.ReactieID));
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+        }
         public List<Reactie> AlleReactiesOpvragen()
         {
             List<Reactie> reactieLijst = new List<Reactie>();
@@ -721,14 +840,21 @@ namespace EyeCT4Events_WF.Persistencies
         public void ToevoegenReactie(Reactie reactie)
         {
             Connect();
-            string query = "INSERT INTO Reactie VALUES (@geplaatstDoor, @mediaID, 0, @inhoud, @datetime, 0)";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@geplaatstDoor", 1)); // Later aanpassen
-                command.Parameters.Add(new SqlParameter("@mediaID", reactie.Media));
-                command.Parameters.Add(new SqlParameter("@inhoud", reactie.Inhoud));
-                command.Parameters.Add(new SqlParameter("@datetime", DateTime.Now.ToString()));
-                command.ExecuteNonQuery();
+                string query = "INSERT INTO Reactie VALUES (@geplaatstDoor, @mediaID, 0, @inhoud, @datetime, 0)";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@geplaatstDoor", 1)); // Later aanpassen
+                    command.Parameters.Add(new SqlParameter("@mediaID", reactie.Media));
+                    command.Parameters.Add(new SqlParameter("@inhoud", reactie.Inhoud));
+                    command.Parameters.Add(new SqlParameter("@datetime", DateTime.Now.ToString()));
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
         }
@@ -800,8 +926,7 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
             return KampeerList;
         }
-
-
+        
         #endregion
 
     }

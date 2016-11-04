@@ -10,6 +10,7 @@ namespace EyeCT4Events_WF.Classes.Interfaces
     {
         Categorie[] AlleCategorienOpvragen();
         List<Media> AlleMediaOpvragen();
+        List<Media> AlleGerapporteerdeMediaOpvragen();
         List<Reactie> AlleReactiesOpvragen();
         void ToevoegenCategorie(Categorie cat);
         void ToevoegenMedia(Media media);
@@ -21,5 +22,8 @@ namespace EyeCT4Events_WF.Classes.Interfaces
         List<Categorie> ZoekenCategorie(string naam);
         List<Media> ZoekenMedia(string zoekterm, int ID);
         Media SelectLaatstIngevoerdeMedia();
+        void ZetAantalKerenGerapporteerdOp0(Media media);
+        void VerwijderReactie(Reactie reactie);
+        void VerwijderMedia(Media media);
     }
 }

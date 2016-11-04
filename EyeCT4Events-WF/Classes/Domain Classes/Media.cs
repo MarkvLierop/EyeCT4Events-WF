@@ -3,6 +3,7 @@ using EyeCT4Events_WF.Persistencies;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -44,7 +45,6 @@ namespace EyeCT4Events_WF.Classes
             }
             return "Alle Bestanden|*.*";
         }
-
         public void BestandOpslaan(string safeFileName, string fileName)
         {
             try
@@ -59,9 +59,19 @@ namespace EyeCT4Events_WF.Classes
                 throw new FoutBijOpslaanBestandException(e.Message);
             }
         }
+        public override string ToString()
+        {
+            return "Geplaatst Door: "+rg.GetGebruikerByID(GeplaatstDoor).ToString() + " | Aantal keren gerapporteerd: " + Flagged.ToString();
+        }
         public string GeplaatstDoorGebruiker()
         {
             return rg.GetGebruikerByID(GeplaatstDoor).ToString();
+        }
+        public string GetBestandsNaam()
+        {
+            string[] bestandsnaam = Pad.Split('\\');
+            string test = bestandsnaam[bestandsnaam.Count() - 1];
+            return bestandsnaam[bestandsnaam.Count() -1];
         }
         private string GetBestandsExtentie()
         {

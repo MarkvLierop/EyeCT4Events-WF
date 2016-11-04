@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace EyeCT4Events_WF.Forms
 {
-    public partial class FormMedewerkerHub : Form
+    public partial class FormMedewerkerMainMenu : Form
     {
         Gebruiker medewerker;
 
-        public FormMedewerkerHub(Gebruiker gebruiker)
+        public FormMedewerkerMainMenu(Gebruiker gebruiker)
         {
             InitializeComponent();
 
