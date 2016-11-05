@@ -55,6 +55,7 @@
             // 
             this.btnVerwijderMedia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnVerwijderMedia.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnVerwijderMedia.Location = new System.Drawing.Point(354, 342);
             this.btnVerwijderMedia.Name = "btnVerwijderMedia";
             this.btnVerwijderMedia.Size = new System.Drawing.Size(119, 23);

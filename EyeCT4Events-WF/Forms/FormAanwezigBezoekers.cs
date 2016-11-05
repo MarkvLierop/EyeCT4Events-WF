@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EyeCT4Events_WF.Classes;
+using EyeCT4Events_WF.Classes.Repositories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +14,8 @@ namespace EyeCT4Events_WF
 {
     public partial class AanwezigBezoekers : Form
     {
+        private RepositoryGebruiker rg;
+        private List<Gebruiker> bezoekerLijst;
         public AanwezigBezoekers()
         {
             InitializeComponent();
@@ -19,7 +23,7 @@ namespace EyeCT4Events_WF
 
         private void AanwezigBezoekers_Load(object sender, EventArgs e)
         {
-            //Laad alle bezoekers uit de database met status aanweziug
+            bezoekerLijst = rg.LijstAanwezigeBezoekers();
         }
 
         private void lbSluiten_Click(object sender, EventArgs e)

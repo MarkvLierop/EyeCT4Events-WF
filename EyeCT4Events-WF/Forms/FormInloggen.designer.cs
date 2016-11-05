@@ -33,13 +33,14 @@
             this.tbPass = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnAanwezigeBezoekers = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(176, 218);
+            this.btnLogin.Location = new System.Drawing.Point(173, 206);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.Size = new System.Drawing.Size(99, 32);
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "Log in";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -79,11 +80,22 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Wachtwoord";
             // 
+            // btnAanwezigeBezoekers
+            // 
+            this.btnAanwezigeBezoekers.Location = new System.Drawing.Point(12, 206);
+            this.btnAanwezigeBezoekers.Name = "btnAanwezigeBezoekers";
+            this.btnAanwezigeBezoekers.Size = new System.Drawing.Size(86, 35);
+            this.btnAanwezigeBezoekers.TabIndex = 5;
+            this.btnAanwezigeBezoekers.Text = "Aanwezige Bezoekers";
+            this.btnAanwezigeBezoekers.UseVisualStyleBackColor = true;
+            this.btnAanwezigeBezoekers.Click += new System.EventHandler(this.btnAanwezigeBezoekers_Click);
+            // 
             // FormInloggen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.btnAanwezigeBezoekers);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbPass);
@@ -103,6 +115,7 @@
         private System.Windows.Forms.TextBox tbPass;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnAanwezigeBezoekers;
     }
 }
 

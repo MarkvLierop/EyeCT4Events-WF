@@ -66,7 +66,16 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnVerwijderReactie_Click(object sender, EventArgs e)
         {
-            rsms.VerwijderReactie(reactieLijst[lsReacties.SelectedIndex]);
+            try
+            {
+                rsms.VerwijderReactie(reactieLijst[lsReacties.SelectedIndex + 1]);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Kan reactie niet verwijderen \n \n" + exc.Message);
+            }
+
+            reactieLijst = rsms.AlleReactiesOpvragen();
             ReactieLijstLaden();
         }
 

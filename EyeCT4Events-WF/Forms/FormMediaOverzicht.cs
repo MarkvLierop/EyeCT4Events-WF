@@ -110,7 +110,19 @@ namespace EyeCT4Events_WF
                 }
             }
         }
-        
+
+        // Constructor
+        public FormMediaOverzicht(Gebruiker gebruiker)
+        {
+            InitializeComponent();
+            this.gebruiker = gebruiker;
+
+            rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
+            categorieLijst = rsms.AlleCategorienOpvragen().ToList();
+
+            mediaLijst = rsms.AlleMediaOpvragen();
+            ContentCreeren(mediaLijst);
+        }
         // Events
         private void lblDownloadFile_MouseUp(object sender, MouseEventArgs e)
         {
@@ -142,19 +154,6 @@ namespace EyeCT4Events_WF
             {
                 pnlContent.Refresh();
             }
-        }
-
-        // Constructor
-        public FormMediaOverzicht(Gebruiker gebruiker)
-        {
-            InitializeComponent();
-            this.gebruiker = gebruiker;
-
-            rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
-            categorieLijst = rsms.AlleCategorienOpvragen().ToList();
-
-            mediaLijst = rsms.AlleMediaOpvragen();
-            ContentCreeren(mediaLijst);
         }
 
         // Events

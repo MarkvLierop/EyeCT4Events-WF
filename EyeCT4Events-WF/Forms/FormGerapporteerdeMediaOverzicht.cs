@@ -38,6 +38,19 @@ namespace EyeCT4Events_WF.Forms
                 lsGerapporteerdeMediaOverzicht.Items.Add(m.ToString());
             }
         }
+        private void BekijkMedia()
+        {
+            if (lsGerapporteerdeMediaOverzicht.SelectedIndex != -1)
+            {
+                FormMediaBekijken fmb = new FormMediaBekijken(beheerder, gerapporteerdeMedia[lsGerapporteerdeMediaOverzicht.SelectedIndex]);
+                fmb.ShowDialog();
+
+                if (fmb.DialogResult == DialogResult.OK)
+                {
+                    MediaLijstVullen();
+                }
+            }
+        }
         public FormGerapporteerdeMediaOverzicht(Gebruiker beheerder)
         {
             InitializeComponent();
@@ -79,8 +92,7 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnBekijk_Click(object sender, EventArgs e)
         {
-            FormMediaBekijken fmb = new FormMediaBekijken(beheerder, gerapporteerdeMedia[lsGerapporteerdeMediaOverzicht.SelectedIndex]);
-            fmb.Show();
+            BekijkMedia();
         }
 
         private void nudVerbergThreshhold_ValueChanged(object sender, EventArgs e)
@@ -105,7 +117,12 @@ namespace EyeCT4Events_WF.Forms
 
         private void FormGerapporteerdeMediaOverzicht_DoubleClick(object sender, EventArgs e)
         {
+            BekijkMedia();
+        }
 
+        private void btnSluiten_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

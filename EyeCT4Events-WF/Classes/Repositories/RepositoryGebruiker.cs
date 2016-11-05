@@ -16,7 +16,7 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             this.context = context;
         }
-        public List<Gebruiker> LijstBezoekers()
+        public List<Gebruiker> LijstAanwezigeBezoekers()
         {
             return context.LijstAanwezigePersonen();
         }

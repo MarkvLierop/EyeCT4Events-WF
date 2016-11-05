@@ -71,5 +71,10 @@ namespace EyeCT4Events_WF
                 btnLogin_Click(sender, e);
             }
         }
+
+        private void btnAanwezigeBezoekers_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

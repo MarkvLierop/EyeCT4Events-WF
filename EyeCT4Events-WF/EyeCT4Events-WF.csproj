@@ -63,6 +63,7 @@
     <Compile Include="CustomControls\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Exceptions\DatabaseConnectionAlreadyCloseException.cs" />
     <Compile Include="Exceptions\FoutBijOpslaanBestandException.cs" />
     <Compile Include="Exceptions\FoutBijUitvoerenQueryException.cs" />
     <Compile Include="Exceptions\NoDatabaseConnectionException.cs" />
