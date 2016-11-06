@@ -74,7 +74,14 @@ namespace EyeCT4Events_WF
 
         private void btnAanwezigeBezoekers_Click(object sender, EventArgs e)
         {
-
+            FormAanwezigeBezoekers fab = new FormAanwezigeBezoekers();
+            fab.ShowDialog();
+            this.Hide();
+            
+            if (fab.DialogResult == DialogResult.OK)
+            {
+                this.Show();
+            }
         }
     }
 }

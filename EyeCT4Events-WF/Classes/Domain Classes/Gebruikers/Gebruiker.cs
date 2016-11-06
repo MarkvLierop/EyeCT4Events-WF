@@ -9,7 +9,7 @@ namespace EyeCT4Events_WF.Classes
     public abstract class Gebruiker
     {
         public string Achternaam { get; set; }
-        public int GebruikersID { get; set; }
+        public int ID { get; set; }
         public int RFID { get; set; }
         public string Gebruikersnaam { get; set; }
         public string Tussenvoegsel { get; set; }

@@ -187,7 +187,7 @@ namespace EyeCT4Events_WF.Persistencies
                         {
                             gebruiker = new Medewerker();
                         }
-                        gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
+                        gebruiker.ID = Convert.ToInt32(reader["ID"]);
                         gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
                         gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
                         gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
@@ -239,7 +239,7 @@ namespace EyeCT4Events_WF.Persistencies
                         {
                             gebruiker = new Medewerker();
                         }
-                        gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
+                        gebruiker.ID = Convert.ToInt32(reader["ID"]);
                         gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
                         gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
                         gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
@@ -308,7 +308,7 @@ namespace EyeCT4Events_WF.Persistencies
                         {
                             gebruiker = new Medewerker();
                         }
-                        gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
+                        gebruiker.ID = Convert.ToInt32(reader["ID"]);
                         gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
                         gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
                         gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
@@ -349,7 +349,7 @@ namespace EyeCT4Events_WF.Persistencies
                     while (reader.Read())
                     {
                         gebruiker = new Bezoeker();
-                        gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
+                        gebruiker.ID = Convert.ToInt32(reader["ID"]);
                         gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
                         gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
                         gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
@@ -392,7 +392,7 @@ namespace EyeCT4Events_WF.Persistencies
                     while (reader.Read())
                     {
                         Gebruiker bezoeker = new Bezoeker();
-                        bezoeker.GebruikersID = Convert.ToInt32(reader["ID"]);
+                        bezoeker.ID = Convert.ToInt32(reader["ID"]);
                         bezoeker.Voornaam = reader["Voornaam"].ToString();
                         bezoeker.Achternaam = reader["Achternaam"].ToString();
                         bezoeker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
@@ -990,7 +990,7 @@ namespace EyeCT4Events_WF.Persistencies
                         Kampeerplaats kampeerplaats = new Kampeerplaats();
 
                         kampeerplaats.Type = reader["KampeerPlaatsType"].ToString();
-                        kampeerplaats.PlaatsID = Convert.ToInt32(reader["ID"]);
+                        kampeerplaats.ID = Convert.ToInt32(reader["ID"]);
                         kampeerplaats.MaxPersonen = Convert.ToInt32(reader["MaxPersonen"]);
                         kampeerplaats.Lawaai = Convert.ToInt32(reader["Lawaai"]);
                         kampeerplaats.Invalide = Convert.ToInt32(reader["Invalide"]);
@@ -1035,7 +1035,7 @@ namespace EyeCT4Events_WF.Persistencies
                         Kampeerplaats kampeerplaats = new Kampeerplaats();
 
                         kampeerplaats.Type = reader["KampeerPlaatsType"].ToString();
-                        kampeerplaats.PlaatsID = Convert.ToInt32(reader["ID"]);
+                        kampeerplaats.ID = Convert.ToInt32(reader["ID"]);
                         kampeerplaats.MaxPersonen = Convert.ToInt32(reader["MaxPersonen"]);
                         kampeerplaats.Lawaai = Convert.ToInt32(reader["Lawaai"]);
                         kampeerplaats.Invalide = Convert.ToInt32(reader["Invalide"]);

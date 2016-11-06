@@ -32,7 +32,7 @@ namespace EyeCT4Events_WF.Forms
 
             Reactie reactie = new Reactie();
             reactie.DatumTijd = DateTime.Now;
-            reactie.GeplaatstDoor = gebruiker.GebruikersID;
+            reactie.GeplaatstDoor = gebruiker.ID;
             reactie.Inhoud = txtReactieInhoud.Text;
             reactie.Media = Convert.ToInt32(mediaID);
 

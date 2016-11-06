@@ -42,7 +42,7 @@ namespace EyeCT4Events_WF.Forms
             {
                 media.Categorie = smsr.GetCategorieMetNaam(fcz.Categorie).ID;
             }
-            media.GeplaatstDoor = gebruiker.GebruikersID;
+            media.GeplaatstDoor = gebruiker.ID;
             media.Type = Path.GetExtension(ofd.FileName);
 
             // Directory bestand opslaan

@@ -67,11 +67,11 @@
     <Compile Include="Exceptions\FoutBijOpslaanBestandException.cs" />
     <Compile Include="Exceptions\FoutBijUitvoerenQueryException.cs" />
     <Compile Include="Exceptions\NoDatabaseConnectionException.cs" />
-    <Compile Include="Forms\FormAanwezigBezoekers.cs">
+    <Compile Include="Forms\FormAanwezigeBezoekers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormAanwezigBezoekers.designer.cs">
-      <DependentUpon>FormAanwezigBezoekers.cs</DependentUpon>
+    <Compile Include="Forms\FormAanwezigeBezoekers.designer.cs">
+      <DependentUpon>FormAanwezigeBezoekers.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Domain Classes\Categorie.cs" />
     <Compile Include="Classes\Domain Classes\Event.cs" />
@@ -191,8 +191,8 @@
     <Compile Include="Forms\FormReserveerPlaats.designer.cs">
       <DependentUpon>FormReserveerPlaats.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\FormAanwezigBezoekers.resx">
-      <DependentUpon>FormAanwezigBezoekers.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormAanwezigeBezoekers.resx">
+      <DependentUpon>FormAanwezigeBezoekers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormBeheerderMainMenu.resx">
       <DependentUpon>FormBeheerderMainMenu.cs</DependentUpon>
