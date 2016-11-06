@@ -20,6 +20,14 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             return context.LijstAanwezigePersonen();
         }
+        public void ZetGebruikerOpAanwezig(int gebruikerID)
+        {
+            context.ZetBezoekerOpAanwezig(gebruikerID);
+        }
+        public void ZetGebruikerOpAfwezig(int gebruikerID)
+        {
+            context.ZetBezoekerOpAfwezig(gebruikerID);
+        }
         public Gebruiker GebruikerInloggen(string gebruikersnaam, string wachtwoord)
         {
             return context.Inloggen(gebruikersnaam, wachtwoord);

@@ -1052,7 +1052,47 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
             return KampeerList;
         }
-        
+
+        public void ZetBezoekerOpAfwezig(int RFID)
+        {
+            Connect();
+            try
+            {
+                string query = "UPDATE Gebruiker SET Aanwezig = 0 WHERE RFID = @RFID ";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@RFID", RFID));
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+        }
+
+        public void ZetBezoekerOpAanwezig(int RFID)
+        {
+            Connect();
+            try
+            {
+                string query = "UPDATE Gebruiker SET Aanwezig = 1 WHERE RFID = @RFID ";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@RFID", RFID));
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+        }
+
         #endregion
 
     }

@@ -30,7 +30,7 @@
         {
             this.lblAanwezigeBezoekers = new System.Windows.Forms.Label();
             this.lbSluiten = new System.Windows.Forms.Button();
-            this.lstAanwezigeBezoekers = new System.Windows.Forms.ListView();
+            this.lvAanwezigeBezoekers = new System.Windows.Forms.ListView();
             this.txtBezoekerAanmelden = new System.Windows.Forms.TextBox();
             this.lblBezoekerAanmelden = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,13 +58,13 @@
             this.lbSluiten.UseVisualStyleBackColor = true;
             this.lbSluiten.Click += new System.EventHandler(this.lbSluiten_Click);
             // 
-            // lstAanwezigeBezoekers
+            // lvAanwezigeBezoekers
             // 
-            this.lstAanwezigeBezoekers.Location = new System.Drawing.Point(17, 49);
-            this.lstAanwezigeBezoekers.Name = "lstAanwezigeBezoekers";
-            this.lstAanwezigeBezoekers.Size = new System.Drawing.Size(660, 306);
-            this.lstAanwezigeBezoekers.TabIndex = 12;
-            this.lstAanwezigeBezoekers.UseCompatibleStateImageBehavior = false;
+            this.lvAanwezigeBezoekers.Location = new System.Drawing.Point(17, 49);
+            this.lvAanwezigeBezoekers.Name = "lvAanwezigeBezoekers";
+            this.lvAanwezigeBezoekers.Size = new System.Drawing.Size(660, 306);
+            this.lvAanwezigeBezoekers.TabIndex = 12;
+            this.lvAanwezigeBezoekers.UseCompatibleStateImageBehavior = false;
             // 
             // txtBezoekerAanmelden
             // 
@@ -100,7 +100,7 @@
             this.txtBezoekerAfmelden.TabIndex = 15;
             this.txtBezoekerAfmelden.TextChanged += new System.EventHandler(this.txtBezoekerAfmelden_TextChanged);
             // 
-            // AanwezigBezoekers
+            // FormAanwezigeBezoekers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -109,10 +109,10 @@
             this.Controls.Add(this.txtBezoekerAfmelden);
             this.Controls.Add(this.lblBezoekerAanmelden);
             this.Controls.Add(this.txtBezoekerAanmelden);
-            this.Controls.Add(this.lstAanwezigeBezoekers);
+            this.Controls.Add(this.lvAanwezigeBezoekers);
             this.Controls.Add(this.lbSluiten);
             this.Controls.Add(this.lblAanwezigeBezoekers);
-            this.Name = "AanwezigBezoekers";
+            this.Name = "FormAanwezigeBezoekers";
             this.Text = "AanwezigBezoekers";
             this.Load += new System.EventHandler(this.AanwezigBezoekers_Load);
             this.ResumeLayout(false);
@@ -124,7 +124,7 @@
 
         private System.Windows.Forms.Label lblAanwezigeBezoekers;
         private System.Windows.Forms.Button lbSluiten;
-        private System.Windows.Forms.ListView lstAanwezigeBezoekers;
+        private System.Windows.Forms.ListView lvAanwezigeBezoekers;
         private System.Windows.Forms.TextBox txtBezoekerAanmelden;
         private System.Windows.Forms.Label lblBezoekerAanmelden;
         private System.Windows.Forms.Label label1;
