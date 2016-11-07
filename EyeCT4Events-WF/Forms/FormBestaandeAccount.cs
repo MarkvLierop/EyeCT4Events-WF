@@ -33,13 +33,16 @@ namespace EyeCT4Events_WF.Forms
         private void tbZoekGebruikers_TextChanged(object sender, EventArgs e)
         {
             string zoekopdracht = tbZoekGebruikers.Text;
+            bestaandegebruikers.Clear();
             RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQL_Server());
             bestaandegebruikers = rg.GezochteBezoekersOphalen(zoekopdracht);
         }
 
         private void btnKampeerplaatsReserveren_Click(object sender, EventArgs e)
         {
-            FormReserveerPlaats frp = new FormReserveerPlaats(medewerker);
+            Gebruiker gekozengebruiker;
+            gekozengebruiker = bestaandegebruikers[lbBestaandeGebruikers.SelectedIndex];
+            FormReserveerPlaats frp = new FormReserveerPlaats(medewerker, gekozengebruiker);
             this.Hide();
             frp.Show();
         }

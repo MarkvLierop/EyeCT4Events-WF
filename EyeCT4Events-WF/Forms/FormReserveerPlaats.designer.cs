@@ -44,6 +44,10 @@
             this.cbHuurTent = new System.Windows.Forms.CheckBox();
             this.cbBungalow = new System.Windows.Forms.CheckBox();
             this.lblMedewerker = new System.Windows.Forms.Label();
+            this.dtVan = new System.Windows.Forms.DateTimePicker();
+            this.dtTot = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PBCampeerplek)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -79,9 +83,9 @@
             // lbKampeerplaatsen
             // 
             this.lbKampeerplaatsen.FormattingEnabled = true;
-            this.lbKampeerplaatsen.Location = new System.Drawing.Point(450, 127);
+            this.lbKampeerplaatsen.Location = new System.Drawing.Point(450, 179);
             this.lbKampeerplaatsen.Name = "lbKampeerplaatsen";
-            this.lbKampeerplaatsen.Size = new System.Drawing.Size(200, 238);
+            this.lbKampeerplaatsen.Size = new System.Drawing.Size(200, 186);
             this.lbKampeerplaatsen.TabIndex = 15;
             // 
             // groupBox1
@@ -223,11 +227,47 @@
             this.lblMedewerker.TabIndex = 18;
             this.lblMedewerker.Text = "label medewerker";
             // 
+            // dtVan
+            // 
+            this.dtVan.Location = new System.Drawing.Point(492, 127);
+            this.dtVan.Name = "dtVan";
+            this.dtVan.Size = new System.Drawing.Size(158, 20);
+            this.dtVan.TabIndex = 19;
+            // 
+            // dtTot
+            // 
+            this.dtTot.Location = new System.Drawing.Point(492, 154);
+            this.dtTot.Name = "dtTot";
+            this.dtTot.Size = new System.Drawing.Size(158, 20);
+            this.dtTot.TabIndex = 20;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(450, 133);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Van:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(450, 160);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(26, 13);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "Tot:";
+            // 
             // FormReserveerPlaats
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(669, 451);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dtTot);
+            this.Controls.Add(this.dtVan);
             this.Controls.Add(this.lblMedewerker);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -265,5 +305,9 @@
         private System.Windows.Forms.CheckBox cbHuurTent;
         private System.Windows.Forms.CheckBox cbBungalow;
         private System.Windows.Forms.Label lblMedewerker;
+        private System.Windows.Forms.DateTimePicker dtVan;
+        private System.Windows.Forms.DateTimePicker dtTot;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -22,6 +22,7 @@ namespace EyeCT4Events_WF.Forms
 
         public FormMedewerkerHub(Gebruiker gebruiker)
         {
+            InitializeComponent();
             medewerker = gebruiker;
             lblMedewerker.Text = medewerker.Voornaam + " " + medewerker.Achternaam;
         }
@@ -34,9 +35,9 @@ namespace EyeCT4Events_WF.Forms
         private void btnReserveer_Click(object sender, EventArgs e)
         {
             
-            FormReserveerPlaats frp = new FormReserveerPlaats(medewerker);
+            FormBestaandeAccount fba = new FormBestaandeAccount(medewerker);
             this.Hide();
-            frp.Show();
+            fba.Show();
         }
 
         private void btnEventAanmaken_Click(object sender, EventArgs e)
@@ -46,12 +47,14 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnBezoekers_Click(object sender, EventArgs e)
         {
-
+            AanwezigBezoekers fab = new AanwezigBezoekers();
+            this.Hide();
+            fab.Show();
         }
 
         private void btnMateriaal_Click(object sender, EventArgs e)
         {
-            FormReserveerMateriaal frm = new FormReserveerMateriaal(medewerker);
+            FormReserveerMateriaal frm = new FormReserveerMateriaal();
             this.Hide();
             frm.Show();
         }

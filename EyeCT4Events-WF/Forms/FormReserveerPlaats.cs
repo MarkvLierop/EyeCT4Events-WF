@@ -17,6 +17,8 @@ namespace EyeCT4Events_WF
     {
         RepositoryKampeerPlaatsen kpr = new RepositoryKampeerPlaatsen(new MSSQL_Server());
         List<Kampeerplaats> kampeerplaatsen = new List<Kampeerplaats>();
+        Gebruiker bezoeker;
+        Gebruiker medewerker;
 
         bool comfort;
         bool lawaai;
@@ -36,10 +38,12 @@ namespace EyeCT4Events_WF
             //HaalKampeerplaatsenOp();
         }
 
-        public FormReserveerPlaats(Gebruiker gebruiker)
+        public FormReserveerPlaats(Gebruiker medewerker, Gebruiker Bezoeker)
         {
            
-            lblMedewerker.Text = gebruiker.Voornaam + " " + gebruiker.Achternaam;
+            lblMedewerker.Text = medewerker.Voornaam + " " + medewerker.Achternaam;
+            bezoeker = Bezoeker;
+
             groupBox2.Enabled = false;
 
         }
@@ -95,9 +99,10 @@ namespace EyeCT4Events_WF
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FormRegistreerNieuweGebruiker frg = new FormRegistreerNieuweGebruiker();
-            this.Hide();
-            frg.Show();
+            Reservering reservering = new Reservering(medewerker.GebruikersID, kampeerplaatsen.Contains.)
+
+            Kampeerplaats plaats;
+            
         }
 
         private void rbInvalide_CheckedChanged(object sender, EventArgs e)

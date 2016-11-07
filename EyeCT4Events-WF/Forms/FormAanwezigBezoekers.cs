@@ -1,4 +1,7 @@
-﻿using System;
+﻿using EyeCT4Events_WF.Classes;
+using EyeCT4Events_WF.Persistencies;
+using EyeCT4Events_WF.Classes.Repositories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

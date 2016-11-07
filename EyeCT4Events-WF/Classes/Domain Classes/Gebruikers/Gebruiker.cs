@@ -21,6 +21,17 @@ namespace EyeCT4Events_WF.Classes
         private List<Reactie> ReactieList;
         private List<Uitgeleend_materiaal> UitgeleendMateriaal;
 
+        public Gebruiker(string voornaam, string achternaam, string tussenvoegsel, string gebruikersnaam, string wachtwoord, int rfid, bool aanwezig)
+        {
+            voornaam = Voornaam;
+            achternaam = Achternaam;
+            tussenvoegsel = Tussenvoegsel;
+            gebruikersnaam = Gebruikersnaam;
+            wachtwoord = Wachtwoord;
+            rfid = RFID;
+            aanwezig = Aanwezig;
+        }
+
         public Gebruiker()
         {
 

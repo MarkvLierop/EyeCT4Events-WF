@@ -13,14 +13,21 @@ namespace EyeCT4Events_WF
 {
     public partial class FormReserveerMateriaal : Form
     {
+        Gebruiker medewerker;
+        Gebruiker bezoeker;
+        Reservering reserving;
+
         public FormReserveerMateriaal()
         {
             InitializeComponent();
         }
 
-        public FormReserveerMateriaal(Gebruiker gebruiker)
+        public FormReserveerMateriaal(Gebruiker Bezoeker, Gebruiker Medewerker, Reservering Reservering)
         {
-
+            InitializeComponent();
+            medewerker = Medewerker;
+            bezoeker = Bezoeker;
+            reserving = Reservering;
         }
 
         private void ReserveerMateriaal_Load(object sender, EventArgs e)

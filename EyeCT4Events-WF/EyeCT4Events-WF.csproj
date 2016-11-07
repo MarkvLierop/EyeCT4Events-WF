@@ -81,6 +81,12 @@
     <Compile Include="Forms\FormBestaandeAccount.Designer.cs">
       <DependentUpon>FormBestaandeAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormBijhorendeBezoekersToevoegen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormBijhorendeBezoekersToevoegen.Designer.cs">
+      <DependentUpon>FormBijhorendeBezoekersToevoegen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormCategorieToevoegen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormBestaandeAccount.resx">
       <DependentUpon>FormBestaandeAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormBijhorendeBezoekersToevoegen.resx">
+      <DependentUpon>FormBijhorendeBezoekersToevoegen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCategorieToevoegen.resx">
       <DependentUpon>FormCategorieToevoegen.cs</DependentUpon>

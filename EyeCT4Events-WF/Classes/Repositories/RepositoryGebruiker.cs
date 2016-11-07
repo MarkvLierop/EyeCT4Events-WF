@@ -49,5 +49,10 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             return context.GezochteBezoekersOphalen(zoekopdracht);
         }
+
+        public void GebruikerRegistreren(Gebruiker gebruiker)
+        {
+            context.GebruikerRegistreren(gebruiker);
+        }
     }
 }
