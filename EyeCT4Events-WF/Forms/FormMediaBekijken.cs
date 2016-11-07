@@ -42,13 +42,20 @@ namespace EyeCT4Events_WF.Forms
             rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
             rg = new RepositoryGebruiker(new MSSQL_Server());
 
-            lblGebruiker.Text = rg.GetGebruikerByID(media.GeplaatstDoor).ToString();
-            btnAantalKerenGerapporteerd.Text = media.Flagged.ToString();
-            lblBestand.Text = "Bestand: "+media.GetBestandsNaam();
-            lblBeschrijving.Text = media.Beschrijving;
+            try
+            {
+                lblGebruiker.Text = rg.GetGebruikerByID(media.GeplaatstDoor).ToString();
+                btnAantalKerenGerapporteerd.Text = media.Flagged.ToString();
+                lblBestand.Text = "Bestand: " + media.GetBestandsNaam();
+                lblBeschrijving.Text = media.Beschrijving;
 
-            reactieLijst = rsms.AlleReactiesOpvragen();
-            ReactieLijstLaden();
+                reactieLijst = rsms.AlleReactiesOpvragen();
+                ReactieLijstLaden();
+            }
+            catch (FoutBijUitvoerenQueryException e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void btnAantalKerenGerapporteerd_Click(object sender, EventArgs e)

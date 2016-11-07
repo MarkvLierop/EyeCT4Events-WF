@@ -1,5 +1,6 @@
 ﻿using EyeCT4Events_WF.Classes;
 using EyeCT4Events_WF.Classes.Repositories;
+using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Persistencies;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,14 @@ namespace EyeCT4Events_WF.Forms
 
             smsr = new RepositorySocialMediaSharing(new MSSQL_Server());
 
-            catlist = smsr.AlleCategorienOpvragen().ToList();
+            try
+            {
+                catlist = smsr.AlleCategorienOpvragen().ToList();
+            }
+            catch (FoutBijUitvoerenQueryException e)
+            {
+                MessageBox.Show("Fout bij zoeken van een categorie " + e.Message);
+            }
 
             foreach (Categorie cat in catlist)
             {

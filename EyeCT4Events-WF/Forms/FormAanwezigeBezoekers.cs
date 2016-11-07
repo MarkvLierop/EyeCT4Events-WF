@@ -37,8 +37,15 @@ namespace EyeCT4Events_WF
         private void AanwezigeBezoekerslijstVullen()
         {
             lvAanwezigeBezoekers.Items.Clear();
-            bezoekerLijst = rg.LijstAanwezigeBezoekers();
-            kampeerplaatsLijst = rkp.AlleKampeerplaatsenOpvragen();
+            try
+            {
+                bezoekerLijst = rg.LijstAanwezigeBezoekers();
+                kampeerplaatsLijst = rkp.AlleKampeerplaatsenOpvragen();
+            }
+            catch (FoutBijUitvoerenQueryException e)
+            {
+                MessageBox.Show(e.Message);
+            }
 
             foreach (Gebruiker g in bezoekerLijst)
             {

@@ -1,5 +1,6 @@
 ﻿using EyeCT4Events_WF.Classes;
 using EyeCT4Events_WF.Classes.Repositories;
+using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Forms;
 using EyeCT4Events_WF.Persistencies;
 using System;
@@ -96,7 +97,14 @@ namespace EyeCT4Events_WF
                     if (r.Media == mediaLijst[i].ID)
                     {
                         Label lblGebruiker = new Label();
-                        lblGebruiker.Text =  rg.GetGebruikerByID(r.GeplaatstDoor).ToString() + ": "+ r.Inhoud;
+                        try
+                        {
+                            lblGebruiker.Text = rg.GetGebruikerByID(r.GeplaatstDoor).ToString() + ": " + r.Inhoud;
+                        }
+                        catch (FoutBijUitvoerenQueryException e)
+                        {
+                            MessageBox.Show(e.Message);
+                        }
                         lblGebruiker.Width = pnlContent.Width;
                         pnlContentControlList.Add(lblGebruiker);
                     }
@@ -119,9 +127,16 @@ namespace EyeCT4Events_WF
             this.gebruiker = gebruiker;
 
             rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
-            categorieLijst = rsms.AlleCategorienOpvragen().ToList();
+            try
+            {
+                categorieLijst = rsms.AlleCategorienOpvragen().ToList();
+                mediaLijst = rsms.AlleMediaOpvragen();
+            }
+            catch (FoutBijUitvoerenQueryException e)
+            {
+                MessageBox.Show("Fout bij ophalen van categorien " + e.Message);
+            }
 
-            mediaLijst = rsms.AlleMediaOpvragen();
             ContentCreeren(mediaLijst);
         }
         // Events
@@ -160,19 +175,33 @@ namespace EyeCT4Events_WF
         // Events
         private void btnMediaRapporteren_MouseUp(object sender, MouseEventArgs e)
         {
-            rsms.ToevoegenRapporterenMediaReactie(Convert.ToInt32(((Button)sender).Name), int.MinValue);
-            ((Button)sender).Enabled = false;
-            ((Button)sender).Text = "Gerapporteerd";
-            MessageBox.Show("Gerapporteerd.");
+            try
+            {
+                rsms.ToevoegenRapporterenMediaReactie(Convert.ToInt32(((Button)sender).Name), int.MinValue);
+                ((Button)sender).Enabled = false;
+                ((Button)sender).Text = "Gerapporteerd";
+                MessageBox.Show("Gerapporteerd.");
+            }
+            catch (FoutBijUitvoerenQueryException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
 
         private void btnMediaLike_MouseUp(object sender, MouseEventArgs e)
         {
             // Button sender.Name = ID van Media. 
             // sender.Tag = Aantal likes dat de media heeft.
-            rsms.ToevoegenLikeInMediaOfReactie(gebruiker, Convert.ToInt32(((Button)sender).Name), int.MinValue);
-            ((Button)sender).Text = "Likes " + (Convert.ToInt32(((Button)sender).Tag) + 1).ToString();
-            ((Button)sender).Enabled = false;
+            try
+            {
+                rsms.ToevoegenLikeInMediaOfReactie(gebruiker, Convert.ToInt32(((Button)sender).Name), int.MinValue);
+                ((Button)sender).Text = "Likes " + (Convert.ToInt32(((Button)sender).Tag) + 1).ToString();
+                ((Button)sender).Enabled = false;
+            }
+            catch (FoutBijUitvoerenQueryException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
 
         private void btnCategorieToevoegen_Click(object sender, EventArgs e)
@@ -231,9 +260,15 @@ namespace EyeCT4Events_WF
         private void txtCategorieZoeken_TextChanged(object sender, EventArgs e)
         {
             RepositorySocialMediaSharing rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
-
-            categorieLijst = rsms.ZoekenCategorie(txtCategorieZoeken.Text);
-            pnlCategorieën.Refresh();
+            try
+            {
+                categorieLijst = rsms.ZoekenCategorie(txtCategorieZoeken.Text);
+                pnlCategorieën.Refresh();
+            }
+            catch (FoutBijUitvoerenQueryException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
     }
 }

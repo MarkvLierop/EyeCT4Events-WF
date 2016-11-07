@@ -1,5 +1,6 @@
 ﻿using EyeCT4Events_WF.Classes;
 using EyeCT4Events_WF.Classes.Repositories;
+using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Persistencies;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,14 @@ namespace EyeCT4Events_WF.Forms
             InitializeComponent();
             smsr = new RepositorySocialMediaSharing(new MSSQL_Server());
 
-            catList = smsr.AlleCategorienOpvragen().ToList();
+            try
+            {
+                catList = smsr.AlleCategorienOpvragen().ToList();
+            }
+            catch (FoutBijUitvoerenQueryException e)
+            {
+                MessageBox.Show("Fout bij categorie toevoegen: " + e.Message);
+            }
             
             foreach (Categorie cat in catList)
             {
@@ -37,8 +45,15 @@ namespace EyeCT4Events_WF.Forms
         {
             Categorie cat = new Categorie();
             cat.Naam = tbNaam.Text;
-            cat.Parent = smsr.GetCategorieMetNaam(lbCategorien.SelectedItem.ToString()).ID;
-            smsr.ToevoegenCategorie(cat);
+            try
+            {
+                cat.Parent = smsr.GetCategorieMetNaam(lbCategorien.SelectedItem.ToString()).ID;
+                smsr.ToevoegenCategorie(cat);
+            }
+            catch (FoutBijUitvoerenQueryException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
 
             if (lbCategorien.SelectedItem == null)
             {
@@ -55,7 +70,14 @@ namespace EyeCT4Events_WF.Forms
         private void tbCategorieZoeken_TextChanged(object sender, EventArgs e)
         {
             lbCategorien.Items.Clear();
-            catList = smsr.ZoekenCategorie(tbCategorieZoeken.Text);
+            try
+            {
+                catList = smsr.ZoekenCategorie(tbCategorieZoeken.Text);
+            }
+            catch (FoutBijUitvoerenQueryException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
 
             foreach (Categorie cat in catList)
             {
