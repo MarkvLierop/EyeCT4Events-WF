@@ -11,7 +11,7 @@ namespace EyeCT4Events_WF.Classes
         public string Beschrijving { get; set; }
         public DateTime DatumTot { get; set; }
         public DateTime DatumVan { get; set; }
-        public int EventID { get; set; }
+        public int ID { get; set; }
         public string Locatie { get; set; }
         public string Naam { get; set; }
 

@@ -9,5 +9,6 @@ namespace EyeCT4Events_WF.Classes.Interfaces
                                       string bungalow, string bungalino, string blokhut, string stacaravan, string huurtent);
 
         List<Kampeerplaats> AlleKampeerplaatsenOpvragen();
+        //List<Reservering> AlleReserveringenOpvragen();
     }
 }

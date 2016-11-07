@@ -102,6 +102,12 @@
     <Compile Include="Forms\FormCategorieZoeken.Designer.cs">
       <DependentUpon>FormCategorieZoeken.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormEvenementAanmaken.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEvenementAanmaken.Designer.cs">
+      <DependentUpon>FormEvenementAanmaken.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormEventAanmaken.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCategorieZoeken.resx">
       <DependentUpon>FormCategorieZoeken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEvenementAanmaken.resx">
+      <DependentUpon>FormEvenementAanmaken.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEventAanmaken.resx">
       <DependentUpon>FormEventAanmaken.cs</DependentUpon>

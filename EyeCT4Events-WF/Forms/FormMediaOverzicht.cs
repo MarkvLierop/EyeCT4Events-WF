@@ -109,6 +109,7 @@ namespace EyeCT4Events_WF
                     pnlContent.Controls.Add(pnlContentControlList[c]);
                 }
             }
+            pnlContent.Refresh();
         }
 
         // Constructor

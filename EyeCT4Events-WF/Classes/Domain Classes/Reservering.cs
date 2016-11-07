@@ -11,6 +11,7 @@ namespace EyeCT4Events_WF.Classes
         public List<Gebruiker> GebruikerList { get; private set; }
         public DateTime DatumTot { get; set; }
         public DateTime DatumVan { get; set; }
+        public bool BetalingsStatus { get; set; }
         public int ReserveringID { get; set; }
 
         public Reservering()
