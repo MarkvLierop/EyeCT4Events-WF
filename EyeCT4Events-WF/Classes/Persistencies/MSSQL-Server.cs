@@ -1121,35 +1121,51 @@ namespace EyeCT4Events_WF.Persistencies
 
         public Reservering HaalReserveringOpNaAanmaken(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot)
         {
-            
+            Reservering reservering;
 
             int Gebruikerid = gebruikerid;
             int Plaatsid = plaatsid;
-
+            DateTime DatumVan = datumVan;
+            DateTime DatumTot = datumTot;
+            bool betaald;
 
             Connect();
-            string query = "SELECT * FROM Reservering WHERE GebruikerType = 'bezoeker' AND Gebruikersnaam LIKE *@gezochtebezoeker*";
+            string query = "SELECT * FROM Reservering WHERE GebruikerID = @Gebruikerid AND KampeerPlaats = @gezochtebezoeker AND DatumVan = @DatumVan AND DatumTot = DatumTot";
             using (command = new SqlCommand(query, SQLcon))
             {
                 reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
+                    
                     int GebruikerID = Convert.ToInt32(reader["GebruikerID"]);
                     int PlaatsID = Convert.ToInt32(reader["PlaatsID"]);
-                    
+                    int ID = Convert.ToInt32(reader["ID"]);
+                    DateTime DatumTOT= Convert.ToDateTime(reader["DatumTot"]);
+                    DateTime DatumVAN = Convert.ToDateTime(reader["DatumVan"]);
+                    if (Convert.ToInt32(reader["Betaald"]) == 0)
+                    {
+                        betaald = false;
+                        reservering = new Reservering(ID, GebruikerID, PlaatsID, DatumVAN, DatumTOT, betaald);
+                        return reservering;
 
-                    Reservering reservering = new Reservering();
-                   
-                        
-                        );
+                    }
+
+                    else
+                    {
+                        betaald = true;
+                        reservering = new Reservering(ID, GebruikerID, PlaatsID, DatumVAN, DatumTOT, betaald);
+                        return reservering;
+                    }             
 
 
                 }
             }
             Close();
+
+            return null;
             
-            return reservering;
+            
         }
 
         #endregion

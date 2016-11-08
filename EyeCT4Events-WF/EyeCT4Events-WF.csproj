@@ -126,10 +126,6 @@
     <Compile Include="Forms\FormGerapporteerdeMediaOverzicht.Designer.cs">
       <DependentUpon>FormGerapporteerdeMediaOverzicht.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormMedewerkerMainMenu.cs" />
-    <Compile Include="Forms\FormMedewerkerMainMenu.Designer.cs">
-      <DependentUpon>FormMedewerkerMainMenu.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormMediaBekijken.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,9 +223,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormGerapporteerdeMediaOverzicht.resx">
       <DependentUpon>FormGerapporteerdeMediaOverzicht.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormMedewerkerMainMenu.resx">
-      <DependentUpon>FormMedewerkerMainMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMediaBekijken.resx">
       <DependentUpon>FormMediaBekijken.cs</DependentUpon>

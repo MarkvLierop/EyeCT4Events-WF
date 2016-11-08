@@ -15,6 +15,7 @@ namespace EyeCT4Events_WF.Classes
         public int Comfort { get; set; }
         public int Invalide { get; set; }
         public int Lawaai { get; set; }
+        public int GebruikerID { get; set; }
 
         public Kampeerplaats()
         {
