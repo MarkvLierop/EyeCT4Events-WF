@@ -43,8 +43,15 @@ namespace EyeCT4Events_WF.Persistencies
         }
         private void Close()
         {
-            SQLcon.Close();
-            SQLcon.Dispose();
+            try
+            {
+                SQLcon.Close();
+                SQLcon.Dispose();
+            }
+            catch (SqlException e)
+            {
+                throw new DatabaseConnectionAlreadyCloseException(e.Message);
+            }
         }
         private string EncryptString(string toEncrypt)
         {
@@ -139,35 +146,16 @@ namespace EyeCT4Events_WF.Persistencies
                 }
             }
         }
-
-        public List<Kampeerplaats> AlleKampeerplaatsenOpvragen()
+        private decimal GetMediaVerbergThreshhold()
         {
-            List<Kampeerplaats> KampeerList = new List<Kampeerplaats>();
 
-            Connect();
-            string query = "SELECT * FROM Kampeerplaats";
-            using (command = new SqlCommand(query, SQLcon))
+            using (StreamReader srVerbergThreshHold = new StreamReader("Settings.txt", false))
             {
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Kampeerplaats kampeerplaats = new Kampeerplaats();
-
-                    kampeerplaats.Type = reader["KampeerPlaatsType"].ToString();
-                    kampeerplaats.PlaatsID = Convert.ToInt32(reader["ID"]);
-                    kampeerplaats.MaxPersonen = Convert.ToInt32(reader["MaxPersonen"]);
-                    kampeerplaats.Lawaai = Convert.ToInt32(reader["Lawaai"]);
-                    kampeerplaats.Invalide = Convert.ToInt32(reader["Invalide"]);
-                    kampeerplaats.Comfort = Convert.ToInt32(reader["Comfort"]);
-                    KampeerList.Add(kampeerplaats);
-
-                }
+                string line = srVerbergThreshHold.ReadLine();
+                string[] data = line.Split(':');
+                return Convert.ToDecimal(data[data.Count() - 1]);
             }
-            Close();
-            return KampeerList;
         }
-
         /// <summary>
         /// Public Methods.
         /// </summary>
@@ -177,92 +165,104 @@ namespace EyeCT4Events_WF.Persistencies
         public Gebruiker GetGebruikerByID(int ID)
         {
             Connect();
-            string query = "SELECT * FROM Gebruiker WHERE ID = @ID";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@ID", ID));
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Gebruiker WHERE ID = @ID";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                    command.Parameters.Add(new SqlParameter("@ID", ID));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
                     {
-                        gebruiker = new Bezoeker();
-                    }
-                    else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
-                    {
-                        gebruiker = new Beheerder();
-                    }
-                    else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
-                    {
-                        gebruiker = new Medewerker();
-                    }
-                    gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
-                    gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
-                    gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
-                    gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
-                    gebruiker.Voornaam = reader["Voornaam"].ToString();
-                    gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
-                    gebruiker.Achternaam = reader["Achternaam"].ToString();
-                    if (Convert.ToInt32(reader["Aanwezig"]) == 1)
-                    {
-                        gebruiker.Aanwezig = true;
-                    }
-                    else
-                    {
-                        gebruiker.Aanwezig = false;
+                        if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                        {
+                            gebruiker = new Bezoeker();
+                        }
+                        else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
+                        {
+                            gebruiker = new Beheerder();
+                        }
+                        else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
+                        {
+                            gebruiker = new Medewerker();
+                        }
+                        gebruiker.ID = Convert.ToInt32(reader["ID"]);
+                        gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                        gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                        gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                        gebruiker.Voornaam = reader["Voornaam"].ToString();
+                        gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                        gebruiker.Achternaam = reader["Achternaam"].ToString();
+                        if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                        {
+                            gebruiker.Aanwezig = true;
+                        }
+                        else
+                        {
+                            gebruiker.Aanwezig = false;
+                        }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
             return gebruiker;
         }
-        public Gebruiker GebruikerLogin(string wachtwoord, string gebruikersnaam)
+        public Gebruiker Inloggen(string Gebruikersnaam, string wachtwoord)
         {
+            Gebruiker gebruiker = null;
             Connect();
-            string query = "SELECT Gebruikersnaam, Wachtwoord FROM Gebruiker WHERE Gebruikersnaam = @Gebruikersnaam AND Wachtwoord = @Wachtwoord";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@Gebruikersnaam", gebruikersnaam));
-                command.Parameters.Add(new SqlParameter("@Wachtwoord", wachtwoord));
-
-                while (reader.Read())
+                string query = "SELECT * FROM Gebruiker WHERE gebruikersnaam = @Gebruiker AND Wachtwoord = @Wachtwoord";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    //GebruikerDataToewijzen(gebruiker);
-                }
+                    command.Parameters.Add(new SqlParameter("@Gebruiker", Gebruikersnaam));
+                    command.Parameters.Add(new SqlParameter("@Wachtwoord", wachtwoord));
+                    reader = command.ExecuteReader();
 
-                Close();
-                return gebruiker;
+                    while (reader.Read())
+                    {
+                        if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                        {
+                            gebruiker = new Bezoeker();
+                        }
+                        else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
+                        {
+                            gebruiker = new Beheerder();
+                        }
+                        else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
+                        {
+                            gebruiker = new Medewerker();
+                        }
+                        gebruiker.ID = Convert.ToInt32(reader["ID"]);
+                        gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                        gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                        gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                        gebruiker.Voornaam = reader["Voornaam"].ToString();
+                        gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                        gebruiker.Achternaam = reader["Achternaam"].ToString();
+                        if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                        {
+                            gebruiker.Aanwezig = true;
+                        }
+                        else
+                        {
+                            gebruiker.Aanwezig = false;
+                        }
+                    }
+                }
             }
-        }
-        public bool Inloggen(string Gebruikersnaam, string wachtwoord)
-        {
-            Connect();
-            string query = "SELECT * FROM Gebruiker WHERE gebruikersnaam = @GEBRUIKERSNAAM";
-            using (command = new SqlCommand(query, SQLcon))
+            catch (Exception e)
             {
-                command.Parameters.Add(new SqlParameter("@GEBRUIKERSNAAM", Gebruikersnaam));
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    if (!reader.HasRows)
-                    {
-                        Close();
-                        return false;
-                    }
-
-                    else if (!wachtwoord.Equals(reader["Wachtwoord"].ToString()))
-                    {
-                        Close();
-                        return false;
-                    }
-
-
-                }
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
-            return true;
+            return gebruiker;
         }
         public void GebruikerRegistreren(Gebruiker gebruiker)
         {
@@ -286,43 +286,51 @@ namespace EyeCT4Events_WF.Persistencies
         public Gebruiker GetGebruikerByGebruikersnaam(string gebruikersnaam)
         {
             Connect();
-            string query = "SELECT * FROM Gebruiker WHERE Gebruikersnaam = @GEBRUIKERSNAAM";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@GEBRUIKERSNAAM", "lieropm")); // Lieropm later aanpassen
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Gebruiker WHERE Gebruikersnaam = @GEBRUIKERSNAAM";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                    command.Parameters.Add(new SqlParameter("@GEBRUIKERSNAAM", "lieropm")); // Lieropm later aanpassen
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
                     {
-                        gebruiker = new Bezoeker();
-                    }
-                    else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
-                    {
-                        gebruiker = new Beheerder();
-                    }
-                    else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
-                    {
-                        gebruiker = new Medewerker();
-                    }
-                    gebruiker.GebruikersID = Convert.ToInt32(reader["ID"]);
-                    gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
-                    gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
-                    gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
-                    gebruiker.Voornaam = reader["Voornaam"].ToString();
-                    gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
-                    gebruiker.Achternaam = reader["Achternaam"].ToString();
-                    if (Convert.ToInt32(reader["Aanwezig"]) == 1)
-                    {
-                        gebruiker.Aanwezig = true;
-                    }
-                    else
-                    {
-                        gebruiker.Aanwezig = false;
+                        if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                        {
+                            gebruiker = new Bezoeker();
+                        }
+                        else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
+                        {
+                            gebruiker = new Beheerder();
+                        }
+                        else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
+                        {
+                            gebruiker = new Medewerker();
+                        }
+                        gebruiker.ID = Convert.ToInt32(reader["ID"]);
+                        gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                        gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                        gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                        gebruiker.Voornaam = reader["Voornaam"].ToString();
+                        gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                        gebruiker.Achternaam = reader["Achternaam"].ToString();
+                        if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                        {
+                            gebruiker.Aanwezig = true;
+                        }
+                        else
+                        {
+                            gebruiker.Aanwezig = false;
+                        }
                     }
                 }
             }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            
             Close();
             return gebruiker;
         }
@@ -331,54 +339,80 @@ namespace EyeCT4Events_WF.Persistencies
             List<Gebruiker> bezoekerLijst = new List<Gebruiker>();
 
             Connect();
-            string query = "SELECT * FROM Gebruiker WHERE GebruikerType = 'bezoeker'";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Gebruiker WHERE LOWER(GebruikerType) = 'bezoeker' AND Aanwezig = 1";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    gebruiker = new Bezoeker();
-                    //GebruikerDataToewijzen(gebruiker);
+                    reader = command.ExecuteReader();
 
-                    bezoekerLijst.Add(gebruiker);
+                    while (reader.Read())
+                    {
+                        gebruiker = new Bezoeker();
+                        gebruiker.ID = Convert.ToInt32(reader["ID"]);
+                        gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                        gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                        gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                        gebruiker.Voornaam = reader["Voornaam"].ToString();
+                        gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                        gebruiker.Achternaam = reader["Achternaam"].ToString();
+                        if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                        {
+                            gebruiker.Aanwezig = true;
+                        }
+                        else
+                        {
+                            gebruiker.Aanwezig = false;
+                        }
+
+                        bezoekerLijst.Add(gebruiker);
+                    }
                 }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
             return bezoekerLijst;
         }
-
         public List<Gebruiker> GezochteBezoekersOphalen(string zoekopdracht)
         {
             string gezochtebezoeker = zoekopdracht;
             List<Gebruiker> Bezoekers = new List<Gebruiker>();
             
             Connect();
-            string query = "SELECT * FROM Gebruiker WHERE GebruikerType = 'bezoeker' AND Gebruikersnaam LIKE *@gezochtebezoeker*";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Gebruiker WHERE GebruikerType = 'bezoeker' AND Gebruikersnaam LIKE *@gezochtebezoeker*";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    Gebruiker bezoeker = new Bezoeker();
+                    reader = command.ExecuteReader();
 
-                   
-                    bezoeker.GebruikersID = Convert.ToInt32(reader["ID"]);
-                    bezoeker.Voornaam = reader["Voornaam"].ToString();
-                    bezoeker.Achternaam = reader["Achternaam"].ToString();
-                    bezoeker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
-                    bezoeker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
-                    bezoeker.RFID = Convert.ToInt32(reader["RFID"]);
-                    if ((Convert.ToInt32(reader["Aanwezig"]) == 1))
+                    while (reader.Read())
                     {
-                        bezoeker.Aanwezig = true;
-                    }
-                    bezoeker.Aanwezig = false;
-                    Bezoekers.Add(bezoeker);
+                        Gebruiker bezoeker = new Bezoeker();
+                        bezoeker.ID = Convert.ToInt32(reader["ID"]);
+                        bezoeker.Voornaam = reader["Voornaam"].ToString();
+                        bezoeker.Achternaam = reader["Achternaam"].ToString();
+                        bezoeker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                        bezoeker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                        bezoeker.RFID = Convert.ToInt32(reader["RFID"]);
+                        if ((Convert.ToInt32(reader["Aanwezig"]) == 1))
+                        {
+                            bezoeker.Aanwezig = true;
+                        }
+                        bezoeker.Aanwezig = false;
+                        Bezoekers.Add(bezoeker);
 
+                    }
                 }
             }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            
             Close();
             return Bezoekers;
         }
@@ -389,48 +423,92 @@ namespace EyeCT4Events_WF.Persistencies
             List<Media> mediaList = new List<Media>();
 
             Connect();
-            string query = "SELECT * FROM Media";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Media WHERE Flagged < @VerbergThreshhold";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    Media media = new Media();
-                    media.ID = Convert.ToInt32(reader["ID"]);
-                    media.Beschrijving = reader["Beschrijving"].ToString();
-                    media.Pad = reader["BestandPad"].ToString();
-                    media.Type = reader["MediaType"].ToString();
-                    media.Categorie = Convert.ToInt32(reader["Categorie"]);
-                    media.Flagged = Convert.ToInt32(reader["Flagged"]);
-                    media.Likes = Convert.ToInt32(reader["Likes"]);
-                    media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]).ToString();
-                    mediaList.Add(media);
+                    command.Parameters.Add(new SqlParameter("@VerbergThreshhold", GetMediaVerbergThreshhold()));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Media media = new Media();
+                        media.ID = Convert.ToInt32(reader["ID"]);
+                        media.Beschrijving = reader["Beschrijving"].ToString();
+                        media.Pad = reader["BestandPad"].ToString();
+                        media.Type = reader["MediaType"].ToString();
+                        media.Categorie = Convert.ToInt32(reader["Categorie"]);
+                        media.Flagged = Convert.ToInt32(reader["Flagged"]);
+                        media.Likes = Convert.ToInt32(reader["Likes"]);
+                        media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]);
+                        mediaList.Add(media);
+                    }
                 }
             }
-            Close();
-
-            foreach (Media m in mediaList)
+            catch (Exception e)
             {
-                m.GeplaatstDoor = GetGebruikerByID(Convert.ToInt32(m.GeplaatstDoor)).ToString();
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
+            Close();
+            return mediaList;
+        }
+        public List<Media> AlleGerapporteerdeMediaOpvragen()
+        {
+            List<Media> mediaList = new List<Media>();
 
+            Connect();
+            try
+            {
+                string query = "SELECT * FROM Media WHERE Flagged > @VerbergThreshhold";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@VerbergThreshhold", GetMediaVerbergThreshhold()));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Media media = new Media();
+                        media.ID = Convert.ToInt32(reader["ID"]);
+                        media.Beschrijving = reader["Beschrijving"].ToString();
+                        media.Pad = reader["BestandPad"].ToString();
+                        media.Type = reader["MediaType"].ToString();
+                        media.Categorie = Convert.ToInt32(reader["Categorie"]);
+                        media.Flagged = Convert.ToInt32(reader["Flagged"]);
+                        media.Likes = Convert.ToInt32(reader["Likes"]);
+                        media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]);
+                        mediaList.Add(media);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
             return mediaList;
         }
         public Media GetMediaByID(int ID)
         {
             Media media = null;
             Connect();
-            string query = "SELECT * FROM Media WHERE ID = @ID";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@ID", ID));
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Media WHERE ID = @ID";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    media.ID = Convert.ToInt32(reader["ID"]);
+                    command.Parameters.Add(new SqlParameter("@ID", ID));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        media.ID = Convert.ToInt32(reader["ID"]);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
 
@@ -439,16 +517,23 @@ namespace EyeCT4Events_WF.Persistencies
         public void ToevoegenMedia(Media media)
         {
             Connect();
-            string query = "INSERT INTO Media VALUES (@GeplaatstDoor, @Categorie, @Pad, @Type, 0, 0, @Beschrijving)";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@GeplaatstDoor", 1)); // media.GeplaatstDoor   AAANPASSEN ALS INLOGGEN WERKT.
-                command.Parameters.Add(new SqlParameter("@Categorie", media.Categorie));
-                command.Parameters.Add(new SqlParameter("@Pad", media.Pad));
-                command.Parameters.Add(new SqlParameter("@Type", BestandsTypeDefinieren(media.Type)));
-                command.Parameters.Add(new SqlParameter("@Beschrijving", media.Beschrijving));
+                string query = "INSERT INTO Media VALUES (@GeplaatstDoor, @Categorie, @Pad, @Type, 0, 0, @Beschrijving)";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@GeplaatstDoor", media.GeplaatstDoor));
+                    command.Parameters.Add(new SqlParameter("@Categorie", media.Categorie));
+                    command.Parameters.Add(new SqlParameter("@Pad", media.Pad));
+                    command.Parameters.Add(new SqlParameter("@Type", BestandsTypeDefinieren(media.Type)));
+                    command.Parameters.Add(new SqlParameter("@Beschrijving", media.Beschrijving));
 
-                command.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
         }      
@@ -458,20 +543,27 @@ namespace EyeCT4Events_WF.Persistencies
             if (reactieID == int.MinValue)
             {
                 Connect();
-                string query = "UPDATE Media SET Likes= (SELECT Likes FROM Media WHERE ID = @mediaID)+1 WHERE ID = @mediaID";
-                using (command = new SqlCommand(query, SQLcon))
+                try
                 {
-                    command.Parameters.Add(new SqlParameter("@mediaID", mediaID));
+                    string query = "UPDATE Media SET Likes= (SELECT Likes FROM Media WHERE ID = @mediaID)+1 WHERE ID = @mediaID";
+                    using (command = new SqlCommand(query, SQLcon))
+                    {
+                        command.Parameters.Add(new SqlParameter("@mediaID", mediaID));
 
-                    command.ExecuteNonQuery();
+                        command.ExecuteNonQuery();
+                    }
+                    //string insert = @"INSERT INTO [Like](GebruikerID,MediaID) VALUES(@gebruikerID, @mediaID)";
+                    //using (command = new SqlCommand(insert, SQLcon))
+                    //{
+                    //    command.Parameters.Add(new SqlParameter("@gebruikerID", 1)); // AANPASSEN ALS LOGIN WERKT gebruiker.GebruikersID
+                    //    command.Parameters.Add(new SqlParameter("@mediaID", mediaID));
+
+                    //    command.ExecuteNonQuery();
+                    //}
                 }
-                string insert = @"INSERT INTO [Like](GebruikerID,MediaID) VALUES(@gebruikerID, @mediaID)";
-                using (command = new SqlCommand(insert, SQLcon))
+                catch (SqlException e)
                 {
-                    command.Parameters.Add(new SqlParameter("@gebruikerID", 1)); // AANPASSEN ALS LOGIN WERKT gebruiker.GebruikersID
-                    command.Parameters.Add(new SqlParameter("@mediaID", mediaID));
-
-                    command.ExecuteNonQuery();
+                    throw new FoutBijUitvoerenQueryException(e.Message);
                 }
                 Close();
             }
@@ -479,21 +571,29 @@ namespace EyeCT4Events_WF.Persistencies
             else if (mediaID == int.MinValue)
             {
                 Connect();
-                string query = "UPDATE Reactie SET Likes= (SELECT Likes FROM Reactie WHERE ID = @reactieID)+1 WHERE ID = @reactieID";
-                using (command = new SqlCommand(query, SQLcon))
+                try
                 {
-                    command.Parameters.Add(new SqlParameter("@reactieID", reactieID));
+                    string query = "UPDATE Reactie SET Likes= (SELECT Likes FROM Reactie WHERE ID = @reactieID)+1 WHERE ID = @reactieID";
+                    using (command = new SqlCommand(query, SQLcon))
+                    {
+                        command.Parameters.Add(new SqlParameter("@reactieID", reactieID));
 
-                    command.ExecuteNonQuery();
+                        command.ExecuteNonQuery();
+                    }
+                    //string insert = "INSERT INTO [Like](GebruikerID, ReactieID) VALUES(@gebruikerID, @reactieID)";
+                    //using (command = new SqlCommand(insert, SQLcon))
+                    //{
+                    //    command.Parameters.Add(new SqlParameter("@gebruikerID", 1)); // AANPASSEN ALS LOGIN WERKT gebruiker.GebruikersID
+                    //    command.Parameters.Add(new SqlParameter("@reactieID", reactieID));
+
+                    //    command.ExecuteNonQuery();
+                    //}
                 }
-                string insert = "INSERT INTO [Like](GebruikerID, ReactieID) VALUES(@gebruikerID, @reactieID)";
-                using (command = new SqlCommand(insert, SQLcon))
+                catch (SqlException e)
                 {
-                    command.Parameters.Add(new SqlParameter("@gebruikerID", 1)); // AANPASSEN ALS LOGIN WERKT gebruiker.GebruikersID
-                    command.Parameters.Add(new SqlParameter("@reactieID", reactieID));
-
-                    command.ExecuteNonQuery();
+                    throw new FoutBijUitvoerenQueryException(e.Message);
                 }
+                
                 Close();
             }
         }
@@ -502,94 +602,200 @@ namespace EyeCT4Events_WF.Persistencies
             if (reactieID == int.MinValue)
             {
                 Connect();
-                string query = "UPDATE Media SET Flagged= (SELECT Flagged FROM Media WHERE ID = @mediaID)+1 WHERE ID = @mediaID";
-                using (command = new SqlCommand(query, SQLcon))
+                try
                 {
-                    command.Parameters.Add(new SqlParameter("@mediaID", mediaID));
+                    string query = "UPDATE Media SET Flagged= (SELECT Flagged FROM Media WHERE ID = @mediaID)+1 WHERE ID = @mediaID";
+                    using (command = new SqlCommand(query, SQLcon))
+                    {
+                        command.Parameters.Add(new SqlParameter("@mediaID", mediaID));
 
-                    command.ExecuteNonQuery();
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (SqlException e)
+                {
+                    throw new FoutBijUitvoerenQueryException(e.Message);
                 }
                 Close();
             }
             else if (mediaID == int.MinValue)
             {
                 Connect();
-                string query = "UPDATE Reactie SET Flagged= (SELECT Flagged FROM Reactie WHERE ID = @reactieID)+1 WHERE ID = @reactieID";
+                try
+                {
+                    string query = "UPDATE Reactie SET Flagged= (SELECT Flagged FROM Reactie WHERE ID = @reactieID)+1 WHERE ID = @reactieID";
+                    using (command = new SqlCommand(query, SQLcon))
+                    {
+                        command.Parameters.Add(new SqlParameter("@reactieID", reactieID));
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (SqlException e)
+                {
+                    throw new FoutBijUitvoerenQueryException(e.Message);
+                }
+                Close();
+            }
+        }
+        // Zoeken op CategorieID & MediaType & bestandpad
+        public List<Media> ZoekenMedia(string zoekterm, int ID)
+        {
+            List<Media> medialist = new List<Media>();
+            Connect();
+            try
+            {
+                string query = "SELECT * FROM Media WHERE Flagged < @Threshhold AND (Categorie = @ID OR MediaType LIKE @zoekterm OR BestandPad LIKE @zoekterm)";
                 using (command = new SqlCommand(query, SQLcon))
                 {
-                    command.Parameters.Add(new SqlParameter("@reactieID", reactieID));
+                    command.Parameters.Add(new SqlParameter("@zoekterm", "%" + zoekterm + "%"));
+                    command.Parameters.Add(new SqlParameter("@ID", ID));
+                    command.Parameters.Add(new SqlParameter("@Threshhold", GetMediaVerbergThreshhold()));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Media media = new Media();
+                        media.ID = Convert.ToInt32(reader["ID"]);
+                        media.Beschrijving = reader["Beschrijving"].ToString();
+                        media.Pad = reader["BestandPad"].ToString();
+                        media.Type = reader["MediaType"].ToString();
+                        media.Categorie = Convert.ToInt32(reader["Categorie"]);
+                        media.Flagged = Convert.ToInt32(reader["Flagged"]);
+                        media.Likes = Convert.ToInt32(reader["Likes"]);
+                        media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]);
+                        medialist.Add(media);
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+            
+            return medialist;
+        }
+        public void ZetAantalKerenGerapporteerdOp0(Media media)
+        {
+            Connect();
+            try
+            {
+                string query = "UPDATE Media SET Flagged = 0 WHERE ID = @mediaID";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@mediaID", media.ID));
 
                     command.ExecuteNonQuery();
                 }
                 Close();
             }
-        }
-        public List<Media> ZoekenMedia(string zoekterm, int ID)
-        {
-            List<Media> medialist = new List<Media>();
-            Connect();
-            string query = "SELECT * FROM Media WHERE GeplaatstDoor LIKE(SELECT ID FROM Gebruiker WHERE Voornaam Like @zoekterm OR Tussenvoegsel Like @zoekterm OR Achternaam LIKE @zoekterm) OR MediaType LIKE @zoekterm OR Categorie = @ID";
-            using (command = new SqlCommand(query, SQLcon))
+            catch (SqlException e)
             {
-                command.Parameters.Add(new SqlParameter("@zoekterm", "%" + zoekterm + "%"));
-                command.Parameters.Add(new SqlParameter("@ID",ID));
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+        }
+        public void VerwijderMedia(Media media)
+        {
+            List<Reactie> reactielijst = AlleReactiesOpvragen();
+            foreach (Reactie r in reactielijst)
+            {
+                if (r.Media == media.ID)
                 {
-                    Media media = new Media();
-                    media.ID = Convert.ToInt32(reader["ID"]);
-                    media.Beschrijving = reader["Beschrijving"].ToString();
-                    media.Pad = reader["BestandPad"].ToString();
-                    media.Type = reader["MediaType"].ToString();
-                    media.Categorie = Convert.ToInt32(reader["Categorie"]);
-                    media.Flagged = Convert.ToInt32(reader["Flagged"]);
-                    media.Likes = Convert.ToInt32(reader["Likes"]);
-                    media.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]).ToString();
-                    medialist.Add(media);
+                    VerwijderReactie(r);
                 }
+            }
+            Connect();
+            try
+            {
+                string query = "DELETE FROM Media WHERE ID = @ID";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@ID", media.ID));
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+        }
+        public Media SelectLaatstIngevoerdeMedia()
+        {
+            Media media = null;
+            Connect();
+            try
+            {
+                string query = "SELECT MAX(ID) maxID FROM Media";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        media = new Media();
+
+                        if (reader["maxID"].ToString() != "NULL")
+                            media.ID = Convert.ToInt32(reader["maxID"]);
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
 
-            foreach (Media m in medialist)
-            {
-                m.GeplaatstDoor = GetGebruikerByID(Convert.ToInt32(m.GeplaatstDoor)).ToString();
-            }
-            return medialist;
+            return media;
         }
         #endregion
         #region Categorie
         public Categorie[] AlleCategorienOpvragen()
         {
             List<Categorie> categorieLijst = new List<Categorie>();
-
+            string query;
             Connect();
-            string query = "SELECT COUNT(*) 'aantalCategorien' FROM Categorie";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                reader = command.ExecuteReader();
-                
-                while (reader.Read())
+                query = "SELECT COUNT(*) 'aantalCategorien' FROM Categorie";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    categorieArray = new Categorie[Convert.ToInt32(reader["aantalCategorien"])];
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        categorieArray = new Categorie[Convert.ToInt32(reader["aantalCategorien"])];
+                    }
                 }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
 
             Connect();
-            query = "SELECT * FROM Categorie";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                query = "SELECT * FROM Categorie";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    Categorie cat = new Categorie();
-                    cat.Naam = reader["Naam"].ToString();
-                    cat.ID = Convert.ToInt32(reader["ID"]);
-                    cat.Parent = Convert.ToInt32(reader["ParentCategorie"]);
-                    categorieLijst.Add(cat);
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Categorie cat = new Categorie();
+                        cat.Naam = reader["Naam"].ToString();
+                        cat.ID = Convert.ToInt32(reader["ID"]);
+                        cat.Parent = Convert.ToInt32(reader["ParentCategorie"]);
+                        categorieLijst.Add(cat);
+                    }
                 }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
             
@@ -616,34 +822,47 @@ namespace EyeCT4Events_WF.Persistencies
         public void ToevoegenCategorie(Categorie cat)
         {
             Connect();
-            string query = "INSERT INTO Categorie VALUES (@Naam, @ParentCat)";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@Naam", cat.Naam));
-                command.Parameters.Add(new SqlParameter("@ParentCat", cat.Parent));
+                string query = "INSERT INTO Categorie VALUES (@Naam, @ParentCat)";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@Naam", cat.Naam));
+                    command.Parameters.Add(new SqlParameter("@ParentCat", cat.Parent));
 
-                command.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
         }
-
         public Categorie GetCategorieMetNaam(string naam)
         {
             Categorie cat = null;
             Connect();
-            string query = "SELECT * FROM Categorie WHERE Naam = @naam";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@naam", naam));
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Categorie WHERE Naam = @naam";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    cat = new Categorie();
-                    cat.ID = Convert.ToInt32(reader["ID"]);
-                    cat.Naam = reader["Naam"].ToString();
-                    cat.Parent = Convert.ToInt32(reader["ParentCategorie"]);
+                    command.Parameters.Add(new SqlParameter("@naam", naam));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        cat = new Categorie();
+                        cat.ID = Convert.ToInt32(reader["ID"]);
+                        cat.Naam = reader["Naam"].ToString();
+                        cat.Parent = Convert.ToInt32(reader["ParentCategorie"]);
+                    }
                 }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
 
@@ -654,48 +873,79 @@ namespace EyeCT4Events_WF.Persistencies
         {
             List<Categorie> catlist = new List<Categorie>();
             Connect();
-            string query = "SELECT * FROM Categorie WHERE Naam LIKE @naam";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@naam", "%" + naam + "%"));
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Categorie WHERE Naam LIKE @naam";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    Categorie cat = new Categorie();
-                    cat.ID = Convert.ToInt32(reader["ID"]);
-                    cat.Naam = reader["Naam"].ToString();
-                    cat.Parent = Convert.ToInt32(reader["ParentCategorie"]);
-                    catlist.Add(cat);
+                    command.Parameters.Add(new SqlParameter("@naam", "%" + naam + "%"));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Categorie cat = new Categorie();
+                        cat.ID = Convert.ToInt32(reader["ID"]);
+                        cat.Naam = reader["Naam"].ToString();
+                        cat.Parent = Convert.ToInt32(reader["ParentCategorie"]);
+                        catlist.Add(cat);
+                    }
                 }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
 
             return catlist;
         }
         #endregion
-        #region Reactie
-
+        #region Reactie        
+        public void VerwijderReactie(Reactie reactie)
+        {
+            Connect();
+            try
+            {
+                string query = "DELETE FROM Reactie WHERE ID = @ID";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@ID", reactie.ReactieID));
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+        }
         public List<Reactie> AlleReactiesOpvragen()
         {
             List<Reactie> reactieLijst = new List<Reactie>();
             Connect();
-            string query = "SELECT * FROM Reactie";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM Reactie";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    Reactie reactie = new Reactie();
-                    reactie.DatumTijd = Convert.ToDateTime(reader["DatumTijd"]);
-                    reactie.Flagged = Convert.ToInt32(reader["Flagged"]);
-                    reactie.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]);
-                    reactie.Inhoud = reader["Inhoud"].ToString();
-                    reactie.Media = Convert.ToInt32(reader["MediaID"]);
-                    reactie.ReactieID = Convert.ToInt32(reader["ID"]);
-                    reactieLijst.Add(reactie);
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Reactie reactie = new Reactie();
+                        reactie.DatumTijd = Convert.ToDateTime(reader["DatumTijd"]);
+                        reactie.Flagged = Convert.ToInt32(reader["Flagged"]);
+                        reactie.GeplaatstDoor = Convert.ToInt32(reader["GeplaatstDoor"]);
+                        reactie.Inhoud = reader["Inhoud"].ToString();
+                        reactie.Media = Convert.ToInt32(reader["MediaID"]);
+                        reactie.ReactieID = Convert.ToInt32(reader["ID"]);
+                        reactieLijst.Add(reactie);
+                    }
                 }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
             return reactieLijst;
@@ -703,60 +953,145 @@ namespace EyeCT4Events_WF.Persistencies
         public void ToevoegenReactie(Reactie reactie)
         {
             Connect();
-            string query = "INSERT INTO Reactie VALUES (@geplaatstDoor, @mediaID, 0, @inhoud, @datetime, 0)";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@geplaatstDoor", 1)); // Later aanpassen
-                command.Parameters.Add(new SqlParameter("@mediaID", reactie.Media));
-                command.Parameters.Add(new SqlParameter("@inhoud", reactie.Inhoud));
-                command.Parameters.Add(new SqlParameter("@datetime", DateTime.Now.ToString()));
-                command.ExecuteNonQuery();
+                string query = "INSERT INTO Reactie VALUES (@geplaatstDoor, @mediaID, 0, @inhoud, @datetime, 0)";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@geplaatstDoor", 1)); // Later aanpassen
+                    command.Parameters.Add(new SqlParameter("@mediaID", reactie.Media));
+                    command.Parameters.Add(new SqlParameter("@inhoud", reactie.Inhoud));
+                    command.Parameters.Add(new SqlParameter("@datetime", DateTime.Now.ToString()));
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
         }
-
         #endregion
         #region Kampeer queries
+        public List<Kampeerplaats> AlleKampeerplaatsenOpvragen()
+        {
+            List<Kampeerplaats> KampeerList = new List<Kampeerplaats>();
 
+            Connect();
+            try
+            {
+                string query = "SELECT * FROM Kampeerplaats";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Kampeerplaats kampeerplaats = new Kampeerplaats();
+
+                        kampeerplaats.Type = reader["KampeerPlaatsType"].ToString();
+                        kampeerplaats.ID = Convert.ToInt32(reader["ID"]);
+                        kampeerplaats.MaxPersonen = Convert.ToInt32(reader["MaxPersonen"]);
+                        kampeerplaats.Lawaai = Convert.ToInt32(reader["Lawaai"]);
+                        kampeerplaats.Invalide = Convert.ToInt32(reader["Invalide"]);
+                        kampeerplaats.Comfort = Convert.ToInt32(reader["Comfort"]);
+                        KampeerList.Add(kampeerplaats);
+
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+            return KampeerList;
+        }
         public List<Kampeerplaats> KampeerplaatsenOpvragen(bool comfort, bool invalide, bool lawaai, string eigentent,
                                      string bungalow, string bungalino, string blokhut, string stacaravan, string huurtent)
         {
             List<Kampeerplaats> KampeerList = new List<Kampeerplaats>();
 
             Connect();
-            string query = "SELECT * FROM KampeerPlaats k WHERE (k.Comfort = @comfort AND k.Invalide = @invalide AND k.Lawaai = @lawaai) "+
-                "AND (k.KampeerPlaatsType = @blokhut OR k.KampeerPlaatsType = @bungelino OR k.KampeerPlaatsType = @bungalow	OR k.KampeerPlaatsType = @invalideaccomedatie)";
-            using (command = new SqlCommand(query, SQLcon))
+            try
             {
-                command.Parameters.Add(new SqlParameter("@comfort", comfort));
-                command.Parameters.Add(new SqlParameter("@invalide", invalide));
-                command.Parameters.Add(new SqlParameter("@lawaai", lawaai));
-                command.Parameters.Add(new SqlParameter("@eigentent", eigentent));
-                command.Parameters.Add(new SqlParameter("@bungalow", bungalow));
-                command.Parameters.Add(new SqlParameter("@bungalino", bungalino));
-                command.Parameters.Add(new SqlParameter("@blokhut", blokhut));
-                command.Parameters.Add(new SqlParameter("@stacaravan", stacaravan));
-                command.Parameters.Add(new SqlParameter("@huurtent", huurtent));
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                string query = "SELECT * FROM KampeerPlaats k WHERE (k.Comfort = @comfort AND k.Invalide = @invalide AND k.Lawaai = @lawaai) " +
+                    "AND (k.KampeerPlaatsType = @blokhut OR k.KampeerPlaatsType = @bungelino OR k.KampeerPlaatsType = @bungalow	OR k.KampeerPlaatsType = @invalideaccomedatie)";
+                using (command = new SqlCommand(query, SQLcon))
                 {
-                    Kampeerplaats kampeerplaats = new Kampeerplaats();
+                    command.Parameters.Add(new SqlParameter("@comfort", comfort));
+                    command.Parameters.Add(new SqlParameter("@invalide", invalide));
+                    command.Parameters.Add(new SqlParameter("@lawaai", lawaai));
+                    command.Parameters.Add(new SqlParameter("@eigentent", eigentent));
+                    command.Parameters.Add(new SqlParameter("@bungalow", bungalow));
+                    command.Parameters.Add(new SqlParameter("@bungalino", bungalino));
+                    command.Parameters.Add(new SqlParameter("@blokhut", blokhut));
+                    command.Parameters.Add(new SqlParameter("@stacaravan", stacaravan));
+                    command.Parameters.Add(new SqlParameter("@huurtent", huurtent));
+                    reader = command.ExecuteReader();
 
-                    kampeerplaats.Type = reader["KampeerPlaatsType"].ToString();
-                    kampeerplaats.PlaatsID = Convert.ToInt32(reader["ID"]);
-                    kampeerplaats.MaxPersonen = Convert.ToInt32(reader["MaxPersonen"]);
-                    kampeerplaats.Lawaai = Convert.ToInt32(reader["Lawaai"]);
-                    kampeerplaats.Invalide = Convert.ToInt32(reader["Invalide"]);
-                    kampeerplaats.Comfort = Convert.ToInt32(reader["Comfort"]);
-                    KampeerList.Add(kampeerplaats);
+                    while (reader.Read())
+                    {
+                        Kampeerplaats kampeerplaats = new Kampeerplaats();
 
+                        kampeerplaats.Type = reader["KampeerPlaatsType"].ToString();
+                        kampeerplaats.ID = Convert.ToInt32(reader["ID"]);
+                        kampeerplaats.MaxPersonen = Convert.ToInt32(reader["MaxPersonen"]);
+                        kampeerplaats.Lawaai = Convert.ToInt32(reader["Lawaai"]);
+                        kampeerplaats.Invalide = Convert.ToInt32(reader["Invalide"]);
+                        kampeerplaats.Comfort = Convert.ToInt32(reader["Comfort"]);
+                        KampeerList.Add(kampeerplaats);
+
+                    }
                 }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
             return KampeerList;
         }
 
+        public void ZetBezoekerOpAfwezig(int RFID)
+        {
+            Connect();
+            try
+            {
+                string query = "UPDATE Gebruiker SET Aanwezig = 0 WHERE RFID = @RFID ";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@RFID", RFID));
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+        }
+
+        public void ZetBezoekerOpAanwezig(int RFID)
+        {
+            Connect();
+            try
+            {
+                string query = "UPDATE Gebruiker SET Aanwezig = 1 WHERE RFID = @RFID ";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@RFID", RFID));
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+        }
 
 
 

@@ -11,23 +11,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace EyeCT4Events_WF
+namespace EyeCT4Events_WF.Forms
 {
-    public partial class AanwezigBezoekers : Form
+    public partial class FormEvenementAanmaken : Form
     {
-        public AanwezigBezoekers()
+        public FormEvenementAanmaken()
         {
             InitializeComponent();
-        }
-
-        private void AanwezigBezoekers_Load(object sender, EventArgs e)
-        {
-            //Laad alle bezoekers uit de database met status aanweziug
-        }
-
-        private void lbSluiten_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

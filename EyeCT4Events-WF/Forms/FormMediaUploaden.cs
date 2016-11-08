@@ -1,5 +1,6 @@
 ﻿using EyeCT4Events_WF.Classes;
 using EyeCT4Events_WF.Classes.Repositories;
+using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Persistencies;
 using System;
 using System.Collections.Generic;
@@ -29,23 +30,49 @@ namespace EyeCT4Events_WF.Forms
 
             smsr = new RepositorySocialMediaSharing(new MSSQL_Server());
         }
-
         private void btnOpslaan_Click(object sender, EventArgs e)
         {
+            // Media
             Media media = new Media();
             media.Beschrijving = tbBeschrijving.Text;
-            if(fct != null)
+            try
             {
-                media.Categorie = smsr.GetCategorieMetNaam(fct.cat.Naam).ID;
+                if (fct != null)
+                {
+                    media.Categorie = smsr.GetCategorieMetNaam(fct.cat.Naam).ID;
+                }
+                else if (fcz != null)
+                {
+                    media.Categorie = smsr.GetCategorieMetNaam(fcz.Categorie).ID;
+                }
             }
-            else if (fcz != null)
+            catch(FoutBijUitvoerenQueryException exc)
             {
-                media.Categorie = smsr.GetCategorieMetNaam(fcz.Categorie).ID;
+                MessageBox.Show(exc.Message);
             }
-            media.GeplaatstDoor = gebruiker.ToString();
-            media.Pad = ofd.FileName;
+            media.GeplaatstDoor = gebruiker.ID;
             media.Type = Path.GetExtension(ofd.FileName);
-            smsr.ToevoegenMedia(media);
+
+            // Directory bestand opslaan
+            try
+            {
+                media.BestandOpslaan(ofd.SafeFileName, ofd.FileName);
+            }
+            catch (FoutBijOpslaanBestandException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+
+            // Database
+            try
+            {
+                smsr.ToevoegenMedia(media);
+            }
+            catch (FoutBijUitvoerenQueryException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+
             MessageBox.Show("Media geplaatst.");
             Close();
         }

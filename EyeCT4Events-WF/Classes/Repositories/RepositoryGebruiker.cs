@@ -16,25 +16,21 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             this.context = context;
         }
-        public List<Gebruiker> LijstBezoekers()
+        public List<Gebruiker> LijstAanwezigeBezoekers()
         {
             return context.LijstAanwezigePersonen();
         }
-        public bool CheckLogIn(string gebruikersnaam, string wachtwoord)
+        public void ZetGebruikerOpAanwezig(int gebruikerID)
         {
-            bool logincorrect;
-
-            logincorrect = context.Inloggen(gebruikersnaam, wachtwoord);
-
-            return logincorrect;
+            context.ZetBezoekerOpAanwezig(gebruikerID);
         }
-        public Gebruiker LogIn(string gebruikersnaam)
+        public void ZetGebruikerOpAfwezig(int gebruikerID)
         {
-            Gebruiker ingelogde;
-
-            ingelogde = context.GetGebruikerByGebruikersnaam(gebruikersnaam);
-
-            return ingelogde;
+            context.ZetBezoekerOpAfwezig(gebruikerID);
+        }
+        public Gebruiker GebruikerInloggen(string gebruikersnaam, string wachtwoord)
+        {
+            return context.Inloggen(gebruikersnaam, wachtwoord);
         }
         public Gebruiker GetGebruikerByGebruikersnaam (string gebruikersnaam)
         {

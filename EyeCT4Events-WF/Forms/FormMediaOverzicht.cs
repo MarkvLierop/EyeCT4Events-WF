@@ -1,21 +1,14 @@
 ﻿using EyeCT4Events_WF.Classes;
 using EyeCT4Events_WF.Classes.Repositories;
+using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Forms;
 using EyeCT4Events_WF.Persistencies;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Media;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WMPLib;
 
 namespace EyeCT4Events_WF
 {
@@ -37,8 +30,8 @@ namespace EyeCT4Events_WF
             for (int i = 0; i < mediaLijst.Count; i++)
             {
                 Label Titel = new Label();
-                Titel.Text = mediaLijst[i].GeplaatstDoor + " heeft een " + mediaLijst[i].Type + " Geplaatst";
-                //Titel.Font = new Font("Arial", 15, FontStyle.Bold);
+                Titel.Text = mediaLijst[i].GeplaatstDoorGebruiker() + " heeft een " + mediaLijst[i].Type + " Geplaatst";
+                Titel.Font = new Font("Arial", 10, FontStyle.Bold);
                 Titel.Width = pnlContent.Width;
                 pnlContentControlList.Add(Titel);
 
@@ -63,8 +56,9 @@ namespace EyeCT4Events_WF
                 if (mediaLijst[i].Pad != "")
                 {
                     Label lblDownloadFile = new Label();
-                    lblDownloadFile.Text = mediaLijst[i].Pad;
+                    lblDownloadFile.Text = "Bestand Downloaden: "+mediaLijst[i].GetBestandsNaam();
                     lblDownloadFile.Name = mediaLijst[i].ID.ToString();
+                    lblCategorieZoeken.Font = new Font("Arial", 10, FontStyle.Underline);
                     lblDownloadFile.Width = pnlContent.Width;
                     lblDownloadFile.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lblDownloadFile_MouseUp);
                     pnlContentControlList.Add(lblDownloadFile);
@@ -72,6 +66,7 @@ namespace EyeCT4Events_WF
 
                 Label Beschrijving = new Label();
                 Beschrijving.Text = mediaLijst[i].Beschrijving;
+                Beschrijving.Width = pnlContent.Width;
                 pnlContentControlList.Add(Beschrijving);
 
                 Button btnMediaLike = new Button();
@@ -102,7 +97,15 @@ namespace EyeCT4Events_WF
                     if (r.Media == mediaLijst[i].ID)
                     {
                         Label lblGebruiker = new Label();
-                        lblGebruiker.Text =  rg.GetGebruikerByID(r.GeplaatstDoor).Gebruikersnaam + ": "+ r.Inhoud;
+                        try
+                        {
+                            lblGebruiker.Text = rg.GetGebruikerByID(r.GeplaatstDoor).ToString() + ": " + r.Inhoud;
+                        }
+                        catch (FoutBijUitvoerenQueryException e)
+                        {
+                            MessageBox.Show(e.Message);
+                        }
+                        lblGebruiker.Width = pnlContent.Width;
                         pnlContentControlList.Add(lblGebruiker);
                     }
                 }
@@ -114,60 +117,28 @@ namespace EyeCT4Events_WF
                     pnlContent.Controls.Add(pnlContentControlList[c]);
                 }
             }
-        }
-        private string FilterVaststellen(Media media)
-        {
-            if (media.Type == "Afbeelding")
-            {
-                return "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|Image Files(*.TIF)|*.TIF|PNG Image(*.png)|*.png";
-            }
-            else if (media.Type == "Audio")
-            {
-                return "Audio Bestand|*.wav|Audio Bestand|*.mp3|Audio Bestand|*.m4a|Audio Bestand|*.wma";
-            }
-            else if (media.Type == "Video")
-            {
-                return "Video Bestand|*.mp4|Video Bestand|*.avi|Video Bestand|*.wmv|Video Bestand|*.flv|Video Bestand|*.mpg|Video Bestand|*.mpeg";
-            }
-            return "Alle Bestanden|*.*";
-        }
-        private void BestandOpslaan(Media media, SaveFileDialog sfd)
-        {
-            switch (media.Type)
-            {
-                case "Afbeelding":
-                    Bitmap bestand = new Bitmap(sfd.FileName);
-                    using (System.IO.FileStream fs = (System.IO.FileStream)sfd.OpenFile())
-                    {
-                        switch (sfd.FilterIndex)
-                        {
-                            case 1:
-                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Jpeg);
-                                break;
-                            case 2:
-                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Bmp);
-                                break;
-                            case 3:
-                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Gif);
-                                break;
-                            case 4:
-                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Tiff);
-                                break;
-                            case 5:
-                                bestand.Save(fs, System.Drawing.Imaging.ImageFormat.Png);
-                                break;
-                        }
-                    }
-                    break;
-                case "Audio":
-                    File.Copy(media.Pad, sfd.FileName);
-                    break;
-                case "Video":
-                    File.Copy(media.Pad, sfd.FileName);
-                    break;
-            }
+            pnlContent.Refresh();
         }
 
+        // Constructor
+        public FormMediaOverzicht(Gebruiker gebruiker)
+        {
+            InitializeComponent();
+            this.gebruiker = gebruiker;
+
+            rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
+            try
+            {
+                categorieLijst = rsms.AlleCategorienOpvragen().ToList();
+                mediaLijst = rsms.AlleMediaOpvragen();
+            }
+            catch (FoutBijUitvoerenQueryException e)
+            {
+                MessageBox.Show("Fout bij ophalen van categorien " + e.Message);
+            }
+
+            ContentCreeren(mediaLijst);
+        }
         // Events
         private void lblDownloadFile_MouseUp(object sender, MouseEventArgs e)
         {
@@ -181,12 +152,12 @@ namespace EyeCT4Events_WF
             }
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Title = "Bestand Opslaan";
-            sfd.Filter = FilterVaststellen(media);
+            sfd.Filter = media.FilterVastStellen();
             sfd.ShowDialog();
 
             if (sfd.FileName != "")
             {
-                BestandOpslaan(media, sfd);
+                File.Copy(media.Pad, sfd.FileName);
             }
         }
 
@@ -201,35 +172,36 @@ namespace EyeCT4Events_WF
             }
         }
 
-        // Constructor
-        public FormMediaOverzicht(Gebruiker gebruiker)
-        {
-            InitializeComponent();
-            this.gebruiker = gebruiker;
-
-            rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
-            categorieLijst = rsms.AlleCategorienOpvragen().ToList();
-
-            mediaLijst = rsms.AlleMediaOpvragen();
-            ContentCreeren(mediaLijst);
-        }
-
         // Events
         private void btnMediaRapporteren_MouseUp(object sender, MouseEventArgs e)
         {
-            rsms.ToevoegenRapporterenMediaReactie(Convert.ToInt32(((Button)sender).Name), int.MinValue);
-            ((Button)sender).Enabled = false;
-            ((Button)sender).Text = "Gerapporteerd";
-            MessageBox.Show("Gerapporteerd.");
+            try
+            {
+                rsms.ToevoegenRapporterenMediaReactie(Convert.ToInt32(((Button)sender).Name), int.MinValue);
+                ((Button)sender).Enabled = false;
+                ((Button)sender).Text = "Gerapporteerd";
+                MessageBox.Show("Gerapporteerd.");
+            }
+            catch (FoutBijUitvoerenQueryException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
 
         private void btnMediaLike_MouseUp(object sender, MouseEventArgs e)
         {
             // Button sender.Name = ID van Media. 
             // sender.Tag = Aantal likes dat de media heeft.
-            rsms.ToevoegenLikeInMediaOfReactie(gebruiker, Convert.ToInt32(((Button)sender).Name), int.MinValue);
-            ((Button)sender).Text = "Likes " + (Convert.ToInt32(((Button)sender).Tag) + 1).ToString();
-            ((Button)sender).Enabled = false;
+            try
+            {
+                rsms.ToevoegenLikeInMediaOfReactie(gebruiker, Convert.ToInt32(((Button)sender).Name), int.MinValue);
+                ((Button)sender).Text = "Likes " + (Convert.ToInt32(((Button)sender).Tag) + 1).ToString();
+                ((Button)sender).Enabled = false;
+            }
+            catch (FoutBijUitvoerenQueryException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
 
         private void btnCategorieToevoegen_Click(object sender, EventArgs e)
@@ -282,6 +254,20 @@ namespace EyeCT4Events_WF
                     mediaLijst = rsms.ZoekenMedia(" ", c.ID);
                     ContentCreeren(mediaLijst);
                 }
+            }
+        }
+
+        private void txtCategorieZoeken_TextChanged(object sender, EventArgs e)
+        {
+            RepositorySocialMediaSharing rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
+            try
+            {
+                categorieLijst = rsms.ZoekenCategorie(txtCategorieZoeken.Text);
+                pnlCategorieën.Refresh();
+            }
+            catch (FoutBijUitvoerenQueryException exc)
+            {
+                MessageBox.Show(exc.Message);
             }
         }
     }

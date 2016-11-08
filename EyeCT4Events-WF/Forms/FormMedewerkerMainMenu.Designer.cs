@@ -1,6 +1,6 @@
 ﻿namespace EyeCT4Events_WF.Forms
 {
-    partial class FormMedewerkerHub
+    partial class FormMedewerkerMainMenu
     {
         /// <summary>
         /// Required designer variable.
@@ -28,22 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblMedewerker = new System.Windows.Forms.Label();
             this.btnReserveer = new System.Windows.Forms.Button();
             this.btnEventAanmaken = new System.Windows.Forms.Button();
             this.btnMedia = new System.Windows.Forms.Button();
             this.btnBezoekers = new System.Windows.Forms.Button();
             this.btnMateriaal = new System.Windows.Forms.Button();
+            this.lblMedewerkerNaam = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // lblMedewerker
-            // 
-            this.lblMedewerker.AutoSize = true;
-            this.lblMedewerker.Location = new System.Drawing.Point(316, 9);
-            this.lblMedewerker.Name = "lblMedewerker";
-            this.lblMedewerker.Size = new System.Drawing.Size(94, 13);
-            this.lblMedewerker.TabIndex = 0;
-            this.lblMedewerker.Text = "naam medewerker";
             // 
             // btnReserveer
             // 
@@ -72,7 +63,7 @@
             this.btnMedia.Name = "btnMedia";
             this.btnMedia.Size = new System.Drawing.Size(107, 51);
             this.btnMedia.TabIndex = 3;
-            this.btnMedia.Text = "Media";
+            this.btnMedia.Text = "Social Media Sharing";
             this.btnMedia.UseVisualStyleBackColor = true;
             this.btnMedia.Click += new System.EventHandler(this.btnMedia_Click);
             // 
@@ -97,18 +88,27 @@
             this.btnMateriaal.UseVisualStyleBackColor = true;
             this.btnMateriaal.Click += new System.EventHandler(this.btnMateriaal_Click);
             // 
-            // FormMedewerkerHub
+            // lblMedewerkerNaam
+            // 
+            this.lblMedewerkerNaam.AutoSize = true;
+            this.lblMedewerkerNaam.Location = new System.Drawing.Point(333, 6);
+            this.lblMedewerkerNaam.Name = "lblMedewerkerNaam";
+            this.lblMedewerkerNaam.Size = new System.Drawing.Size(94, 13);
+            this.lblMedewerkerNaam.TabIndex = 6;
+            this.lblMedewerkerNaam.Text = "medewerker naam";
+            // 
+            // FormMedewerkerMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(427, 280);
+            this.Controls.Add(this.lblMedewerkerNaam);
             this.Controls.Add(this.btnMateriaal);
             this.Controls.Add(this.btnBezoekers);
             this.Controls.Add(this.btnMedia);
             this.Controls.Add(this.btnEventAanmaken);
             this.Controls.Add(this.btnReserveer);
-            this.Controls.Add(this.lblMedewerker);
-            this.Name = "FormMedewerkerHub";
+            this.Name = "FormMedewerkerMainMenu";
             this.Text = "Hub Medewerker";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -116,12 +116,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblMedewerker;
         private System.Windows.Forms.Button btnReserveer;
         private System.Windows.Forms.Button btnEventAanmaken;
         private System.Windows.Forms.Button btnMedia;
         private System.Windows.Forms.Button btnBezoekers;
         private System.Windows.Forms.Button btnMateriaal;
+        private System.Windows.Forms.Label lblMedewerkerNaam;
     }
 }

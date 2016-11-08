@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using EyeCT4Events_WF.Classes;
 using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Persistencies;
+using EyeCT4Events_WF.Exceptions;
 
 namespace EyeCT4Events_WF
 {
@@ -67,8 +68,15 @@ namespace EyeCT4Events_WF
             if (rbComfort.Checked) { comfort = true; }
             if (rbInvalide.Checked) { invalide = true; }
             if (rbLawaai.Checked) { lawaai = true; }
-            kampeerplaatsen = kpr.KampeerplaatsenOpvragen(comfort, invalide, lawaai, eigentent, bungalow, bungalino, blokhut, stacaravan, huurtent);
 
+            try
+            {
+                kampeerplaatsen = kpr.KampeerplaatsenOpvragen(comfort, invalide, lawaai, eigentent, bungalow, bungalino, blokhut, stacaravan, huurtent);
+            }
+            catch (FoutBijUitvoerenQueryException e)
+            {
+                MessageBox.Show(e.Message);
+            }
             Ververs();
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EyeCT4Events_WF.Persistencies;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,14 @@ namespace EyeCT4Events_WF.Classes
         public int Media { get; set; }
         public int ReactieID { get; set; }
 
+        private Repositories.RepositoryGebruiker rg;
         public Reactie()
         {
-
+            rg = new Repositories.RepositoryGebruiker(new MSSQL_Server());
+        }
+        public override string ToString()
+        {
+            return "Geplaatst Door: " + rg.GetGebruikerByID(GeplaatstDoor).ToString() + " | Reactie: " + Inhoud;
         }
     }
 }

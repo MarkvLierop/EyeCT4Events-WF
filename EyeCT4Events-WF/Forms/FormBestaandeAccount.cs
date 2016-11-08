@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EyeCT4Events_WF.Exceptions;
 
 namespace EyeCT4Events_WF.Forms
 {
@@ -35,7 +36,14 @@ namespace EyeCT4Events_WF.Forms
             string zoekopdracht = tbZoekGebruikers.Text;
             bestaandegebruikers.Clear();
             RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQL_Server());
-            bestaandegebruikers = rg.GezochteBezoekersOphalen(zoekopdracht);
+            try
+            {
+                bestaandegebruikers = rg.GezochteBezoekersOphalen(zoekopdracht);
+            }
+            catch (FoutBijUitvoerenQueryException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
 
         private void btnKampeerplaatsReserveren_Click(object sender, EventArgs e)

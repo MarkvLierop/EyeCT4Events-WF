@@ -9,9 +9,8 @@ namespace EyeCT4Events_WF.Classes
     public class Kampeerplaats
     {
         public List<Gebruiker> gebruikersOpLocatie { get; private set; }
-        public List<string> Eigenschappen { get; set; }
         public int MaxPersonen { get; set; }
-        public int PlaatsID { get; set; }
+        public int ID { get; set; }
         public string Type { get; set; }
         public int Comfort { get; set; }
         public int Invalide { get; set; }
@@ -19,16 +18,16 @@ namespace EyeCT4Events_WF.Classes
 
         public Kampeerplaats()
         {
-
+            gebruikersOpLocatie = new List<Gebruiker>();
         }
 
-        public bool CheckOfBezoekersAanwezigZijn()
+        public bool CheckOfBezoekerOpKampeerplaatsIs(Gebruiker g)
         {
-            if (gebruikersOpLocatie.Count < 1)
+            if (gebruikersOpLocatie.Contains(g))
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
     }
 }

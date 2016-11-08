@@ -1,5 +1,6 @@
 ﻿using EyeCT4Events_WF.Classes;
 using EyeCT4Events_WF.Classes.Repositories;
+using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Persistencies;
 using System;
 using System.Collections.Generic;
@@ -32,13 +33,20 @@ namespace EyeCT4Events_WF.Forms
 
             Reactie reactie = new Reactie();
             reactie.DatumTijd = DateTime.Now;
-            reactie.GeplaatstDoor = gebruiker.GebruikersID;
+            reactie.GeplaatstDoor = gebruiker.ID;
             reactie.Inhoud = txtReactieInhoud.Text;
             reactie.Media = Convert.ToInt32(mediaID);
 
-            rsms.ToevoegenReactie(reactie);
+            try
+            {
+                rsms.ToevoegenReactie(reactie);
+                MessageBox.Show("Reactie Toegevoegd");
+            }
+            catch (FoutBijUitvoerenQueryException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
 
-            MessageBox.Show("Reactie Toegevoegd");
             Close();
         }
     }
