@@ -1090,10 +1090,6 @@ namespace EyeCT4Events_WF.Persistencies
             }
             Close();
         }
-
-
-
-
         #endregion
 
         #region Reserveringen
@@ -1151,7 +1147,7 @@ namespace EyeCT4Events_WF.Persistencies
         }
 
         #endregion
-        #region Algemeen
+        #region Events
         public void ToevoegenEvent(Event ev)
         {
             Connect();
@@ -1173,6 +1169,39 @@ namespace EyeCT4Events_WF.Persistencies
                 throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
+        }
+
+        public List<Event> AlleEventsOpvragen()
+        {
+            List<Event> eventList = new List<Event>();
+            Connect();
+            try
+            {
+                string query = "SELECT * FROM Event";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Event e = new Event();
+                        e.Beschrijving = reader["Beschrijving"].ToString();
+                        e.Naam = reader["Titel"].ToString();
+                        e.Locatie = reader["Locatie"].ToString();
+                        e.ID = Convert.ToInt32(reader["ID"]);
+                        e.DatumVan = Convert.ToDateTime(reader["DatumVan"]);
+                        e.DatumTot = Convert.ToDateTime(reader["DatumTot"]);
+                        eventList.Add(e);
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+
+            return eventList;
         }
         #endregion
 

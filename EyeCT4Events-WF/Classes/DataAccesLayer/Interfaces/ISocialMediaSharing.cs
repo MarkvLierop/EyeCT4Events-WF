@@ -12,6 +12,7 @@ namespace EyeCT4Events_WF.Classes.Interfaces
         List<Media> AlleMediaOpvragen();
         List<Media> AlleGerapporteerdeMediaOpvragen();
         List<Reactie> AlleReactiesOpvragen();
+        List<Event> AlleEventsOpvragen();
         void ToevoegenCategorie(Categorie cat);
         void ToevoegenEvent(Event ev);
         void ToevoegenMedia(Media media);
