@@ -1,4 +1,5 @@
 ﻿using EyeCT4Events_WF.Classes;
+using System;
 using System.Collections.Generic;
 
 namespace EyeCT4Events_WF.Classes.Interfaces
@@ -10,6 +11,9 @@ namespace EyeCT4Events_WF.Classes.Interfaces
 
         List<Kampeerplaats> AlleKampeerplaatsenOpvragen();
 
-        void ReserveringPlaatsen();
+        void ReserveringPlaatsen(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot);
+
+        Reservering HaalReserveringOpNaAanmaken(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot);
+        
     }
 }

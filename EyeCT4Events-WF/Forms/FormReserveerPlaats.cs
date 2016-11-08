@@ -19,6 +19,12 @@ namespace EyeCT4Events_WF
         List<Kampeerplaats> kampeerplaatsen = new List<Kampeerplaats>();
         Gebruiker bezoeker;
         Gebruiker medewerker;
+        Kampeerplaats kampeerplaats;
+        Reservering reservering;
+        DateTime datumVan;
+        DateTime datumTot;
+        int plaatsid;
+        int bezoekerid;
 
         bool comfort;
         bool lawaai;
@@ -99,10 +105,17 @@ namespace EyeCT4Events_WF
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Reservering reservering = new Reservering(medewerker.GebruikersID, kampeerplaatsen.Contains.)
+            kampeerplaats = kampeerplaatsen[lbKampeerplaatsen.SelectedIndex];
+            datumVan = dtVan.Value;
+            datumTot = dtTot.Value;
+            plaatsid = kampeerplaats.PlaatsID;
+            bezoekerid = bezoeker.GebruikersID;
 
-            Kampeerplaats plaats;
-            
+            RepositoryKampeerPlaatsen rkp = new RepositoryKampeerPlaatsen(new MSSQL_Server());
+            plaatsid = kampeerplaats.PlaatsID;
+            rkp.ReserveringPlaatsen(bezoekerid, plaatsid, datumVan, datumTot);
+
+
         }
 
         private void rbInvalide_CheckedChanged(object sender, EventArgs e)

@@ -758,6 +758,65 @@ namespace EyeCT4Events_WF.Persistencies
         }
 
 
+
+
+
+        #endregion
+
+        #region Reserveringen
+        public void ReserveringPlaatsen(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot)
+        {
+
+            Connect();
+            string query = "INSERT INTO Reservering VALUES (@KampeerPlaats, @GebruikrID, @DatumVan, @DatumTot, @Betaling)";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@KampeerPlaats", plaatsid));
+                command.Parameters.Add(new SqlParameter("@GebruikrID", gebruikerid));
+                command.Parameters.Add(new SqlParameter("@DatumVan", datumVan));
+                command.Parameters.Add(new SqlParameter("@DatumTot", datumTot));
+                command.Parameters.Add(new SqlParameter("@Betaling", 0));
+
+
+                command.ExecuteNonQuery();
+            }
+
+            Close();
+        }
+
+        public Reservering HaalReserveringOpNaAanmaken(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot)
+        {
+            
+
+            int Gebruikerid = gebruikerid;
+            int Plaatsid = plaatsid;
+
+
+            Connect();
+            string query = "SELECT * FROM Reservering WHERE GebruikerType = 'bezoeker' AND Gebruikersnaam LIKE *@gezochtebezoeker*";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    int GebruikerID = Convert.ToInt32(reader["GebruikerID"]);
+                    int PlaatsID = Convert.ToInt32(reader["PlaatsID"]);
+                    
+
+                    Reservering reservering = new Reservering();
+                   
+                        
+                        );
+
+
+                }
+            }
+            Close();
+            
+            return reservering;
+        }
+
         #endregion
 
     }

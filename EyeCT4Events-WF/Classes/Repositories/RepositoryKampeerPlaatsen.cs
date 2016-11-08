@@ -28,5 +28,16 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             return context.AlleKampeerplaatsenOpvragen();
         }
+
+        public void ReserveringPlaatsen(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot)
+        {
+            context.ReserveringPlaatsen(gebruikerid, plaatsid, datumVan, datumTot);
+        }
+
+        public Reservering HaalReserveringOpNaAanmaken(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot)
+        {
+            return context.HaalReserveringOpNaAanmaken(gebruikerid, plaatsid, datumVan, datumTot);
+        }
+
     }
 }

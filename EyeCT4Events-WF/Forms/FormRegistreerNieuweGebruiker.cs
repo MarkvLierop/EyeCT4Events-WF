@@ -40,6 +40,7 @@ namespace EyeCT4Events_WF
                     Gebruiker bezoeker = new Bezoeker(tbRegVoornaam.Text, tbRegAchternaam.Text, tbTussenvoegsel.Text, tbRegGebruiker.Text, tbRegWachtwoord.Text, Convert.ToInt32(tbRFID.Text), aanwezig);
                     RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQL_Server());
                     rg.GebruikerRegistreren(bezoeker);
+                    bezoeker = rg.GetGebruikerByGebruikersnaam(tbRegGebruiker.Text);
                     //methode voor check 
                     //MessageBox.Show("Registratie succesvol");
                     //MessageBox.Show("Regestratie niet gelukt");
