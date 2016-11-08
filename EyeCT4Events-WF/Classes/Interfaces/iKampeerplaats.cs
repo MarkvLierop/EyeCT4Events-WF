@@ -1,4 +1,5 @@
 ﻿using EyeCT4Events_WF.Classes;
+using System;
 using System.Collections.Generic;
 
 namespace EyeCT4Events_WF.Classes.Interfaces
@@ -9,6 +10,10 @@ namespace EyeCT4Events_WF.Classes.Interfaces
                                       string bungalow, string bungalino, string blokhut, string stacaravan, string huurtent);
 
         List<Kampeerplaats> AlleKampeerplaatsenOpvragen();
-        //List<Reservering> AlleReserveringenOpvragen();
+
+        void ReserveringPlaatsen(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot);
+
+        Reservering HaalReserveringOpNaAanmaken(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot);
+        
     }
 }

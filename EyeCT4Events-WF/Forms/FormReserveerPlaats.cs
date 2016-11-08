@@ -18,6 +18,14 @@ namespace EyeCT4Events_WF
     {
         RepositoryKampeerPlaatsen kpr = new RepositoryKampeerPlaatsen(new MSSQL_Server());
         List<Kampeerplaats> kampeerplaatsen = new List<Kampeerplaats>();
+        Gebruiker bezoeker;
+        Gebruiker medewerker;
+        Kampeerplaats kampeerplaats;
+        Reservering reservering;
+        DateTime datumVan;
+        DateTime datumTot;
+        int plaatsid;
+        int bezoekerid;
 
         bool comfort;
         bool lawaai;
@@ -37,10 +45,12 @@ namespace EyeCT4Events_WF
             //HaalKampeerplaatsenOp();
         }
 
-        public FormReserveerPlaats(Gebruiker gebruiker)
+        public FormReserveerPlaats(Gebruiker medewerker, Gebruiker Bezoeker)
         {
            
-            lblMedewerker.Text = gebruiker.Voornaam + " " + gebruiker.Achternaam;
+            lblMedewerker.Text = medewerker.Voornaam + " " + medewerker.Achternaam;
+            bezoeker = Bezoeker;
+
             groupBox2.Enabled = false;
 
         }
@@ -103,9 +113,17 @@ namespace EyeCT4Events_WF
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FormRegistreerNieuweGebruiker frg = new FormRegistreerNieuweGebruiker();
-            this.Hide();
-            frg.Show();
+            kampeerplaats = kampeerplaatsen[lbKampeerplaatsen.SelectedIndex];
+            datumVan = dtVan.Value;
+            datumTot = dtTot.Value;
+            plaatsid = kampeerplaats.PlaatsID;
+            bezoekerid = bezoeker.GebruikersID;
+
+            RepositoryKampeerPlaatsen rkp = new RepositoryKampeerPlaatsen(new MSSQL_Server());
+            plaatsid = kampeerplaats.PlaatsID;
+            rkp.ReserveringPlaatsen(bezoekerid, plaatsid, datumVan, datumTot);
+
+
         }
 
         private void rbInvalide_CheckedChanged(object sender, EventArgs e)

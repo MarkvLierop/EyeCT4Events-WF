@@ -13,5 +13,8 @@ namespace EyeCT4Events_WF.Interfaces
         Gebruiker GetGebruikerByGebruikersnaam(string gebruikersnaam);
         Gebruiker GetGebruikerByID(int ID);
 
+        void GebruikerRegistreren(Gebruiker gebruiker);
+
+
     }
 }

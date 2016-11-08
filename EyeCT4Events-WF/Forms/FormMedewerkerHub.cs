@@ -11,30 +11,33 @@ using System.Windows.Forms;
 
 namespace EyeCT4Events_WF.Forms
 {
-    public partial class FormMedewerkerMainMenu : Form
+    public partial class FormMedewerkerHub : Form
     {
         Gebruiker medewerker;
 
-        public FormMedewerkerMainMenu(Gebruiker gebruiker)
+        public FormMedewerkerHub()
         {
             InitializeComponent();
+        }
 
+        public FormMedewerkerHub(Gebruiker gebruiker)
+        {
+            InitializeComponent();
             medewerker = gebruiker;
-            lblMedewerkerNaam.Text = medewerker.ToString();
+            lblMedewerker.Text = medewerker.Voornaam + " " + medewerker.Achternaam;
         }
 
         private void btnMedia_Click(object sender, EventArgs e)
         {
-            FormMediaOverzicht fmo = new FormMediaOverzicht(medewerker);
-            fmo.Show();
+
         }
 
         private void btnReserveer_Click(object sender, EventArgs e)
         {
             
-            FormReserveerPlaats frp = new FormReserveerPlaats(medewerker);
+            FormBestaandeAccount fba = new FormBestaandeAccount(medewerker);
             this.Hide();
-            frp.Show();
+            fba.Show();
         }
 
         private void btnEventAanmaken_Click(object sender, EventArgs e)
@@ -44,12 +47,14 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnBezoekers_Click(object sender, EventArgs e)
         {
-
+            AanwezigBezoekers fab = new AanwezigBezoekers();
+            this.Hide();
+            fab.Show();
         }
 
         private void btnMateriaal_Click(object sender, EventArgs e)
         {
-            FormReserveerMateriaal frm = new FormReserveerMateriaal(medewerker);
+            FormReserveerMateriaal frm = new FormReserveerMateriaal();
             this.Hide();
             frm.Show();
         }

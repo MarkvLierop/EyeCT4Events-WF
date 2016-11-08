@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EyeCT4Events_WF.Classes;
+using EyeCT4Events_WF.Classes.Repositories;
+using EyeCT4Events_WF.Persistencies;
+using EyeCT4Events_WF.Classes.Gebruikers;
 
 namespace EyeCT4Events_WF
 {
@@ -31,17 +34,22 @@ namespace EyeCT4Events_WF
 
             if (tbRegAchternaam.Text != "" && tbRegVoornaam.Text != "" && tbRegGebruiker.Text != "" && tbRegWachtwoord.Text != "")
             {
+                bool aanwezig = false;
                 if(tbRegBevestigWachtwoord.Text == tbRegWachtwoord.Text)
                 {
-                    //Administration admin = new Administration();
-                    //bool gelukt = admin.MaakBezoeker(tbRegAchternaam.Text, tbRegVoornaam.Text, tbRegGebruiker.Text, tbRegWachtwoord.Text);
-
-                    //if (gelukt)
-                    //{
-                    //    MessageBox.Show("Registratie succesvol");
-                    //}
+                    Gebruiker bezoeker = new Bezoeker(tbRegVoornaam.Text, tbRegAchternaam.Text, tbTussenvoegsel.Text, tbRegGebruiker.Text, tbRegWachtwoord.Text, Convert.ToInt32(tbRFID.Text), aanwezig);
+                    RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQL_Server());
+                    rg.GebruikerRegistreren(bezoeker);
+                    bezoeker = rg.GetGebruikerByGebruikersnaam(tbRegGebruiker.Text);
+                    //methode voor check 
+                    //MessageBox.Show("Registratie succesvol");
+                    //MessageBox.Show("Regestratie niet gelukt");
+                    FormReserveerPlaats frp = new FormReserveerPlaats(medewerker, bezoeker);
+                    this.Hide();
+                    frp.Show();
                 }
 
+                
                 else
                 {
                     MessageBox.Show("Wachtwoorden komen niet overeen");
