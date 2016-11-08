@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EyeCT4Events_WF.Classes
 {
-    class Event
+    public class Event
     {
         public string Beschrijving { get; set; }
         public DateTime DatumTot { get; set; }

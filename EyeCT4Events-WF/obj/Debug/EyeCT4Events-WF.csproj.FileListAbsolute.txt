@@ -78,3 +78,4 @@ C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.Form
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMedewerkerMainMenu.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMediaBekijken.resources
 C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormAanwezigeBezoekers.resources
+C:\Users\Mark\Desktop\eyect\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormEvenementAanmaken.resources

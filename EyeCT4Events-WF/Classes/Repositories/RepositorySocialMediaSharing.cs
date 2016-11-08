@@ -23,6 +23,10 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             ISMS.VerwijderReactie(reactie);
         }
+        public void ToevoegenEvent(Event ev)
+        {
+            ISMS.ToevoegenEvent(ev);
+        }
         public Categorie[] AlleCategorienOpvragen()
         {
             return ISMS.AlleCategorienOpvragen();

@@ -1052,7 +1052,6 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
             return KampeerList;
         }
-
         public void ZetBezoekerOpAfwezig(int RFID)
         {
             Connect();
@@ -1072,7 +1071,6 @@ namespace EyeCT4Events_WF.Persistencies
             }
             Close();
         }
-
         public void ZetBezoekerOpAanwezig(int RFID)
         {
             Connect();
@@ -1092,7 +1090,30 @@ namespace EyeCT4Events_WF.Persistencies
             }
             Close();
         }
-
+        #endregion
+        #region Algemeen
+        public void ToevoegenEvent(Event ev)
+        {
+            Connect();
+            try
+            {
+                string query = "INSERT INTO Event VALUES (@locatie, @datumVan, @titel, @beschrijving, @datumTot)";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@locatie", ev.Locatie));
+                    command.Parameters.Add(new SqlParameter("@datumVan", ev.DatumVan));
+                    command.Parameters.Add(new SqlParameter("@titel", ev.Naam));
+                    command.Parameters.Add(new SqlParameter("@beschrijving", ev.Beschrijving));
+                    command.Parameters.Add(new SqlParameter("@datumTot", ev.DatumTot));
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+        }
         #endregion
 
     }

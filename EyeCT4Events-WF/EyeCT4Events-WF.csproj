@@ -90,22 +90,22 @@
     <Compile Include="Forms\FormBestaandeAccount.Designer.cs">
       <DependentUpon>FormBestaandeAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormCategorieToevoegen.cs">
+    <Compile Include="Forms\SocialMediaSharing\FormCategorieToevoegen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormCategorieToevoegen.Designer.cs">
+    <Compile Include="Forms\SocialMediaSharing\FormCategorieToevoegen.Designer.cs">
       <DependentUpon>FormCategorieToevoegen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormCategorieZoeken.cs">
+    <Compile Include="Forms\SocialMediaSharing\FormCategorieZoeken.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormCategorieZoeken.Designer.cs">
+    <Compile Include="Forms\SocialMediaSharing\FormCategorieZoeken.Designer.cs">
       <DependentUpon>FormCategorieZoeken.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormEvenementAanmaken.cs">
+    <Compile Include="Forms\SocialMediaSharing\FormEvenementAanmaken.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormEvenementAanmaken.Designer.cs">
+    <Compile Include="Forms\SocialMediaSharing\FormEvenementAanmaken.Designer.cs">
       <DependentUpon>FormEvenementAanmaken.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormEventAanmaken.cs">
@@ -126,16 +126,16 @@
     <Compile Include="Forms\FormMedewerkerMainMenu.Designer.cs">
       <DependentUpon>FormMedewerkerMainMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormMediaBekijken.cs">
+    <Compile Include="Forms\SocialMediaSharing\FormMediaBekijken.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormMediaBekijken.Designer.cs">
+    <Compile Include="Forms\SocialMediaSharing\FormMediaBekijken.Designer.cs">
       <DependentUpon>FormMediaBekijken.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormMediaOverzicht.cs">
+    <Compile Include="Forms\SocialMediaSharing\FormMediaOverzicht.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormMediaOverzicht.Designer.cs">
+    <Compile Include="Forms\SocialMediaSharing\FormMediaOverzicht.Designer.cs">
       <DependentUpon>FormMediaOverzicht.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Domain Classes\Gebruikers\Gebruiker.cs" />
@@ -160,16 +160,16 @@
     <Compile Include="Forms\FormInloggen.designer.cs">
       <DependentUpon>FormInloggen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormMediaReageren.cs">
+    <Compile Include="Forms\SocialMediaSharing\FormMediaReageren.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormMediaReageren.Designer.cs">
+    <Compile Include="Forms\SocialMediaSharing\FormMediaReageren.Designer.cs">
       <DependentUpon>FormMediaReageren.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormMediaUploaden.cs">
+    <Compile Include="Forms\SocialMediaSharing\FormMediaUploaden.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormMediaUploaden.Designer.cs">
+    <Compile Include="Forms\SocialMediaSharing\FormMediaUploaden.Designer.cs">
       <DependentUpon>FormMediaUploaden.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormRegistreerNieuweGebruiker.cs">
@@ -179,7 +179,7 @@
       <DependentUpon>FormRegistreerNieuweGebruiker.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Interfaces\IGebruikerAdministratie.cs" />
-    <Compile Include="Classes\Persistencies\MSSQL-Server.cs" />
+    <Compile Include="Forms\Persistencies\MSSQL-Server.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Domain Classes\Reactie.cs" />
@@ -206,13 +206,13 @@
     <EmbeddedResource Include="Forms\FormBestaandeAccount.resx">
       <DependentUpon>FormBestaandeAccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormCategorieToevoegen.resx">
+    <EmbeddedResource Include="Forms\SocialMediaSharing\FormCategorieToevoegen.resx">
       <DependentUpon>FormCategorieToevoegen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormCategorieZoeken.resx">
+    <EmbeddedResource Include="Forms\SocialMediaSharing\FormCategorieZoeken.resx">
       <DependentUpon>FormCategorieZoeken.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormEvenementAanmaken.resx">
+    <EmbeddedResource Include="Forms\SocialMediaSharing\FormEvenementAanmaken.resx">
       <DependentUpon>FormEvenementAanmaken.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEventAanmaken.resx">
@@ -224,10 +224,10 @@
     <EmbeddedResource Include="Forms\FormMedewerkerMainMenu.resx">
       <DependentUpon>FormMedewerkerMainMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormMediaBekijken.resx">
+    <EmbeddedResource Include="Forms\SocialMediaSharing\FormMediaBekijken.resx">
       <DependentUpon>FormMediaBekijken.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormMediaOverzicht.resx">
+    <EmbeddedResource Include="Forms\SocialMediaSharing\FormMediaOverzicht.resx">
       <DependentUpon>FormMediaOverzicht.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormGebruikergegevens.resx">
@@ -239,10 +239,10 @@
     <EmbeddedResource Include="Forms\FormInloggen.resx">
       <DependentUpon>FormInloggen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormMediaReageren.resx">
+    <EmbeddedResource Include="Forms\SocialMediaSharing\FormMediaReageren.resx">
       <DependentUpon>FormMediaReageren.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormMediaUploaden.resx">
+    <EmbeddedResource Include="Forms\SocialMediaSharing\FormMediaUploaden.resx">
       <DependentUpon>FormMediaUploaden.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormRegistreerNieuweGebruiker.resx">
