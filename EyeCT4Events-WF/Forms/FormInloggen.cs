@@ -68,7 +68,7 @@ namespace EyeCT4Events_WF
                 else
                     MessageBox.Show("Gebruikersnaam of wachtwoord incorrect, probeer het nogmaals");
             }
-            catch (NoDatabaseConnectionException exc)
+            catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
             }            

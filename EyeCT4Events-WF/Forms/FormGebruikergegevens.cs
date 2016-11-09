@@ -26,18 +26,10 @@ namespace EyeCT4Events_WF
             tbnaam.Text = beheerder.Voornaam;
             tbTussenvoegsel.Text = beheerder.Tussenvoegsel;
             tbAchternaam.Text = beheerder.Achternaam;
-            tbWachtwoord.Text = beheerder.Wachtwoord;
-            
-            
+            tbWachtwoord.Text = beheerder.Wachtwoord; 
         }
-
-        private void tbGebruikersnaam_TextChanged(object sender, EventArgs e)
-        {
-      
-        }
-
         private void tbnaam_TextChanged(object sender, EventArgs e)
-        {// Changes the textboxs length accordingly
+        {
             if (tbnaam.Text.Length > tbnaam.Width)
             {
                 tbnaam.Width += 5;
@@ -68,8 +60,6 @@ namespace EyeCT4Events_WF
             beheerder.Achternaam = tbAchternaam.Text;
             beheerder.Wachtwoord = tbWachtwoord.Text;
             // Voeg veranderingen toe in de database
-         
-            
         }
 
         private void tbTussenvoegsel_TextChanged(object sender, EventArgs e)
@@ -94,7 +84,8 @@ namespace EyeCT4Events_WF
            // beheerder = null;
         }
 
-        private void BtBack_Click(object sender, EventArgs e){
+        private void BtBack_Click(object sender, EventArgs e)
+        {
             Gebruikersbeheer G = new Gebruikersbeheer();
             G.Show();
             this.Hide();

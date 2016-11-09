@@ -23,8 +23,8 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnGerapporteerdeMedia_Click(object sender, EventArgs e)
         {
-            //FormGerapporteerdeMediaOverzicht fgmo = new FormGerapporteerdeMediaOverzicht(beheerder);
-            //fgmo.Show();
+            FormGerapporteerdeMediaOverzicht fgmo = new FormGerapporteerdeMediaOverzicht(beheerder);
+            fgmo.Show();
         }
 
         private void btnAanwezigeBezoekers_Click(object sender, EventArgs e)
@@ -42,6 +42,11 @@ namespace EyeCT4Events_WF.Forms
         {
             FormEvenementAanmaken fea = new FormEvenementAanmaken(beheerder);
             fea.Show();
+        }
+
+        private void btnSocialmediaSharing_Click(object sender, EventArgs e)
+        {
+            //FormSocialMediaOverzicht
         }
     }
 }

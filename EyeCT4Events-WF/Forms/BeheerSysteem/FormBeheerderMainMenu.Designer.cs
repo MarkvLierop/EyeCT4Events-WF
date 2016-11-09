@@ -44,6 +44,7 @@
             this.btnSocialmediaSharing.Text = "Social Media Sharing";
             this.btnSocialmediaSharing.UseCompatibleTextRendering = true;
             this.btnSocialmediaSharing.UseVisualStyleBackColor = true;
+            this.btnSocialmediaSharing.Click += new System.EventHandler(this.btnSocialmediaSharing_Click);
             // 
             // btnAanwezigeBezoekers
             // 
