@@ -53,13 +53,13 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\DataAccesLayer\Interfaces\IKampeerplaats.cs" />
-    <Compile Include="Classes\DataAccesLayer\Interfaces\IMateriaal.cs" />
-    <Compile Include="Classes\DataAccesLayer\Interfaces\ISocialMediaSharing.cs" />
-    <Compile Include="Classes\DataAccesLayer\Repositories\RepositoryKampeerPlaatsen.cs" />
-    <Compile Include="Classes\DataAccesLayer\Repositories\RepositoryGebruiker.cs" />
-    <Compile Include="Classes\DataAccesLayer\Repositories\RepositoryMateriaal.cs" />
-    <Compile Include="Classes\DataAccesLayer\Repositories\RepositorySocialMediaSharing.cs" />
+    <Compile Include="Classes\Interfaces\IKampeerplaats.cs" />
+    <Compile Include="Classes\Interfaces\IMateriaal.cs" />
+    <Compile Include="Classes\Interfaces\ISocialMediaSharing.cs" />
+    <Compile Include="Classes\Repositories\RepositoryKampeerPlaatsen.cs" />
+    <Compile Include="Classes\Repositories\RepositoryGebruiker.cs" />
+    <Compile Include="Classes\Repositories\RepositoryMateriaal.cs" />
+    <Compile Include="Classes\Repositories\RepositorySocialMediaSharing.cs" />
     <Compile Include="CustomControls\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -184,8 +184,8 @@
     <Compile Include="Forms\FormRegistreerNieuweGebruiker.designer.cs">
       <DependentUpon>FormRegistreerNieuweGebruiker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\DataAccesLayer\Interfaces\IGebruikerAdministratie.cs" />
-    <Compile Include="Classes\DataAccesLayer\Persistencies\MSSQL-Server.cs" />
+    <Compile Include="Classes\Interfaces\IGebruikerAdministratie.cs" />
+    <Compile Include="Classes\Persistencies\MSSQL-Server.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Domain Classes\Reactie.cs" />
@@ -303,6 +303,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes\DataAccesLayer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

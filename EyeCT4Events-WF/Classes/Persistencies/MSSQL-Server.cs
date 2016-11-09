@@ -553,6 +553,8 @@ namespace EyeCT4Events_WF.Persistencies
         public void SchoolAbusievelijkTaalgebruikOp()
         {
             List<Reactie> reactielijst = AlleReactiesOpvragen();
+            List<Media> mediaLijst = AlleMediaOpvragen();
+            List<string> nietGeaccepteerdeWoorden = GetNietGeaccepteerdeWoorden();
             foreach (Reactie r in reactielijst)
             {
                 //if (r.Media == media.ID)
