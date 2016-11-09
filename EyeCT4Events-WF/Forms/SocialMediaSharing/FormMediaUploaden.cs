@@ -1,4 +1,5 @@
 ﻿using EyeCT4Events_WF.Classes;
+using EyeCT4Events_WF.Classes.Persistencies;
 using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Persistencies;
@@ -28,7 +29,7 @@ namespace EyeCT4Events_WF.Forms
             InitializeComponent();
             this.gebruiker = gebruiker;
 
-            smsr = new RepositorySocialMediaSharing(new MSSQL_Server());
+            smsr = new RepositorySocialMediaSharing(new MSSQLSMS());
         }
         private void btnOpslaan_Click(object sender, EventArgs e)
         {

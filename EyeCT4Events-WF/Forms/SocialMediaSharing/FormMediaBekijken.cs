@@ -1,4 +1,5 @@
 ﻿using EyeCT4Events_WF.Classes;
+using EyeCT4Events_WF.Classes.Persistencies;
 using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Persistencies;
@@ -39,8 +40,8 @@ namespace EyeCT4Events_WF.Forms
             this.beheerder = beheerder;
             this.media = media;
 
-            rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
-            rg = new RepositoryGebruiker(new MSSQL_Server());
+            rsms = new RepositorySocialMediaSharing(new MSSQLSMS());
+            rg = new RepositoryGebruiker(new MSSQLGebruiker());
 
             try
             {

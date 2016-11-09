@@ -1,4 +1,5 @@
 ﻿using EyeCT4Events_WF.Classes;
+using EyeCT4Events_WF.Classes.Persistencies;
 using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Forms.BeheerSysteem;
@@ -25,8 +26,8 @@ namespace EyeCT4Events_WF
         public FormAanwezigeBezoekers()
         {
             InitializeComponent();
-            rg = new RepositoryGebruiker(new MSSQL_Server());
-            rkp = new RepositoryKampeerPlaatsen(new MSSQL_Server());
+            rg = new RepositoryGebruiker(new MSSQLGebruiker());
+            rkp = new RepositoryKampeerPlaatsen(new MSSQLReserveren());
             bezoekerLijst = new List<Gebruiker>();
 
             lvAanwezigeBezoekers.View = View.Details;

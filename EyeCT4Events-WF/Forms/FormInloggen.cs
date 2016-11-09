@@ -12,6 +12,7 @@ using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Persistencies;
 using EyeCT4Events_WF.Forms;
 using EyeCT4Events_WF.Exceptions;
+using EyeCT4Events_WF.Classes.Persistencies;
 
 namespace EyeCT4Events_WF
 {
@@ -23,7 +24,7 @@ namespace EyeCT4Events_WF
         {
             InitializeComponent();
 
-            gar = new RepositoryGebruiker(new MSSQL_Server());
+            gar = new RepositoryGebruiker(new MSSQLGebruiker());
         }       
 
         private void btnLogin_Click(object sender, EventArgs e)

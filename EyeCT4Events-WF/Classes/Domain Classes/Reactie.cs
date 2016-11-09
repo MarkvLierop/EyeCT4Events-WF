@@ -1,4 +1,5 @@
-﻿using EyeCT4Events_WF.Persistencies;
+﻿using EyeCT4Events_WF.Classes.Persistencies;
+using EyeCT4Events_WF.Persistencies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace EyeCT4Events_WF.Classes
         private Repositories.RepositoryGebruiker rg;
         public Reactie()
         {
-            rg = new Repositories.RepositoryGebruiker(new MSSQL_Server());
+            rg = new Repositories.RepositoryGebruiker(new MSSQLGebruiker());
         }
         public override string ToString()
         {

@@ -12,12 +12,13 @@ using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Persistencies;
 using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Forms;
+using EyeCT4Events_WF.Classes.Persistencies;
 
 namespace EyeCT4Events_WF
 {
     public partial class FormReserveerPlaats : Form
     {
-        RepositoryKampeerPlaatsen kpr = new RepositoryKampeerPlaatsen(new MSSQL_Server());
+        RepositoryKampeerPlaatsen kpr = new RepositoryKampeerPlaatsen(new MSSQLReserveren());
         List<Kampeerplaats> kampeerplaatsen = new List<Kampeerplaats>();
         Gebruiker bezoeker;
         Gebruiker medewerker;
@@ -191,7 +192,7 @@ namespace EyeCT4Events_WF
             plaatsid = kampeerplaats.ID;
             bezoekerid = bezoeker.ID;
 
-            RepositoryKampeerPlaatsen rkp = new RepositoryKampeerPlaatsen(new MSSQL_Server());
+            RepositoryKampeerPlaatsen rkp = new RepositoryKampeerPlaatsen(new MSSQLReserveren());
             rkp.ReserveringPlaatsen(bezoekerid, plaatsid, datumVan, datumTot);
 
             reservering = rkp.HaalReserveringOpNaAanmaken(bezoekerid, plaatsid, datumVan, datumTot);

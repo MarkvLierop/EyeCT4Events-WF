@@ -13,7 +13,7 @@ namespace EyeCT4Events_WF
 {
     partial class Gebruikergegevens : Form
     {
-
+        Gebruiker beheerder;
         public Gebruikergegevens() 
         {
             InitializeComponent();
@@ -93,7 +93,7 @@ namespace EyeCT4Events_WF
         }
 
         private void BtBack_Click(object sender, EventArgs e){
-            Gebruikersbeheer G = new Gebruikersbeheer(beheerder);
+            Gebruikersbeheer G = new Gebruikersbeheer();
             G.Show();
             this.Hide();
         }

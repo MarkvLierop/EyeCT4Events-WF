@@ -1,4 +1,5 @@
 ﻿using EyeCT4Events_WF.Classes;
+using EyeCT4Events_WF.Classes.Persistencies;
 using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Persistencies;
@@ -24,7 +25,7 @@ namespace EyeCT4Events_WF.Forms
         public FormCategorieToevoegen()
         {
             InitializeComponent();
-            smsr = new RepositorySocialMediaSharing(new MSSQL_Server());
+            smsr = new RepositorySocialMediaSharing(new MSSQLSMS());
 
             try
             {

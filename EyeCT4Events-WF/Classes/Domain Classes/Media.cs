@@ -1,4 +1,5 @@
-﻿using EyeCT4Events_WF.Exceptions;
+﻿using EyeCT4Events_WF.Classes.Persistencies;
+using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Persistencies;
 using Microsoft.Win32;
 using System;
@@ -26,8 +27,8 @@ namespace EyeCT4Events_WF.Classes
         Repositories.RepositoryGebruiker rg;
         public Media()
         {
-            smsr = new Repositories.RepositorySocialMediaSharing(new MSSQL_Server());
-            rg = new Repositories.RepositoryGebruiker(new MSSQL_Server());
+            smsr = new Repositories.RepositorySocialMediaSharing(new MSSQLSMS());
+            rg = new Repositories.RepositoryGebruiker(new MSSQLGebruiker());
         }
         public string FilterVastStellen()
         {

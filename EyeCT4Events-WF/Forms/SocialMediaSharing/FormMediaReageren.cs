@@ -1,4 +1,5 @@
 ﻿using EyeCT4Events_WF.Classes;
+using EyeCT4Events_WF.Classes.Persistencies;
 using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Persistencies;
@@ -29,7 +30,7 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnReactiePlaatsen_Click(object sender, EventArgs e)
         {
-            rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
+            rsms = new RepositorySocialMediaSharing(new MSSQLSMS());
 
             Reactie reactie = new Reactie();
             reactie.DatumTijd = DateTime.Now;

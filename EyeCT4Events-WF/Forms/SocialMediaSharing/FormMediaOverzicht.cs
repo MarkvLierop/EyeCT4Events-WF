@@ -1,4 +1,5 @@
 ﻿using EyeCT4Events_WF.Classes;
+using EyeCT4Events_WF.Classes.Persistencies;
 using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Forms;
@@ -26,7 +27,7 @@ namespace EyeCT4Events_WF
         private void ContentCreeren(List<Media> mediaList)
         {
             // Ongewenste inhoud verwijderen
-            rg = new RepositoryGebruiker(new MSSQL_Server());
+            rg = new RepositoryGebruiker(new MSSQLGebruiker());
             try
             {
                 rsms.SchoolAbusievelijkTaalgebruikOp();
@@ -119,7 +120,7 @@ namespace EyeCT4Events_WF
             InitializeComponent();
             this.gebruiker = gebruiker;
 
-            rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
+            rsms = new RepositorySocialMediaSharing(new MSSQLSMS());
             try
             {
                 categorieLijst = rsms.AlleCategorienOpvragen().ToList();
@@ -257,7 +258,7 @@ namespace EyeCT4Events_WF
 
         private void txtCategorieZoeken_TextChanged(object sender, EventArgs e)
         {
-            RepositorySocialMediaSharing rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
+            RepositorySocialMediaSharing rsms = new RepositorySocialMediaSharing(new MSSQLSMS());
             try
             {
                 categorieLijst = rsms.ZoekenCategorie(txtCategorieZoeken.Text);

@@ -1,5 +1,6 @@
 ﻿using EyeCT4Events_WF.Classes;
 using EyeCT4Events_WF.Classes.Gebruikers;
+using EyeCT4Events_WF.Classes.Persistencies;
 using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Persistencies;
@@ -17,7 +18,7 @@ namespace EyeCT4Events_WF.Forms.BeheerSysteem
 {
     public partial class FormBetalingsGegevens : Form
     {
-        private RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQL_Server());
+        private RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQLGebruiker());
         public FormBetalingsGegevens()
         {
             InitializeComponent();
@@ -60,22 +61,15 @@ namespace EyeCT4Events_WF.Forms.BeheerSysteem
         {
             try
             {
-                if (txtScannen.Text != "")
-                {
-                    Gebruiker gebruiker = rg.GetGebruikerByRFID(Convert.ToInt32(txtScannen.Text));
+                Gebruiker gebruiker = rg.GetGebruikerByRFID(Convert.ToInt32(txtScannen.Text));
 
-                    lblAchternaam.Text = gebruiker.Achternaam;
-                    lblTussenvoegsel.Text = gebruiker.Tussenvoegsel;
-                    lblVoornaam.Text = gebruiker.Voornaam;
+                lblAchternaam.Text = gebruiker.Achternaam;
+                lblTussenvoegsel.Text = gebruiker.Tussenvoegsel;
+                lblVoornaam.Text = gebruiker.Voornaam;
+                btnBetaald.Text = rg.GetBetalingsGegevens(gebruiker)[1];
+                lblVerantwoordelijke.Text = rg.GetBetalingsGegevens(gebruiker)[0];
 
-                    if (rg.GetBetalingsGegevens(gebruiker).Count != 0)
-                    {
-                        btnBetaald.Text = rg.GetBetalingsGegevens(gebruiker)[1];
-                        lblVerantwoordelijke.Text = rg.GetBetalingsGegevens(gebruiker)[0];
-                    }
-
-                    txtScannen.Text = "";
-                }
+                txtScannen.Text = "";
             }
             catch (Exception exc)
             {

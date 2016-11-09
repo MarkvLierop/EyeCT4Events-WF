@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EyeCT4Events_WF.Persistencies;
+using EyeCT4Events_WF.Classes.Persistencies;
 
 namespace EyeCT4Events_WF.Forms
 {
@@ -55,7 +56,7 @@ namespace EyeCT4Events_WF.Forms
         {
             InitializeComponent();
             this.beheerder = beheerder;
-            rsms = new RepositorySocialMediaSharing(new MSSQL_Server());
+            rsms = new RepositorySocialMediaSharing(new MSSQLSMS());
             #region Verbergthreshhold Ophalen of wegschrijven
             if (!File.Exists("Settings.txt"))
             {

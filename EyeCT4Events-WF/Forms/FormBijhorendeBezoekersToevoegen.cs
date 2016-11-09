@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using EyeCT4Events_WF.Classes.Gebruikers;
 using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Persistencies;
+using EyeCT4Events_WF.Classes.Persistencies;
 
 namespace EyeCT4Events_WF.Forms
 {
@@ -53,7 +54,7 @@ namespace EyeCT4Events_WF.Forms
                     bijhorendebezoeker.RFID = Convert.ToInt32(tbRFID.Text);
                     bijhorendebezoeker.Aanwezig = aanwezig;
 
-                    RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQL_Server());
+                    RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQLGebruiker());
                     rg.GebruikerRegistreren(bijhorendebezoeker);
 
                     MessageBox.Show("Gebruiker Toegevoegd");
@@ -75,7 +76,7 @@ namespace EyeCT4Events_WF.Forms
                     int plaatsid = kampeerplaats.ID;
                     int bijhorendebezoekerid = bijhorendebezoeker.ID;
 
-                    RepositoryKampeerPlaatsen rkp = new RepositoryKampeerPlaatsen(new MSSQL_Server());
+                    RepositoryKampeerPlaatsen rkp = new RepositoryKampeerPlaatsen(new MSSQLReserveren());
                     rkp.ReserveringgroepToevoegen(verantwoordelijkeid, bijhorendebezoekerid, plaatsid, reserveringid);
                     MessageBox.Show("Gebruiker toegevoegd aan reservering");
                 }

@@ -124,7 +124,7 @@
             this.btnBetaald.Name = "btnBetaald";
             this.btnBetaald.Size = new System.Drawing.Size(75, 23);
             this.btnBetaald.TabIndex = 9;
-            this.btnBetaald.Text = "Ja/Nee";
+            this.btnBetaald.Text = "button3";
             this.btnBetaald.UseVisualStyleBackColor = true;
             this.btnBetaald.Click += new System.EventHandler(this.btnBetaald_Click);
             // 
@@ -168,9 +168,9 @@
             this.lblVerantwoordelijke.AutoSize = true;
             this.lblVerantwoordelijke.Location = new System.Drawing.Point(138, 194);
             this.lblVerantwoordelijke.Name = "lblVerantwoordelijke";
-            this.lblVerantwoordelijke.Size = new System.Drawing.Size(91, 13);
+            this.lblVerantwoordelijke.Size = new System.Drawing.Size(58, 13);
             this.lblVerantwoordelijke.TabIndex = 15;
-            this.lblVerantwoordelijke.Text = "Verantwoordelijke";
+            this.lblVerantwoordelijke.Text = "Voornaam:";
             // 
             // txtScannen
             // 
