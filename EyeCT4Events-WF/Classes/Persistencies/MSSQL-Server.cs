@@ -229,6 +229,118 @@ namespace EyeCT4Events_WF.Persistencies
             }
             Close();
         }
+        public List<Gebruiker> GesorteerdeGeberuikers(string filter)
+        {
+            List<Gebruiker> gebruikersLijst = new List<Gebruiker>();
+            string query = "";
+            if (filter == "ID")
+            {
+                query = "SELECT * FROM Gebruiker";
+            }
+            else if (filter == "Naam")
+            {
+                query = "SELECT * FROM Gebruiker ORDER BY Voornaam";
+            }
+            else if (filter == "GebruikerType")
+            {
+                query = "SELECT * FROM Gebruiker ORDER BY GebruikerType, Voornaam ASC";
+            }
+            else if (filter == "Aanwezig")
+            {
+                query = "SELECT * FROM Gebruiker where Aanwezig = 1";
+            }
+            else if (filter == "Hoofd Reserveerder")
+            {
+                query = "SELECT * From Gebruiker Where ID IN (Select DISTINCT(ReserveringVerantwoordelijke) FROM ReserveringGroep)";
+            }
+            else
+            {
+                query = "SELECT * FROM Gebruiker";
+            }
+            Connect();
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                    {
+                        gebruiker = new Bezoeker();
+                    }
+                    else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
+                    {
+                        gebruiker = new Beheerder();
+                    }
+                    else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
+                    {
+                        gebruiker = new Medewerker();
+                    }
+                    gebruiker.ID = Convert.ToInt32(reader["ID"]);
+                    gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                    gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                    gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                    gebruiker.Voornaam = reader["Voornaam"].ToString();
+                    gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                    gebruiker.Achternaam = reader["Achternaam"].ToString();
+                    if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                    {
+                        gebruiker.Aanwezig = true;
+                    }
+                    else
+                    {
+                        gebruiker.Aanwezig = false;
+                    }
+                    gebruikersLijst.Add(gebruiker);
+
+                }
+            }
+            return gebruikersLijst;
+        }
+        public List<Gebruiker> ZoekenGebruiker(string GezochtenNaam)
+        {
+            List<Gebruiker> gebruikersLijst = new List<Gebruiker>();
+            Connect();
+            string query = "Select * FROM Gebruiker WHERE Voornaam LIKE @txtZoeken";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@txtZoeken", "%" + GezochtenNaam + "%"));
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                    {
+                        gebruiker = new Bezoeker();
+                    }
+                    else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
+                    {
+                        gebruiker = new Beheerder();
+                    }
+                    else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
+                    {
+                        gebruiker = new Medewerker();
+                    }
+                    gebruiker.ID = Convert.ToInt32(reader["ID"]);
+                    gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                    gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                    gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                    gebruiker.Voornaam = reader["Voornaam"].ToString();
+                    gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                    gebruiker.Achternaam = reader["Achternaam"].ToString();
+                    if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                    {
+                        gebruiker.Aanwezig = true;
+                    }
+                    else
+                    {
+                        gebruiker.Aanwezig = false;
+                    }
+                    gebruikersLijst.Add(gebruiker);
+
+                }
+            }
+            return gebruikersLijst;
+        }
         public List<string> GetBetalingsGegevens(Gebruiker gebruiker)
         {
             List<string> betalingsGegevens = new List<string>();

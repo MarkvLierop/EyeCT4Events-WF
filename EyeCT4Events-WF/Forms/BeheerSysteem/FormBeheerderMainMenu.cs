@@ -34,8 +34,8 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnGebruikersBeheren_Click(object sender, EventArgs e)
         {
-            Gebruikersbeheer gebruikerbeheer = new Gebruikersbeheer();
-            gebruikerbeheer.Show();
+            //Gebruikersbeheer gebruikerbeheer = new Gebruikersbeheer();
+            //gebruikerbeheer.Show();
         }
 
         private void btnEvenementAanmaken_Click(object sender, EventArgs e)

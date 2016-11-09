@@ -13,19 +13,18 @@ namespace EyeCT4Events_WF
 {
     partial class Gebruikergegevens : Form
     {
-        Gebruiker g;   
-        public Gebruikergegevens(Gebruiker g) 
+
+        public Gebruikergegevens() 
         {
             InitializeComponent();
-            this.g = g;
         }
 
         private void Gebruikergegevens_Load(object sender, EventArgs e)
         {
-            tbnaam.Text = g.Voornaam;
-            tbTussenvoegsel.Text = g.Tussenvoegsel;
-            tbAchternaam.Text = g.Achternaam;
-            tbWachtwoord.Text = g.Wachtwoord;
+            tbnaam.Text = beheerder.Voornaam;
+            tbTussenvoegsel.Text = beheerder.Tussenvoegsel;
+            tbAchternaam.Text = beheerder.Achternaam;
+            tbWachtwoord.Text = beheerder.Wachtwoord;
             
             
         }
@@ -62,10 +61,10 @@ namespace EyeCT4Events_WF
 
         private void tbEdit_Click(object sender, EventArgs e)
         {
-            g.Voornaam = tbnaam.Text;
-            g.Tussenvoegsel = tbTussenvoegsel.Text;
-            g.Achternaam = tbAchternaam.Text;
-            g.Wachtwoord = tbWachtwoord.Text;
+            beheerder.Voornaam = tbnaam.Text;
+            beheerder.Tussenvoegsel = tbTussenvoegsel.Text;
+            beheerder.Achternaam = tbAchternaam.Text;
+            beheerder.Wachtwoord = tbWachtwoord.Text;
             // Voeg veranderingen toe in de database
          
             
@@ -90,7 +89,21 @@ namespace EyeCT4Events_WF
         private void btDeleteAccount_Click(object sender, EventArgs e)
         {
             //Verwijder account uit de database
-           // g = null;
+           // beheerder = null;
         }
+
+        private void BtBack_Click(object sender, EventArgs e){
+            Gebruikersbeheer G = new Gebruikersbeheer(beheerder);
+            G.Show();
+            this.Hide();
+        }
+
+
+
+
+
+
+
+
     }
 }

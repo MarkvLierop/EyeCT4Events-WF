@@ -37,6 +37,11 @@ namespace EyeCT4Events_WF.Classes
 
         }
 
+        public string GetGebruikerType()
+        {
+            string[] type = this.GetType().ToString().Split('.');
+            return type[type.Count() - 1];
+        }
         public override string ToString()
         {
             return Voornaam + " " + Tussenvoegsel + " " + Achternaam;
