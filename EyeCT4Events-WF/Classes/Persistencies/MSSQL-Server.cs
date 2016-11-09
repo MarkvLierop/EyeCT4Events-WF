@@ -354,7 +354,7 @@ namespace EyeCT4Events_WF.Persistencies
                 using (command = new SqlCommand(query, SQLcon))
                 {
                     command.Parameters.Add(new SqlParameter("@Gebruiker", Gebruikersnaam));
-                    command.Parameters.Add(new SqlParameter("@Wachtwoord", wachtwoord));
+                    command.Parameters.Add(new SqlParameter("@Wachtwoord", EncryptString(wachtwoord)));
                     reader = command.ExecuteReader();
 
                     while (reader.Read())
@@ -1277,7 +1277,7 @@ namespace EyeCT4Events_WF.Persistencies
 
         public Reservering HaalReserveringOpNaAanmaken(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot)
         {
-            Reservering reservering;
+            Reservering reservering = new Reservering();
 
             int Gebruikerid = gebruikerid;
             int Plaatsid = plaatsid;
@@ -1290,35 +1290,72 @@ namespace EyeCT4Events_WF.Persistencies
             using (command = new SqlCommand(query, SQLcon))
             {
                 reader = command.ExecuteReader();
+                
 
                 while (reader.Read())
                 {
-                    
+
                     int GebruikerID = Convert.ToInt32(reader["GebruikerID"]);
                     int PlaatsID = Convert.ToInt32(reader["PlaatsID"]);
                     int ID = Convert.ToInt32(reader["ID"]);
-                    DateTime DatumTOT= Convert.ToDateTime(reader["DatumTot"]);
+                    DateTime DatumTOT = Convert.ToDateTime(reader["DatumTot"]);
                     DateTime DatumVAN = Convert.ToDateTime(reader["DatumVan"]);
                     if (Convert.ToInt32(reader["Betaald"]) == 0)
                     {
                         betaald = false;
-                        reservering = new Reservering(ID, GebruikerID, PlaatsID, DatumVAN, DatumTOT, betaald);
-                        return reservering;
+                        
+
+                        reservering.ReserveringID = ID;
+                        reservering.BezoekerID = GebruikerID;
+                        reservering.KampeerplaatsID = PlaatsID;
+                        reservering.DatumVan = DatumVAN;
+                        reservering.DatumTot = DatumTOT;
+                        reservering.Betaald = betaald;
 
                     }
-                    
+
                     else
                     {
-                        betaald = true;
-                        reservering = new Reservering(ID, GebruikerID, PlaatsID, DatumVAN, DatumTOT, betaald);
-                        return reservering;
-                    }             
-
-                   
-                }
-            }
-            Close();
                         
+                        betaald = true;
+
+                        reservering.ReserveringID = ID;
+                        reservering.BezoekerID = GebruikerID;
+                        reservering.KampeerplaatsID = PlaatsID;
+                        reservering.DatumVan = DatumVAN;
+                        reservering.DatumTot = DatumTOT;
+                        reservering.Betaald = betaald;
+                    }
+
+
+                }
+
+                
+            }
+
+            Close();
+            return reservering;
+
+        }
+
+        public void ReserveringgroepToevoegen(int verantwoordelijke, int gebruiker, int kampeerplaats, int reservering)
+        {
+            Connect();
+            string query = "INSERT INTO ReserveringGroep VALUES (@ReserveringsVerantwoordelijke, @Gebruiker, @Kampeerplaats, @Reservering)";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@ReserveringsVerantwoordelijke", verantwoordelijke));
+                command.Parameters.Add(new SqlParameter("@Gebruiker", gebruiker));
+                command.Parameters.Add(new SqlParameter("@Kampeerplaats", kampeerplaats));
+                command.Parameters.Add(new SqlParameter("@Reservering", reservering));
+
+
+                command.ExecuteNonQuery();
+            }
+
+            Close();
+        }
+
         #endregion
         #region Events
         public void ToevoegenEvent(Event ev)
@@ -1337,6 +1374,7 @@ namespace EyeCT4Events_WF.Persistencies
                     command.ExecuteNonQuery();
                 }
             }
+
             catch (SqlException e)
             {
                 throw new FoutBijUitvoerenQueryException(e.Message);
@@ -1367,30 +1405,17 @@ namespace EyeCT4Events_WF.Persistencies
                         eventList.Add(e);
                     }
                 }
-                }
-
-        public void ReserveringgroepToevoegen(int verantwoordelijke, int gebruiker, int kampeerplaats, int reservering)
-        {
-            Connect();
-            string query = "INSERT INTO ReserveringGroep VALUES (@ReserveringsVerantwoordelijke, @Gebruiker, @Kampeerplaats, @Reservering)";
-            using (command = new SqlCommand(query, SQLcon))
+            }
+            catch (SqlException e)
             {
-                command.Parameters.Add(new SqlParameter("@ReserveringsVerantwoordelijke", verantwoordelijke));
-                command.Parameters.Add(new SqlParameter("@Gebruiker", gebruiker));
-                command.Parameters.Add(new SqlParameter("@Kampeerplaats", kampeerplaats));
-                command.Parameters.Add(new SqlParameter("@Reservering", reservering));
-
-
-                command.ExecuteNonQuery();
+                throw new FoutBijUitvoerenQueryException(e.Message);
             }
 
-            Close();
-        }
-
-            
             return eventList;
-        }
+            }
+      }
+
         #endregion
 
-    }
 }
+

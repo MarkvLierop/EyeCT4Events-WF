@@ -26,6 +26,7 @@ namespace EyeCT4Events_WF
         private void ContentCreeren(List<Media> mediaList)
         {
             rg = new RepositoryGebruiker(new MSSQL_Server());
+            //rsms.SchoolAbusievelijkTaalgebruikOp();
 
             List<Control> pnlContentControlList = new List<Control>();
             for (int i = 0; i < mediaLijst.Count; i++)
@@ -36,24 +37,6 @@ namespace EyeCT4Events_WF
                 Titel.Width = pnlContent.Width;
                 pnlContentControlList.Add(Titel);
 
-                //switch (mediaLijst[i].Type)
-                //{
-                //    case "Afbeelding":
-                //        PictureBox pb = new PictureBox();
-                //        pb.Image = Image.FromFile(mediaLijst[i].Pad);
-                //        pb.Width = Image.FromFile(mediaLijst[i].Pad).Width;
-                //        pb.Height = Image.FromFile(mediaLijst[i].Pad).Height;
-                //        pnlContentControlList.Add(pb);
-                //        break;
-                //    case "Video":
-                //        WindowsMediaPlayer wmp1 = new WindowsMediaPlayer();
-                //        //pnlContentControlList.Add(wmp1 as Control);
-                //        break;
-                //    case "Audio":
-                //        WindowsMediaPlayer wmp2 = new WindowsMediaPlayer();
-                //        //pnlContentControlList.Add(wmp2 as Control);
-                //        break;
-                //}
                 if (mediaLijst[i].Pad != "")
                 {
                     Label lblDownloadFile = new Label();

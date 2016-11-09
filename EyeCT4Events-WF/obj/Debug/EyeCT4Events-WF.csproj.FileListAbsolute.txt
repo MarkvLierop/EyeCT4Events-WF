@@ -73,4 +73,9 @@ C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4E
 C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormBijhorendeBezoekersToevoegen.resources
 C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.FormAanwezigeBezoekers.resources
 C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormBeheerderMainMenu.resources
-C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMedewerkerMainMenu.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.BeheerSysteem.FormBetalingsGegevens.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormGerapporteerdeMediaOverzicht.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.GebruikerAanmaken.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormEvenementAanmaken.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.SocialMediaSharing.FormEventOverzicht.resources
+C:\Users\Dell i5\Source\Repos\EyeCT4Events-WF2\EyeCT4Events-WF\obj\Debug\EyeCT4Events_WF.Forms.FormMediaBekijken.resources
