@@ -8,10 +8,7 @@ namespace EyeCT4Events_WF.Classes.Interfaces
 {
     public interface IMateriaal
     {
-        List<Materiaal> Materialen();
-
-
-       Materiaal HaalMaterialenOp(); 
+       List<Materiaal> HaalMaterialenOp(); 
 
     }
 }

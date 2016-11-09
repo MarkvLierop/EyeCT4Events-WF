@@ -45,8 +45,8 @@ namespace EyeCT4Events_WF
                     else if (gebruiker.GetType() == typeof(Medewerker))
                     {
                         this.Hide();
-                        //FormMedewerkerMainMenu fmh = new FormMedewerkerMainMenu(gebruiker);
-                        //fmh.Show();
+                        FormMedewerkerMainMenu fmh = new FormMedewerkerMainMenu(gebruiker);
+                        fmh.Show();
                         
                     }
 

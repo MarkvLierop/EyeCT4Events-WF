@@ -16,7 +16,7 @@ namespace EyeCT4Events_WF.Forms
 {
     public partial class FormBestaandeAccount : Form
     {
-        List<Gebruiker> bestaandegebruikers;
+        List<Gebruiker> bestaandegebruikers = new List<Gebruiker>();
         Gebruiker medewerker;
 
         public int MSSQL { get; private set; }
@@ -28,17 +28,24 @@ namespace EyeCT4Events_WF.Forms
 
         public FormBestaandeAccount(Gebruiker gebruiker)
         {
+            InitializeComponent();
             medewerker = gebruiker;
         }
 
         private void tbZoekGebruikers_TextChanged(object sender, EventArgs e)
         {
             string zoekopdracht = tbZoekGebruikers.Text;
-            bestaandegebruikers.Clear();
+            if (bestaandegebruikers.Capacity > 0)
+            {
+                bestaandegebruikers.Clear();
+            }
+
             RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQL_Server());
             try
             {
                 bestaandegebruikers = rg.GezochteBezoekersOphalen(zoekopdracht);
+
+                Ververs();
             }
             catch (FoutBijUitvoerenQueryException exc)
             {
@@ -60,6 +67,16 @@ namespace EyeCT4Events_WF.Forms
             FormRegistreerNieuweGebruiker frng = new FormRegistreerNieuweGebruiker(medewerker);
             this.Hide();
             frng.Show();
+        }
+
+        void Ververs()
+        {
+            lbBestaandeGebruikers.Items.Clear();
+
+            foreach (Gebruiker g in bestaandegebruikers)
+            {
+                lbBestaandeGebruikers.Items.Add(g);
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ namespace EyeCT4Events_WF.Classes
     {
         public int MateriaalID { get; set; }
         public string Naam { get; set; }
-        public string Prijs { get; set; }
+        public int Prijs { get; set; }
         public int Voorraad { get; set; }
 
         public Materiaal()

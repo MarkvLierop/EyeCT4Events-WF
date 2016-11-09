@@ -11,6 +11,7 @@ using EyeCT4Events_WF.Classes;
 using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Persistencies;
 using EyeCT4Events_WF.Exceptions;
+using EyeCT4Events_WF.Forms;
 
 namespace EyeCT4Events_WF
 {
@@ -45,11 +46,13 @@ namespace EyeCT4Events_WF
             //HaalKampeerplaatsenOp();
         }
 
-        public FormReserveerPlaats(Gebruiker medewerker, Gebruiker Bezoeker)
+        public FormReserveerPlaats(Gebruiker Medewerker, Gebruiker Bezoeker)
         {
-           
-            lblMedewerker.Text = medewerker.Voornaam + " " + medewerker.Achternaam;
+            InitializeComponent();
+
+            medewerker = Medewerker;
             bezoeker = Bezoeker;
+            lblMedewerker.Text = medewerker.Voornaam + " " + medewerker.Achternaam;
 
             groupBox2.Enabled = false;
 
@@ -72,12 +75,13 @@ namespace EyeCT4Events_WF
             try
             {
                 kampeerplaatsen = kpr.KampeerplaatsenOpvragen(comfort, invalide, lawaai, eigentent, bungalow, bungalino, blokhut, stacaravan, huurtent);
+                Ververs();
             }
             catch (FoutBijUitvoerenQueryException e)
             {
                 MessageBox.Show(e.Message);
             }
-            Ververs();
+            
         }
 
         public void ResetGegevens()
@@ -111,19 +115,7 @@ namespace EyeCT4Events_WF
             groupBox2.Enabled = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            kampeerplaats = kampeerplaatsen[lbKampeerplaatsen.SelectedIndex];
-            datumVan = dtVan.Value;
-            datumTot = dtTot.Value;
-            plaatsid = kampeerplaats.ID;
-            bezoekerid = bezoeker.ID;
-
-            RepositoryKampeerPlaatsen rkp = new RepositoryKampeerPlaatsen(new MSSQL_Server());
-            rkp.ReserveringPlaatsen(bezoekerid, plaatsid, datumVan, datumTot);
-
-
-        }
+       
 
         private void rbInvalide_CheckedChanged(object sender, EventArgs e)
         {
@@ -189,6 +181,24 @@ namespace EyeCT4Events_WF
         private void cbEigenTent_CheckedChanged(object sender, EventArgs e)
         {
             HaalKampeerplaatsenOp();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            kampeerplaats = kampeerplaatsen[lbKampeerplaatsen.SelectedIndex];
+            datumVan = dtVan.Value;
+            datumTot = dtTot.Value;
+            plaatsid = kampeerplaats.ID;
+            bezoekerid = bezoeker.ID;
+
+            RepositoryKampeerPlaatsen rkp = new RepositoryKampeerPlaatsen(new MSSQL_Server());
+            rkp.ReserveringPlaatsen(bezoekerid, plaatsid, datumVan, datumTot);
+
+            reservering = rkp.HaalReserveringOpNaAanmaken(bezoekerid, plaatsid, datumVan, datumTot);
+
+            FormBijhorendeBezoekersToevoegen fbbt = new FormBijhorendeBezoekersToevoegen(medewerker, bezoeker, reservering, kampeerplaats);
+
+
         }
     }
 }

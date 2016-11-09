@@ -28,173 +28,71 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btAnnuleer = new System.Windows.Forms.Button();
-            this.btBevestig = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.VoorraadLijst = new System.Windows.Forms.CheckedListBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.btnGeenMateriaal = new System.Windows.Forms.Button();
+            this.btnBevestig = new System.Windows.Forms.Button();
+            this.lblHuurder = new System.Windows.Forms.Label();
+            this.lblMedewerker = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // btAnnuleer
+            // btnGeenMateriaal
             // 
-            this.btAnnuleer.Location = new System.Drawing.Point(20, 400);
-            this.btAnnuleer.Name = "btAnnuleer";
-            this.btAnnuleer.Size = new System.Drawing.Size(80, 30);
-            this.btAnnuleer.TabIndex = 6;
-            this.btAnnuleer.Text = "Annuleer";
-            this.btAnnuleer.UseVisualStyleBackColor = true;
+            this.btnGeenMateriaal.Location = new System.Drawing.Point(12, 400);
+            this.btnGeenMateriaal.Name = "btnGeenMateriaal";
+            this.btnGeenMateriaal.Size = new System.Drawing.Size(139, 30);
+            this.btnGeenMateriaal.TabIndex = 6;
+            this.btnGeenMateriaal.Text = "Geen Materiaal Nodig";
+            this.btnGeenMateriaal.UseVisualStyleBackColor = true;
             // 
-            // btBevestig
+            // btnBevestig
             // 
-            this.btBevestig.Location = new System.Drawing.Point(570, 400);
-            this.btBevestig.Name = "btBevestig";
-            this.btBevestig.Size = new System.Drawing.Size(80, 30);
-            this.btBevestig.TabIndex = 7;
-            this.btBevestig.Text = "Bevestig";
-            this.btBevestig.UseVisualStyleBackColor = true;
-            this.btBevestig.Click += new System.EventHandler(this.button1_Click);
+            this.btnBevestig.Location = new System.Drawing.Point(570, 400);
+            this.btnBevestig.Name = "btnBevestig";
+            this.btnBevestig.Size = new System.Drawing.Size(80, 30);
+            this.btnBevestig.TabIndex = 7;
+            this.btnBevestig.Text = "Bevestig";
+            this.btnBevestig.UseVisualStyleBackColor = true;
+            this.btnBevestig.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox1
+            // lblHuurder
             // 
-            this.textBox1.Location = new System.Drawing.Point(20, 20);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(300, 20);
-            this.textBox1.TabIndex = 8;
-            this.textBox1.Text = "Materiaal verhuur";
+            this.lblHuurder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblHuurder.Location = new System.Drawing.Point(12, 13);
+            this.lblHuurder.Name = "lblHuurder";
+            this.lblHuurder.Size = new System.Drawing.Size(54, 20);
+            this.lblHuurder.TabIndex = 9;
+            this.lblHuurder.Text = "Huurder:";
+            this.lblHuurder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // textBox2
+            // lblMedewerker
             // 
-            this.textBox2.Location = new System.Drawing.Point(20, 90);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(160, 20);
-            this.textBox2.TabIndex = 8;
-            this.textBox2.Text = "Voornaam";
+            this.lblMedewerker.AutoSize = true;
+            this.lblMedewerker.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblMedewerker.Location = new System.Drawing.Point(524, 13);
+            this.lblMedewerker.Name = "lblMedewerker";
+            this.lblMedewerker.Size = new System.Drawing.Size(78, 15);
+            this.lblMedewerker.TabIndex = 13;
+            this.lblMedewerker.Text = "lblMedewerker";
             // 
-            // label1
+            // listBox1
             // 
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Location = new System.Drawing.Point(20, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 20);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Huurder gegevens";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(12, 92);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(129, 212);
+            this.listBox1.TabIndex = 14;
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(20, 115);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(160, 20);
-            this.textBox3.TabIndex = 8;
-            this.textBox3.Text = "Tusenvoegsel";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(20, 140);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(160, 20);
-            this.textBox4.TabIndex = 8;
-            this.textBox4.Text = "Achternaam";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(20, 165);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(160, 20);
-            this.textBox5.TabIndex = 8;
-            this.textBox5.Text = "E-mailadres";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(20, 190);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(160, 20);
-            this.textBox6.TabIndex = 8;
-            this.textBox6.Text = "Straatnaam + huisnummer";
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(20, 240);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(160, 20);
-            this.textBox7.TabIndex = 8;
-            this.textBox7.Text = "Postcode";
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(20, 215);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(160, 20);
-            this.textBox8.TabIndex = 8;
-            this.textBox8.Text = "Woonplaats";
-            // 
-            // label2
-            // 
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Location = new System.Drawing.Point(200, 60);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(120, 20);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Materiaal voorraad";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // VoorraadLijst
-            // 
-            this.VoorraadLijst.FormattingEnabled = true;
-            this.VoorraadLijst.Location = new System.Drawing.Point(200, 90);
-            this.VoorraadLijst.Name = "VoorraadLijst";
-            this.VoorraadLijst.Size = new System.Drawing.Size(120, 184);
-            this.VoorraadLijst.TabIndex = 11;
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(330, 90);
-            this.textBox9.Multiline = true;
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(300, 180);
-            this.textBox9.TabIndex = 12;
-            // 
-            // label3
-            // 
-            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label3.Location = new System.Drawing.Point(330, 60);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(120, 20);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Opmerkingen";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // ReserveerMateriaal
+            // FormReserveerMateriaal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(669, 451);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.VoorraadLijst);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.btAnnuleer);
-            this.Controls.Add(this.btBevestig);
-            this.Name = "ReserveerMateriaal";
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lblMedewerker);
+            this.Controls.Add(this.lblHuurder);
+            this.Controls.Add(this.btnGeenMateriaal);
+            this.Controls.Add(this.btnBevestig);
+            this.Name = "FormReserveerMateriaal";
             this.Text = "ReserveerMateriaal";
             this.Load += new System.EventHandler(this.ReserveerMateriaal_Load);
             this.ResumeLayout(false);
@@ -204,20 +102,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btAnnuleer;
-        private System.Windows.Forms.Button btBevestig;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckedListBox VoorraadLijst;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnGeenMateriaal;
+        private System.Windows.Forms.Button btnBevestig;
+        private System.Windows.Forms.Label lblHuurder;
+        private System.Windows.Forms.Label lblMedewerker;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }

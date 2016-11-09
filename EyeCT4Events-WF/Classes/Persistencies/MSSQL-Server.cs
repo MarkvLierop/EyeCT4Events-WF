@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace EyeCT4Events_WF.Persistencies
 {
-    public class MSSQL_Server : ISocialMediaSharing, IGebruikerAdministratie, IKampeerplaats
+    public class MSSQL_Server : ISocialMediaSharing, IGebruikerAdministratie, IKampeerplaats, IMateriaal
     {
         string connString;
         SqlCommand command;
@@ -156,6 +156,41 @@ namespace EyeCT4Events_WF.Persistencies
                 return Convert.ToDecimal(data[data.Count() - 1]);
             }
         }
+
+        public List<Materiaal> HaalMaterialenOp()
+        {
+            List<Materiaal> materialen = new List<Materiaal>();
+
+            Connect();
+            try
+            {
+                string query = "SELECT * FROM Gebruiker WHERE LOWER(GebruikerType) = 'bezoeker' AND Aanwezig = 1";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Materiaal materiaal = new Materiaal();
+
+                        materiaal.MateriaalID = Convert.ToInt32(reader["ID"]);
+                        materiaal.Naam = reader["Naam"].ToString();
+                        materiaal.Prijs = Convert.ToInt32(reader["Prijs"]);
+                        materiaal.Voorraad = Convert.ToInt32(reader["HuidigeVoorraad"]);
+                    
+
+                        materialen.Add(materiaal);
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+
+            return materialen;
+        }
         /// <summary>
         /// Public Methods.
         /// </summary>
@@ -266,17 +301,18 @@ namespace EyeCT4Events_WF.Persistencies
         }
         public void GebruikerRegistreren(Gebruiker gebruiker)
         {
+            string wachtwoord = EncryptString(gebruiker.Wachtwoord);
             Connect();
             string query = "INSERT INTO Gebruiker VALUES (@RFID, @Gebruikersnaam, @Wachtwoord, @Voornaam, @Tussenvoegsel, @Achternaam, @GebruikerType, @Aanwezig)";
             using (command = new SqlCommand(query, SQLcon))
             {
                 command.Parameters.Add(new SqlParameter("@RFID", gebruiker.RFID));
                 command.Parameters.Add(new SqlParameter("@Gebruikersnaam", gebruiker.Gebruikersnaam));
-                command.Parameters.Add(new SqlParameter("@Wachtwoord", EncryptString(gebruiker.Wachtwoord)));
+                command.Parameters.Add(new SqlParameter("@Wachtwoord", wachtwoord));
                 command.Parameters.Add(new SqlParameter("@Voornaam", gebruiker.Voornaam));
                 command.Parameters.Add(new SqlParameter("@Tussenvoegsel", gebruiker.Tussenvoegsel));
                 command.Parameters.Add(new SqlParameter("@Achternaam", gebruiker.Achternaam));
-                command.Parameters.Add(new SqlParameter("@GebruikerType", gebruiker.GetType().ToString()));
+                command.Parameters.Add(new SqlParameter("@GebruikerType", "bezoeker"));
                 command.Parameters.Add(new SqlParameter("@Aanwezig", gebruiker.Aanwezig ? 1 : 0));
 
                 command.ExecuteNonQuery();
@@ -384,9 +420,10 @@ namespace EyeCT4Events_WF.Persistencies
             Connect();
             try
             {
-                string query = "SELECT * FROM Gebruiker WHERE GebruikerType = 'bezoeker' AND Gebruikersnaam LIKE *@gezochtebezoeker*";
+                string query = "SELECT * FROM Gebruiker WHERE GebruikerType = 'bezoeker' AND Gebruikersnaam LIKE @gezochtebezoeker";
                 using (command = new SqlCommand(query, SQLcon))
                 {
+                    command.Parameters.Add(new SqlParameter("@gezochtebezoeker", "%" + gezochtebezoeker + "%"));
                     reader = command.ExecuteReader();
 
                     while (reader.Read())
@@ -1016,7 +1053,7 @@ namespace EyeCT4Events_WF.Persistencies
             try
             {
                 string query = "SELECT * FROM KampeerPlaats k WHERE (k.Comfort = @comfort AND k.Invalide = @invalide AND k.Lawaai = @lawaai) " +
-                    "AND (k.KampeerPlaatsType = @blokhut OR k.KampeerPlaatsType = @bungelino OR k.KampeerPlaatsType = @bungalow	OR k.KampeerPlaatsType = @invalideaccomedatie)";
+                    "AND (k.KampeerPlaatsType = @blokhut OR k.KampeerPlaatsType = @bungalino OR k.KampeerPlaatsType = @eigentent OR k.KampeerPlaatsType = @huurtent OR k.KampeerPlaatsType = @stacaravan OR k.KampeerPlaatsType = @bungalow)";
                 using (command = new SqlCommand(query, SQLcon))
                 {
                     command.Parameters.Add(new SqlParameter("@comfort", comfort));
@@ -1167,6 +1204,26 @@ namespace EyeCT4Events_WF.Persistencies
             
             
         }
+
+        public void ReserveringgroepToevoegen(int verantwoordelijke, int gebruiker, int kampeerplaats, int reservering)
+        {
+            Connect();
+            string query = "INSERT INTO ReserveringGroep VALUES (@ReserveringsVerantwoordelijke, @Gebruiker, @Kampeerplaats, @Reservering)";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@ReserveringsVerantwoordelijke", verantwoordelijke));
+                command.Parameters.Add(new SqlParameter("@Gebruiker", gebruiker));
+                command.Parameters.Add(new SqlParameter("@Kampeerplaats", kampeerplaats));
+                command.Parameters.Add(new SqlParameter("@Reservering", reservering));
+
+
+                command.ExecuteNonQuery();
+            }
+
+            Close();
+        }
+
+   
 
         #endregion
 

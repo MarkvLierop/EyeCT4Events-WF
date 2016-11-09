@@ -15,19 +15,22 @@ namespace EyeCT4Events_WF
     {
         Gebruiker medewerker;
         Gebruiker bezoeker;
-        Reservering reserving;
+        
 
         public FormReserveerMateriaal()
         {
             InitializeComponent();
         }
 
-        public FormReserveerMateriaal(Gebruiker Bezoeker, Gebruiker Medewerker, Reservering Reservering)
+        public FormReserveerMateriaal(Gebruiker Bezoeker, Gebruiker Medewerker)
         {
             InitializeComponent();
+
             medewerker = Medewerker;
             bezoeker = Bezoeker;
-            reserving = Reservering;
+
+            lblHuurder.Text = "Huurder:" + bezoeker.ToString();
+            lblMedewerker.Text = medewerker.ToString();
         }
 
         private void ReserveerMateriaal_Load(object sender, EventArgs e)

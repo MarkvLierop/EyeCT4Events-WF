@@ -14,6 +14,8 @@ namespace EyeCT4Events_WF.Classes.Interfaces
         void ReserveringPlaatsen(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot);
 
         Reservering HaalReserveringOpNaAanmaken(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot);
+
+        void ReserveringgroepToevoegen(int verantwoordelijke, int gebruiker, int kampeerplaats, int reservering);
         
     }
 }

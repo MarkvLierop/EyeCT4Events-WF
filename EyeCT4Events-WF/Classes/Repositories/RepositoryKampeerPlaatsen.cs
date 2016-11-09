@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EyeCT4Events_WF.Classes.Interfaces;
 
 namespace EyeCT4Events_WF.Classes.Repositories
 {
     class RepositoryKampeerPlaatsen
     {
 
-        Interfaces.IKampeerplaats context;
+        IKampeerplaats context;
 
-        public RepositoryKampeerPlaatsen(Interfaces.IKampeerplaats context)
+        public RepositoryKampeerPlaatsen(IKampeerplaats context)
         {
             this.context = context;
         }
@@ -39,5 +40,9 @@ namespace EyeCT4Events_WF.Classes.Repositories
             return context.HaalReserveringOpNaAanmaken(gebruikerid, plaatsid, datumVan, datumTot);
         }
 
+        public void ReserveringgroepToevoegen(int verantwoordelijke, int gebruiker, int kampeerplaats, int reservering)
+        {
+            context.ReserveringgroepToevoegen(verantwoordelijke, gebruiker, kampeerplaats, reservering);
+        }
     }
 }

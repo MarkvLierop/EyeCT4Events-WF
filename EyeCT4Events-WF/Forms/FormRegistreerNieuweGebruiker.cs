@@ -26,6 +26,7 @@ namespace EyeCT4Events_WF
 
         public FormRegistreerNieuweGebruiker(Gebruiker gebruiker)
         {
+            InitializeComponent();
             medewerker = gebruiker;
         }
 
@@ -37,7 +38,15 @@ namespace EyeCT4Events_WF
                 bool aanwezig = false;
                 if(tbRegBevestigWachtwoord.Text == tbRegWachtwoord.Text)
                 {
-                    Gebruiker bezoeker = new Bezoeker(tbRegVoornaam.Text, tbRegAchternaam.Text, tbTussenvoegsel.Text, tbRegGebruiker.Text, tbRegWachtwoord.Text, Convert.ToInt32(tbRFID.Text), aanwezig);
+                    Gebruiker bezoeker = new Bezoeker();
+                    bezoeker.Voornaam = tbRegVoornaam.Text;
+                    bezoeker.Achternaam = tbRegAchternaam.Text;
+                    bezoeker.Tussenvoegsel = tbTussenvoegsel.Text;
+                    bezoeker.Gebruikersnaam = tbRegGebruiker.Text;
+                    bezoeker.Wachtwoord = tbRegWachtwoord.Text;
+                    bezoeker.RFID = Convert.ToInt32(tbRFID.Text);
+                    bezoeker.Aanwezig = aanwezig;
+
                     RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQL_Server());
                     rg.GebruikerRegistreren(bezoeker);
                     bezoeker = rg.GetGebruikerByGebruikersnaam(tbRegGebruiker.Text);
