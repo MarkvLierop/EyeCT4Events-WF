@@ -198,6 +198,9 @@ namespace EyeCT4Events_WF
 
             FormBijhorendeBezoekersToevoegen fbbt = new FormBijhorendeBezoekersToevoegen(medewerker, bezoeker, reservering, kampeerplaats);
 
+            this.Close();
+            fbbt.Show();
+
 
         }
     }

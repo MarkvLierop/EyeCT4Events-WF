@@ -520,7 +520,7 @@ namespace EyeCT4Events_WF.Persistencies
                 string query = "SELECT * FROM Gebruiker WHERE GebruikerType = 'bezoeker' AND Gebruikersnaam LIKE @gezochtebezoeker";
                 using (command = new SqlCommand(query, SQLcon))
                 {
-                    command.Parameters.Add(new SqlParameter("@gezochtebezoeker", "%" + gezochtebezoeker + "%"));
+                    command.Parameters.Add(new SqlParameter("@gezochtebezoeker", gezochtebezoeker + "%"));
                     reader = command.ExecuteReader();
 
                     while (reader.Read())
@@ -1313,16 +1313,20 @@ namespace EyeCT4Events_WF.Persistencies
         #region Reserveringen
         public void ReserveringPlaatsen(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot)
         {
+            int userid = gebruikerid;
+            int id = plaatsid;
+            DateTime dvan = datumVan;
+            DateTime dtot = datumTot;
 
             Connect();
             string query = "INSERT INTO Reservering VALUES (@KampeerPlaats, @GebruikrID, @DatumVan, @DatumTot, @Betaling)";
             using (command = new SqlCommand(query, SQLcon))
             {
-                command.Parameters.Add(new SqlParameter("@KampeerPlaats", plaatsid));
-                command.Parameters.Add(new SqlParameter("@GebruikrID", gebruikerid));
-                command.Parameters.Add(new SqlParameter("@DatumVan", datumVan));
-                command.Parameters.Add(new SqlParameter("@DatumTot", datumTot));
-                command.Parameters.Add(new SqlParameter("@Betaling", 0));
+                command.Parameters.Add(new SqlParameter("@KampeerPlaats", id));
+                command.Parameters.Add(new SqlParameter("@GebruikrID", userid));
+                command.Parameters.Add(new SqlParameter("@DatumVan", dvan));
+                command.Parameters.Add(new SqlParameter("@DatumTot", dtot));
+                command.Parameters.Add(new SqlParameter("@Betaling", false));
 
 
                 command.ExecuteNonQuery();
@@ -1342,9 +1346,14 @@ namespace EyeCT4Events_WF.Persistencies
             bool betaald;
 
             Connect();
-            string query = "SELECT * FROM Reservering WHERE GebruikerID = @Gebruikerid AND KampeerPlaats = @gezochtebezoeker AND DatumVan = @DatumVan AND DatumTot = DatumTot";
+            string query = "SELECT * FROM Reservering WHERE GebruikerID = @Gebruikerid AND KampeerPlaats = @Plaatsid AND DatumVan = @DatumVan AND DatumTot = @DatumTot";
             using (command = new SqlCommand(query, SQLcon))
             {
+                command.Parameters.Add(new SqlParameter("@Gebruikerid", Gebruikerid));
+                command.Parameters.Add(new SqlParameter("@Plaatsid", Plaatsid));
+                command.Parameters.Add(new SqlParameter("@DatumVan", DatumVan));
+                command.Parameters.Add(new SqlParameter("@DatumTot", DatumTot));
+
                 reader = command.ExecuteReader();
 
 
@@ -1352,11 +1361,11 @@ namespace EyeCT4Events_WF.Persistencies
                 {
 
                     int GebruikerID = Convert.ToInt32(reader["GebruikerID"]);
-                    int PlaatsID = Convert.ToInt32(reader["PlaatsID"]);
+                    int PlaatsID = Convert.ToInt32(reader["KampeerPlaats"]);
                     int ID = Convert.ToInt32(reader["ID"]);
                     DateTime DatumTOT = Convert.ToDateTime(reader["DatumTot"]);
                     DateTime DatumVAN = Convert.ToDateTime(reader["DatumVan"]);
-                    if (Convert.ToInt32(reader["Betaald"]) == 0)
+                    if ((bool)(reader["Betaald"])  == false)
                     {
                         betaald = false;
 
