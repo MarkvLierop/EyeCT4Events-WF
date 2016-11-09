@@ -33,10 +33,10 @@
             this.lvAanwezigeBezoekers = new System.Windows.Forms.ListView();
             this.txtBezoekerAanmelden = new System.Windows.Forms.TextBox();
             this.lblBezoekerAanmelden = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblAfmelden = new System.Windows.Forms.Label();
             this.txtBezoekerAfmelden = new System.Windows.Forms.TextBox();
             this.btnBetalingsgegevens = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblBetalingsgegevens = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblAanwezigeBezoekers
@@ -85,14 +85,14 @@
             this.lblBezoekerAanmelden.TabIndex = 14;
             this.lblBezoekerAanmelden.Text = "Bezoeker aanmelden: ";
             // 
-            // label1
+            // lblAfmelden
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(438, 382);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 13);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Bezoeker afmelden:";
+            this.lblAfmelden.AutoSize = true;
+            this.lblAfmelden.Location = new System.Drawing.Point(438, 382);
+            this.lblAfmelden.Name = "lblAfmelden";
+            this.lblAfmelden.Size = new System.Drawing.Size(101, 13);
+            this.lblAfmelden.TabIndex = 16;
+            this.lblAfmelden.Text = "Bezoeker afmelden:";
             // 
             // txtBezoekerAfmelden
             // 
@@ -104,7 +104,7 @@
             // 
             // btnBetalingsgegevens
             // 
-            this.btnBetalingsgegevens.Location = new System.Drawing.Point(593, 12);
+            this.btnBetalingsgegevens.Location = new System.Drawing.Point(593, 18);
             this.btnBetalingsgegevens.Name = "btnBetalingsgegevens";
             this.btnBetalingsgegevens.Size = new System.Drawing.Size(74, 27);
             this.btnBetalingsgegevens.TabIndex = 17;
@@ -112,23 +112,23 @@
             this.btnBetalingsgegevens.UseVisualStyleBackColor = true;
             this.btnBetalingsgegevens.Click += new System.EventHandler(this.btnBetalingsgegevens_Click);
             // 
-            // label2
+            // lblBetalingsgegevens
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(437, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(150, 13);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Betalingsgegevens Opvragen:";
+            this.lblBetalingsgegevens.AutoSize = true;
+            this.lblBetalingsgegevens.Location = new System.Drawing.Point(437, 18);
+            this.lblBetalingsgegevens.Name = "lblBetalingsgegevens";
+            this.lblBetalingsgegevens.Size = new System.Drawing.Size(150, 13);
+            this.lblBetalingsgegevens.TabIndex = 18;
+            this.lblBetalingsgegevens.Text = "Betalingsgegevens Opvragen:";
             // 
             // FormAanwezigeBezoekers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(709, 414);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblBetalingsgegevens);
             this.Controls.Add(this.btnBetalingsgegevens);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblAfmelden);
             this.Controls.Add(this.txtBezoekerAfmelden);
             this.Controls.Add(this.lblBezoekerAanmelden);
             this.Controls.Add(this.txtBezoekerAanmelden);
@@ -150,9 +150,9 @@
         private System.Windows.Forms.ListView lvAanwezigeBezoekers;
         private System.Windows.Forms.TextBox txtBezoekerAanmelden;
         private System.Windows.Forms.Label lblBezoekerAanmelden;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblAfmelden;
         private System.Windows.Forms.TextBox txtBezoekerAfmelden;
         private System.Windows.Forms.Button btnBetalingsgegevens;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblBetalingsgegevens;
     }
 }

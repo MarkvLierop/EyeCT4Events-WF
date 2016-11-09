@@ -303,11 +303,17 @@ namespace EyeCT4Events_WF.Classes.Persistencies
                             gebruiker = new Medewerker();
                         }
                         gebruiker.ID = Convert.ToInt32(reader["ID"]);
-                        gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+
+                        if (reader["RFID"].GetType() != typeof(DBNull))
+                            gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+
                         gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
                         gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
                         gebruiker.Voornaam = reader["Voornaam"].ToString();
-                        gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+
+                        if (reader["Tussenvoegsel"].GetType() != typeof(DBNull))
+                            gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+
                         gebruiker.Achternaam = reader["Achternaam"].ToString();
                         if (Convert.ToInt32(reader["Aanwezig"]) == 1)
                         {

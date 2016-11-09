@@ -29,7 +29,8 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnAanwezigeBezoekers_Click(object sender, EventArgs e)
         {
-
+            FormAanwezigeBezoekers fab = new FormAanwezigeBezoekers(beheerder);
+            fab.Show();
         }
 
         private void btnGebruikersBeheren_Click(object sender, EventArgs e)
@@ -46,7 +47,8 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnSocialmediaSharing_Click(object sender, EventArgs e)
         {
-            //FormSocialMediaOverzicht
+            FormMediaOverzicht fmo = new FormMediaOverzicht(beheerder);
+            fmo.Show();
         }
     }
 }

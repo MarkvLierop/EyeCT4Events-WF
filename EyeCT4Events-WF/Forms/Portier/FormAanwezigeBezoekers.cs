@@ -22,10 +22,20 @@ namespace EyeCT4Events_WF
         private RepositoryKampeerPlaatsen rkp;
         private List<Gebruiker> bezoekerLijst;
         private List<Kampeerplaats> kampeerplaatsLijst;
+        private Gebruiker gebruiker;
 
-        public FormAanwezigeBezoekers()
+        public FormAanwezigeBezoekers(Gebruiker gebruiker)
         {
             InitializeComponent();
+            this.gebruiker = gebruiker;
+
+            if (gebruiker.GetGebruikerType().ToLower() == "beheerder")
+            {
+                lblAfmelden.Visible = false;
+                lblBetalingsgegevens.Visible = false;
+                lblBezoekerAanmelden.Visible = false;
+                btnBetalingsgegevens.Visible = false;
+            }
             rg = new RepositoryGebruiker(new MSSQLGebruiker());
             rkp = new RepositoryKampeerPlaatsen(new MSSQLReserveren());
             bezoekerLijst = new List<Gebruiker>();
