@@ -1,6 +1,7 @@
 ﻿using EyeCT4Events_WF.Classes;
 using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Exceptions;
+using EyeCT4Events_WF.Forms.BeheerSysteem;
 using EyeCT4Events_WF.Persistencies;
 using System;
 using System.Collections.Generic;
@@ -107,6 +108,12 @@ namespace EyeCT4Events_WF
                 }
                 AanwezigeBezoekerslijstVullen();
             }
+        }
+
+        private void btnBetalingsgegevens_Click(object sender, EventArgs e)
+        {
+            FormBetalingsGegevens fbg = new FormBetalingsGegevens();
+            fbg.ShowDialog();
         }
     }
 }

@@ -12,9 +12,9 @@ namespace EyeCT4Events_WF.Interfaces
         Gebruiker Inloggen(string gebruikersnaam, string wachtwoord);
         Gebruiker GetGebruikerByGebruikersnaam(string gebruikersnaam);
         Gebruiker GetGebruikerByID(int ID);
-
+        Gebruiker GetGebruikerByRFID(int RFID);
         void GebruikerRegistreren(Gebruiker gebruiker);
-
-
+        List<string> GetBetalingsGegevens(Gebruiker gebruiker);
+        void Betaal(int RFID);
     }
 }

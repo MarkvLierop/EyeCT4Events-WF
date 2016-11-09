@@ -40,7 +40,8 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnEvenementAanmaken_Click(object sender, EventArgs e)
         {
-
+            FormEvenementAanmaken fea = new FormEvenementAanmaken(beheerder);
+            fea.Show();
         }
     }
 }

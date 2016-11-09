@@ -16,13 +16,25 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             this.context = context;
         }
+        public void Betaal(int RFID)
+        {
+            context.Betaal(RFID);
+        }
+        public List<string> GetBetalingsGegevens(Gebruiker g)
+        {
+            return context.GetBetalingsGegevens(g);
+        }
+        public Gebruiker GetGebruikerByRFID(int RFID)
+        {
+            return context.GetGebruikerByRFID(RFID);
+        }
         public List<Gebruiker> LijstAanwezigeBezoekers()
         {
             return context.LijstAanwezigePersonen();
         }
-        public void ZetGebruikerOpAanwezig(int gebruikerID)
+        public void ZetGebruikerOpAanwezig(int RFID)
         {
-            context.ZetBezoekerOpAanwezig(gebruikerID);
+            context.ZetBezoekerOpAanwezig(RFID);
         }
         public void ZetGebruikerOpAfwezig(int gebruikerID)
         {
