@@ -11,6 +11,7 @@ using EyeCT4Events_WF.Classes;
 using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Persistencies;
 using EyeCT4Events_WF.Classes.Gebruikers;
+using EyeCT4Events_WF.Classes.Persistencies;
 
 namespace EyeCT4Events_WF
 {
@@ -47,7 +48,7 @@ namespace EyeCT4Events_WF
                     bezoeker.RFID = Convert.ToInt32(tbRFID.Text);
                     bezoeker.Aanwezig = aanwezig;
 
-                    RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQL_Server());
+                    RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQLGebruiker());
                     rg.GebruikerRegistreren(bezoeker);
                     bezoeker = rg.GetGebruikerByGebruikersnaam(tbRegGebruiker.Text);
                     //methode voor check 

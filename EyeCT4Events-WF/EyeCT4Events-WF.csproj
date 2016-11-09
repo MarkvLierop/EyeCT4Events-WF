@@ -56,6 +56,9 @@
     <Compile Include="Classes\Interfaces\IKampeerplaats.cs" />
     <Compile Include="Classes\Interfaces\IMateriaal.cs" />
     <Compile Include="Classes\Interfaces\ISocialMediaSharing.cs" />
+    <Compile Include="Classes\Persistencies\MSSQLGebruiker.cs" />
+    <Compile Include="Classes\Persistencies\MSSQLReserveren.cs" />
+    <Compile Include="Classes\Persistencies\MSSQLSMS.cs" />
     <Compile Include="Classes\Repositories\RepositoryKampeerPlaatsen.cs" />
     <Compile Include="Classes\Repositories\RepositoryGebruiker.cs" />
     <Compile Include="Classes\Repositories\RepositoryMateriaal.cs" />
@@ -73,15 +76,11 @@
     <Compile Include="Forms\BeheerSysteem\FormBeheerderMainMenu.Designer.cs">
       <DependentUpon>FormBeheerderMainMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\BeheerSysteem\FormBetalingsGegevens.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\BeheerSysteem\FormBetalingsGegevens.cs" />
     <Compile Include="Forms\BeheerSysteem\FormBetalingsGegevens.Designer.cs">
       <DependentUpon>FormBetalingsGegevens.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\BeheerSysteem\FormGebruikersbeheer.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\BeheerSysteem\FormGebruikersbeheer.cs" />
     <Compile Include="Forms\BeheerSysteem\FormGebruikersbeheer.designer.cs">
       <DependentUpon>FormGebruikersbeheer.cs</DependentUpon>
     </Compile>
@@ -153,9 +152,7 @@
     </Compile>
     <Compile Include="Classes\Interfaces\IGebruikerAdministratie.cs" />
     <Compile Include="Classes\Persistencies\MSSQL-Server.cs" />
-    <Compile Include="Forms\GebruikerAanmaken.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\GebruikerAanmaken.cs" />
     <Compile Include="Forms\GebruikerAanmaken.Designer.cs">
       <DependentUpon>GebruikerAanmaken.cs</DependentUpon>
     </Compile>

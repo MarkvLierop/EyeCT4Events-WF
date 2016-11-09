@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EyeCT4Events_WF.Exceptions;
+using EyeCT4Events_WF.Classes.Persistencies;
 
 namespace EyeCT4Events_WF.Forms
 {
@@ -40,7 +41,7 @@ namespace EyeCT4Events_WF.Forms
                 bestaandegebruikers.Clear();
             }
 
-            RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQL_Server());
+            RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQLGebruiker());
             try
             {
                 bestaandegebruikers = rg.GezochteBezoekersOphalen(zoekopdracht);
