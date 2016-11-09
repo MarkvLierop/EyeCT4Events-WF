@@ -148,7 +148,6 @@ namespace EyeCT4Events_WF.Persistencies
         }
         private decimal GetMediaVerbergThreshhold()
         {
-
             using (StreamReader srVerbergThreshHold = new StreamReader("Settings.txt", false))
             {
                 string line = srVerbergThreshHold.ReadLine();
@@ -156,12 +155,71 @@ namespace EyeCT4Events_WF.Persistencies
                 return Convert.ToDecimal(data[data.Count() - 1]);
             }
         }
+        private List<string> GetNietGeaccepteerdeWoorden()
+        {
+            List<string> nietGeaccepteerdeWoorden = new List<string>();
+
+            using (StreamReader srVerbergThreshHold = new StreamReader("NietGeaccepteerdeWoorden.txt", false))
+            {
+                while (srVerbergThreshHold.ReadLine() != null)
+                {
+                    nietGeaccepteerdeWoorden.Add(srVerbergThreshHold.ReadLine().ToLower());
+                }
+            }
+
+            return nietGeaccepteerdeWoorden;
+        }
         /// <summary>
         /// Public Methods.
         /// </summary>
         /// <returns></returns>
         /// 
         #region Gebruikers
+        public void Betaal(int RFID)
+        {
+            Connect();
+            try
+            {
+                string query = "UPDATE Reservering SET Betaald = 1 WHERE GebruikerID = (SELECT ReserveringVerantwoordelijke FROM ReserveringGroep WHERE Gebruiker = (SELECT ID FROM Gebruiker WHERE RFID = @RFID))";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@RFID", RFID));
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+        }
+        public List<string> GetBetalingsGegevens(Gebruiker gebruiker)
+        {
+            List<string> betalingsGegevens = new List<string>();
+            Connect();
+            try
+            {
+                string query = "SELECT rg.ReserveringVerantwoordelijke, r.Betaald FROM Reservering r, ReserveringGroep rg WHERE rg.Reservering = r.ID AND rg.Gebruiker = @ID";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@ID", gebruiker.ID));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        betalingsGegevens.Add(reader["ReserveringVerantwoordelijke"].ToString());
+                        betalingsGegevens.Add(reader["Betaald"].ToString());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+            return betalingsGegevens;
+        }
         public Gebruiker GetGebruikerByID(int ID)
         {
             Connect();
@@ -187,6 +245,45 @@ namespace EyeCT4Events_WF.Persistencies
                         {
                             gebruiker = new Medewerker();
                         }
+                        gebruiker.ID = Convert.ToInt32(reader["ID"]);
+                        gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                        gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                        gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                        gebruiker.Voornaam = reader["Voornaam"].ToString();
+                        gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                        gebruiker.Achternaam = reader["Achternaam"].ToString();
+                        if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                        {
+                            gebruiker.Aanwezig = true;
+                        }
+                        else
+                        {
+                            gebruiker.Aanwezig = false;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+            return gebruiker;
+        }
+        public Gebruiker GetGebruikerByRFID(int RFID)
+        {
+            Connect();
+            try
+            {
+                string query = "SELECT * FROM Gebruiker WHERE RFID = @RFID";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@RFID", RFID));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        gebruiker = new Bezoeker();
                         gebruiker.ID = Convert.ToInt32(reader["ID"]);
                         gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
                         gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
@@ -1115,7 +1212,6 @@ namespace EyeCT4Events_WF.Persistencies
 
         public Reservering HaalReserveringOpNaAanmaken(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot)
         {
-            
 
             int Gebruikerid = gebruikerid;
             int Plaatsid = plaatsid;
@@ -1131,19 +1227,14 @@ namespace EyeCT4Events_WF.Persistencies
                 {
                     int GebruikerID = Convert.ToInt32(reader["GebruikerID"]);
                     int PlaatsID = Convert.ToInt32(reader["PlaatsID"]);
-                    
-
-                    Reservering reservering = new Reservering();
-                   
-                        
-                        );
 
 
+                    //Reservering reservering = new Reservering();
                 }
             }
             Close();
-            
-            return reservering;
+
+            return new Reservering();
         }
 
         #endregion
@@ -1158,7 +1249,7 @@ namespace EyeCT4Events_WF.Persistencies
                 {
                     command.Parameters.Add(new SqlParameter("@locatie", ev.Locatie));
                     command.Parameters.Add(new SqlParameter("@datumVan", ev.DatumVan));
-                    command.Parameters.Add(new SqlParameter("@titel", ev.Naam));
+                    command.Parameters.Add(new SqlParameter("@titel", ev.Titel));
                     command.Parameters.Add(new SqlParameter("@beschrijving", ev.Beschrijving));
                     command.Parameters.Add(new SqlParameter("@datumTot", ev.DatumTot));
                     command.ExecuteNonQuery();
@@ -1186,7 +1277,7 @@ namespace EyeCT4Events_WF.Persistencies
                     {
                         Event e = new Event();
                         e.Beschrijving = reader["Beschrijving"].ToString();
-                        e.Naam = reader["Titel"].ToString();
+                        e.Titel = reader["Titel"].ToString();
                         e.Locatie = reader["Locatie"].ToString();
                         e.ID = Convert.ToInt32(reader["ID"]);
                         e.DatumVan = Convert.ToDateTime(reader["DatumVan"]);

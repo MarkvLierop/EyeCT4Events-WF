@@ -152,6 +152,8 @@
             this.Name = "FormMediaOverzicht";
             this.Text = "Media Overzicht";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMediaOverzicht_FormClosing);
+            this.Load += new System.EventHandler(this.FormMediaOverzicht_Load);
             this.pnlCategorieën.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

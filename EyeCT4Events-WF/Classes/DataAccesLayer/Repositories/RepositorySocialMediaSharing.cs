@@ -19,6 +19,10 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             ISMS.VerwijderMedia(media);
         }
+        public List<Event> AlleEventsOpvragen()
+        {
+            return ISMS.AlleEventsOpvragen();
+        }
         public void VerwijderReactie(Reactie reactie)
         {
             ISMS.VerwijderReactie(reactie);

@@ -35,6 +35,8 @@
             this.lblBezoekerAanmelden = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtBezoekerAfmelden = new System.Windows.Forms.TextBox();
+            this.btnBetalingsgegevens = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblAanwezigeBezoekers
@@ -100,11 +102,32 @@
             this.txtBezoekerAfmelden.TabIndex = 15;
             this.txtBezoekerAfmelden.TextChanged += new System.EventHandler(this.txtBezoekerAfmelden_TextChanged);
             // 
+            // btnBetalingsgegevens
+            // 
+            this.btnBetalingsgegevens.Location = new System.Drawing.Point(593, 12);
+            this.btnBetalingsgegevens.Name = "btnBetalingsgegevens";
+            this.btnBetalingsgegevens.Size = new System.Drawing.Size(74, 27);
+            this.btnBetalingsgegevens.TabIndex = 17;
+            this.btnBetalingsgegevens.Text = "Opvragen";
+            this.btnBetalingsgegevens.UseVisualStyleBackColor = true;
+            this.btnBetalingsgegevens.Click += new System.EventHandler(this.btnBetalingsgegevens_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(437, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(150, 13);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Betalingsgegevens Opvragen:";
+            // 
             // FormAanwezigeBezoekers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(709, 414);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.btnBetalingsgegevens);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtBezoekerAfmelden);
             this.Controls.Add(this.lblBezoekerAanmelden);
@@ -129,5 +152,7 @@
         private System.Windows.Forms.Label lblBezoekerAanmelden;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtBezoekerAfmelden;
+        private System.Windows.Forms.Button btnBetalingsgegevens;
+        private System.Windows.Forms.Label label2;
     }
 }

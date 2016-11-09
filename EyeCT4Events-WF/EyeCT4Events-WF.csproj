@@ -67,6 +67,12 @@
     <Compile Include="Exceptions\FoutBijOpslaanBestandException.cs" />
     <Compile Include="Exceptions\FoutBijUitvoerenQueryException.cs" />
     <Compile Include="Exceptions\NoDatabaseConnectionException.cs" />
+    <Compile Include="Forms\BeheerSysteem\FormBetalingsGegevens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BeheerSysteem\FormBetalingsGegevens.Designer.cs">
+      <DependentUpon>FormBetalingsGegevens.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormAanwezigeBezoekers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,10 +84,10 @@
     <Compile Include="Classes\Domain Classes\Gebruikers\Beheerder.cs" />
     <Compile Include="Classes\Domain Classes\Gebruikers\Bezoeker.cs" />
     <Compile Include="Classes\Domain Classes\Gebruikers\Medewerker.cs" />
-    <Compile Include="Forms\FormBeheerderMainMenu.cs">
+    <Compile Include="Forms\BeheerSysteem\FormBeheerderMainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormBeheerderMainMenu.Designer.cs">
+    <Compile Include="Forms\BeheerSysteem\FormBeheerderMainMenu.Designer.cs">
       <DependentUpon>FormBeheerderMainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormBestaandeAccount.cs">
@@ -148,10 +154,10 @@
     <Compile Include="Forms\FormGebruikergegevens.designer.cs">
       <DependentUpon>FormGebruikergegevens.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormGebruikersbeheer.cs">
+    <Compile Include="Forms\BeheerSysteem\FormGebruikersbeheer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormGebruikersbeheer.designer.cs">
+    <Compile Include="Forms\BeheerSysteem\FormGebruikersbeheer.designer.cs">
       <DependentUpon>FormGebruikersbeheer.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormInloggen.cs">
@@ -197,10 +203,13 @@
     <Compile Include="Forms\FormReserveerPlaats.designer.cs">
       <DependentUpon>FormReserveerPlaats.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\BeheerSysteem\FormBetalingsGegevens.resx">
+      <DependentUpon>FormBetalingsGegevens.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAanwezigeBezoekers.resx">
       <DependentUpon>FormAanwezigeBezoekers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormBeheerderMainMenu.resx">
+    <EmbeddedResource Include="Forms\BeheerSysteem\FormBeheerderMainMenu.resx">
       <DependentUpon>FormBeheerderMainMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormBestaandeAccount.resx">
@@ -233,7 +242,7 @@
     <EmbeddedResource Include="Forms\FormGebruikergegevens.resx">
       <DependentUpon>FormGebruikergegevens.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormGebruikersbeheer.resx">
+    <EmbeddedResource Include="Forms\BeheerSysteem\FormGebruikersbeheer.resx">
       <DependentUpon>FormGebruikersbeheer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormInloggen.resx">

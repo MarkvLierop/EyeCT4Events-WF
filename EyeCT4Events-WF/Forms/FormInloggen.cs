@@ -39,21 +39,26 @@ namespace EyeCT4Events_WF
                     {
                         this.Hide();
                         FormMediaOverzicht fmo = new FormMediaOverzicht(gebruiker);
-                        fmo.Show();
+                        fmo.ShowDialog();
+                        if (fmo.DialogResult == DialogResult.OK)
+                            this.ShowDialog();
                     }
 
                     else if (gebruiker.GetType() == typeof(Medewerker))
                     {
                         this.Hide();
-                        FormMedewerkerMainMenu fmh = new FormMedewerkerMainMenu(gebruiker);
-                        fmh.Show();
+                        //FormMedewerkerMainMenu fmh = new FormMedewerkerMainMenu(gebruiker);
+                        //fmh.Show();
                     }
 
                     else if (gebruiker.GetType() == typeof(Beheerder))
                     {
                         this.Hide();
                         FormBeheerderMainMenu fbmm = new FormBeheerderMainMenu(gebruiker);
-                        fbmm.Show();
+                        fbmm.ShowDialog();
+
+                        if (fbmm.DialogResult == DialogResult.OK)
+                            this.ShowDialog();
                     }
                 }
                 else
@@ -62,7 +67,7 @@ namespace EyeCT4Events_WF
             catch (NoDatabaseConnectionException exc)
             {
                 MessageBox.Show(exc.Message);
-            }            
+            }
         }
         private void tbPass_KeyDown(object sender, KeyEventArgs e)
         {

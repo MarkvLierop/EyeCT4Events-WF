@@ -37,7 +37,7 @@ namespace EyeCT4Events_WF.Forms
             ev.DatumTot = dtpDatumTot.Value;
             ev.DatumVan = dtpDatumVan.Value;
             ev.Locatie = txtLocatie.Text;
-            ev.Naam = txtEventNaam.Text;
+            ev.Titel = txtEventNaam.Text;
 
             try
             {

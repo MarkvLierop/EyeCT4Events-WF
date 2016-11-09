@@ -116,11 +116,11 @@ namespace EyeCT4Events_WF
             kampeerplaats = kampeerplaatsen[lbKampeerplaatsen.SelectedIndex];
             datumVan = dtVan.Value;
             datumTot = dtTot.Value;
-            plaatsid = kampeerplaats.PlaatsID;
-            bezoekerid = bezoeker.GebruikersID;
+            plaatsid = kampeerplaats.ID;
+            bezoekerid = bezoeker.ID;
 
             RepositoryKampeerPlaatsen rkp = new RepositoryKampeerPlaatsen(new MSSQL_Server());
-            plaatsid = kampeerplaats.PlaatsID;
+            plaatsid = kampeerplaats.ID;
             rkp.ReserveringPlaatsen(bezoekerid, plaatsid, datumVan, datumTot);
 
 

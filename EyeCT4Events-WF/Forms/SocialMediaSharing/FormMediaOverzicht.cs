@@ -2,6 +2,7 @@
 using EyeCT4Events_WF.Classes.Repositories;
 using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Forms;
+using EyeCT4Events_WF.Forms.SocialMediaSharing;
 using EyeCT4Events_WF.Persistencies;
 using System;
 using System.Collections.Generic;
@@ -269,6 +270,18 @@ namespace EyeCT4Events_WF
             {
                 MessageBox.Show(exc.Message);
             }
+        }
+
+        private void FormMediaOverzicht_Load(object sender, EventArgs e)
+        {
+            // Event scherm laten zien
+            FormEventOverzicht feo = new FormEventOverzicht();
+            feo.Show();
+        }
+
+        private void FormMediaOverzicht_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult = DialogResult.OK;
         }
     }
 }
