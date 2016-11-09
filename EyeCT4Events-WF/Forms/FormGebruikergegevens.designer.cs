@@ -40,6 +40,7 @@
             this.tbTussenvoegsel = new System.Windows.Forms.TextBox();
             this.tbAchternaam = new System.Windows.Forms.TextBox();
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
+            this.BtBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbEdit
@@ -143,11 +144,22 @@
             this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
             this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
             // 
+            // BtBack
+            // 
+            this.BtBack.Location = new System.Drawing.Point(1, 200);
+            this.BtBack.Name = "BtBack";
+            this.BtBack.Size = new System.Drawing.Size(75, 23);
+            this.BtBack.TabIndex = 17;
+            this.BtBack.Text = "Back";
+            this.BtBack.UseVisualStyleBackColor = true;
+            this.BtBack.Click += new System.EventHandler(this.BtBack_Click);
+            // 
             // Gebruikergegevens
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(717, 421);
+            this.Controls.Add(this.BtBack);
             this.Controls.Add(this.tbAchternaam);
             this.Controls.Add(this.tbTussenvoegsel);
             this.Controls.Add(this.listBox1);
@@ -180,5 +192,6 @@
         private System.Windows.Forms.TextBox tbTussenvoegsel;
         private System.Windows.Forms.TextBox tbAchternaam;
         private System.DirectoryServices.DirectorySearcher directorySearcher1;
+        private System.Windows.Forms.Button BtBack;
     }
 }

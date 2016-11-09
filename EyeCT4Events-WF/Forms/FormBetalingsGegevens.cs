@@ -60,15 +60,22 @@ namespace EyeCT4Events_WF.Forms.BeheerSysteem
         {
             try
             {
-                Gebruiker gebruiker = rg.GetGebruikerByRFID(Convert.ToInt32(txtScannen.Text));
+                if (txtScannen.Text != "")
+                {
+                    Gebruiker gebruiker = rg.GetGebruikerByRFID(Convert.ToInt32(txtScannen.Text));
 
-                lblAchternaam.Text = gebruiker.Achternaam;
-                lblTussenvoegsel.Text = gebruiker.Tussenvoegsel;
-                lblVoornaam.Text = gebruiker.Voornaam;
-                btnBetaald.Text = rg.GetBetalingsGegevens(gebruiker)[1];
-                lblVerantwoordelijke.Text = rg.GetBetalingsGegevens(gebruiker)[0];
+                    lblAchternaam.Text = gebruiker.Achternaam;
+                    lblTussenvoegsel.Text = gebruiker.Tussenvoegsel;
+                    lblVoornaam.Text = gebruiker.Voornaam;
 
-                txtScannen.Text = "";
+                    if (rg.GetBetalingsGegevens(gebruiker).Count != 0)
+                    {
+                        btnBetaald.Text = rg.GetBetalingsGegevens(gebruiker)[1];
+                        lblVerantwoordelijke.Text = rg.GetBetalingsGegevens(gebruiker)[0];
+                    }
+
+                    txtScannen.Text = "";
+                }
             }
             catch (Exception exc)
             {
