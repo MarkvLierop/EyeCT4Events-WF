@@ -229,6 +229,118 @@ namespace EyeCT4Events_WF.Persistencies
             }
             Close();
         }
+        public List<Gebruiker> GesorteerdeGeberuikers(string filter)
+        {
+            List<Gebruiker> gebruikersLijst = new List<Gebruiker>();
+            string query = "";
+            if (filter == "ID")
+            {
+                query = "SELECT * FROM Gebruiker";
+            }
+            else if (filter == "Naam")
+            {
+                query = "SELECT * FROM Gebruiker ORDER BY Voornaam";
+            }
+            else if (filter == "GebruikerType")
+            {
+                query = "SELECT * FROM Gebruiker ORDER BY GebruikerType, Voornaam ASC";
+            }
+            else if (filter == "Aanwezig")
+            {
+                query = "SELECT * FROM Gebruiker where Aanwezig = 1";
+            }
+            else if (filter == "Hoofd Reserveerder")
+            {
+                query = "SELECT * From Gebruiker Where ID IN (Select DISTINCT(ReserveringVerantwoordelijke) FROM ReserveringGroep)";
+            }
+            else
+            {
+                query = "SELECT * FROM Gebruiker";
+            }
+            Connect();
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                    {
+                        gebruiker = new Bezoeker();
+                    }
+                    else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
+                    {
+                        gebruiker = new Beheerder();
+                    }
+                    else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
+                    {
+                        gebruiker = new Medewerker();
+                    }
+                    gebruiker.ID = Convert.ToInt32(reader["ID"]);
+                    gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                    gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                    gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                    gebruiker.Voornaam = reader["Voornaam"].ToString();
+                    gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                    gebruiker.Achternaam = reader["Achternaam"].ToString();
+                    if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                    {
+                        gebruiker.Aanwezig = true;
+                    }
+                    else
+                    {
+                        gebruiker.Aanwezig = false;
+                    }
+                    gebruikersLijst.Add(gebruiker);
+
+                }
+            }
+            return gebruikersLijst;
+        }
+        public List<Gebruiker> ZoekenGebruiker(string GezochtenNaam)
+        {
+            List<Gebruiker> gebruikersLijst = new List<Gebruiker>();
+            Connect();
+            string query = "Select * FROM Gebruiker WHERE Voornaam LIKE @txtZoeken";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@txtZoeken", "%" + GezochtenNaam + "%"));
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                    {
+                        gebruiker = new Bezoeker();
+                    }
+                    else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
+                    {
+                        gebruiker = new Beheerder();
+                    }
+                    else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
+                    {
+                        gebruiker = new Medewerker();
+                    }
+                    gebruiker.ID = Convert.ToInt32(reader["ID"]);
+                    gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+                    gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                    gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                    gebruiker.Voornaam = reader["Voornaam"].ToString();
+                    gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+                    gebruiker.Achternaam = reader["Achternaam"].ToString();
+                    if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                    {
+                        gebruiker.Aanwezig = true;
+                    }
+                    else
+                    {
+                        gebruiker.Aanwezig = false;
+                    }
+                    gebruikersLijst.Add(gebruiker);
+
+                }
+            }
+            return gebruikersLijst;
+        }
         public List<string> GetBetalingsGegevens(Gebruiker gebruiker)
         {
             List<string> betalingsGegevens = new List<string>();
@@ -520,7 +632,7 @@ namespace EyeCT4Events_WF.Persistencies
                 string query = "SELECT * FROM Gebruiker WHERE GebruikerType = 'bezoeker' AND Gebruikersnaam LIKE @gezochtebezoeker";
                 using (command = new SqlCommand(query, SQLcon))
                 {
-                    command.Parameters.Add(new SqlParameter("@gezochtebezoeker", gezochtebezoeker + "%"));
+                    command.Parameters.Add(new SqlParameter("@gezochtebezoeker", "%" + gezochtebezoeker + "%"));
                     reader = command.ExecuteReader();
 
                     while (reader.Read())
@@ -1313,20 +1425,16 @@ namespace EyeCT4Events_WF.Persistencies
         #region Reserveringen
         public void ReserveringPlaatsen(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot)
         {
-            int userid = gebruikerid;
-            int id = plaatsid;
-            DateTime dvan = datumVan;
-            DateTime dtot = datumTot;
 
             Connect();
             string query = "INSERT INTO Reservering VALUES (@KampeerPlaats, @GebruikrID, @DatumVan, @DatumTot, @Betaling)";
             using (command = new SqlCommand(query, SQLcon))
             {
-                command.Parameters.Add(new SqlParameter("@KampeerPlaats", id));
-                command.Parameters.Add(new SqlParameter("@GebruikrID", userid));
-                command.Parameters.Add(new SqlParameter("@DatumVan", dvan));
-                command.Parameters.Add(new SqlParameter("@DatumTot", dtot));
-                command.Parameters.Add(new SqlParameter("@Betaling", false));
+                command.Parameters.Add(new SqlParameter("@KampeerPlaats", plaatsid));
+                command.Parameters.Add(new SqlParameter("@GebruikrID", gebruikerid));
+                command.Parameters.Add(new SqlParameter("@DatumVan", datumVan));
+                command.Parameters.Add(new SqlParameter("@DatumTot", datumTot));
+                command.Parameters.Add(new SqlParameter("@Betaling", 0));
 
 
                 command.ExecuteNonQuery();
@@ -1346,14 +1454,9 @@ namespace EyeCT4Events_WF.Persistencies
             bool betaald;
 
             Connect();
-            string query = "SELECT * FROM Reservering WHERE GebruikerID = @Gebruikerid AND KampeerPlaats = @Plaatsid AND DatumVan = @DatumVan AND DatumTot = @DatumTot";
+            string query = "SELECT * FROM Reservering WHERE GebruikerID = @Gebruikerid AND KampeerPlaats = @gezochtebezoeker AND DatumVan = @DatumVan AND DatumTot = DatumTot";
             using (command = new SqlCommand(query, SQLcon))
             {
-                command.Parameters.Add(new SqlParameter("@Gebruikerid", Gebruikerid));
-                command.Parameters.Add(new SqlParameter("@Plaatsid", Plaatsid));
-                command.Parameters.Add(new SqlParameter("@DatumVan", DatumVan));
-                command.Parameters.Add(new SqlParameter("@DatumTot", DatumTot));
-
                 reader = command.ExecuteReader();
 
 
@@ -1361,11 +1464,11 @@ namespace EyeCT4Events_WF.Persistencies
                 {
 
                     int GebruikerID = Convert.ToInt32(reader["GebruikerID"]);
-                    int PlaatsID = Convert.ToInt32(reader["KampeerPlaats"]);
+                    int PlaatsID = Convert.ToInt32(reader["PlaatsID"]);
                     int ID = Convert.ToInt32(reader["ID"]);
                     DateTime DatumTOT = Convert.ToDateTime(reader["DatumTot"]);
                     DateTime DatumVAN = Convert.ToDateTime(reader["DatumVan"]);
-                    if ((bool)(reader["Betaald"])  == false)
+                    if (Convert.ToInt32(reader["Betaald"]) == 0)
                     {
                         betaald = false;
 
