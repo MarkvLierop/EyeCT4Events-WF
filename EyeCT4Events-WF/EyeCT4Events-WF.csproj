@@ -108,35 +108,17 @@
     <Compile Include="Forms\FormCategorieZoeken.Designer.cs">
       <DependentUpon>FormCategorieZoeken.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormEvenementAanmaken.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormEvenementAanmaken.Designer.cs">
-      <DependentUpon>FormEvenementAanmaken.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormEventAanmaken.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormEventAanmaken.Designer.cs">
       <DependentUpon>FormEventAanmaken.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormGerapporteerdeMediaOverzicht.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormGerapporteerdeMediaOverzicht.Designer.cs">
-      <DependentUpon>FormGerapporteerdeMediaOverzicht.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormMedewerkerMainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormMedewerkerMainMenu.Designer.cs">
       <DependentUpon>FormMedewerkerMainMenu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormMediaBekijken.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormMediaBekijken.Designer.cs">
-      <DependentUpon>FormMediaBekijken.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormMediaOverzicht.cs">
       <SubType>Form</SubType>
@@ -221,20 +203,11 @@
     <EmbeddedResource Include="Forms\FormCategorieZoeken.resx">
       <DependentUpon>FormCategorieZoeken.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormEvenementAanmaken.resx">
-      <DependentUpon>FormEvenementAanmaken.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEventAanmaken.resx">
       <DependentUpon>FormEventAanmaken.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormGerapporteerdeMediaOverzicht.resx">
-      <DependentUpon>FormGerapporteerdeMediaOverzicht.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMedewerkerMainMenu.resx">
       <DependentUpon>FormMedewerkerMainMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormMediaBekijken.resx">
-      <DependentUpon>FormMediaBekijken.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMediaOverzicht.resx">
       <DependentUpon>FormMediaOverzicht.cs</DependentUpon>
