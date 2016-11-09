@@ -15,6 +15,7 @@ namespace EyeCT4Events_WF.Classes.Interfaces
         List<Event> AlleEventsOpvragen();
         void ToevoegenCategorie(Categorie cat);
         void ToevoegenEvent(Event ev);
+        void SchoolAbusievelijkTaalgebruikOp();
         void ToevoegenMedia(Media media);
         void ToevoegenLikeInMediaOfReactie(Gebruiker gebruiker, int mediaID, int reactieID);
         void ToevoegenReactie(Reactie reactie);

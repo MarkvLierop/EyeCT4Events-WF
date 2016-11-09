@@ -550,6 +550,32 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
             return mediaList;
         }
+        public void SchoolAbusievelijkTaalgebruikOp()
+        {
+            List<Reactie> reactielijst = AlleReactiesOpvragen();
+            foreach (Reactie r in reactielijst)
+            {
+                //if (r.Media == media.ID)
+                //{
+                //    VerwijderReactie(r);
+                //}
+            }
+            Connect();
+            try
+            {
+                string query = "DELETE FROM Media WHERE ID = @ID";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    //command.Parameters.Add(new SqlParameter("@ID", media.ID));
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+        }
         public List<Media> AlleGerapporteerdeMediaOpvragen()
         {
             List<Media> mediaList = new List<Media>();
