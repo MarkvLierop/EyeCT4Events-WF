@@ -89,6 +89,20 @@ namespace EyeCT4Events_WF.Classes.Persistencies
             return type;
         }
 
+        private List<string> GetNietGeaccepteerdeWoorden()
+        {
+            List<string> nietGeaccepteerdeWoorden = new List<string>();
+
+            using (StreamReader srVerbergThreshHold = new StreamReader("NietGeaccepteerdeWoorden.txt", false))
+            {
+                while (srVerbergThreshHold.ReadLine() != null)
+                {
+                    nietGeaccepteerdeWoorden.Add(srVerbergThreshHold.ReadLine().ToLower());
+                }
+            }
+
+            return nietGeaccepteerdeWoorden;
+        }
         private void CheckVoorSubCategorien(List<Categorie> catLijst, Categorie[] catArray, Categorie cat)
         {
             foreach (Categorie c in catLijst)
@@ -231,12 +245,6 @@ namespace EyeCT4Events_WF.Classes.Persistencies
             }
         }
 
-        List<string> GetNietGeaccepteerdeWoorden()
-        {
-            List<string> verbodenwoorden = new List<string>();
-
-            return verbodenwoorden;
-        }
         public List<Media> AlleGerapporteerdeMediaOpvragen()
         {
             List<Media> mediaList = new List<Media>();

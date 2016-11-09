@@ -2,6 +2,7 @@
 using EyeCT4Events_WF.Classes.Gebruikers;
 using EyeCT4Events_WF.Classes.Persistencies;
 using EyeCT4Events_WF.Classes.Repositories;
+using EyeCT4Events_WF.Exceptions;
 using EyeCT4Events_WF.Persistencies;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,13 @@ namespace EyeCT4Events_WF.Forms
 {
     public partial class FormGebruikernieuw : Form
     {
+        Gebruiker gebruiker;
         public FormGebruikernieuw()
         {
             InitializeComponent();
+
+            cbType.Items.Add("Medewerker");
+            cbType.Items.Add("Beheerder");
         }
 
         private void FormGebruikernieuw_Load(object sender, EventArgs e)
@@ -30,18 +35,38 @@ namespace EyeCT4Events_WF.Forms
 
         private void BtnRegistreer_Click(object sender, EventArgs e)
         {
-            //Controleer of ieder veld ingevuld is,
-            //Controleer of wachtwoord overeenkomt met bevestiging,
-            //Voer alle informatie in de database in.
-            //Let op, ID word automatisch ingevoerd.
-
-            if (TbAchternaam.Text != null & TbVoornaam.Text != null & TbGebruikersnaam.Text != null & TbWachtwoord.Text != null & TbBevestig.Text != null) {
-                if (TbWachtwoord.Text == TbBevestig.Text) {
-                    RepositoryGebruiker RG = new RepositoryGebruiker(new MSSQLGebruiker());                  
-
+            if (TbAchternaam.Text != null & TbVoornaam.Text != null & TbGebruikersnaam.Text != null & TbWachtwoord.Text != null & TbBevestig.Text != null)
+            {
+                if (TbWachtwoord.Text == TbBevestig.Text)
+                {
+                    RepositoryGebruiker RG = new RepositoryGebruiker(new MSSQLGebruiker());
+                    if (cbType.SelectedText == "Medewerker")
+                    {
+                        gebruiker = new Medewerker();
+                    }
+                    else if (cbType.SelectedText == "Beheerder")
+                    {
+                        gebruiker = new Beheerder();
+                    }
+                    gebruiker.Achternaam = TbAchternaam.Text;
+                    gebruiker.Voornaam = TbVoornaam.Text;
+                    gebruiker.Tussenvoegsel = TbTussenvoegsel.Text;
+                    gebruiker.Wachtwoord = TbWachtwoord.Text;
+                    try
+                    {
+                        RG.GebruikerRegistreren(gebruiker);
+                        MessageBox.Show("Nieuw account geregistreerd.");
+                        DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    catch (FoutBijUitvoerenQueryException exc)
+                    {
+                        MessageBox.Show(exc.Message);
                     }
                 }
-            else {
+            }
+            else
+            {
                 MessageBox.Show("Niet alle gegevens zijn ingevuld.");
             }
 

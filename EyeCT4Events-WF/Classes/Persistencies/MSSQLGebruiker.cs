@@ -10,6 +10,7 @@ using EyeCT4Events_WF.Interfaces;
 using EyeCT4Events_WF.Classes.Gebruikers;
 using EyeCT4Events_WF.Classes.Interfaces;
 using System.Security.Cryptography;
+using System.IO;
 
 namespace EyeCT4Events_WF.Classes.Persistencies
 {
@@ -34,7 +35,8 @@ namespace EyeCT4Events_WF.Classes.Persistencies
             }
             return hash.ToString();
         }
-
+        
+        // Public Methods.
         public void Betaal(int RFID)
         {
             Connect();
@@ -346,7 +348,7 @@ namespace EyeCT4Events_WF.Classes.Persistencies
                 command.Parameters.Add(new SqlParameter("@Voornaam", gebruiker.Voornaam));
                 command.Parameters.Add(new SqlParameter("@Tussenvoegsel", gebruiker.Tussenvoegsel));
                 command.Parameters.Add(new SqlParameter("@Achternaam", gebruiker.Achternaam));
-                command.Parameters.Add(new SqlParameter("@GebruikerType", "bezoeker"));
+                command.Parameters.Add(new SqlParameter("@GebruikerType", gebruiker.GetGebruikerType()));
                 command.Parameters.Add(new SqlParameter("@Aanwezig", gebruiker.Aanwezig ? 1 : 0));
 
                 command.ExecuteNonQuery();
@@ -361,7 +363,7 @@ namespace EyeCT4Events_WF.Classes.Persistencies
                 string query = "SELECT * FROM Gebruiker WHERE Gebruikersnaam = @GEBRUIKERSNAAM";
                 using (command = new SqlCommand(query, SQLcon))
                 {
-                    command.Parameters.Add(new SqlParameter("@GEBRUIKERSNAAM", "lieropm")); // Lieropm later aanpassen
+                    command.Parameters.Add(new SqlParameter("@GEBRUIKERSNAAM", gebruikersnaam)); 
                     reader = command.ExecuteReader();
 
                     while (reader.Read())
@@ -488,14 +490,43 @@ namespace EyeCT4Events_WF.Classes.Persistencies
             return Bezoekers;
         }
 
-        void IGebruikerAdministratie.ZetBezoekerOpAfwezig(int gebruikerID)
+        public void ZetBezoekerOpAfwezig(int RFID)
         {
+            Connect();
+            try
+            {
+                string query = "UPDATE Gebruiker SET Aanwezig = 0 WHERE RFID = @RFID ";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@RFID", RFID));
 
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
         }
-
-        void IGebruikerAdministratie.ZetBezoekerOpAanwezig(int gebruikerID)
+        public void ZetBezoekerOpAanwezig(int RFID)
         {
-            throw new NotImplementedException();
+            Connect();
+            try
+            {
+                string query = "UPDATE Gebruiker SET Aanwezig = 1 WHERE RFID = @RFID ";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@RFID", RFID));
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
         }
     }
 

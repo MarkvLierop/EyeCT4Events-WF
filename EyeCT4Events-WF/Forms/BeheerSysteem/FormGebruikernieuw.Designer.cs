@@ -43,6 +43,8 @@
             this.BtnRegistreer = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.TbTussenvoegsel = new System.Windows.Forms.TextBox();
+            this.lblType = new System.Windows.Forms.Label();
+            this.cbType = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -135,7 +137,7 @@
             // 
             // BtnBack
             // 
-            this.BtnBack.Location = new System.Drawing.Point(15, 240);
+            this.BtnBack.Location = new System.Drawing.Point(12, 285);
             this.BtnBack.Name = "BtnBack";
             this.BtnBack.Size = new System.Drawing.Size(75, 23);
             this.BtnBack.TabIndex = 2;
@@ -145,7 +147,7 @@
             // 
             // BtnRegistreer
             // 
-            this.BtnRegistreer.Location = new System.Drawing.Point(200, 240);
+            this.BtnRegistreer.Location = new System.Drawing.Point(200, 285);
             this.BtnRegistreer.Name = "BtnRegistreer";
             this.BtnRegistreer.Size = new System.Drawing.Size(75, 23);
             this.BtnRegistreer.TabIndex = 2;
@@ -169,11 +171,30 @@
             this.TbTussenvoegsel.Size = new System.Drawing.Size(100, 20);
             this.TbTussenvoegsel.TabIndex = 1;
             // 
+            // lblType
+            // 
+            this.lblType.AutoSize = true;
+            this.lblType.Location = new System.Drawing.Point(15, 235);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(74, 13);
+            this.lblType.TabIndex = 3;
+            this.lblType.Text = "Type Account";
+            // 
+            // cbType
+            // 
+            this.cbType.FormattingEnabled = true;
+            this.cbType.Location = new System.Drawing.Point(200, 232);
+            this.cbType.Name = "cbType";
+            this.cbType.Size = new System.Drawing.Size(100, 21);
+            this.cbType.TabIndex = 4;
+            // 
             // FormGebruikernieuw
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 281);
+            this.ClientSize = new System.Drawing.Size(324, 320);
+            this.Controls.Add(this.cbType);
+            this.Controls.Add(this.lblType);
             this.Controls.Add(this.BtnRegistreer);
             this.Controls.Add(this.BtnBack);
             this.Controls.Add(this.TbBevestig);
@@ -214,5 +235,7 @@
         private System.Windows.Forms.Button BtnRegistreer;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox TbTussenvoegsel;
+        private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.ComboBox cbType;
     }
 }
