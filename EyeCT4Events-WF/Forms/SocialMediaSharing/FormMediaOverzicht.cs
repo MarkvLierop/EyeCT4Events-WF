@@ -25,9 +25,18 @@ namespace EyeCT4Events_WF
         // Private Methods
         private void ContentCreeren(List<Media> mediaList)
         {
+            // Ongewenste inhoud verwijderen
             rg = new RepositoryGebruiker(new MSSQL_Server());
-            //rsms.SchoolAbusievelijkTaalgebruikOp();
+            try
+            {
+                rsms.SchoolAbusievelijkTaalgebruikOp();
+            }
+            catch (FoutBijUitvoerenQueryException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
 
+            // Form layout creeren
             List<Control> pnlContentControlList = new List<Control>();
             for (int i = 0; i < mediaLijst.Count; i++)
             {
@@ -118,7 +127,7 @@ namespace EyeCT4Events_WF
             }
             catch (FoutBijUitvoerenQueryException e)
             {
-                MessageBox.Show("Fout bij ophalen van categorien " + e.Message);
+                MessageBox.Show("Fout bij ophalen van categorien: " + e.Message);
             }
 
             ContentCreeren(mediaLijst);
@@ -191,7 +200,12 @@ namespace EyeCT4Events_WF
         private void btnCategorieToevoegen_Click(object sender, EventArgs e)
         {
             FormCategorieToevoegen catToevoegen = new FormCategorieToevoegen();
-            catToevoegen.Show();
+            catToevoegen.ShowDialog();
+
+            if (catToevoegen.DialogResult == DialogResult.OK)
+            {
+                pnlCategorieën.Refresh();
+            }
         }
 
         private void pnlCategorieën_Paint(object sender, PaintEventArgs e)

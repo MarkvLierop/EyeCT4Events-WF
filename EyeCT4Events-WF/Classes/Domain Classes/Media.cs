@@ -43,13 +43,23 @@ namespace EyeCT4Events_WF.Classes
             {
                 return "Video Bestand|*" + GetBestandsExtentie();
             }
-            return "Alle Bestanden|*.*";
+            return "Overige Bestanden|*" + GetBestandsExtentie();
         }
+        int hoogsteID;
         public void BestandOpslaan(string safeFileName, string fileName)
         {
             try
             {
-                string directory = "SocialMediaSharingData\\" + (Convert.ToInt32(smsr.SelectHoogsteMediaID().ID) + 1).ToString() + "\\";
+
+                if (smsr.SelectHoogsteMediaID().ID == 1)
+                {
+                    hoogsteID = 1;
+                }
+                else
+                {
+                    hoogsteID = smsr.SelectHoogsteMediaID().ID+1;
+                }
+                string directory = "SocialMediaSharingData\\" + hoogsteID.ToString() + "\\";
                 Pad = directory + safeFileName;
                 Directory.CreateDirectory(directory);
                 File.Copy(fileName, directory + safeFileName);

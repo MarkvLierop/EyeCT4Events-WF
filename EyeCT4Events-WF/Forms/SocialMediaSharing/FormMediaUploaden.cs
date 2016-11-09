@@ -74,6 +74,8 @@ namespace EyeCT4Events_WF.Forms
             }
 
             MessageBox.Show("Media geplaatst.");
+
+            DialogResult = DialogResult.OK;
             Close();
         }
 

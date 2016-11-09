@@ -6,7 +6,7 @@ namespace EyeCT4Events_WF.Classes.Interfaces
 {
     public interface IKampeerplaats
     {
-        List<Kampeerplaats> KampeerplaatsenOpvragen(bool comfort, bool invalide, bool lawaai, string eigentent,
+        List<Kampeerplaats> KampeerplaatsenOpvragen(int comfort, int invalide, int lawaai, string eigentent,
                                       string bungalow, string bungalino, string blokhut, string stacaravan, string huurtent);
 
         List<Kampeerplaats> AlleKampeerplaatsenOpvragen();

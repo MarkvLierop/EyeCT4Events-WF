@@ -28,9 +28,9 @@ namespace EyeCT4Events_WF
         int plaatsid;
         int bezoekerid;
 
-        bool comfort;
-        bool lawaai;
-        bool invalide;
+        int comfort;
+        int lawaai;
+        int invalide;
         string bungalow ;
         string bungalino ;
         string blokhut ;
@@ -63,14 +63,14 @@ namespace EyeCT4Events_WF
             ResetGegevens();
 
             if (cbBlokhut.Checked) { blokhut = "blokhut"; }
-            if (cbBungalino.Checked) { blokhut = "bungalino"; }
-            if (cbBungalow.Checked) { blokhut = "bungalow"; }
-            if (cbEigenTent.Checked) { blokhut = "eigentent"; }
-            if (cbHuurTent.Checked) { blokhut = "huurtent"; }
-            if (cbStaCaravan.Checked) { blokhut = "stacaravan"; }
-            if (rbComfort.Checked) { comfort = true; }
-            if (rbInvalide.Checked) { invalide = true; }
-            if (rbLawaai.Checked) { lawaai = true; }
+            if (cbBungalino.Checked) { bungalino = "bungalino"; }
+            if (cbBungalow.Checked) { bungalow = "bungalow"; }
+            if (cbEigenTent.Checked) { eigentent = "eigentent"; }
+            if (cbHuurTent.Checked) { huurtent = "huurtent"; }
+            if (cbStaCaravan.Checked) { stacaravan = "stacaravan"; }
+            if (rbComfort.Checked) { comfort = 1; }
+            if (rbInvalide.Checked) { invalide = 1; }
+            if (rbLawaai.Checked) { lawaai = 1; }
 
             try
             {
@@ -87,15 +87,15 @@ namespace EyeCT4Events_WF
         public void ResetGegevens()
         {
             kampeerplaatsen.Clear();
-            comfort = false;
-            lawaai = false;
-            invalide = false;
-            bungalow = "";
-            bungalino = "";
-            blokhut = "";
-            stacaravan = "";
-            huurtent = "";
-            eigentent = "";
+            comfort = 0;
+            lawaai = 0;
+            invalide = 0;
+            bungalow = "''";
+            bungalino = "''";
+            blokhut = "''";
+            stacaravan = "''";
+            huurtent = "''";
+            eigentent = "''";
         }
 
         public void Ververs()
@@ -104,7 +104,7 @@ namespace EyeCT4Events_WF
 
             foreach (Kampeerplaats k in kampeerplaatsen)
             {
-                lbKampeerplaatsen.Items.Add(k);
+                lbKampeerplaatsen.Items.Add(k.ToString()) ;
             }
                         
         }

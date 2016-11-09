@@ -27,7 +27,9 @@ namespace EyeCT4Events_WF.Forms.SocialMediaSharing
             {
                 lsEvents.Items.Add(e.ToString());
             }
-            lsEvents.SelectedIndex = 0;
+            if (eventlist.Count != 0)
+                lsEvents.SelectedIndex = 0;
+
             lblBeschrijving.Width = this.Width;
             lblBeschrijving.Height = 80;
         }

@@ -83,9 +83,9 @@
             // lbKampeerplaatsen
             // 
             this.lbKampeerplaatsen.FormattingEnabled = true;
-            this.lbKampeerplaatsen.Location = new System.Drawing.Point(450, 179);
+            this.lbKampeerplaatsen.Location = new System.Drawing.Point(450, 166);
             this.lbKampeerplaatsen.Name = "lbKampeerplaatsen";
-            this.lbKampeerplaatsen.Size = new System.Drawing.Size(200, 186);
+            this.lbKampeerplaatsen.Size = new System.Drawing.Size(269, 199);
             this.lbKampeerplaatsen.TabIndex = 15;
             // 
             // groupBox1
@@ -95,7 +95,7 @@
             this.groupBox1.Controls.Add(this.rbInvalide);
             this.groupBox1.Location = new System.Drawing.Point(450, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 36);
+            this.groupBox1.Size = new System.Drawing.Size(269, 36);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Type";
@@ -103,7 +103,7 @@
             // rbLawaai
             // 
             this.rbLawaai.AutoSize = true;
-            this.rbLawaai.Location = new System.Drawing.Point(135, 13);
+            this.rbLawaai.Location = new System.Drawing.Point(204, 13);
             this.rbLawaai.Name = "rbLawaai";
             this.rbLawaai.Size = new System.Drawing.Size(59, 17);
             this.rbLawaai.TabIndex = 18;
@@ -115,7 +115,7 @@
             // rbComfort
             // 
             this.rbComfort.AutoSize = true;
-            this.rbComfort.Location = new System.Drawing.Point(74, 13);
+            this.rbComfort.Location = new System.Drawing.Point(104, 13);
             this.rbComfort.Name = "rbComfort";
             this.rbComfort.Size = new System.Drawing.Size(61, 17);
             this.rbComfort.TabIndex = 1;
@@ -147,7 +147,7 @@
             this.groupBox2.Controls.Add(this.cbBungalow);
             this.groupBox2.Location = new System.Drawing.Point(450, 48);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 73);
+            this.groupBox2.Size = new System.Drawing.Size(269, 59);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Verblijf";
@@ -155,7 +155,7 @@
             // cbEigenTent
             // 
             this.cbEigenTent.AutoSize = true;
-            this.cbEigenTent.Location = new System.Drawing.Point(92, 52);
+            this.cbEigenTent.Location = new System.Drawing.Point(185, 35);
             this.cbEigenTent.Name = "cbEigenTent";
             this.cbEigenTent.Size = new System.Drawing.Size(78, 17);
             this.cbEigenTent.TabIndex = 5;
@@ -177,7 +177,7 @@
             // cbBlokhut
             // 
             this.cbBlokhut.AutoSize = true;
-            this.cbBlokhut.Location = new System.Drawing.Point(6, 52);
+            this.cbBlokhut.Location = new System.Drawing.Point(92, 19);
             this.cbBlokhut.Name = "cbBlokhut";
             this.cbBlokhut.Size = new System.Drawing.Size(62, 17);
             this.cbBlokhut.TabIndex = 3;
@@ -199,7 +199,7 @@
             // cbHuurTent
             // 
             this.cbHuurTent.AutoSize = true;
-            this.cbHuurTent.Location = new System.Drawing.Point(92, 19);
+            this.cbHuurTent.Location = new System.Drawing.Point(185, 19);
             this.cbHuurTent.Name = "cbHuurTent";
             this.cbHuurTent.Size = new System.Drawing.Size(71, 17);
             this.cbHuurTent.TabIndex = 1;
@@ -229,22 +229,22 @@
             // 
             // dtVan
             // 
-            this.dtVan.Location = new System.Drawing.Point(492, 127);
+            this.dtVan.Location = new System.Drawing.Point(492, 113);
             this.dtVan.Name = "dtVan";
-            this.dtVan.Size = new System.Drawing.Size(158, 20);
+            this.dtVan.Size = new System.Drawing.Size(227, 20);
             this.dtVan.TabIndex = 19;
             // 
             // dtTot
             // 
-            this.dtTot.Location = new System.Drawing.Point(492, 154);
+            this.dtTot.Location = new System.Drawing.Point(492, 139);
             this.dtTot.Name = "dtTot";
-            this.dtTot.Size = new System.Drawing.Size(158, 20);
+            this.dtTot.Size = new System.Drawing.Size(227, 20);
             this.dtTot.TabIndex = 20;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(450, 133);
+            this.label1.Location = new System.Drawing.Point(453, 119);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 21;
@@ -253,7 +253,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(450, 160);
+            this.label2.Location = new System.Drawing.Point(453, 145);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(26, 13);
             this.label2.TabIndex = 22;
@@ -263,7 +263,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 451);
+            this.ClientSize = new System.Drawing.Size(731, 451);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtTot);

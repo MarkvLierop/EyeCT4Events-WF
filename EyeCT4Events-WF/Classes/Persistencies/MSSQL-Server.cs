@@ -64,7 +64,7 @@ namespace EyeCT4Events_WF.Persistencies
             }
             return hash.ToString();
         }
-        private string BestandsTypeDefinieren (string type)
+        private string BestandsTypeDefinieren(string type)
         {
             switch (type.ToLower())
             {
@@ -132,7 +132,7 @@ namespace EyeCT4Events_WF.Persistencies
                 if (c.Parent == cat.ID)
                 {
                     int x = 0;
-                    Start:
+                Start:
                     if (catArray[x] == null)
                     {
                         catArray[x] = c;
@@ -176,7 +176,7 @@ namespace EyeCT4Events_WF.Persistencies
                         materiaal.Naam = reader["Naam"].ToString();
                         materiaal.Prijs = Convert.ToInt32(reader["Prijs"]);
                         materiaal.Voorraad = Convert.ToInt32(reader["HuidigeVoorraad"]);
-                    
+
 
                         materialen.Add(materiaal);
                     }
@@ -463,7 +463,7 @@ namespace EyeCT4Events_WF.Persistencies
             {
                 throw new FoutBijUitvoerenQueryException(e.Message);
             }
-            
+
             Close();
             return gebruiker;
         }
@@ -513,7 +513,7 @@ namespace EyeCT4Events_WF.Persistencies
         {
             string gezochtebezoeker = zoekopdracht;
             List<Gebruiker> Bezoekers = new List<Gebruiker>();
-            
+
             Connect();
             try
             {
@@ -546,10 +546,12 @@ namespace EyeCT4Events_WF.Persistencies
             {
                 throw new FoutBijUitvoerenQueryException(e.Message);
             }
-            
+
             Close();
             return Bezoekers;
         }
+
+
         #endregion
         #region Media
         public List<Media> AlleMediaOpvragen()
@@ -582,6 +584,7 @@ namespace EyeCT4Events_WF.Persistencies
             }
             catch (Exception e)
             {
+                Close();
                 throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
@@ -592,28 +595,73 @@ namespace EyeCT4Events_WF.Persistencies
             List<Reactie> reactielijst = AlleReactiesOpvragen();
             List<Media> mediaLijst = AlleMediaOpvragen();
             List<string> nietGeaccepteerdeWoorden = GetNietGeaccepteerdeWoorden();
-            foreach (Reactie r in reactielijst)
-            {
-                //if (r.Media == media.ID)
-                //{
-                //    VerwijderReactie(r);
-                //}
-            }
-            Connect();
+
+            List<Media> teVerwijderenMedia = new List<Media>();
+            List<Reactie> teVerwijderenReacties = new List<Reactie>();
+
             try
             {
-                string query = "DELETE FROM Media WHERE ID = @ID";
-                using (command = new SqlCommand(query, SQLcon))
+                // Alle media selecteren waar niet geaccepteerde woorden in voorkomen
+                foreach (string s in nietGeaccepteerdeWoorden)
                 {
-                    //command.Parameters.Add(new SqlParameter("@ID", media.ID));
-                    command.ExecuteNonQuery();
+                    Connect();
+                    string query = "SELECT * FROM Media WHERE Beschrijving LIKE @zoekterm";
+                    using (command = new SqlCommand(query, SQLcon))
+                    {
+                        command.Parameters.Add(new SqlParameter("@zoekterm", "%" + s + "%"));
+                        reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            Media media = new Media();
+                            media.ID = Convert.ToInt32(reader["ID"]);
+                            teVerwijderenMedia.Add(media);
+                        }
+                    }
+                    Close();
                 }
             }
             catch (Exception e)
             {
+                Close();
                 throw new FoutBijUitvoerenQueryException(e.Message);
             }
-            Close();
+            try
+            {
+                // Alle reacties selecteren waarin niet geaccepteerde woorden in voorkomen
+                foreach (string s in nietGeaccepteerdeWoorden)
+                {
+                    Connect();
+                    string query = "SELECT * FROM Reactie WHERE Inhoud LIKE @zoekterm";
+                    using (command = new SqlCommand(query, SQLcon))
+                    {
+                        command.Parameters.Add(new SqlParameter("@zoekterm", "%" + s + "%"));
+                        reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            Reactie reactie = new Reactie();
+                            reactie.ReactieID = Convert.ToInt32(reader["ID"]);
+                            teVerwijderenReacties.Add(reactie);
+                        }
+                    }
+                    Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Close();
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+
+            foreach (Media m in teVerwijderenMedia)
+            {
+                VerwijderMedia(m);
+            }
+            foreach (Reactie r in teVerwijderenReacties)
+            {
+                VerwijderReactie(r);
+            }
         }
         public List<Media> AlleGerapporteerdeMediaOpvragen()
         {
@@ -681,7 +729,7 @@ namespace EyeCT4Events_WF.Persistencies
             Connect();
             try
             {
-                string query = "INSERT INTO Media VALUES (@GeplaatstDoor, @Categorie, @Pad, @Type, 0, 0, @Beschrijving)";
+                string query = "INSERT INTO Media VALUES (@GeplaatstDoor, @Categorie, @Beschrijving, @Pad, @Type, 0, 0)";
                 using (command = new SqlCommand(query, SQLcon))
                 {
                     command.Parameters.Add(new SqlParameter("@GeplaatstDoor", media.GeplaatstDoor));
@@ -698,7 +746,7 @@ namespace EyeCT4Events_WF.Persistencies
                 throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
-        }      
+        }
         public void ToevoegenLikeInMediaOfReactie(Gebruiker gebruiker, int mediaID, int reactieID)
         {
             // INSERT +1 Like INTO Media
@@ -755,7 +803,7 @@ namespace EyeCT4Events_WF.Persistencies
                 {
                     throw new FoutBijUitvoerenQueryException(e.Message);
                 }
-                
+
                 Close();
             }
         }
@@ -835,7 +883,7 @@ namespace EyeCT4Events_WF.Persistencies
                 throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
-            
+
             return medialist;
         }
         public void ZetAantalKerenGerapporteerdOp0(Media media)
@@ -898,8 +946,14 @@ namespace EyeCT4Events_WF.Persistencies
                     {
                         media = new Media();
 
-                        if (reader["maxID"].ToString() != "NULL")
+                        if (reader["maxID"].GetType() != typeof(DBNull))
+                        {
                             media.ID = Convert.ToInt32(reader["maxID"]);
+                        }
+                        else
+                        {
+                            media.ID = 1;
+                        }
                     }
                 }
             }
@@ -960,13 +1014,13 @@ namespace EyeCT4Events_WF.Persistencies
                 throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
-            
-            for (int i = 0; i< categorieLijst.Count;i++)
+
+            for (int i = 0; i < categorieLijst.Count; i++)
             {
                 if (!categorieArray.Contains(categorieLijst[i]))
                 {
                     int a = i;
-                    Start:
+                Start:
                     if (categorieArray[a] == null)
                     {
                         categorieArray[a] = categorieLijst[i];
@@ -1107,6 +1161,7 @@ namespace EyeCT4Events_WF.Persistencies
             }
             catch (SqlException e)
             {
+                Close();
                 throw new FoutBijUitvoerenQueryException(e.Message);
             }
             Close();
@@ -1169,7 +1224,7 @@ namespace EyeCT4Events_WF.Persistencies
             Close();
             return KampeerList;
         }
-        public List<Kampeerplaats> KampeerplaatsenOpvragen(bool comfort, bool invalide, bool lawaai, string eigentent,
+        public List<Kampeerplaats> KampeerplaatsenOpvragen(int comfort, int invalide, int lawaai, string eigentent,
                                      string bungalow, string bungalino, string blokhut, string stacaravan, string huurtent)
         {
             List<Kampeerplaats> KampeerList = new List<Kampeerplaats>();
@@ -1177,8 +1232,7 @@ namespace EyeCT4Events_WF.Persistencies
             Connect();
             try
             {
-                string query = "SELECT * FROM KampeerPlaats k WHERE (k.Comfort = @comfort AND k.Invalide = @invalide AND k.Lawaai = @lawaai) " +
-                    "AND (k.KampeerPlaatsType = @blokhut OR k.KampeerPlaatsType = @bungalino OR k.KampeerPlaatsType = @eigentent OR k.KampeerPlaatsType = @huurtent OR k.KampeerPlaatsType = @stacaravan OR k.KampeerPlaatsType = @bungalow)";
+                string query = "SELECT * FROM KampeerPlaats k WHERE k.Comfort = @comfort AND k.Invalide = @invalide AND k.Lawaai = @lawaai AND (k.KampeerPlaatsType = @eigentent OR k.KampeerPlaatsType = @bungalow OR k.KampeerPlaatsType = @bungalino OR k.KampeerPlaatsType = @blokhut OR k.KampeerPlaatsType = @stacaravan OR k.KampeerPlaatsType = @huurtent);";
                 using (command = new SqlCommand(query, SQLcon))
                 {
                     command.Parameters.Add(new SqlParameter("@comfort", comfort));
@@ -1190,6 +1244,7 @@ namespace EyeCT4Events_WF.Persistencies
                     command.Parameters.Add(new SqlParameter("@blokhut", blokhut));
                     command.Parameters.Add(new SqlParameter("@stacaravan", stacaravan));
                     command.Parameters.Add(new SqlParameter("@huurtent", huurtent));
+
                     reader = command.ExecuteReader();
 
                     while (reader.Read())
@@ -1202,6 +1257,7 @@ namespace EyeCT4Events_WF.Persistencies
                         kampeerplaats.Lawaai = Convert.ToInt32(reader["Lawaai"]);
                         kampeerplaats.Invalide = Convert.ToInt32(reader["Invalide"]);
                         kampeerplaats.Comfort = Convert.ToInt32(reader["Comfort"]);
+                        kampeerplaats.Locatie = Convert.ToInt32(reader["Locatie"]);
                         KampeerList.Add(kampeerplaats);
 
                     }
@@ -1290,7 +1346,7 @@ namespace EyeCT4Events_WF.Persistencies
             using (command = new SqlCommand(query, SQLcon))
             {
                 reader = command.ExecuteReader();
-                
+
 
                 while (reader.Read())
                 {
@@ -1303,7 +1359,7 @@ namespace EyeCT4Events_WF.Persistencies
                     if (Convert.ToInt32(reader["Betaald"]) == 0)
                     {
                         betaald = false;
-                        
+
 
                         reservering.ReserveringID = ID;
                         reservering.BezoekerID = GebruikerID;
@@ -1316,7 +1372,7 @@ namespace EyeCT4Events_WF.Persistencies
 
                     else
                     {
-                        
+
                         betaald = true;
 
                         reservering.ReserveringID = ID;
@@ -1330,7 +1386,7 @@ namespace EyeCT4Events_WF.Persistencies
 
                 }
 
-                
+
             }
 
             Close();
@@ -1410,12 +1466,11 @@ namespace EyeCT4Events_WF.Persistencies
             {
                 throw new FoutBijUitvoerenQueryException(e.Message);
             }
+            Close();
 
             return eventList;
-            }
-      }
-
+        }
         #endregion
-
+    }
 }
 

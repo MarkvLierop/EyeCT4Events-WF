@@ -47,8 +47,15 @@ namespace EyeCT4Events_WF.Forms
             cat.Naam = tbNaam.Text;
             try
             {
-                cat.Parent = smsr.GetCategorieMetNaam(lbCategorien.SelectedItem.ToString()).ID;
-                smsr.ToevoegenCategorie(cat);
+                if (lbCategorien.SelectedItem != null)
+                {
+                    cat.Parent = smsr.GetCategorieMetNaam(lbCategorien.SelectedItem.ToString()).ID;
+                    smsr.ToevoegenCategorie(cat);
+                }
+                else
+                {
+                    MessageBox.Show("Selecteer een hoofdcategorie");
+                }
             }
             catch (FoutBijUitvoerenQueryException exc)
             {
@@ -63,6 +70,7 @@ namespace EyeCT4Events_WF.Forms
             {
                 MessageBox.Show(cat.Naam + " Toegevoegd");
 
+                DialogResult = DialogResult.OK;
                 Close();
             }
         }

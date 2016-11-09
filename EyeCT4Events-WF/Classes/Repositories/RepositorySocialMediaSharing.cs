@@ -19,6 +19,10 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             ISMS.VerwijderMedia(media);
         }
+        public void SchoolAbusievelijkTaalgebruikOp()
+        {
+            ISMS.SchoolAbusievelijkTaalgebruikOp();
+        }
         public List<Event> AlleEventsOpvragen()
         {
             return ISMS.AlleEventsOpvragen();

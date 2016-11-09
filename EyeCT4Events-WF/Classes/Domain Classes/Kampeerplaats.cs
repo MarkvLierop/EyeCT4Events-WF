@@ -16,6 +16,7 @@ namespace EyeCT4Events_WF.Classes
         public int Invalide { get; set; }
         public int Lawaai { get; set; }
         public int GebruikerID { get; set; }
+        public int Locatie { get; set; }
 
         public Kampeerplaats()
         {
@@ -29,6 +30,25 @@ namespace EyeCT4Events_WF.Classes
                 return true;
             }
             return false;
+        }
+
+        public override string ToString()
+        {
+            if(Comfort == 1)
+            {
+                return "Locatie: " + Locatie + " Max aantal Personen: " + MaxPersonen + " Comfortabel";
+            }
+
+            if (Lawaai == 1)
+            {
+                return "Locatie: " + Locatie + " Max aantal Personen: " + MaxPersonen + " Lawaaierig";
+            }
+
+            else 
+            {
+                return "Locatie: " + Locatie + " Max aantal Personen: " + MaxPersonen + " Voor minder valide bezoekers";
+            }
+
         }
     }
 }
