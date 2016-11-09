@@ -1,4 +1,5 @@
 ﻿using EyeCT4Events_WF.Classes;
+using EyeCT4Events_WF.Classes.Gebruikers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace EyeCT4Events_WF
         public Gebruikergegevens() 
         {
             InitializeComponent();
+            beheerder = new Beheerder();
         }
 
         private void Gebruikergegevens_Load(object sender, EventArgs e)

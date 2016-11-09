@@ -43,11 +43,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(175, 18);
+            this.label1.Location = new System.Drawing.Point(147, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 13);
+            this.label1.Size = new System.Drawing.Size(116, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Fill in first name";
+            this.label1.Text = "Voornaam invoeren";
             // 
             // cbSorteer
             // 
@@ -56,7 +56,7 @@
             this.cbSorteer.Name = "cbSorteer";
             this.cbSorteer.Size = new System.Drawing.Size(83, 21);
             this.cbSorteer.TabIndex = 4;
-            this.cbSorteer.Text = "Sort by";
+            this.cbSorteer.Text = "Filter Op";
             this.cbSorteer.SelectedIndexChanged += new System.EventHandler(this.cbSorteer_SelectedIndexChanged);
             // 
             // btSluiten
@@ -65,7 +65,7 @@
             this.btSluiten.Name = "btSluiten";
             this.btSluiten.Size = new System.Drawing.Size(80, 20);
             this.btSluiten.TabIndex = 5;
-            this.btSluiten.Text = "Close";
+            this.btSluiten.Text = "Sluiten";
             this.btSluiten.UseVisualStyleBackColor = true;
             this.btSluiten.Click += new System.EventHandler(this.btSluiten_Click);
             // 
@@ -75,7 +75,7 @@
             this.btEdit.Name = "btEdit";
             this.btEdit.Size = new System.Drawing.Size(80, 20);
             this.btEdit.TabIndex = 6;
-            this.btEdit.Text = "Edit";
+            this.btEdit.Text = "Aanpassen";
             this.btEdit.UseVisualStyleBackColor = true;
             this.btEdit.Click += new System.EventHandler(this.btEdit_Click);
             // 
@@ -101,7 +101,7 @@
             this.BtnZoeken.Name = "BtnZoeken";
             this.BtnZoeken.Size = new System.Drawing.Size(80, 20);
             this.BtnZoeken.TabIndex = 9;
-            this.BtnZoeken.Text = "Search";
+            this.BtnZoeken.Text = "Zoeken";
             this.BtnZoeken.UseVisualStyleBackColor = true;
             this.BtnZoeken.Click += new System.EventHandler(this.BtnZoeken_Click);
             // 
@@ -111,7 +111,7 @@
             this.btRemove.Name = "btRemove";
             this.btRemove.Size = new System.Drawing.Size(80, 20);
             this.btRemove.TabIndex = 6;
-            this.btRemove.Text = "Remove";
+            this.btRemove.Text = "Verwijderen";
             this.btRemove.UseVisualStyleBackColor = true;
             this.btRemove.Click += new System.EventHandler(this.btEdit_Click);
             // 
@@ -121,7 +121,7 @@
             this.BtAddNew.Name = "BtAddNew";
             this.BtAddNew.Size = new System.Drawing.Size(80, 20);
             this.BtAddNew.TabIndex = 10;
-            this.BtAddNew.Text = "Add new";
+            this.BtAddNew.Text = "Nieuw";
             this.BtAddNew.UseVisualStyleBackColor = true;
             this.BtAddNew.Click += new System.EventHandler(this.BtAddNew_Click);
             // 

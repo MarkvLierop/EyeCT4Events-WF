@@ -18,15 +18,6 @@ namespace EyeCT4Events_WF.Classes.Persistencies
 {
     class MSSQLSMS : MSSQL_Server, ISocialMediaSharing
     {
-        string connString;
-        SqlCommand command;
-        SqlConnection SQLcon;
-        SqlDataReader reader;
-
-        Gebruiker gebruiker;
-        Categorie[] categorieArray;
-
-
         private string BestandsTypeDefinieren(string type)
         {
             switch (type.ToLower())

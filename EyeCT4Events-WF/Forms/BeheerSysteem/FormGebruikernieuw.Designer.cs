@@ -141,7 +141,7 @@
             this.BtnBack.Name = "BtnBack";
             this.BtnBack.Size = new System.Drawing.Size(75, 23);
             this.BtnBack.TabIndex = 2;
-            this.BtnBack.Text = "Back";
+            this.BtnBack.Text = "Sluiten";
             this.BtnBack.UseVisualStyleBackColor = true;
             this.BtnBack.Click += new System.EventHandler(this.BtnBack_Click);
             // 

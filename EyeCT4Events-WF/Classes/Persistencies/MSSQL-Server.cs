@@ -15,19 +15,16 @@ using System.Windows.Forms;
 
 namespace EyeCT4Events_WF.Persistencies
 {
-    public class MSSQL_Server  
+    public abstract class MSSQL_Server  
     {
-        string connString;
-        SqlCommand command;
-        SqlConnection SQLcon;
-        SqlDataReader reader;
+        protected string connString;
+        protected SqlCommand command;
+        protected SqlConnection SQLcon;
+        protected SqlDataReader reader;
 
-        Gebruiker gebruiker;
-        Categorie[] categorieArray;
+        protected Gebruiker gebruiker;
+        protected Categorie[] categorieArray;
 
-        /// <summary>
-        ///  Private Methods
-        /// </summary>
         public void Connect()
         {
             try
@@ -53,32 +50,6 @@ namespace EyeCT4Events_WF.Persistencies
                 throw new DatabaseConnectionAlreadyCloseException(e.Message);
             }
         }
-       
-       
-       
-    
-
-        
-    
-        /// <summary>
-        /// Public Methods.
-        /// </summary>
-        /// <returns></returns>
-        /// 
-        #region Gebruikers
-       
-
-        #endregion
-        #region Media
-       
-        #endregion
-        #region Kampeer queries
-        
-
-        #endregion
-        #region Events
-      
-        #endregion
     }
 }
 

@@ -13,14 +13,6 @@ namespace EyeCT4Events_WF.Classes.Persistencies
 {
     class MSSQLReserveren : MSSQL_Server, IKampeerplaats , IMateriaal
     {
-        string connString;
-        SqlCommand command;
-        SqlConnection SQLcon;
-        SqlDataReader reader;
-
-        Gebruiker gebruiker;
-        Categorie[] categorieArray;
-
         public List<Materiaal> HaalMaterialenOp()
         {
             List<Materiaal> materialen = new List<Materiaal>();

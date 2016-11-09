@@ -16,14 +16,6 @@ namespace EyeCT4Events_WF.Classes.Persistencies
 {
     class MSSQLGebruiker : MSSQL_Server, IGebruikerAdministratie
     {
-        string connString;
-        SqlCommand command;
-        SqlConnection SQLcon;
-        SqlDataReader reader;
-
-        Gebruiker gebruiker;
-        Categorie[] categorieArray;
-
         private string EncryptString(string toEncrypt)
         {
             SHA256Managed crypt = new SHA256Managed();
@@ -441,7 +433,7 @@ namespace EyeCT4Events_WF.Classes.Persistencies
                     }
                 }
             }
-            catch (SqlException e)
+            catch (Exception e)
             {
                 throw new FoutBijUitvoerenQueryException(e.Message);
             }

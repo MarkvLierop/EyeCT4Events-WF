@@ -75,7 +75,7 @@ namespace EyeCT4Events_WF.Forms
         private void BtnBack_Click(object sender, EventArgs e){
             Gebruikersbeheer G = new Gebruikersbeheer();
             G.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }
