@@ -133,7 +133,7 @@ namespace EyeCT4Events_WF.Classes.Persistencies
             Connect();
             try
             {
-                string query = "SELECT * FROM Media WHERE Flagged < @VerbergThreshhold ORDER ID DESC";
+                string query = "SELECT * FROM Media WHERE Flagged < @VerbergThreshhold ORDER BY ID DESC";
                 using (command = new SqlCommand(query, SQLcon))
                 {
                     command.Parameters.Add(new SqlParameter("@VerbergThreshhold", GetMediaVerbergThreshhold()));
@@ -243,7 +243,7 @@ namespace EyeCT4Events_WF.Classes.Persistencies
             Connect();
             try
             {
-                string query = "SELECT * FROM Media WHERE Flagged > @VerbergThreshhold";
+                string query = "SELECT * FROM Media WHERE Flagged > @VerbergThreshhold ORDER BY ID DESC";
                 using (command = new SqlCommand(query, SQLcon))
                 {
                     command.Parameters.Add(new SqlParameter("@VerbergThreshhold", GetMediaVerbergThreshhold()));
@@ -428,7 +428,7 @@ namespace EyeCT4Events_WF.Classes.Persistencies
             Connect();
             try
             {
-                string query = "SELECT * FROM Media WHERE Flagged < @Threshhold AND (Categorie = @ID OR MediaType LIKE @zoekterm OR BestandPad LIKE @zoekterm)";
+                string query = "SELECT * FROM Media WHERE Flagged < @Threshhold AND (Categorie = @ID OR MediaType LIKE @zoekterm OR BestandPad LIKE @zoekterm) ORDER BY ID DESC";
                 using (command = new SqlCommand(query, SQLcon))
                 {
                     command.Parameters.Add(new SqlParameter("@zoekterm", "%" + zoekterm + "%"));
