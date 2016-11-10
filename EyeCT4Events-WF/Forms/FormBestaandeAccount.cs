@@ -22,15 +22,21 @@ namespace EyeCT4Events_WF.Forms
 
         public int MSSQL { get; private set; }
 
-        public FormBestaandeAccount()
+        public FormBestaandeAccount(Gebruiker gebruiker, string tekst)
         {
             InitializeComponent();
+            medewerker = gebruiker;
+
+            btnNieuweAccAanmaken.Visible = false;
+            btnKampeerplaatsReserveren.Visible = false;
         }
 
         public FormBestaandeAccount(Gebruiker gebruiker)
         {
             InitializeComponent();
             medewerker = gebruiker;
+
+            btnMateriaalReserveren.Visible = false;
         }
 
         private void tbZoekGebruikers_TextChanged(object sender, EventArgs e)
@@ -59,14 +65,14 @@ namespace EyeCT4Events_WF.Forms
             Gebruiker gekozengebruiker;
             gekozengebruiker = bestaandegebruikers[lbBestaandeGebruikers.SelectedIndex];
             FormReserveerPlaats frp = new FormReserveerPlaats(medewerker, gekozengebruiker);
-            this.Hide();
+            this.Close();
             frp.Show();
         }
 
         private void btnNieuweAccAanmaken_Click(object sender, EventArgs e)
         {
             FormRegistreerNieuweGebruiker frng = new FormRegistreerNieuweGebruiker(medewerker);
-            this.Hide();
+            this.Close();
             frng.Show();
         }
 
@@ -78,6 +84,15 @@ namespace EyeCT4Events_WF.Forms
             {
                 lbBestaandeGebruikers.Items.Add(g);
             }
+        }
+
+        private void btnMateriaalReserveren_Click(object sender, EventArgs e)
+        {
+            Gebruiker gekozengebruiker;
+            gekozengebruiker = bestaandegebruikers[lbBestaandeGebruikers.SelectedIndex];
+            FormReserveerMateriaal frm = new FormReserveerMateriaal(gekozengebruiker, medewerker);
+            this.Close();
+            frm.Show();
         }
     }
 }

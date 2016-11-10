@@ -17,9 +17,19 @@ namespace EyeCT4Events_WF.Classes.Repositories
         }
 
 
-        List<Materiaal> HaalMaterialenOp()
+        public List<Materiaal> HaalMaterialenOp()
         {
             return  IM.HaalMaterialenOp();
+        }
+
+        public void ReserveerMateriaal(int gebruikerid, int materiaalid, int aantal, DateTime datum)
+        {
+            IM.ReserveerMateriaal(gebruikerid, materiaalid, aantal, datum);
+        }
+
+        public void WerkVoorraadBij(int voorraad, int id)
+        {
+            IM.WerkVoorraadBij(voorraad, id);
         }
     }
 }

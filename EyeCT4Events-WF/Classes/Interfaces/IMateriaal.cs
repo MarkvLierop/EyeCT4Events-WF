@@ -8,7 +8,11 @@ namespace EyeCT4Events_WF.Classes.Interfaces
 {
     public interface IMateriaal
     {
-       List<Materiaal> HaalMaterialenOp(); 
+       List<Materiaal> HaalMaterialenOp();
+
+        void ReserveerMateriaal(int gebruikerid, int materiaalid, int aantal, DateTime datum);
+
+        void WerkVoorraadBij(int voorraad, int id);
 
     }
 }

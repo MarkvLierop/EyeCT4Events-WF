@@ -18,5 +18,9 @@ namespace EyeCT4Events_WF.Classes
 
         }
 
+        public override string ToString()
+        {
+            return "Item: " + Naam + " Prijs: " + Prijs + " Aantal beschikbaar: " + Voorraad;
+        }
     }
 }

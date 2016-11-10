@@ -35,6 +35,7 @@ namespace EyeCT4Events_WF.Forms
             verantwoordelijke = Bezoeker;
             reservering = Reservering;
             kampeerplaats = Kampeerplaats;
+            lblMedewerker.Text = medewerker.ToString();
         }
 
         private void btnNogEenToevoegen_Click(object sender, EventArgs e)

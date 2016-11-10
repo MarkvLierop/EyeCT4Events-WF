@@ -44,6 +44,7 @@
             this.lblRegNaam = new System.Windows.Forms.Label();
             this.btnNogEenToevoegen = new System.Windows.Forms.Button();
             this.btnNaarMateriaal = new System.Windows.Forms.Button();
+            this.lblMedewerker = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbRFID
@@ -164,7 +165,7 @@
             this.btnNogEenToevoegen.Name = "btnNogEenToevoegen";
             this.btnNogEenToevoegen.Size = new System.Drawing.Size(162, 23);
             this.btnNogEenToevoegen.TabIndex = 30;
-            this.btnNogEenToevoegen.Text = "Voeg nog een gebruiker toe";
+            this.btnNogEenToevoegen.Text = "Voeg nieuwe gebruiker toe";
             this.btnNogEenToevoegen.UseVisualStyleBackColor = true;
             this.btnNogEenToevoegen.Click += new System.EventHandler(this.btnNogEenToevoegen_Click);
             // 
@@ -178,11 +179,21 @@
             this.btnNaarMateriaal.UseVisualStyleBackColor = true;
             this.btnNaarMateriaal.Click += new System.EventHandler(this.btnNaarMateriaal_Click);
             // 
+            // lblMedewerker
+            // 
+            this.lblMedewerker.AutoSize = true;
+            this.lblMedewerker.Location = new System.Drawing.Point(213, 9);
+            this.lblMedewerker.Name = "lblMedewerker";
+            this.lblMedewerker.Size = new System.Drawing.Size(66, 13);
+            this.lblMedewerker.TabIndex = 32;
+            this.lblMedewerker.Text = "Medewerker";
+            // 
             // FormBijhorendeBezoekersToevoegen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(337, 322);
+            this.Controls.Add(this.lblMedewerker);
             this.Controls.Add(this.btnNaarMateriaal);
             this.Controls.Add(this.btnNogEenToevoegen);
             this.Controls.Add(this.tbRFID);
@@ -224,5 +235,6 @@
         private System.Windows.Forms.Label lblRegNaam;
         private System.Windows.Forms.Button btnNogEenToevoegen;
         private System.Windows.Forms.Button btnNaarMateriaal;
+        private System.Windows.Forms.Label lblMedewerker;
     }
 }

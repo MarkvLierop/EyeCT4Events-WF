@@ -30,9 +30,11 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnMateriaalReserveren_Click(object sender, EventArgs e)
         {
-            FormReserveerMateriaal frm = new FormReserveerMateriaal();
-            this.Hide();
-            frm.Show();
+            string materiaal = "materiaal";
+            FormBestaandeAccount fba = new FormBestaandeAccount(medewerker, materiaal);
+            
+            this.Close();
+            fba.Show();
         }
 
         private void btnMedia_Click(object sender, EventArgs e)
@@ -42,16 +44,23 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnAanwezigeBezoekers_Click(object sender, EventArgs e)
         {
-            FormAanwezigeBezoekers fab = new FormAanwezigeBezoekers();
-            this.Hide();
-            fab.Show();
+          //  FormAanwezigeBezoekers fab = new FormAanwezigeBezoekers();
+            this.Close();
+          //  fab.Show();
         }
 
         private void btnPlaatsReserveren_Click(object sender, EventArgs e)
         {
             FormBestaandeAccount fba = new FormBestaandeAccount(medewerker);
-            this.Hide();
+            this.Close();
             fba.Show();
+        }
+
+        private void btnloguit_Click(object sender, EventArgs e)
+        {
+            FormInloggen fi = new FormInloggen();
+            fi.Show();
+            this.Close();
         }
     }
     }

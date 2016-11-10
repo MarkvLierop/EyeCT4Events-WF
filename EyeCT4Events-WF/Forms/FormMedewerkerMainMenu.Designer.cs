@@ -34,6 +34,7 @@
             this.btnMateriaalReserveren = new System.Windows.Forms.Button();
             this.btnMedia = new System.Windows.Forms.Button();
             this.lblMedewerker = new System.Windows.Forms.Label();
+            this.btnloguit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnMaakEventAan
@@ -89,17 +90,28 @@
             // lblMedewerker
             // 
             this.lblMedewerker.AutoSize = true;
-            this.lblMedewerker.Location = new System.Drawing.Point(351, 13);
+            this.lblMedewerker.Location = new System.Drawing.Point(24, 13);
             this.lblMedewerker.Name = "lblMedewerker";
             this.lblMedewerker.Size = new System.Drawing.Size(35, 13);
             this.lblMedewerker.TabIndex = 8;
             this.lblMedewerker.Text = "label1";
+            // 
+            // btnloguit
+            // 
+            this.btnloguit.Location = new System.Drawing.Point(432, 1);
+            this.btnloguit.Name = "btnloguit";
+            this.btnloguit.Size = new System.Drawing.Size(60, 25);
+            this.btnloguit.TabIndex = 9;
+            this.btnloguit.Text = "Uitloggen";
+            this.btnloguit.UseVisualStyleBackColor = true;
+            this.btnloguit.Click += new System.EventHandler(this.btnloguit_Click);
             // 
             // FormMedewerkerMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(515, 298);
+            this.Controls.Add(this.btnloguit);
             this.Controls.Add(this.lblMedewerker);
             this.Controls.Add(this.btnMedia);
             this.Controls.Add(this.btnMateriaalReserveren);
@@ -121,5 +133,6 @@
         private System.Windows.Forms.Button btnMateriaalReserveren;
         private System.Windows.Forms.Button btnMedia;
         private System.Windows.Forms.Label lblMedewerker;
+        private System.Windows.Forms.Button btnloguit;
     }
 }

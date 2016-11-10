@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnKampeerplaatsReserveren = new System.Windows.Forms.Button();
             this.tbZoekGebruikers = new System.Windows.Forms.TextBox();
+            this.btnMateriaalReserveren = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnNieuweAccAanmaken
@@ -80,11 +81,22 @@
             this.tbZoekGebruikers.TabIndex = 4;
             this.tbZoekGebruikers.TextChanged += new System.EventHandler(this.tbZoekGebruikers_TextChanged);
             // 
+            // btnMateriaalReserveren
+            // 
+            this.btnMateriaalReserveren.Location = new System.Drawing.Point(321, 247);
+            this.btnMateriaalReserveren.Name = "btnMateriaalReserveren";
+            this.btnMateriaalReserveren.Size = new System.Drawing.Size(166, 23);
+            this.btnMateriaalReserveren.TabIndex = 5;
+            this.btnMateriaalReserveren.Text = "Materiaal Reserveren";
+            this.btnMateriaalReserveren.UseVisualStyleBackColor = true;
+            this.btnMateriaalReserveren.Click += new System.EventHandler(this.btnMateriaalReserveren_Click);
+            // 
             // FormBestaandeAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(499, 296);
+            this.Controls.Add(this.btnMateriaalReserveren);
             this.Controls.Add(this.tbZoekGebruikers);
             this.Controls.Add(this.btnKampeerplaatsReserveren);
             this.Controls.Add(this.label1);
@@ -104,5 +116,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnKampeerplaatsReserveren;
         private System.Windows.Forms.TextBox tbZoekGebruikers;
+        private System.Windows.Forms.Button btnMateriaalReserveren;
     }
 }

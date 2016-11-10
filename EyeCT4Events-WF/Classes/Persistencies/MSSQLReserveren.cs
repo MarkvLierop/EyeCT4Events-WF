@@ -20,7 +20,7 @@ namespace EyeCT4Events_WF.Classes.Persistencies
             Connect();
             try
             {
-                string query = "SELECT * FROM Gebruiker WHERE LOWER(GebruikerType) = 'bezoeker' AND Aanwezig = 1";
+                string query = "SELECT * FROM Materiaal WHERE HuidigeVoorraad > 0";
                 using (command = new SqlCommand(query, SQLcon))
                 {
                     reader = command.ExecuteReader();
@@ -271,6 +271,41 @@ namespace EyeCT4Events_WF.Classes.Persistencies
                 command.Parameters.Add(new SqlParameter("@Kampeerplaats", kampeerplaats));
                 command.Parameters.Add(new SqlParameter("@Reservering", reservering));
 
+
+                command.ExecuteNonQuery();
+            }
+
+            Close();
+        }
+
+        public void ReserveerMateriaal(int gebruikerid, int materiaalid, int aantal, DateTime datum)
+        {
+            Connect();
+            string query = "INSERT INTO Uitgeleend_Materiaal VALUES (@Materiaalid, @Gebruikerid, @Datum, @Aantal)";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@Materiaalid", materiaalid));
+                command.Parameters.Add(new SqlParameter("@Gebruikerid", gebruikerid));
+                command.Parameters.Add(new SqlParameter("@Datum", datum));
+                command.Parameters.Add(new SqlParameter("@Aantal", aantal));
+               
+
+
+                command.ExecuteNonQuery();
+            }
+
+            Close();
+        }
+
+        public void WerkVoorraadBij(int voorraad, int id)
+        {
+            Connect();
+            string query = "UPDATE Materiaal SET HuidigeVoorraad = @Voorraad WHERE ID = @ID";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@Voorraad", voorraad));
+                command.Parameters.Add(new SqlParameter("@ID", id));
+              
 
                 command.ExecuteNonQuery();
             }

@@ -55,15 +55,17 @@
             // 
             // PBCampeerplek
             // 
+            this.PBCampeerplek.Image = global::EyeCT4Events_WF.Properties.Resources.CampingZonderLegenda;
             this.PBCampeerplek.Location = new System.Drawing.Point(20, 60);
             this.PBCampeerplek.Name = "PBCampeerplek";
-            this.PBCampeerplek.Size = new System.Drawing.Size(400, 310);
+            this.PBCampeerplek.Size = new System.Drawing.Size(469, 370);
+            this.PBCampeerplek.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PBCampeerplek.TabIndex = 8;
             this.PBCampeerplek.TabStop = false;
             // 
             // btnVerder
             // 
-            this.btnVerder.Location = new System.Drawing.Point(570, 400);
+            this.btnVerder.Location = new System.Drawing.Point(706, 471);
             this.btnVerder.Name = "btnVerder";
             this.btnVerder.Size = new System.Drawing.Size(80, 30);
             this.btnVerder.TabIndex = 5;
@@ -73,27 +75,29 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(20, 400);
+            this.button2.Location = new System.Drawing.Point(20, 471);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(80, 30);
             this.button2.TabIndex = 5;
             this.button2.Text = "Annuleer";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // lbKampeerplaatsen
             // 
             this.lbKampeerplaatsen.FormattingEnabled = true;
-            this.lbKampeerplaatsen.Location = new System.Drawing.Point(450, 166);
+            this.lbKampeerplaatsen.Location = new System.Drawing.Point(517, 231);
             this.lbKampeerplaatsen.Name = "lbKampeerplaatsen";
             this.lbKampeerplaatsen.Size = new System.Drawing.Size(269, 199);
             this.lbKampeerplaatsen.TabIndex = 15;
+            this.lbKampeerplaatsen.SelectedIndexChanged += new System.EventHandler(this.lbKampeerplaatsen_SelectedIndexChanged);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.rbLawaai);
             this.groupBox1.Controls.Add(this.rbComfort);
             this.groupBox1.Controls.Add(this.rbInvalide);
-            this.groupBox1.Location = new System.Drawing.Point(450, 12);
+            this.groupBox1.Location = new System.Drawing.Point(517, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(269, 36);
             this.groupBox1.TabIndex = 16;
@@ -145,7 +149,7 @@
             this.groupBox2.Controls.Add(this.cbStaCaravan);
             this.groupBox2.Controls.Add(this.cbHuurTent);
             this.groupBox2.Controls.Add(this.cbBungalow);
-            this.groupBox2.Location = new System.Drawing.Point(450, 48);
+            this.groupBox2.Location = new System.Drawing.Point(517, 48);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(269, 59);
             this.groupBox2.TabIndex = 17;
@@ -229,22 +233,24 @@
             // 
             // dtVan
             // 
-            this.dtVan.Location = new System.Drawing.Point(492, 113);
+            this.dtVan.Location = new System.Drawing.Point(559, 145);
             this.dtVan.Name = "dtVan";
             this.dtVan.Size = new System.Drawing.Size(227, 20);
             this.dtVan.TabIndex = 19;
+            this.dtVan.ValueChanged += new System.EventHandler(this.dtVan_ValueChanged);
             // 
             // dtTot
             // 
-            this.dtTot.Location = new System.Drawing.Point(492, 139);
+            this.dtTot.Location = new System.Drawing.Point(559, 191);
             this.dtTot.Name = "dtTot";
             this.dtTot.Size = new System.Drawing.Size(227, 20);
             this.dtTot.TabIndex = 20;
+            this.dtTot.ValueChanged += new System.EventHandler(this.dtTot_ValueChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(453, 119);
+            this.label1.Location = new System.Drawing.Point(514, 152);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 21;
@@ -253,7 +259,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(453, 145);
+            this.label2.Location = new System.Drawing.Point(514, 197);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(26, 13);
             this.label2.TabIndex = 22;
@@ -263,7 +269,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(731, 451);
+            this.ClientSize = new System.Drawing.Size(835, 513);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtTot);

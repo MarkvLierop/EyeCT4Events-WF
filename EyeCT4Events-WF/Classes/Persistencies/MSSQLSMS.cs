@@ -713,7 +713,7 @@ namespace EyeCT4Events_WF.Classes.Persistencies
             Connect();
             try
             {
-                string query = "SELECT * FROM Reactie";
+                string query = "SELECT * FROM Reactie ORDER BY ID DESC";
                 using (command = new SqlCommand(query, SQLcon))
                 {
                     reader = command.ExecuteReader();
@@ -791,7 +791,7 @@ namespace EyeCT4Events_WF.Classes.Persistencies
             Connect();
             try
             {
-                string query = "SELECT * FROM Event";
+                string query = "SELECT * FROM Event ORDER BY DatumVan DESC";
                 using (command = new SqlCommand(query, SQLcon))
                 {
                     reader = command.ExecuteReader();

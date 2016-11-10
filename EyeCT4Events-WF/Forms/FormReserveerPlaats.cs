@@ -44,7 +44,6 @@ namespace EyeCT4Events_WF
         public FormReserveerPlaats()
         {
             InitializeComponent();
-            //HaalKampeerplaatsenOp();
         }
 
         public FormReserveerPlaats(Gebruiker Medewerker, Gebruiker Bezoeker)
@@ -55,8 +54,10 @@ namespace EyeCT4Events_WF
             bezoeker = Bezoeker;
             lblMedewerker.Text = medewerker.Voornaam + " " + medewerker.Achternaam;
 
+            btnVerder.Enabled = false;
             groupBox2.Enabled = false;
 
+            PBCampeerplek.Image = Properties.Resources.CampingZonderLegenda;
         }
 
         public void HaalKampeerplaatsenOp()
@@ -203,6 +204,34 @@ namespace EyeCT4Events_WF
             fbbt.Show();
 
 
+        }
+
+        private void lbKampeerplaatsen_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbKampeerplaatsen.SelectedIndex >= 0)
+            {
+                btnVerder.Enabled = true;
+            }
+
+            else
+                btnVerder.Enabled = false;
+        }
+
+        private void dtTot_ValueChanged(object sender, EventArgs e)
+        {
+            dtTot.MinDate = dtVan.Value;
+        }
+
+        private void dtVan_ValueChanged(object sender, EventArgs e)
+        {
+            dtVan.MinDate = DateTime.Now;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FormMedewerkerMainMenu fmmm = new FormMedewerkerMainMenu(medewerker);
+            fmmm.Show();
+            this.Close();
         }
     }
 }
