@@ -162,7 +162,8 @@ namespace EyeCT4Events_WF
 
             if (fmr.DialogResult == DialogResult.OK)
             {
-                pnlContent.Refresh();
+                mediaLijst = rsms.AlleMediaOpvragen();
+                ContentCreeren(mediaLijst);
             }
         }
 
@@ -205,6 +206,7 @@ namespace EyeCT4Events_WF
 
             if (catToevoegen.DialogResult == DialogResult.OK)
             {
+                categorieLijst = rsms.AlleCategorienOpvragen().ToList();
                 pnlCategorieën.Refresh();
             }
         }
@@ -227,8 +229,8 @@ namespace EyeCT4Events_WF
 
                 if (fmu.DialogResult == DialogResult.OK)
                 {
-                    pnlCategorieën.Refresh();
-                    pnlContent.Refresh();
+                    mediaLijst = rsms.AlleMediaOpvragen();
+                    ContentCreeren(mediaLijst);
                 }
             }
         }

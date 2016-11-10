@@ -25,8 +25,8 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnMaakEventAan_Click(object sender, EventArgs e)
         {
-            FormEvenementAanmaken fea = new FormEvenementAanmaken(medewerker);
-            fea.Show();
+            FormMateriaalToevoegen fmt = new FormMateriaalToevoegen();
+            fmt.Show();
         }
 
         private void btnMateriaalReserveren_Click(object sender, EventArgs e)

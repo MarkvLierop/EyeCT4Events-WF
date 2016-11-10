@@ -43,7 +43,7 @@
             this.btnMaakEventAan.Name = "btnMaakEventAan";
             this.btnMaakEventAan.Size = new System.Drawing.Size(141, 83);
             this.btnMaakEventAan.TabIndex = 3;
-            this.btnMaakEventAan.Text = "Event Aanmaken";
+            this.btnMaakEventAan.Text = "Materiaal Toevoegen";
             this.btnMaakEventAan.UseVisualStyleBackColor = true;
             this.btnMaakEventAan.Click += new System.EventHandler(this.btnMaakEventAan_Click);
             // 

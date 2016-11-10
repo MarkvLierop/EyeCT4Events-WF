@@ -14,5 +14,6 @@ namespace EyeCT4Events_WF.Classes.Interfaces
 
         void WerkVoorraadBij(int voorraad, int id);
 
+        void ToevoegenMateriaal(string naam, decimal prijs, decimal vooraad);
     }
 }

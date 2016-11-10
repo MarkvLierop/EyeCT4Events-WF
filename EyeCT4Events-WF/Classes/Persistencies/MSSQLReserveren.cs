@@ -167,7 +167,21 @@ namespace EyeCT4Events_WF.Classes.Persistencies
             Close();
         }
 
-        
+        public void ToevoegenMateriaal(string naam, decimal prijs, decimal voorraad)
+        {
+            Connect();
+            string query = "INSERT INTO Materiaal VALUES (@voorraad, @naam, @prijs)";
+            using (command = new SqlCommand(query, SQLcon))
+            {
+                command.Parameters.Add(new SqlParameter("@voorraad", voorraad));
+                command.Parameters.Add(new SqlParameter("@naam", naam));
+                command.Parameters.Add(new SqlParameter("@prijs", prijs));
+
+                command.ExecuteNonQuery();
+            }
+
+            Close();
+        }
         public void ReserveringPlaatsen(int gebruikerid, int plaatsid, DateTime datumVan, DateTime datumTot)
         {
             int userid = gebruikerid;

@@ -16,7 +16,10 @@ namespace EyeCT4Events_WF.Classes.Repositories
             IM = im;
         }
 
-
+        public void ToevoegenMateriaal(string naam, decimal prijs, decimal voorraad)
+        {
+            IM.ToevoegenMateriaal(naam, prijs, voorraad);
+        }
         public List<Materiaal> HaalMaterialenOp()
         {
             return  IM.HaalMaterialenOp();
