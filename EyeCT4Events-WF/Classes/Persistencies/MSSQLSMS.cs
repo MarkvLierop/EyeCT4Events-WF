@@ -133,7 +133,7 @@ namespace EyeCT4Events_WF.Classes.Persistencies
             Connect();
             try
             {
-                string query = "SELECT * FROM Media WHERE Flagged < @VerbergThreshhold";
+                string query = "SELECT * FROM Media WHERE Flagged < @VerbergThreshhold ORDER ID DESC";
                 using (command = new SqlCommand(query, SQLcon))
                 {
                     command.Parameters.Add(new SqlParameter("@VerbergThreshhold", GetMediaVerbergThreshhold()));

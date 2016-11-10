@@ -29,17 +29,26 @@ namespace EyeCT4Events_WF
             InitializeComponent();
             this.gebruiker = gebruiker;
 
-            if (gebruiker.GetGebruikerType().ToLower() == "beheerder")
-            {
-                lblAfmelden.Visible = false;
-                lblBetalingsgegevens.Visible = false;
-                lblBezoekerAanmelden.Visible = false;
-                btnBetalingsgegevens.Visible = false;
-            }
+            lblAfmelden.Visible = false;
+            lblBetalingsgegevens.Visible = false;
+            lblBezoekerAanmelden.Visible = false;
+            btnBetalingsgegevens.Visible = false;
+
             rg = new RepositoryGebruiker(new MSSQLGebruiker());
             rkp = new RepositoryKampeerPlaatsen(new MSSQLReserveren());
             bezoekerLijst = new List<Gebruiker>();
 
+            lvAanwezigeBezoekers.View = View.Details;
+            lvAanwezigeBezoekers.FullRowSelect = true;
+            lvAanwezigeBezoekers.Columns.Add("Bezoeker");
+            lvAanwezigeBezoekers.Columns.Add("Aanwezig");
+            lvAanwezigeBezoekers.Columns.Add("Kampeerplaats");
+        }
+        public FormAanwezigeBezoekers()
+        {
+            rg = new RepositoryGebruiker(new MSSQLGebruiker());
+            rkp = new RepositoryKampeerPlaatsen(new MSSQLReserveren());
+            bezoekerLijst = new List<Gebruiker>();
             lvAanwezigeBezoekers.View = View.Details;
             lvAanwezigeBezoekers.FullRowSelect = true;
             lvAanwezigeBezoekers.Columns.Add("Bezoeker");
