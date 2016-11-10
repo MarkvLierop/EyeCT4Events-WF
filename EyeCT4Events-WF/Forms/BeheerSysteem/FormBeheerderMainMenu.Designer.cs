@@ -102,6 +102,7 @@
             this.Controls.Add(this.btnSocialmediaSharing);
             this.Name = "FormBeheerderMainMenu";
             this.Text = "FormBeheerderMainMenu";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormBeheerderMainMenu_FormClosing);
             this.ResumeLayout(false);
 
         }

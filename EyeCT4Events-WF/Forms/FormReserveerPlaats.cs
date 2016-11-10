@@ -194,12 +194,20 @@ namespace EyeCT4Events_WF
             bezoekerid = bezoeker.ID;
 
             RepositoryKampeerPlaatsen rkp = new RepositoryKampeerPlaatsen(new MSSQLReserveren());
-            rkp.ReserveringPlaatsen(bezoekerid, plaatsid, datumVan, datumTot);
+            try
+            {
+                rkp.ReserveringPlaatsen(bezoekerid, plaatsid, datumVan, datumTot);
 
-            reservering = rkp.HaalReserveringOpNaAanmaken(bezoekerid, plaatsid, datumVan, datumTot);
+                reservering = rkp.HaalReserveringOpNaAanmaken(bezoekerid, plaatsid, datumVan, datumTot);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
 
             FormBijhorendeBezoekersToevoegen fbbt = new FormBijhorendeBezoekersToevoegen(medewerker, bezoeker, reservering, kampeerplaats);
 
+            MessageBox.Show("Kampeerplaats gereserveerd");
             this.Close();
             fbbt.Show();
 

@@ -63,7 +63,7 @@ namespace EyeCT4Events_WF.Forms
                 MessageBox.Show(exc.Message);
             }
 
-            if (lbCategorien.SelectedItem == null)
+            if (lbCategorien.SelectedIndex <= 0)
             {
                 MessageBox.Show("Selecteer een hoofdcategorie.");
             }

@@ -67,7 +67,7 @@
             // labelHuurder
             // 
             this.labelHuurder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelHuurder.Location = new System.Drawing.Point(12, 13);
+            this.labelHuurder.Location = new System.Drawing.Point(57, 12);
             this.labelHuurder.Name = "labelHuurder";
             this.labelHuurder.Size = new System.Drawing.Size(51, 20);
             this.labelHuurder.TabIndex = 9;
@@ -156,7 +156,7 @@
             // lblHuurder
             // 
             this.lblHuurder.AutoSize = true;
-            this.lblHuurder.Location = new System.Drawing.Point(70, 19);
+            this.lblHuurder.Location = new System.Drawing.Point(13, 16);
             this.lblHuurder.Name = "lblHuurder";
             this.lblHuurder.Size = new System.Drawing.Size(38, 13);
             this.lblHuurder.TabIndex = 22;

@@ -46,8 +46,15 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnSelecteren_Click(object sender, EventArgs e)
         {
-            Categorie = lbCategorien.SelectedItem.ToString();
-            Close();
+            if (lbCategorien.SelectedIndex >= 0)
+            {
+                Categorie = lbCategorien.SelectedItem.ToString();
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Er is geen categorie geselecteerd.");
+            }
         }
     }
 }

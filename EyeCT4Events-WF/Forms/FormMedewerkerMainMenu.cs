@@ -41,7 +41,12 @@ namespace EyeCT4Events_WF.Forms
         private void btnMedia_Click(object sender, EventArgs e)
         {
             FormMediaOverzicht fmo = new FormMediaOverzicht(medewerker);
-            fmo.Show();
+            fmo.ShowDialog();
+
+            if (fmo.DialogResult == DialogResult.OK)
+            {
+                this.Show();
+            }
         }
 
         private void btnAanwezigeBezoekers_Click(object sender, EventArgs e)
@@ -49,6 +54,10 @@ namespace EyeCT4Events_WF.Forms
           FormAanwezigeBezoekers fab = new FormAanwezigeBezoekers(medewerker);
           this.Close();
           fab.Show();
+            if (fab.DialogResult == DialogResult.OK)
+            {
+                this.Show();
+            }
         }
 
         private void btnPlaatsReserveren_Click(object sender, EventArgs e)

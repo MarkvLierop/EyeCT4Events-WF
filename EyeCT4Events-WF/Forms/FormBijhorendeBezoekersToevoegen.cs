@@ -35,7 +35,6 @@ namespace EyeCT4Events_WF.Forms
             verantwoordelijke = Bezoeker;
             reservering = Reservering;
             kampeerplaats = Kampeerplaats;
-            lblMedewerker.Text = medewerker.ToString();
         }
 
         private void btnNogEenToevoegen_Click(object sender, EventArgs e)
@@ -103,9 +102,9 @@ namespace EyeCT4Events_WF.Forms
         private void btnNaarMateriaal_Click(object sender, EventArgs e)
         {
            
-                    FormReserveerMateriaal frm = new FormReserveerMateriaal(verantwoordelijke, medewerker);
-                    this.Hide();
-                    frm.Show();
+            FormReserveerMateriaal frm = new FormReserveerMateriaal(verantwoordelijke, medewerker, reservering);
+            this.Hide();
+            frm.Show();
         }
     }
 }

@@ -44,7 +44,6 @@
             this.lblRegNaam = new System.Windows.Forms.Label();
             this.btnNogEenToevoegen = new System.Windows.Forms.Button();
             this.btnNaarMateriaal = new System.Windows.Forms.Button();
-            this.lblMedewerker = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbRFID
@@ -52,7 +51,7 @@
             this.tbRFID.Location = new System.Drawing.Point(216, 127);
             this.tbRFID.Name = "tbRFID";
             this.tbRFID.Size = new System.Drawing.Size(100, 20);
-            this.tbRFID.TabIndex = 29;
+            this.tbRFID.TabIndex = 3;
             // 
             // RFID
             // 
@@ -68,7 +67,7 @@
             this.tbTussenvoegsel.Location = new System.Drawing.Point(216, 101);
             this.tbTussenvoegsel.Name = "tbTussenvoegsel";
             this.tbTussenvoegsel.Size = new System.Drawing.Size(100, 20);
-            this.tbTussenvoegsel.TabIndex = 27;
+            this.tbTussenvoegsel.TabIndex = 2;
             // 
             // label1
             // 
@@ -84,35 +83,37 @@
             this.tbRegVoornaam.Location = new System.Drawing.Point(216, 74);
             this.tbRegVoornaam.Name = "tbRegVoornaam";
             this.tbRegVoornaam.Size = new System.Drawing.Size(100, 20);
-            this.tbRegVoornaam.TabIndex = 25;
+            this.tbRegVoornaam.TabIndex = 1;
             // 
             // tbRegGebruiker
             // 
             this.tbRegGebruiker.Location = new System.Drawing.Point(216, 153);
             this.tbRegGebruiker.Name = "tbRegGebruiker";
             this.tbRegGebruiker.Size = new System.Drawing.Size(100, 20);
-            this.tbRegGebruiker.TabIndex = 24;
+            this.tbRegGebruiker.TabIndex = 4;
             // 
             // tbRegWachtwoord
             // 
             this.tbRegWachtwoord.Location = new System.Drawing.Point(216, 179);
             this.tbRegWachtwoord.Name = "tbRegWachtwoord";
+            this.tbRegWachtwoord.PasswordChar = '*';
             this.tbRegWachtwoord.Size = new System.Drawing.Size(100, 20);
-            this.tbRegWachtwoord.TabIndex = 23;
+            this.tbRegWachtwoord.TabIndex = 5;
             // 
             // tbRegBevestigWachtwoord
             // 
             this.tbRegBevestigWachtwoord.Location = new System.Drawing.Point(216, 205);
             this.tbRegBevestigWachtwoord.Name = "tbRegBevestigWachtwoord";
+            this.tbRegBevestigWachtwoord.PasswordChar = '*';
             this.tbRegBevestigWachtwoord.Size = new System.Drawing.Size(100, 20);
-            this.tbRegBevestigWachtwoord.TabIndex = 22;
+            this.tbRegBevestigWachtwoord.TabIndex = 6;
             // 
             // tbRegAchternaam
             // 
             this.tbRegAchternaam.Location = new System.Drawing.Point(216, 48);
             this.tbRegAchternaam.Name = "tbRegAchternaam";
             this.tbRegAchternaam.Size = new System.Drawing.Size(100, 20);
-            this.tbRegAchternaam.TabIndex = 21;
+            this.tbRegAchternaam.TabIndex = 0;
             // 
             // lblWachtwoordBevestig
             // 
@@ -164,7 +165,7 @@
             this.btnNogEenToevoegen.Location = new System.Drawing.Point(15, 289);
             this.btnNogEenToevoegen.Name = "btnNogEenToevoegen";
             this.btnNogEenToevoegen.Size = new System.Drawing.Size(162, 23);
-            this.btnNogEenToevoegen.TabIndex = 30;
+            this.btnNogEenToevoegen.TabIndex = 7;
             this.btnNogEenToevoegen.Text = "Voeg nieuwe gebruiker toe";
             this.btnNogEenToevoegen.UseVisualStyleBackColor = true;
             this.btnNogEenToevoegen.Click += new System.EventHandler(this.btnNogEenToevoegen_Click);
@@ -174,26 +175,16 @@
             this.btnNaarMateriaal.Location = new System.Drawing.Point(203, 289);
             this.btnNaarMateriaal.Name = "btnNaarMateriaal";
             this.btnNaarMateriaal.Size = new System.Drawing.Size(113, 23);
-            this.btnNaarMateriaal.TabIndex = 31;
+            this.btnNaarMateriaal.TabIndex = 8;
             this.btnNaarMateriaal.Text = "Naar Materiaal";
             this.btnNaarMateriaal.UseVisualStyleBackColor = true;
             this.btnNaarMateriaal.Click += new System.EventHandler(this.btnNaarMateriaal_Click);
-            // 
-            // lblMedewerker
-            // 
-            this.lblMedewerker.AutoSize = true;
-            this.lblMedewerker.Location = new System.Drawing.Point(213, 9);
-            this.lblMedewerker.Name = "lblMedewerker";
-            this.lblMedewerker.Size = new System.Drawing.Size(66, 13);
-            this.lblMedewerker.TabIndex = 32;
-            this.lblMedewerker.Text = "Medewerker";
             // 
             // FormBijhorendeBezoekersToevoegen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(337, 322);
-            this.Controls.Add(this.lblMedewerker);
             this.Controls.Add(this.btnNaarMateriaal);
             this.Controls.Add(this.btnNogEenToevoegen);
             this.Controls.Add(this.tbRFID);
@@ -211,7 +202,7 @@
             this.Controls.Add(this.lblRegVoornaam);
             this.Controls.Add(this.lblRegNaam);
             this.Name = "FormBijhorendeBezoekersToevoegen";
-            this.Text = "FormBijhorendeBezoekersToevoegen";
+            this.Text = "Bijbehorende bezoeker toevoegen";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,6 +226,5 @@
         private System.Windows.Forms.Label lblRegNaam;
         private System.Windows.Forms.Button btnNogEenToevoegen;
         private System.Windows.Forms.Button btnNaarMateriaal;
-        private System.Windows.Forms.Label lblMedewerker;
     }
 }

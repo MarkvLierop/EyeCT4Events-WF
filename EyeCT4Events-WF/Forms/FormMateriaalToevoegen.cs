@@ -22,12 +22,19 @@ namespace EyeCT4Events_WF.Forms
         private void btnToevoegen_Click(object sender, EventArgs e)
         {
             RepositoryMateriaal rm = new RepositoryMateriaal(new MSSQLReserveren());
-            rm.ToevoegenMateriaal(txtNaam.Text, nudPrijs.Value, nudVoorraad.Value);
-            MessageBox.Show("Materiaal Toevoegd");
+            try
+            {
+                rm.ToevoegenMateriaal(txtNaam.Text, nudPrijs.Value, nudVoorraad.Value);
+                MessageBox.Show("Materiaal Toevoegd");
 
-            txtNaam.Text = "";
-            nudVoorraad.Value = 0;
-            nudPrijs.Value = 0;
+                txtNaam.Text = "";
+                nudVoorraad.Value = 0;
+                nudPrijs.Value = 0;
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
 
         private void btnSluiten_Click(object sender, EventArgs e)

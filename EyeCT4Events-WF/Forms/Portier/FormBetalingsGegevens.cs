@@ -71,9 +71,9 @@ namespace EyeCT4Events_WF.Forms.BeheerSysteem
 
                 txtScannen.Text = "";
             }
-            catch (Exception exc)
+            catch
             {
-                MessageBox.Show(exc.Message);
+                //MessageBox.Show("De gebruiker heeft geen reservering");
             }
         }
     }

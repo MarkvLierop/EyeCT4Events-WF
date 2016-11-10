@@ -50,5 +50,10 @@ namespace EyeCT4Events_WF.Forms
             FormMediaOverzicht fmo = new FormMediaOverzicht(beheerder);
             fmo.Show();
         }
+
+        private void FormBeheerderMainMenu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
     }
 }

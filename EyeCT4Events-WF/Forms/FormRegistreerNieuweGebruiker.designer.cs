@@ -52,7 +52,7 @@
             this.btnBevestigRegistratie.Location = new System.Drawing.Point(198, 295);
             this.btnBevestigRegistratie.Name = "btnBevestigRegistratie";
             this.btnBevestigRegistratie.Size = new System.Drawing.Size(121, 23);
-            this.btnBevestigRegistratie.TabIndex = 0;
+            this.btnBevestigRegistratie.TabIndex = 7;
             this.btnBevestigRegistratie.Text = "Bevestig registratie";
             this.btnBevestigRegistratie.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnBevestigRegistratie.UseVisualStyleBackColor = true;
@@ -118,28 +118,30 @@
             this.tbRegAchternaam.Location = new System.Drawing.Point(219, 67);
             this.tbRegAchternaam.Name = "tbRegAchternaam";
             this.tbRegAchternaam.Size = new System.Drawing.Size(100, 20);
-            this.tbRegAchternaam.TabIndex = 7;
+            this.tbRegAchternaam.TabIndex = 0;
             // 
             // tbRegBevestigWachtwoord
             // 
             this.tbRegBevestigWachtwoord.Location = new System.Drawing.Point(219, 224);
             this.tbRegBevestigWachtwoord.Name = "tbRegBevestigWachtwoord";
+            this.tbRegBevestigWachtwoord.PasswordChar = '*';
             this.tbRegBevestigWachtwoord.Size = new System.Drawing.Size(100, 20);
-            this.tbRegBevestigWachtwoord.TabIndex = 8;
+            this.tbRegBevestigWachtwoord.TabIndex = 6;
             // 
             // tbRegWachtwoord
             // 
             this.tbRegWachtwoord.Location = new System.Drawing.Point(219, 198);
             this.tbRegWachtwoord.Name = "tbRegWachtwoord";
+            this.tbRegWachtwoord.PasswordChar = '*';
             this.tbRegWachtwoord.Size = new System.Drawing.Size(100, 20);
-            this.tbRegWachtwoord.TabIndex = 9;
+            this.tbRegWachtwoord.TabIndex = 5;
             // 
             // tbRegGebruiker
             // 
             this.tbRegGebruiker.Location = new System.Drawing.Point(219, 172);
             this.tbRegGebruiker.Name = "tbRegGebruiker";
             this.tbRegGebruiker.Size = new System.Drawing.Size(100, 20);
-            this.tbRegGebruiker.TabIndex = 10;
+            this.tbRegGebruiker.TabIndex = 4;
             this.tbRegGebruiker.TextChanged += new System.EventHandler(this.tbRegGebruiker_TextChanged);
             // 
             // tbRegVoornaam
@@ -147,7 +149,7 @@
             this.tbRegVoornaam.Location = new System.Drawing.Point(219, 93);
             this.tbRegVoornaam.Name = "tbRegVoornaam";
             this.tbRegVoornaam.Size = new System.Drawing.Size(100, 20);
-            this.tbRegVoornaam.TabIndex = 11;
+            this.tbRegVoornaam.TabIndex = 1;
             // 
             // label1
             // 
@@ -163,7 +165,7 @@
             this.tbTussenvoegsel.Location = new System.Drawing.Point(219, 120);
             this.tbTussenvoegsel.Name = "tbTussenvoegsel";
             this.tbTussenvoegsel.Size = new System.Drawing.Size(100, 20);
-            this.tbTussenvoegsel.TabIndex = 13;
+            this.tbTussenvoegsel.TabIndex = 2;
             // 
             // RFID
             // 
@@ -179,7 +181,7 @@
             this.tbRFID.Location = new System.Drawing.Point(219, 146);
             this.tbRFID.Name = "tbRFID";
             this.tbRFID.Size = new System.Drawing.Size(100, 20);
-            this.tbRFID.TabIndex = 15;
+            this.tbRFID.TabIndex = 3;
             // 
             // lblGebruikerBestaat
             // 

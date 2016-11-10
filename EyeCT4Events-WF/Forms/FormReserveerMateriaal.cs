@@ -18,15 +18,18 @@ namespace EyeCT4Events_WF
     {
         Gebruiker medewerker;
         Gebruiker bezoeker;
+        Reservering reservering;
         List<Materiaal> Materialen = new List<Materiaal>();
         List<Uitgeleend_materiaal> GewensteMaterialen = new List<Uitgeleend_materiaal>();
         
 
-        public FormReserveerMateriaal(Gebruiker Bezoeker, Gebruiker Medewerker)
+        public FormReserveerMateriaal(Gebruiker Bezoeker, Gebruiker Medewerker, Reservering reservering)
         {
             InitializeComponent();
-          
-            
+
+            this.reservering = reservering;
+            dateTimePicker1.MinDate = reservering.DatumVan;
+            dateTimePicker1.MaxDate = reservering.DatumTot;
             // sdfsdf
             nudAantal.Enabled = false;
 
@@ -38,11 +41,44 @@ namespace EyeCT4Events_WF
 
             RepositoryMateriaal rm = new RepositoryMateriaal(new MSSQLReserveren());
 
-            Materialen = rm.HaalMaterialenOp();
+            try
+            {
+                Materialen = rm.HaalMaterialenOp();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Kan materiaal niet ophalen : \n" + exc.Message);
+            }
 
             Ververs();
         }
+        public FormReserveerMateriaal(Gebruiker Bezoeker, Gebruiker Medewerker)
+        {
+            InitializeComponent();
+            
+            // sdfsdf
+            nudAantal.Enabled = false;
 
+            medewerker = Medewerker;
+            bezoeker = Bezoeker;
+
+            labelHuurder.Text = bezoeker.ToString();
+            labelHuurder.Width = bezoeker.ToString().Length;
+            lblMedewerker.Text = medewerker.ToString();
+
+            RepositoryMateriaal rm = new RepositoryMateriaal(new MSSQLReserveren());
+
+            try
+            {
+                Materialen = rm.HaalMaterialenOp();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Kan materiaal niet ophalen : \n" + exc.Message);
+            }
+
+            Ververs();
+        }
         public void Ververs()
         {
             lbBeschikbareMaterialen.Items.Clear();
@@ -72,18 +108,25 @@ namespace EyeCT4Events_WF
         {
             RepositoryMateriaal rm = new RepositoryMateriaal(new MSSQLReserveren());
 
-
-            foreach (Uitgeleend_materiaal u in GewensteMaterialen)
+            try
             {
-                
-                rm.ReserveerMateriaal(u.Gebruiker, u.MateriaalID, u.Aantal, u.UitleenDatum);
+                foreach (Uitgeleend_materiaal u in GewensteMaterialen)
+                {
+
+                    rm.ReserveerMateriaal(u.Gebruiker, u.MateriaalID, u.Aantal, u.UitleenDatum);
+                }
+
+                foreach (Materiaal m in Materialen)
+                {
+                    rm.WerkVoorraadBij(m.Voorraad, m.MateriaalID);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
-            foreach (Materiaal m in Materialen)
-            {
-                rm.WerkVoorraadBij(m.Voorraad, m.MateriaalID);
-            }
-
+            MessageBox.Show("Materiaal gereserveerd.");
             FormMedewerkerMainMenu fmmm = new FormMedewerkerMainMenu(medewerker);
             fmmm.Show();
             this.Close();

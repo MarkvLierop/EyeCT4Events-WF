@@ -93,8 +93,8 @@ namespace EyeCT4Events_WF
 
         private void lbSluiten_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            FormInloggen fi = new FormInloggen();
+            fi.Show();
         }
 
         private void txtBezoekerAanmelden_TextChanged(object sender, EventArgs e)

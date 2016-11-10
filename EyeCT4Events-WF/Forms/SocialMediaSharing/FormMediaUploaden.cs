@@ -38,46 +38,54 @@ namespace EyeCT4Events_WF.Forms
             media.Beschrijving = tbBeschrijving.Text;
             try
             {
-                if (fct != null)
+                if (lblCategorie.Text.Length < 2)
                 {
-                    media.Categorie = smsr.GetCategorieMetNaam(fct.cat.Naam).ID;
+                    MessageBox.Show("Selecteer een categorie.");
                 }
-                else if (fcz != null)
+                else
                 {
-                    media.Categorie = smsr.GetCategorieMetNaam(fcz.Categorie).ID;
+                    if (fct != null)
+                    {
+                        media.Categorie = smsr.GetCategorieMetNaam(fct.cat.Naam).ID;
+                    }
+                    else if (fcz != null)
+                    {
+                        media.Categorie = smsr.GetCategorieMetNaam(fcz.Categorie).ID;
+                    }
+                    media.GeplaatstDoor = gebruiker.ID;
+                    media.Type = Path.GetExtension(ofd.FileName);
+
+
+                    // Directory bestand opslaan
+                    try
+                    {
+                        media.BestandOpslaan(ofd.SafeFileName, ofd.FileName);
+                    }
+                    catch (FoutBijOpslaanBestandException exc)
+                    {
+                        MessageBox.Show(exc.Message);
+                    }
+
+                    // Database
+                    try
+                    {
+                        smsr.ToevoegenMedia(media);
+                    }
+                    catch (FoutBijUitvoerenQueryException exc)
+                    {
+                        MessageBox.Show(exc.Message);
+                    }
+
+                    MessageBox.Show("Media geplaatst.");
+
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
             }
             catch(FoutBijUitvoerenQueryException exc)
             {
                 MessageBox.Show(exc.Message);
             }
-            media.GeplaatstDoor = gebruiker.ID;
-            media.Type = Path.GetExtension(ofd.FileName);
-
-            // Directory bestand opslaan
-            try
-            {
-                media.BestandOpslaan(ofd.SafeFileName, ofd.FileName);
-            }
-            catch (FoutBijOpslaanBestandException exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
-
-            // Database
-            try
-            {
-                smsr.ToevoegenMedia(media);
-            }
-            catch (FoutBijUitvoerenQueryException exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
-
-            MessageBox.Show("Media geplaatst.");
-
-            DialogResult = DialogResult.OK;
-            Close();
         }
 
         private void tbBestandZoeken_Click(object sender, EventArgs e)

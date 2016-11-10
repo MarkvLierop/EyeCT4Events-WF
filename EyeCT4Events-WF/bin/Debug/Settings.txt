@@ -1,1 +1,1 @@
-VerbergThreshhold:5
+VerbergThreshhold:6

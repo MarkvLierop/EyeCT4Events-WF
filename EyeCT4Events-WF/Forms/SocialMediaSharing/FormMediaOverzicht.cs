@@ -229,6 +229,7 @@ namespace EyeCT4Events_WF
 
                 if (fmu.DialogResult == DialogResult.OK)
                 {
+                    pnlContent.Controls.Clear();
                     mediaLijst = rsms.AlleMediaOpvragen();
                     ContentCreeren(mediaLijst);
                 }

@@ -76,18 +76,28 @@
     <Compile Include="Forms\BeheerSysteem\FormBeheerderMainMenu.Designer.cs">
       <DependentUpon>FormBeheerderMainMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\BeheerSysteem\FormBetalingsGegevens.cs" />
-    <Compile Include="Forms\BeheerSysteem\FormBetalingsGegevens.Designer.cs">
-      <DependentUpon>FormBetalingsGegevens.cs</DependentUpon>
+    <Compile Include="Forms\BeheerSysteem\FormGebruikernieuw.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\BeheerSysteem\FormGebruikersbeheer.cs" />
+    <Compile Include="Forms\BeheerSysteem\FormGebruikernieuw.Designer.cs">
+      <DependentUpon>FormGebruikernieuw.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BeheerSysteem\FormGebruikersbeheer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\BeheerSysteem\FormGebruikersbeheer.designer.cs">
       <DependentUpon>FormGebruikersbeheer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormAanwezigeBezoekers.cs">
+    <Compile Include="Forms\FormMateriaalToevoegen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormAanwezigeBezoekers.designer.cs">
+    <Compile Include="Forms\FormMateriaalToevoegen.Designer.cs">
+      <DependentUpon>FormMateriaalToevoegen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Portier\FormAanwezigeBezoekers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Portier\FormAanwezigeBezoekers.designer.cs">
       <DependentUpon>FormAanwezigeBezoekers.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Domain Classes\Categorie.cs" />
@@ -101,25 +111,22 @@
     <Compile Include="Forms\FormBestaandeAccount.Designer.cs">
       <DependentUpon>FormBestaandeAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Portier\FormBetalingsGegevens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Portier\FormBetalingsGegevens.Designer.cs">
+      <DependentUpon>FormBetalingsGegevens.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormBijhorendeBezoekersToevoegen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormBijhorendeBezoekersToevoegen.Designer.cs">
       <DependentUpon>FormBijhorendeBezoekersToevoegen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormEvenementAanmaken.cs">
+    <Compile Include="Forms\BeheerSysteem\FormGerapporteerdeMediaOverzicht.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormEventAanmaken.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormEventAanmaken.Designer.cs">
-      <DependentUpon>FormEventAanmaken.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormGerapporteerdeMediaOverzicht.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormGerapporteerdeMediaOverzicht.designer.cs">
+    <Compile Include="Forms\BeheerSysteem\FormGerapporteerdeMediaOverzicht.designer.cs">
       <DependentUpon>FormGerapporteerdeMediaOverzicht.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormMedewerkerMainMenu.cs">
@@ -152,10 +159,6 @@
     </Compile>
     <Compile Include="Classes\Interfaces\IGebruikerAdministratie.cs" />
     <Compile Include="Classes\Persistencies\MSSQL-Server.cs" />
-    <Compile Include="Forms\GebruikerAanmaken.cs" />
-    <Compile Include="Forms\GebruikerAanmaken.Designer.cs">
-      <DependentUpon>GebruikerAanmaken.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\SocialMediaSharing\FormCategorieToevoegen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,25 +227,31 @@
     <EmbeddedResource Include="Forms\BeheerSysteem\FormBeheerderMainMenu.resx">
       <DependentUpon>FormBeheerderMainMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\BeheerSysteem\FormBetalingsGegevens.resx">
-      <DependentUpon>FormBetalingsGegevens.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\BeheerSysteem\FormGebruikernieuw.resx">
+      <DependentUpon>FormGebruikernieuw.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\BeheerSysteem\FormGebruikersbeheer.resx">
       <DependentUpon>FormGebruikersbeheer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormAanwezigeBezoekers.resx">
+    <EmbeddedResource Include="Forms\FormMateriaalToevoegen.resx">
+      <DependentUpon>FormMateriaalToevoegen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMedewerkerMainMenu.resx">
+      <DependentUpon>FormMedewerkerMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Portier\FormAanwezigeBezoekers.resx">
       <DependentUpon>FormAanwezigeBezoekers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormBestaandeAccount.resx">
       <DependentUpon>FormBestaandeAccount.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Portier\FormBetalingsGegevens.resx">
+      <DependentUpon>FormBetalingsGegevens.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormBijhorendeBezoekersToevoegen.resx">
       <DependentUpon>FormBijhorendeBezoekersToevoegen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormEventAanmaken.resx">
-      <DependentUpon>FormEventAanmaken.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormGerapporteerdeMediaOverzicht.resx">
+    <EmbeddedResource Include="Forms\BeheerSysteem\FormGerapporteerdeMediaOverzicht.resx">
       <DependentUpon>FormGerapporteerdeMediaOverzicht.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormGebruikergegevens.resx">
@@ -253,9 +262,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormRegistreerNieuweGebruiker.resx">
       <DependentUpon>FormRegistreerNieuweGebruiker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GebruikerAanmaken.resx">
-      <DependentUpon>GebruikerAanmaken.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SocialMediaSharing\FormCategorieToevoegen.resx">
       <DependentUpon>FormCategorieToevoegen.cs</DependentUpon>
@@ -289,6 +295,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Forms\FormReserveerMateriaal.resx">
       <DependentUpon>FormReserveerMateriaal.cs</DependentUpon>
@@ -327,6 +334,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CampingZonderLegenda.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
