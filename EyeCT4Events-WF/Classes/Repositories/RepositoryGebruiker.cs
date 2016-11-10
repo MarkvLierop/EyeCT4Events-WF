@@ -16,6 +16,10 @@ namespace EyeCT4Events_WF.Classes.Repositories
         {
             this.context = context;
         }
+        public bool CheckOfGebruikerBestaat(string gebruikersnaam)
+        {
+            return context.CheckOfGebruikerBestaat(gebruikersnaam);
+        }
         public List<Gebruiker> GesorteerdeGeberuikers(string filter)
         {
             return context.GesorteerdeGeberuikers(filter);

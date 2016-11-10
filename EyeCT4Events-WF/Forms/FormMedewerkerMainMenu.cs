@@ -25,7 +25,8 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnMaakEventAan_Click(object sender, EventArgs e)
         {
-
+            FormEvenementAanmaken fea = new FormEvenementAanmaken(medewerker);
+            fea.Show();
         }
 
         private void btnMateriaalReserveren_Click(object sender, EventArgs e)
@@ -39,14 +40,15 @@ namespace EyeCT4Events_WF.Forms
 
         private void btnMedia_Click(object sender, EventArgs e)
         {
-
+            FormMediaOverzicht fmo = new FormMediaOverzicht(medewerker);
+            fmo.Show();
         }
 
         private void btnAanwezigeBezoekers_Click(object sender, EventArgs e)
         {
-          //  FormAanwezigeBezoekers fab = new FormAanwezigeBezoekers();
-            this.Close();
-          //  fab.Show();
+          FormAanwezigeBezoekers fab = new FormAanwezigeBezoekers(medewerker);
+          this.Close();
+          fab.Show();
         }
 
         private void btnPlaatsReserveren_Click(object sender, EventArgs e)

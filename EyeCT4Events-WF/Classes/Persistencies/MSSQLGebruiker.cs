@@ -333,6 +333,64 @@ namespace EyeCT4Events_WF.Classes.Persistencies
             Close();
             return gebruiker;
         }
+        public bool CheckOfGebruikerBestaat(string gebruikersnaam)
+        {
+            bool gebruikerBestaat = false;
+            Connect();
+            try
+            {
+                string query = "SELECT * FROM Gebruiker WHERE gebruikersnaam = @Gebruiker";
+                using (command = new SqlCommand(query, SQLcon))
+                {
+                    command.Parameters.Add(new SqlParameter("@Gebruiker", gebruikersnaam));
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        if (reader["GebruikerType"].ToString().ToLower() == "bezoeker")
+                        {
+                            gebruiker = new Bezoeker();
+                        }
+                        else if (reader["GebruikerType"].ToString().ToLower() == "beheerder")
+                        {
+                            gebruiker = new Beheerder();
+                        }
+                        else if (reader["GebruikerType"].ToString().ToLower() == "medewerker")
+                        {
+                            gebruiker = new Medewerker();
+                        }
+                        gebruiker.ID = Convert.ToInt32(reader["ID"]);
+
+                        if (reader["RFID"].GetType() != typeof(DBNull))
+                            gebruiker.RFID = Convert.ToInt32(reader["RFID"]);
+
+                        gebruiker.Gebruikersnaam = reader["Gebruikersnaam"].ToString();
+                        gebruiker.Wachtwoord = reader["Wachtwoord"].ToString();
+                        gebruiker.Voornaam = reader["Voornaam"].ToString();
+
+                        if (reader["Tussenvoegsel"].GetType() != typeof(DBNull))
+                            gebruiker.Tussenvoegsel = reader["Tussenvoegsel"].ToString();
+
+                        gebruiker.Achternaam = reader["Achternaam"].ToString();
+                        if (Convert.ToInt32(reader["Aanwezig"]) == 1)
+                        {
+                            gebruiker.Aanwezig = true;
+                        }
+                        else
+                        {
+                            gebruiker.Aanwezig = false;
+                        }
+                        gebruikerBestaat = true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FoutBijUitvoerenQueryException(e.Message);
+            }
+            Close();
+            return gebruikerBestaat;
+        }
         public void GebruikerRegistreren(Gebruiker gebruiker)
         {
             string wachtwoord = EncryptString(gebruiker.Wachtwoord);

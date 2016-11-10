@@ -37,6 +37,7 @@ namespace EyeCT4Events_WF.Forms
             medewerker = gebruiker;
 
             btnMateriaalReserveren.Visible = false;
+            btnKampeerplaatsReserveren.Enabled = false;
         }
 
         private void tbZoekGebruikers_TextChanged(object sender, EventArgs e)
@@ -93,6 +94,14 @@ namespace EyeCT4Events_WF.Forms
             FormReserveerMateriaal frm = new FormReserveerMateriaal(gekozengebruiker, medewerker);
             this.Close();
             frm.Show();
+        }
+
+        private void lbBestaandeGebruikers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbBestaandeGebruikers.SelectedIndex >= 0)
+            {
+                btnKampeerplaatsReserveren.Enabled = true;
+            }
         }
     }
 }

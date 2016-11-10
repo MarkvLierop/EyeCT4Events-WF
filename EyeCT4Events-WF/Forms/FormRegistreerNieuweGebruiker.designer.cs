@@ -44,6 +44,7 @@
             this.tbTussenvoegsel = new System.Windows.Forms.TextBox();
             this.RFID = new System.Windows.Forms.Label();
             this.tbRFID = new System.Windows.Forms.TextBox();
+            this.lblGebruikerBestaat = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnBevestigRegistratie
@@ -139,6 +140,7 @@
             this.tbRegGebruiker.Name = "tbRegGebruiker";
             this.tbRegGebruiker.Size = new System.Drawing.Size(100, 20);
             this.tbRegGebruiker.TabIndex = 10;
+            this.tbRegGebruiker.TextChanged += new System.EventHandler(this.tbRegGebruiker_TextChanged);
             // 
             // tbRegVoornaam
             // 
@@ -179,11 +181,23 @@
             this.tbRFID.Size = new System.Drawing.Size(100, 20);
             this.tbRFID.TabIndex = 15;
             // 
+            // lblGebruikerBestaat
+            // 
+            this.lblGebruikerBestaat.AutoSize = true;
+            this.lblGebruikerBestaat.ForeColor = System.Drawing.Color.Maroon;
+            this.lblGebruikerBestaat.Location = new System.Drawing.Point(195, 279);
+            this.lblGebruikerBestaat.Name = "lblGebruikerBestaat";
+            this.lblGebruikerBestaat.Size = new System.Drawing.Size(133, 13);
+            this.lblGebruikerBestaat.TabIndex = 16;
+            this.lblGebruikerBestaat.Text = "Gebruikersnaam bestaat al";
+            this.lblGebruikerBestaat.Visible = false;
+            // 
             // FormRegistreerNieuweGebruiker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(350, 330);
+            this.Controls.Add(this.lblGebruikerBestaat);
             this.Controls.Add(this.tbRFID);
             this.Controls.Add(this.RFID);
             this.Controls.Add(this.tbTussenvoegsel);
@@ -226,5 +240,6 @@
         private System.Windows.Forms.TextBox tbTussenvoegsel;
         private System.Windows.Forms.Label RFID;
         private System.Windows.Forms.TextBox tbRFID;
+        private System.Windows.Forms.Label lblGebruikerBestaat;
     }
 }

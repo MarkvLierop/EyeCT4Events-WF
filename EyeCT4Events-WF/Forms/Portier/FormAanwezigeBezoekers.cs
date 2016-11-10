@@ -46,6 +46,7 @@ namespace EyeCT4Events_WF
         }
         public FormAanwezigeBezoekers()
         {
+            InitializeComponent();
             rg = new RepositoryGebruiker(new MSSQLGebruiker());
             rkp = new RepositoryKampeerPlaatsen(new MSSQLReserveren());
             bezoekerLijst = new List<Gebruiker>();

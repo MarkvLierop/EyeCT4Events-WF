@@ -53,6 +53,7 @@
             this.lbBestaandeGebruikers.Name = "lbBestaandeGebruikers";
             this.lbBestaandeGebruikers.Size = new System.Drawing.Size(195, 199);
             this.lbBestaandeGebruikers.TabIndex = 1;
+            this.lbBestaandeGebruikers.SelectedIndexChanged += new System.EventHandler(this.lbBestaandeGebruikers_SelectedIndexChanged);
             // 
             // label1
             // 

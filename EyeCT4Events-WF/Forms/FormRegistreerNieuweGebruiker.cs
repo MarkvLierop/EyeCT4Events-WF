@@ -20,6 +20,7 @@ namespace EyeCT4Events_WF
         Gebruiker medewerker;
 
 
+        RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQLGebruiker());
         public FormRegistreerNieuweGebruiker()
         {
             InitializeComponent();
@@ -48,7 +49,6 @@ namespace EyeCT4Events_WF
                     bezoeker.RFID = Convert.ToInt32(tbRFID.Text);
                     bezoeker.Aanwezig = aanwezig;
 
-                    RepositoryGebruiker rg = new RepositoryGebruiker(new MSSQLGebruiker());
                     rg.GebruikerRegistreren(bezoeker);
                     bezoeker = rg.GetGebruikerByGebruikersnaam(tbRegGebruiker.Text);
                     //methode voor check 
@@ -69,15 +69,27 @@ namespace EyeCT4Events_WF
 
             else
             {
-                MessageBox.Show("Vul alle velden in");
-
-              
+                MessageBox.Show("Vul alle velden in");              
             }    
         }
 
         private void RegistreerNieuweGebruiker_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void tbRegGebruiker_TextChanged(object sender, EventArgs e)
+        {
+            if (rg.CheckOfGebruikerBestaat(tbRegGebruiker.Text))
+            {
+                btnBevestigRegistratie.Enabled = false;
+                lblGebruikerBestaat.Visible = true;
+            }
+            else
+            {
+                btnBevestigRegistratie.Enabled = true;
+                lblGebruikerBestaat.Visible = false;
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ namespace EyeCT4Events_WF.Interfaces
         void ZetBezoekerOpAfwezig(int gebruikerID);
         void ZetBezoekerOpAanwezig(int gebruikerID);
         List<Gebruiker> ZoekenGebruiker(string GezochtenNaam);
+        bool CheckOfGebruikerBestaat(string gebruikersnaam);
         List<Gebruiker> GesorteerdeGeberuikers(string filter);
         List<Gebruiker> GezochteBezoekersOphalen(string zoekopdracht);
         Gebruiker Inloggen(string gebruikersnaam, string wachtwoord);
